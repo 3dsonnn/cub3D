@@ -2,7 +2,7 @@
 My first RayCaster with miniLibX
 
 
-				                                        *** MAP RULES ***
+				                        *** MAP RULES ***
 
 ◦ The map must be composed of only 6 possible characters: 0 for an empty space,
 1 for a wall, and N,S,E or W for the player’s start position and spawning
@@ -34,19 +34,13 @@ as long as it respects the rules of the map.
 object in a strict order such as:
         
         ∗ North texture:
-        
             NO ./path_to_the_north_texture
-        
                 · identifier: NO
-        
                 · path to the north texure
         
         ∗ Ceiling color:
-        
             C 225,30,0
-        
                 · identifier: C
-        
                 · R,G,B colors in range [0,255]: 0, 255, 255
         
 ![alt text](map.png)         
