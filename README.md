@@ -2,7 +2,7 @@
 My first RayCaster with miniLibX
 
 
-				                        *** MAP RULES ***
+				                *** MAP RULES ***
 
 ◦ The map must be composed of only 6 possible characters: 0 for an empty space,
 1 for a wall, and N,S,E or W for the player’s start position and spawning
