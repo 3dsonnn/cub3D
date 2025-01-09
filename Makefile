@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/09 13:24:29 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/09 15:21:44 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ CC = cc
 MLXPATH = minilibx-linux
 FLAGS = -Wall -Wextra -Werror -I./$(MLXPATH) -O3
 LIBS =	-L./$(MLXPATH) -lmlx -lX11 -lXext -lm
-RM = rm -f
+RM = rm -rf
 
-SRC = *.c
+SRC =	src/main.c 		\
+		src/checks.c 	\
+
 LIBFT =	libft/libft.a
 MINILIBX = $(MLXPATH)/libmlx.a
 

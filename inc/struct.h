@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/09 14:12:43 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/09 15:35:33 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 typedef struct s_wall
 {
+    int     fd;
 	char    *ID;
     char    *path;
 }		t_wall;
 
 typedef struct s_fc
 {
+    int     fd;
 	char    *ID;
     char    *range;
     int     r;
@@ -43,5 +45,14 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }		t_img;
+
+typedef struct s_cub
+{
+	int     fd;
+    char    *line;
+    char    *tmp;
+    t_img   img;
+    t_map   map;
+}		t_cub;
 
 #endif

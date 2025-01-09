@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/09 13:52:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/09 15:40:08 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h>
 # include <math.h>
 # include "mlx.h"
 # include "struct.h"
@@ -32,6 +33,6 @@
 # define S_KEY      83
 # define W_KEY      87
 
-
+void    checks(t_cub *cub, int ac, char **av);
 
 #endif
