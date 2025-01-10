@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/09 15:35:33 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/10 01:06:57 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_cub
 	int     fd;
     char    *line;
     char    *tmp;
+    char    **mtx;
     t_img   img;
     t_map   map;
 }		t_cub;

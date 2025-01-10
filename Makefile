@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/09 15:21:44 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/09 21:37:13 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ FLAGS = -Wall -Wextra -Werror -I./$(MLXPATH) -O3
 LIBS =	-L./$(MLXPATH) -lmlx -lX11 -lXext -lm
 RM = rm -rf
 
-SRC =	src/main.c 		\
-		src/checks.c 	\
+SRC =	src/main.c 				\
+		src/checks/checks.c 	\
+		src/checks/elements.c 	\
 
 LIBFT =	libft/libft.a
 MINILIBX = $(MLXPATH)/libmlx.a

@@ -90,6 +90,7 @@ SRC = 	ctype/ft_isalnum.c		\
 	extras/ft_atoll.c		\
 	extras/ft_getpid.c		\
 	extras/ft_strchr_count.c	\
+	extras/ft_swaptr.c		\
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror
