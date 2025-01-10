@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/10 02:24:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/10 02:46:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,19 @@ static	void	check_elements(t_cub *cub, int i)
         else
             i++;
 	}
+	if (i != 6)
+	{
+		ft_putstr_fd("Error\n\tMissing elements in the file\n", 2);
+		exit(1);
+	}
 }
-
+/*
 void	check_map(t_cub *cub)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	check_elements(cub);
 	cub->fd = open(av[1], O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
@@ -90,10 +94,10 @@ void	check_map(t_cub *cub)
 		exit(1);
 	}
 }
-
+*/
 void	checks(t_cub *cub, int ac, char **av)
 {
 	check_args(cub, ac, av);
 	check_elements(cub, 0);
-	check_map(cub);
+	//check_map(cub);
 }

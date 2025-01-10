@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/10 02:27:31 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/10 02:49:53 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	check_fc(t_cub *cub, int i, int len, int error)
 	ft_mtxfree(&cub->mtx);
 	if (error)
 		return (error);
-	return (0);
+    return (0);
 }
 
 static int	check_texture(char *line, int i, int error)
@@ -82,7 +82,7 @@ static int	check_texture(char *line, int i, int error)
 		error++;
 	if (error)
 		return (1);
-	return (0);
+    return (0);
 }
 
 int	check_element(t_cub *cub, int error)
@@ -95,10 +95,10 @@ int	check_element(t_cub *cub, int error)
 		|| (ft_strlen(cub->line) > 5 && check_id(cub->line, 0)
 			&& !ft_strnstr(cub->line, " ./", ft_strlen(cub->line))))
 		error++;
-	if (!error && check_id(cub->line, 1))
+    if (!error && check_id(cub->line, 1))
 		error += check_fc(cub, -1, 0, 0);
 	else if (!error && check_id(cub->line, 0))
-		error += check_texture(cub->line + 3, -1, 0, 0);
+		error += check_texture(cub->line + 3, -1, 0);
 	if (error)
 	{
 		ft_strfree(&cub->line);

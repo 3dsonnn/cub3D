@@ -21,7 +21,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t n)
 	if (!big || !*big || !little)
 		return (NULL);
 	if (!*little)
-		return (big);
+		return ((char *)big);
 	while (big[i] && i < n)
 	{
 		if (big[i] == *little)

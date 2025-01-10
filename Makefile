@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/09 21:37:13 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/10 03:00:12 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,11 @@ $(OBJ_DIR):
 	@mkdir -p $@
 
 $(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) $(LIBS) $(LIBFT) -o $@
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $@
 
 clean:
 	@$(RM) $(OBJ_DIR)
