@@ -48,25 +48,6 @@ static char	**ft_fill_matrix(char const *s, char c, int wc)
 	return (res);
 }
 
-static int	ft_word_count(char const *s, char c)
-{
-	int	res;
-	int	i;
-
-	i = 0;
-	res = 0;
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i])
-			res++;
-		while (s[i] && s[i] != c)
-			i++;
-	}
-	return (res);
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char	**res;

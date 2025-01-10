@@ -132,6 +132,7 @@ int				ft_samestr(char *s1, char *s2);
 int				ft_strspn(char *s, char *accept);
 int				ft_strchr_count(char *str, int c);
 int				ft_strcspn(char *s, char *reject);
+int				ft_word_count(char const *s, char c);
 int				ft_strnfill(char *dest, char *src, int n);
 int				ft_countstr_mtx(char **matrix, char *str);
 void			ft_mtxfree(char ***matrix);
