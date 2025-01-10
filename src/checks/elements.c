@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/10 01:21:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/10 02:27:31 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,57 @@ static int	check_id(char *line, int flag)
 	return (0);
 }
 
-static int	check_element(t_cub *cub, int *i, int error)
+static int	check_color_range(t_cub *cub, int len, int error)
+{
+	len = ft_strlen(cub->tmp);
+	if (*cub->tmp == ',' || len < 5 || cub->tmp[len - 1] == ',')
+		error++;
+	cub->tmp = ft_strchr(cub->tmp, ',');
+	if (*(cub->tmp + 1) == ',')
+		error++;
+	cub->tmp = ft_strchr(cub->tmp + 1, ',');
+	ft_strfree(&cub->tmp);
+	if (error)
+		return (1);
+	return (0);
+}
+
+static int	check_fc(t_cub *cub, int i, int len, int error)
+{
+	cub->line += 2;
+	while (cub->line[++i])
+		if (cub->line[i] != ',' && cub->line[i] != ' ' && !(cub->line[i] >= '0'
+				&& cub->line[i] <= '9'))
+			error++;
+	cub->mtx = ft_split(cub->line, ' ');
+	len = ft_mtxlen(cub->mtx);
+	if (len < 1 || len > 5 || strcmp(*cub->mtx, ",") == 0 || strcmp(cub->mtx[len
+			- 1], ",") == 0)
+		error++;
+	i = -1;
+	while (cub->mtx[++i])
+		cub->tmp = ft_strjoin_free(cub->tmp, cub->mtx[i]);
+	error = check_color_range(cub, 0, 0);
+	ft_mtxfree(&cub->mtx);
+	if (error)
+		return (error);
+	return (0);
+}
+
+static int	check_texture(char *line, int i, int error)
+{
+	while (line[++i] && line[i] == ' ')
+		;
+	if (ft_strncmp(&line[i], "./", 2))
+		error++;
+	else if (open(&line[i], O_RDONLY) < 0)
+		error++;
+	if (error)
+		return (1);
+	return (0);
+}
+
+int	check_element(t_cub *cub, int error)
 {
 	cub->tmp = ft_strtrim(cub->line, " ");
 	ft_strfree(&cub->line);
@@ -44,41 +94,15 @@ static int	check_element(t_cub *cub, int *i, int error)
 			&& (ft_strchr_count(cub->line + 2, ',') != 2))
 		|| (ft_strlen(cub->line) > 5 && check_id(cub->line, 0)
 			&& !ft_strnstr(cub->line, " ./", ft_strlen(cub->line))))
-        error++;
-	if (check_id(cub->line, 1))
-		error = check_fc(cub, -1, 0, 0);
-	else if (check_id(cub->line, 0))
-		error = check_texture(cub + 3, -1, 0, 0);
-    if (error)
-    {
+		error++;
+	if (!error && check_id(cub->line, 1))
+		error += check_fc(cub, -1, 0, 0);
+	else if (!error && check_id(cub->line, 0))
+		error += check_texture(cub->line + 3, -1, 0, 0);
+	if (error)
+	{
 		ft_strfree(&cub->line);
-        return (1);
-    }
-    return (0);
-}
-
-void	check_elements(t_cub *cub, int i)
-{
-	while (-42 && i != 6)
-	{
-		cub->line = get_next_line(cub->fd);
-		if (!cub->line)
-			break ;
-        cub->line[ft_strlen(cub->line) - 1] = '\0';
-		if (!*cub->line || ft_strspace(cub->line))
-		{
-			ft_strfree(&cub->line);
-			continue ;
-		}
-		if (check_element(cub, &i, 0))
-		{
-			ft_putstr_fd("Error\n\tInvalid element in the file\n", 2);
-			exit(1);
-		}
+		return (error);
 	}
-	if (i < 8)
-	{
-		ft_putstr_fd("Error\nMissing elements\n", 2);
-		exit(1);
-	}
+	return (0);
 }
