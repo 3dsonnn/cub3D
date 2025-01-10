@@ -13,29 +13,45 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+typedef	enum	ID
+{
+	C = 0,
+	F = 1,
+	EA = 0,
+	NO = 1,
+	SO = 2,
+	WE = 3
+}	t_ID;
+
 typedef struct s_wall
 {
 	int		fd;
-	char	*ID;
+	t_ID	id;
 	char	*path;
 }			t_wall;
 
 typedef struct s_fc
 {
-	int		fd;
-	char	*ID;
-	char	*range;
-	int		r;
-	int		g;
-	int		b;
+	t_ID	id;
+	int		rgb[3];
 }			t_fc;
 
-typedef struct s_map
+typedef struct s_elem
 {
+	t_ID	id;
+	int		rgb[3];
+}			t_elem;
+
+typedef struct s_scene
+{
+	int		fd;
+	char	*tmp;
+	char	*line;
+	char	**mtx;
 	char	**map;
 	t_fc	fc[2];
 	t_wall	walls[4];
-}			t_map;
+}			t_scene;
 
 typedef struct s_img
 {
@@ -48,13 +64,8 @@ typedef struct s_img
 
 typedef struct s_cub
 {
-	int		fd;
-	int		error;
-	char	*line;
-	char	*tmp;
-	char	**mtx;
-	t_img	img;
-	t_map	map;
+	t_img	*img;
+	t_scene	scene;
 }			t_cub;
 
 #endif

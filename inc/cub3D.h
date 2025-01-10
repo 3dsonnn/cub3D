@@ -34,7 +34,7 @@
 # define W_KEY 87
 
 //  CHECKS
-void	checks(t_cub *cub, int ac, char **av);
-int		check_element(t_cub *cub, int error);
+void	checks(t_scene *scene, int ac, char **av);
+void	check_element(t_scene *scene);
 
 #endif

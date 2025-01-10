@@ -35,97 +35,73 @@ static int	check_id(char *line, int flag)
 	return (0);
 }
 
-static int	check_color_range(t_cub *cub, int len, int error, int rgb[3])
+static void	check_color_range(t_cub *cub, int len, int rgb[3])
 {
-	len = ft_strlen(cub->tmp);
-	if (*cub->tmp == ',' || len < 5 || len > 11 || cub->tmp[len - 1] == ',')
-		error = 1;
-	*rgb = ft_atoi(cub->tmp);
-	cub->tmp = ft_strchr(cub->tmp, ',');
-	if (*(cub->tmp + 1) == ',')
-		error = 1;
-	rgb[1] = ft_atoi(cub->tmp + 1);
-	cub->tmp = ft_strchr(cub->tmp, ',');
-	rgb[2] = ft_atoi(cub->tmp + 1);
+	cub->tmp = cub->line;
+	len = ft_strlen(cub->line);
+	if (*cub->line == ',' || len < 5 || len > 11 || cub->line[len - 1] == ',')
+		exit_error("Syntax error in a file element", cub->line, NULL);
+	*rgb = ft_atoi(cub->line);
+	cub->line = ft_strchr(cub->line, ',');
+	if (*(cub->line + 1) == ',')
+		exit_error("Syntax error in a file element", cub->tmp, NULL);
+	rgb[1] = ft_atoi(cub->line + 1);
+	cub->line = ft_strchr(cub->line, ',');
+	rgb[2] = ft_atoi(cub->line + 1);
 	ft_strfree(&cub->tmp);
-	if (!error && (!(*rgb >= 0 && *rgb <= 255) || !(rgb[1] >= 0
-				&& rgb[1] <= 255) || !(rgb[2] >= 0 && rgb[2] <= 255)))
-    {
-        ft_putstr_fd("Error\n\tThere's a color out of the range in an element in the file\n", 2);
-        cub->error = 1;
-    }
-	if (error)
-		return (1);
-	return (0);
+	if (!(*rgb >= 0 && *rgb <= 255) || !(rgb[1] >= 0
+				&& rgb[1] <= 255) || !(rgb[2] >= 0 && rgb[2] <= 255))
+		exit_error("Color out of range in a file element", cub->tmp, NULL);
 }
 
-static int	check_fc(t_cub *cub, int i, int len, int error)
+static void	check_fc(t_cub *cub, int i, int j, int len)
 {
 	int	rgb[3];
 
-	cub->line += 2;
 	while (cub->line[++i])
 		if (cub->line[i] != ',' && cub->line[i] != ' ' && !(cub->line[i] >= '0'
 				&& cub->line[i] <= '9'))
-		{
-			ft_putstr_fd("Error\n\tUnknown key in the file element\n", 2);
-			cub->error = 1;
-			error++;
-		}
+			exit_error("Syntax error in a file element", cub->line, NULL);
 	cub->mtx = ft_split(cub->line, ' ');
 	len = ft_mtxlen(cub->mtx);
 	if (len < 1 || len > 5 || strcmp(*cub->mtx, ",") == 0 || strcmp(cub->mtx[len
 			- 1], ",") == 0)
-		error++;
-	i = -1;
-	while (cub->mtx[++i])
-		cub->tmp = ft_strjoin_free(cub->tmp, cub->mtx[i]);
-	error = check_color_range(cub, 0, 0, rgb);
+		exit_error("Syntax error in a file element", cub->line, cub->mtx);
+	ft_strfree(&cub->line);
+	while (cub->mtx[++j])
+		cub->line = ft_strjoin_free(cub->line, cub->mtx[j]);
 	ft_mtxfree(&cub->mtx);
-	if (error)
-		return (error);
-	return (0);
+	check_color_range(cub, 0, rgb);
 }
 
-static int	check_texture(t_cub *cub, char *line, int i, int error)
+static void	check_texture(t_cub *cub)
 {
-    char    *aux;
-
-    aux = ft_strtrim(line, " ");
-	if (ft_word_count(aux, ' ') != 1)
-    {
-        ft_putstr_fd("Error\n\tMore than one path to a texture element\n", 2);
-        cub->error = 1;
-        error = 1;
-    }
-	if (open(aux, O_RDONLY) < 0)
-    {
-        ft_putstr_fd("Error\n\tInvalid path to a texture element\n", 2);
-        cub->error = 1;
-        error = 1;
-    }
-    ft_strfree(&aux);
-	if (error)
-		return (1);
-	return (0);
-}
-
-int	check_element(t_cub *cub, int error)
-{
-	cub->tmp = ft_strtrim(cub->line, " ");
+	cub->tmp = ft_strtrim(cub->line + 3, " ");
 	ft_strfree(&cub->line);
 	ft_swaptr((void **)&cub->line, (void **)&cub->tmp);
-	if (!ft_strchr(cub->line, ' ') || (check_id(cub->line, 1)
-			&& ft_strchr_count(cub->line + 2, ',') != 2))
-		error++;
-	if (!error && check_id(cub->line, 1))
-		error += check_fc(cub, -1, 0, 0);
-	else if (!error && check_id(cub->line, 0))
-		error += check_texture(cub, cub->line + 3, -1, 0);
-	if (error)
+	if (ft_word_count(cub->line, ' ') != 1)
+		exit_error("Invalid path to a texture element: It cannot contain spaces", cub->line, NULL);
+	if (open(cub->line, O_RDONLY) < 0)
 	{
 		ft_strfree(&cub->line);
-		return (error);
+		cub->line = ft_strjoin("Invalid path to a texture element: ", strerror(errno));
+		exit_error(cub->line, cub->line, NULL);
 	}
-	return (0);
+	ft_strfree(&cub->line);
+}
+
+void	check_element(t_scene *scene)
+{
+	scene->tmp = ft_strtrim(scene->line, " ");
+	ft_strfree(&scene->line);
+	ft_swaptr((void **)&scene->line, (void **)&scene->tmp);
+	if (!ft_strchr(scene->line, ' ') || (check_id(scene->line, 1)
+			&& ft_strchr_count(scene->line + 2, ',') != 2))
+		exit_error("Invalid element in the file", scene->line, NULL);
+	if (check_id(scene->line, 1))
+		check_fc(scene, 1, -1, 0);
+	else if (check_id(scene->line, 0))
+		check_texture(scene);
+	else
+		exit_error("Invalid element in the file", scene->line, NULL);
 }

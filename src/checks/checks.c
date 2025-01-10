@@ -12,64 +12,43 @@
 
 #include "../../inc/cub3D.h"
 
-static	void	check_args(t_cub *cub, int ac, char **av)
+static	void	check_args(t_scene *scene, int ac, char **av)
 {
 	if (ac != 2)
-	{
-		ft_putstr_fd("Error\n\tInvalid number of arguments\n", 2);
-		exit(1);
-	}
+		exit_error("Invalid number of arguments", NULL, NULL);
 	if (ft_strlen(av[1]) <= 4 || ft_strncmp(av[1] + ft_strlen(av[1]) - 4,
 			".cub", 4))
-	{
-		ft_putstr_fd("Error\n\tInvalid file extension\n", 2);
-		exit(1);
-	}
-	cub->fd = open(av[1], O_RDONLY);
-	if (cub->fd < 0)
-	{
-		ft_dprintf(2, "Error\n\t%s\n", strerror(errno));
-		exit(1);
-	}
-	cub->line = get_next_line(cub->fd);
-	if (!cub->line)
-	{
-		ft_putstr_fd("Error\n\tEmpty file\n", 2);
-		exit(1);
-	}
-	ft_strfree(&cub->line);
+		exit_error("Invalid scene file extension", NULL, NULL);
+	scene->fd = open(av[1], O_RDONLY);
+	if (scene->fd < 0)
+		exit_error(strerror(errno), NULL, NULL);
+	scene->line = get_next_line(scene->fd);
+	if (!scene->line)
+		exit_error("Empty scene file", NULL, NULL);
+	ft_strfree(&scene->line);
 }
 
-static	void	check_elements(t_cub *cub, int i)
+static	void	check_elements(t_scene *scene, int i)
 {
 	while (-42 && i != 6)
 	{
-		cub->line = get_next_line(cub->fd);
-		if (!cub->line)
-			break ;
-		cub->line[ft_strlen(cub->line) - 1] = '\0';
-		if (!*cub->line || ft_strspace(cub->line))
+		scene->line = get_next_line(scene->fd);
+		if (!scene->line)
+			exit_error("The scene file is incomplete", NULL, NULL);
+		scene->line[ft_strlen(scene->line) - 1] = '\0';
+		if (!*scene->line || ft_strspace(scene->line))
 		{
-			ft_strfree(&cub->line);
+			ft_strfree(&scene->line);
 			continue ;
 		}
-		if (check_element(cub, 0))
-		{
-			if (!cub->error)
-				ft_putstr_fd("Error\n\tInvalid element in the file\n", 2);
-			exit(1);
-		}
-        else
-            i++;
+		check_element(scene);
+        i++;
 	}
 	if (i != 6)
-	{
-		ft_putstr_fd("Error\n\tMissing elements in the file\n", 2);
-		exit(1);
-	}
+		exit_error("Missing elements in the scene file", NULL, NULL);
 }
 
-void	check_map(t_cub *cub)
+static	void	check_map(t_scene *scene)
 {
 	char	*line;
 	int		i;
@@ -96,10 +75,9 @@ void	check_map(t_cub *cub)
 	}
 }
 
-void	checks(t_cub *cub, int ac, char **av)
+void	checks(t_scene *scene, int ac, char **av)
 {
-	cub->error = 0;
-	check_args(cub, ac, av);
-	check_elements(cub, 0);
-	check_map(cub);
+	check_args(scene, ac, av);
+	check_elements(scene, 0);
+	check_map(scene);
 }
