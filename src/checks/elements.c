@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/10 05:05:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 11:08:14 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,59 +35,67 @@ static int	check_id(char *line, int flag)
 	return (0);
 }
 
-static void	check_color_range(t_cub *cub, int len, int rgb[3])
+static void	check_color_range(t_scene *scene, int len, int **rgb)
 {
-	cub->tmp = cub->line;
-	len = ft_strlen(cub->line);
-	if (*cub->line == ',' || len < 5 || len > 11 || cub->line[len - 1] == ',')
-		exit_error("Syntax error in a file element", cub->line, NULL);
-	*rgb = ft_atoi(cub->line);
-	cub->line = ft_strchr(cub->line, ',');
-	if (*(cub->line + 1) == ',')
-		exit_error("Syntax error in a file element", cub->tmp, NULL);
-	rgb[1] = ft_atoi(cub->line + 1);
-	cub->line = ft_strchr(cub->line, ',');
-	rgb[2] = ft_atoi(cub->line + 1);
-	ft_strfree(&cub->tmp);
-	if (!(*rgb >= 0 && *rgb <= 255) || !(rgb[1] >= 0
-				&& rgb[1] <= 255) || !(rgb[2] >= 0 && rgb[2] <= 255))
-		exit_error("Color out of range in a file element", cub->tmp, NULL);
+	char	*aux;
+
+	aux = scene->tmp;
+	len = ft_strlen(scene->tmp);
+	if (len < 5 || len > 11 || *scene->tmp == ',' || scene->tmp[len - 1] == ',')
+		exit_error("Syntax error in the color range of an element", scene);
+	*rgb[0] = ft_atoi(scene->tmp);
+	scene->tmp = ft_strchr(scene->tmp, ',');
+	if (*(scene->tmp + 1) == ',')
+		exit_error("Syntax error in the color range of an element", scene);
+	*rgb[1] = ft_atoi(scene->tmp + 1);
+	scene->tmp = ft_strchr(scene->tmp, ',');
+	*rgb[2] = ft_atoi(scene->tmp + 1);
+	if (!(*rgb[0] >= 0 && *rgb[0] <= 255) || !(*rgb[1] >= 0 && *rgb[1] <= 255)
+		|| !(*rgb[2] >= 0 && *rgb[2] <= 255))
+		exit_error("Color out of range in an element", scene);
+	ft_strfree(&scene->tmp);
 }
 
-static void	check_fc(t_cub *cub, int i, int j, int len)
+static void	check_fc(t_scene *scene, int i, int j, int len)
 {
 	int	rgb[3];
 
-	while (cub->line[++i])
-		if (cub->line[i] != ',' && cub->line[i] != ' ' && !(cub->line[i] >= '0'
-				&& cub->line[i] <= '9'))
-			exit_error("Syntax error in a file element", cub->line, NULL);
-	cub->mtx = ft_split(cub->line, ' ');
-	len = ft_mtxlen(cub->mtx);
-	if (len < 1 || len > 5 || strcmp(*cub->mtx, ",") == 0 || strcmp(cub->mtx[len
-			- 1], ",") == 0)
-		exit_error("Syntax error in a file element", cub->line, cub->mtx);
-	ft_strfree(&cub->line);
-	while (cub->mtx[++j])
-		cub->line = ft_strjoin_free(cub->line, cub->mtx[j]);
-	ft_mtxfree(&cub->mtx);
-	check_color_range(cub, 0, rgb);
+	while (scene->line[++i])
+		if (!ft_strchr("0123456789 ,", scene->line[i]))
+			exit_error("Invalid element in the scene file", scene);
+	scene->mtx = ft_split(scene->line, ' ');
+	len = ft_mtxlen(scene->mtx);
+	if (len < 2 || len > 6 || (strcmp(*scene->mtx, "F") && strcmp(*scene->mtx,
+				"C")) || strcmp(scene->mtx[1], ",") == 0
+		|| strcmp(scene->mtx[len - 1], ",") == 0)
+		exit_error("Invalid element in the scene file", scene);
+	while (scene->mtx[++j])
+		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[j]);
+	check_color_range(scene, 0, &rgb);
+	fill_fc(scene, *(*scene->mtx), rgb, -1);
+	ft_strfree(&scene->line);
+	ft_mtxfree(&scene->mtx);
 }
 
-static void	check_texture(t_cub *cub)
+static void	check_texture(t_scene *scene)
 {
-	cub->tmp = ft_strtrim(cub->line + 3, " ");
-	ft_strfree(&cub->line);
-	ft_swaptr((void **)&cub->line, (void **)&cub->tmp);
-	if (ft_word_count(cub->line, ' ') != 1)
-		exit_error("Invalid path to a texture element: It cannot contain spaces", cub->line, NULL);
-	if (open(cub->line, O_RDONLY) < 0)
+	int	fd;
+
+	scene->tmp = ft_strtrim(scene->line + 3, " ");
+	if (ft_word_count(scene->tmp, ' ') != 1)
+		exit_error("Invalid path to a texture element: It cannot contain spaces",
+			scene);
+	fd = open(scene->tmp, O_RDONLY);
+	if (fd < 0)
 	{
-		ft_strfree(&cub->line);
-		cub->line = ft_strjoin("Invalid path to a texture element: ", strerror(errno));
-		exit_error(cub->line, cub->line, NULL);
+		ft_strfree(&scene->tmp);
+		scene->tmp = ft_strjoin("Invalid path to a texture element: ",
+				strerror(errno));
+		exit_error(scene->tmp, scene);
 	}
-	ft_strfree(&cub->line);
+	ft_strfree(&scene->tmp);
+	fill_texture(scene, *scene->line, fd);
+	ft_strfree(&scene->line);
 }
 
 void	check_element(t_scene *scene)
@@ -95,13 +103,12 @@ void	check_element(t_scene *scene)
 	scene->tmp = ft_strtrim(scene->line, " ");
 	ft_strfree(&scene->line);
 	ft_swaptr((void **)&scene->line, (void **)&scene->tmp);
-	if (!ft_strchr(scene->line, ' ') || (check_id(scene->line, 1)
+	if (!ft_strchr(scene->line, ' ') || (!check_id(scene->line, 0)
+			&& !check_id(scene->line, 1)) || (check_id(scene->line, 1)
 			&& ft_strchr_count(scene->line + 2, ',') != 2))
-		exit_error("Invalid element in the file", scene->line, NULL);
+		exit_error("Invalid element in the scene file", scene);
 	if (check_id(scene->line, 1))
-		check_fc(scene, 1, -1, 0);
-	else if (check_id(scene->line, 0))
-		check_texture(scene);
+		check_fc(scene, 1, 0, 0);
 	else
-		exit_error("Invalid element in the file", scene->line, NULL);
+		check_texture(scene);
 }
