@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:22:09 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 10:15:16 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 17:38:01 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void    exit_error(char *message, t_scene *scene)
     ft_strfree(&scene->line);
     ft_strfree(&scene->elements);
     ft_mtxfree(&scene->mtx);
+    ft_mtxfree(&scene->map.content);
 	exit(1);
 }
