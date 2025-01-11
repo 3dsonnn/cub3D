@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 11:08:14 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 17:34:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,22 @@ void	check_element(t_scene *scene)
 	ft_strfree(&scene->line);
 	ft_swaptr((void **)&scene->line, (void **)&scene->tmp);
 	if (!ft_strchr(scene->line, ' ') || (!check_id(scene->line, 0)
-			&& !check_id(scene->line, 1)) || (check_id(scene->line, 1)
-			&& ft_strchr_count(scene->line + 2, ',') != 2))
+			&& !check_id(scene->line, 1)))
 		exit_error("Invalid element in the scene file", scene);
-	if (check_id(scene->line, 1))
-		check_fc(scene, 1, 0, 0);
-	else
+	if (check_id(scene->line, 0))
+	{
+		if (ft_strlen(scene->line + 3) < 5)
+			exit_error("Invalid path to a texture: too short", scene);
+		if (ft_strncmp((scene->line + 3) + ft_strlen(scene->line + 3) - 4,
+				".xpm", 4))
+			exit_error("Invalid extension to a texture's path", scene);
 		check_texture(scene);
+	}
+	if (check_id(scene->line, 1))
+	{
+		if (ft_strchr_count(scene->line + 2, ',') != 2)
+			exit_error("Syntax error: the Floor/Ceiling colors needs to be separated by ','",
+				scene);
+		check_fc(scene, 1, 0, 0);
+	}
 }
