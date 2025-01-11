@@ -28,7 +28,11 @@ char	**ft_addstr_mtx(char ***matrix, char **tmp, char *str)
 	{
 		(*matrix)[i] = ft_strdup(tmp[i]);
 		if (!(*matrix)[i])
+		{
 			ft_mtxfree(matrix);
+			ft_mtxfree(&tmp);
+			return (NULL);
+		}
 	}
 	(*matrix)[i] = ft_strdup(str);
 	(*matrix)[i + 1] = NULL;

@@ -127,6 +127,7 @@ int				ft_nbrlen(int n);
 int				ft_strnbr(char *str);
 int				ft_strspace(char *str);
 int				ft_mtxlen(char **matrix);
+int				ft_longestr_mtx(char **mtx);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_samestr(char *s1, char *s2);
 int				ft_strspn(char *s, char *accept);

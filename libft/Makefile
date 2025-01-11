@@ -92,6 +92,7 @@ SRC = 	ctype/ft_isalnum.c		\
 	extras/ft_strchr_count.c	\
 	extras/ft_swaptr.c		\
 	extras/ft_word_count.c		\
+	extras/ft_longestr_mtx.c	\
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror

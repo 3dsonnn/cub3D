@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 11:15:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 19:29:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@
 # define ESC 65307
 # define LEFT 65362
 # define RIGHT 65364
-# define A_KEY 65
-# define D_KEY 68
-# define S_KEY 83
-# define W_KEY 87
+# define AKEY 65
+# define DKEY 68
+# define SKEY 83
+# define WKEY 87
 
 //  CHECKS
 void	checks(t_scene *scene, int ac, char **av);
 void	check_element(t_scene *scene);
 void	fill_texture(t_scene *scene, char ID, int fd);
 void	fill_fc(t_scene *scene, char ID, int *rgb, int i);
+    //  MAP
+void	escape_empty_lines(t_scene *scene);
+void	fill_map(t_scene *scene, t_map *map);
 
 #endif

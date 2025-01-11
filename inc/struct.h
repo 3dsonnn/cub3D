@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 11:05:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 15:48:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ typedef struct s_fc
 	int		rgb[3];
 }			t_fc;
 
-typedef struct s_elem
+typedef struct s_map
 {
-	t_ID	id;
-	int		rgb[3];
-}			t_elem;
+	char	**content;
+	int		rows;
+	int		cols;
+}			t_map;
 
 typedef struct s_scene
 {
@@ -47,8 +48,8 @@ typedef struct s_scene
 	char	*tmp;
 	char	*line;
 	char	**mtx;
-	char	**map;
 	char	*elements;
+	t_map	map;
 	t_fc	fc[2];
 	t_wall	walls[4];
 }			t_scene;
