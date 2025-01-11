@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/10 02:52:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 11:15:03 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@
 //  CHECKS
 void	checks(t_scene *scene, int ac, char **av);
 void	check_element(t_scene *scene);
+void	fill_texture(t_scene *scene, char ID, int fd);
+void	fill_fc(t_scene *scene, char ID, int *rgb, int i);
 
 #endif

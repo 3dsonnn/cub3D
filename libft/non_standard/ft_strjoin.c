@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 00:33:23 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/10 01:00:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 10:24:43 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = -1;
 	j = -1;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));

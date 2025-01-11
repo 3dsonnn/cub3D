@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/10 04:08:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/11 11:05:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 
 typedef	enum	ID
 {
-	C = 0,
-	F = 1,
-	EA = 0,
-	NO = 1,
-	SO = 2,
-	WE = 3
+	NO,
+	SO,
+	WE,
+	EA,
+	F,
+	C
 }	t_ID;
 
 typedef struct s_wall
 {
-	int		fd;
 	t_ID	id;
-	char	*path;
+	int		fd;
 }			t_wall;
 
 typedef struct s_fc
@@ -49,6 +48,7 @@ typedef struct s_scene
 	char	*line;
 	char	**mtx;
 	char	**map;
+	char	*elements;
 	t_fc	fc[2];
 	t_wall	walls[4];
 }			t_scene;
