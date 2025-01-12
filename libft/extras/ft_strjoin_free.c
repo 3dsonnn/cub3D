@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 08:03:21 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 09:58:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 10:35:43 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ char	*ft_strjoin_free(char *str, char *buffer)
 	if (!str)
 		return (ft_strdup(buffer));
 	if (!buffer)
-	{
-		ft_strfree(&str);
-		return (ft_strdup(str));
-	}
+		return (str);
 	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + ft_strlen(buffer)
 				+ 1));
 	if (!new_str)
