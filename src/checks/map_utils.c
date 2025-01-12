@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 19:27:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 16:40:07 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 19:14:40 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	check_empty_spaces(t_scene *scene, t_map *map)
 {
-	int	p[4];
+	int	p[3];
 
-	ft_memset(p, -1, 4 * sizeof(int));
+	ft_memset(p, -1, 3 * sizeof(int));
 	if (ft_strchr(*map->content, '0') || ft_strchr(map->content[map->size.y
 			- 1], '0'))
 		exit_error("Invalid map: not surrounded by walls", scene);
@@ -32,17 +32,15 @@ static void	check_empty_spaces(t_scene *scene, t_map *map)
 				if (map->content[p[1] + 1][p[2]] == ' ' || map->content[p[1]
 					- 1][p[2]] == ' ' || map->content[p[1]][p[2] + 1] == ' '
 					|| map->content[p[1]][p[2] - 1] == ' ')
-					p[3] = 1;
+					exit_error("Invalid map: a 0 cannot touch a space", scene);
 	}
-	if (p[3] == 1)
-		exit_error("Invalid map: a 0 cannot touch a space", scene);
 }
 
 static void	check_start_pos(t_scene *scene, t_map *map)
 {
-	int	p[4];
+	int	p[3];
 
-	ft_memset(p, -1, 4 * sizeof(int));
+	ft_memset(p, -1, 3 * sizeof(int));
 	if (ft_strchr(*map->content, map->start)
 		|| ft_strchr(map->content[map->size.y - 1], map->start))
 		exit_error("Invalid map: not surrounded by walls", scene);
@@ -58,11 +56,9 @@ static void	check_start_pos(t_scene *scene, t_map *map)
 				if (map->content[p[1] + 1][p[2]] == ' ' || map->content[p[1]
 					- 1][p[2]] == ' ' || map->content[p[1]][p[2] + 1] == ' '
 					|| map->content[p[1]][p[2] - 1] == ' ')
-					p[3] = 1;
+					exit_error("Invalid map: the start position cannot touch a space",
+						scene);
 	}
-	if (p[3] == 1)
-		exit_error("Invalid map: the start position cannot touch a space",
-			scene);
 }
 
 static void	check_spaces(t_scene *scene, t_map *map)
@@ -90,24 +86,20 @@ static void	check_spaces(t_scene *scene, t_map *map)
 	}
 }
 
-void	is_surrounded(t_scene *scene, t_map *map, int p[3])
+void	is_surrounded(t_scene *scene, t_map *map, int y)
 {
-	(void)p;
 	check_empty_spaces(scene, map);
 	check_start_pos(scene, map);
 	check_spaces(scene, map);
-	// map->visited = malloc(sizeof(*map->visited) * map->size.y);
-	// while (++(*p) < map->size.y)
-	// 	map->visited[*p] = ft_calloc(map->size.x, sizeof(bool));
-    // while (++(p[1]) < map->size.x)
-    // {
-    //     if (map->content[0][p[1]] == '1')
-    //     {
-    //         map->init.x = p[1];
-    //         map->init.y = 0;
-    //         break ;
-    //     }
-    // }
-    // if (!my_flood_fill(map))
-    // 	exit_error("Invalid map: not surrounded by walls", scene);
+	ft_replace_char(*map->content, '1', '*');
+	ft_replace_char(map->content[map->size.y - 1], '1', '*');
+	while (++y < map->size.y)
+	{
+		if (*map->content[y] == '1')
+			*map->content[y] = '*';
+		if (map->content[y][map->size.x - 1] == '1')
+			map->content[y][map->size.x - 1] = '*';
+	}
+	my_flood_fill(map, -1, -1);
+	//flood_fill(map->content, map->size, map->start);
 }
