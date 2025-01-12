@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:02:24 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 21:20:09 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 10:00:27 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void				ft_mtxfree(char ***matrix);
 void				ft_strfree(char **str);
 void				ft_swaptr(void **p1, void **p2);
 void				flood_fill(char **tab, t_point size, t_point begin);
+char				*ft_ctoa(char c);
 char				*ft_strcpy(char *dest, char *src);
 char				**ft_mtxdup(char **matrix);
 char				**ft_addstr_mtx(char ***matrix, char **tmp, char *str);
