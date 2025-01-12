@@ -6,14 +6,14 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 15:48:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 00:17:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef	enum	ID
+typedef enum ID
 {
 	NO,
 	SO,
@@ -21,7 +21,7 @@ typedef	enum	ID
 	EA,
 	F,
 	C
-}	t_ID;
+}			t_ID;
 
 typedef struct s_wall
 {
@@ -38,8 +38,8 @@ typedef struct s_fc
 typedef struct s_map
 {
 	char	**content;
-	int		rows;
-	int		cols;
+	char	start;
+	t_point	size;
 }			t_map;
 
 typedef struct s_scene

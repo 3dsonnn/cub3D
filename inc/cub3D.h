@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 19:29:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 00:22:29 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ void	fill_fc(t_scene *scene, char ID, int *rgb, int i);
     //  MAP
 void	escape_empty_lines(t_scene *scene);
 void	fill_map(t_scene *scene, t_map *map);
+void	is_surrounded(t_scene *scene, t_map *map);
+void	check_starting_position(t_scene *scene, t_map *map);
 
 #endif
