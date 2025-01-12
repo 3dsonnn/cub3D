@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 16:41:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 18:38:12 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ static void	check_elements(t_scene *scene, int i)
 		exit_error("Missing elements in the scene file", scene);
 }
 
+void	print_map(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (++i < map->size.y)
+		printf("%s\n", map->content[i]);
+}
+
 static void	check_map(t_scene *scene, t_map *map)
 {
 	int	p[3];
@@ -72,7 +81,8 @@ static void	check_map(t_scene *scene, t_map *map)
 	if (map->size.x < 3 || map->size.y < 3)
 		exit_error("Invalid map: it's too small", scene);
 	check_starting_position(scene, map);
-	is_surrounded(scene, map, p);
+	is_surrounded(scene, map, -1);
+	print_map(map);
 }
 
 void	checks(t_scene *scene, int ac, char **av)
@@ -82,14 +92,6 @@ void	checks(t_scene *scene, int ac, char **av)
 	scene->elements = NULL;
 	scene->map.head = NULL;
 	scene->map.content = NULL;
-	scene->map.dx[0] = -1;
-	scene->map.dx[1] = 1;
-	scene->map.dx[2] = 0;
-	scene->map.dx[3] = 0;
-	scene->map.dy[0] = 0;
-	scene->map.dy[1] = 0;
-	scene->map.dy[2] = -1;
-	scene->map.dy[3] = 1;
 	check_args(scene, ac, av);
 	check_elements(scene, 0);
 	ft_strfree(&scene->elements);
