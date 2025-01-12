@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 19:18:41 by efinda            #+#    #+#              #
-#    Updated: 2025/01/11 21:27:17 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/12 10:00:53 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRC = 	ctype/ft_isalnum.c					\
 	extras/ft_word_count.c					\
 	extras/ft_longestr_mtx.c				\
 	extras/ft_flood_fill.c					\
+	extras/ft_ctoa.c						\
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror

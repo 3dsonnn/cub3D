@@ -14,13 +14,16 @@
 
 void    exit_error(char *message, t_scene *scene)
 {
-    write(2, "Error\n", 6);
-    write(2, message, ft_strlen(message));
-    write(2, "\n", 1);
+    int return_value;
+
+    return_value = write(2, "Error\n", 6);
+    return_value = write(2, message, ft_strlen(message));
+    return_value = write(2, "\n", 1);
     ft_strfree(&scene->tmp);
     ft_strfree(&scene->line);
     ft_strfree(&scene->elements);
     ft_mtxfree(&scene->mtx);
     ft_mtxfree(&scene->map.content);
-	exit(1);
+    (void)return_value;
+    exit(1);
 }

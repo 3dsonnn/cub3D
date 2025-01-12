@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 19:27:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 05:09:25 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 05:37:21 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,6 @@ static void	check_spaces(t_scene *scene, t_map *map)
 			scene);
 }
 
-static void	free_visited(t_map *map)
-{
-	int	i;
-
-	i = -1;
-	while (++i < map->size.y)
-		free(map->visited[i]);
-	free(map->visited);
-}
-
 void	is_surrounded(t_scene *scene, t_map *map, int p[3])
 {
 	check_empty_spaces(scene, map);
@@ -117,8 +107,6 @@ void	is_surrounded(t_scene *scene, t_map *map, int p[3])
             break ;
         }
     }
-    *p = my_flood_fill(scene, map, -1, -1);
-    free_visited(map);
-    if (!*p)
+    if (!my_flood_fill(map))
         exit_error("Invalid map: not surrounded by walls", scene);
 }

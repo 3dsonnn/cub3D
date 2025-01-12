@@ -64,8 +64,8 @@ static void	check_map(t_scene *scene, t_map *map)
 	scene->line[ft_strlen(scene->line) - 1] = '\0';
 	if (!*scene->line || ft_strspace(scene->line))
 		escape_empty_lines(scene);
-	if (ft_strcspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
-		exit_error("Invalid character inside the map", scene);
+	if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
+		exit_error("aInvalid character inside the map", scene);
 	map->content = ft_mtxdup(&scene->line);
 	ft_strfree(&scene->line);
 	fill_map(scene, map);
