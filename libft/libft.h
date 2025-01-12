@@ -140,6 +140,7 @@ int					ft_countstr_mtx(char **matrix, char *str);
 void				ft_mtxfree(char ***matrix);
 void				ft_strfree(char **str);
 void				ft_swaptr(void **p1, void **p2);
+void				ft_replace_char(char *str, char src, char dst);
 void				flood_fill(char **tab, t_point size, t_point begin);
 char				*ft_ctoa(char c);
 char				*ft_strcpy(char *dest, char *src);
