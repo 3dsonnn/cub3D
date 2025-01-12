@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 05:29:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 10:51:39 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static void	check_color_range(t_scene *scene, int len, int rgb[3])
 		scene->tmp = aux;
 		exit_error("Color out of range in an element", scene);
 	}
-	ft_strfree(&scene->tmp);
 }
 
 static void	check_fc(t_scene *scene, int i, int j, int len)
 {
+	char	*aux;
 	int	rgb[3];
 
 	while (scene->line[++i])
@@ -77,29 +77,30 @@ static void	check_fc(t_scene *scene, int i, int j, int len)
 		exit_error("Invalid element in the scene file", scene);
 	while (scene->mtx[++j])
 		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[j]);
+	aux = scene->tmp;
 	check_color_range(scene, 0, rgb);
 	fill_fc(scene, *(*scene->mtx), rgb, -1);
 	ft_strfree(&scene->line);
 	ft_mtxfree(&scene->mtx);
+	ft_strfree(&aux);
 }
 
 static void	check_texture(t_scene *scene)
 {
 	int	fd;
 
-	scene->tmp = ft_strtrim(scene->line + 3, " ");
-	if (ft_word_count(scene->tmp, ' ') != 1)
+	scene->mtx = ft_split(scene->line, ' ');
+	if (ft_mtxlen(scene->mtx) != 2)
 		exit_error("Invalid path to a texture element: It cannot contain spaces",
 			scene);
-	fd = open(scene->tmp, O_RDONLY);
+	fd = open(scene->mtx[1], O_RDONLY);
 	if (fd < 0)
 	{
-		ft_strfree(&scene->tmp);
 		scene->tmp = ft_strjoin("Invalid path to a texture element: ",
 				strerror(errno));
 		exit_error(scene->tmp, scene);
 	}
-	ft_strfree(&scene->tmp);
+	ft_mtxfree(&scene->mtx);
 	fill_texture(scene, *scene->line, fd);
 	ft_strfree(&scene->line);
 }
