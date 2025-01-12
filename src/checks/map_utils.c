@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 19:27:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 01:25:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 05:09:25 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,35 +90,35 @@ static void	check_spaces(t_scene *scene, t_map *map)
 			scene);
 }
 
-static void	check_walls(t_scene *scene, t_map *map)
+static void	free_visited(t_map *map)
 {
-	int	p[3];
+	int	i;
 
-	ft_memset(p, -1, 4 * sizeof(int));
-	while (++(*p) < map->size.y)
-	{
-		p[1] = -1;
-		while (++(p[1]) < map->size.x)
-			if (map->content[*p][p[1]] == ' ')
-				if ((*p > 0 && map->content[*p - 1][p[1]] != 1
-						&& map->content[*p - 1][p[1]] != ' ')
-					|| (*p < map->size.y - 1 && map->content[*p + 1][p[1]] != 1
-						&& map->content[*p + 1][p[1]] != ' ') || (p[1] > 0
-						&& map->content[*p][p[1] - 1] != 1
-						&& map->content[*p][p[1] - 1] != ' ')
-					|| (p[1] < map->size.x - 1 && map->content[*p][p[1]
-						- 1] != 1 && map->content[*p][p[1] - 1] != ' '))
-					p[2] = 1;
-	}
-	if (p[2] == 1)
-		exit_error("Invalid map: a space can only touch another space or a wall",
-			scene);
+	i = -1;
+	while (++i < map->size.y)
+		free(map->visited[i]);
+	free(map->visited);
 }
 
-void	is_surrounded(t_scene *scene, t_map *map)
+void	is_surrounded(t_scene *scene, t_map *map, int p[3])
 {
 	check_empty_spaces(scene, map);
 	check_start_pos(scene, map);
 	check_spaces(scene, map);
-	check_walls(scene, map);
+	map->visited = malloc(sizeof(*map->visited) * map->size.y);
+	while (++(*p) < map->size.y)
+		map->visited[*p] = ft_calloc(map->size.x, sizeof(bool));
+    while (++(p[1]) < map->size.x)
+    {
+        if (map->content[0][p[1]] == '1')
+        {
+            map->init.x = p[1];
+            map->init.y = 0;
+            break ;
+        }
+    }
+    *p = my_flood_fill(scene, map, -1, -1);
+    free_visited(map);
+    if (!*p)
+        exit_error("Invalid map: not surrounded by walls", scene);
 }
