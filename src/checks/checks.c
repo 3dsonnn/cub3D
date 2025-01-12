@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 03:14:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 11:00:41 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static void	check_map(t_scene *scene, t_map *map)
 	scene->line[ft_strlen(scene->line) - 1] = '\0';
 	if (!*scene->line || ft_strspace(scene->line))
 		escape_empty_lines(scene);
-	if (ft_strcspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
-		exit_error("Invalid character inside the map", scene);
+	if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
+		exit_error("aInvalid character inside the map", scene);
 	map->content = ft_mtxdup(&scene->line);
 	ft_strfree(&scene->line);
 	fill_map(scene, map);
