@@ -6,12 +6,14 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 05:11:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 09:55:19 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+# include <stdbool.h>
+# include "../libft/libft.h"
 
 typedef enum ID
 {
