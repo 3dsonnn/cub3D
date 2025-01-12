@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 00:17:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 05:11:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct s_map
 	char	**content;
 	char	start;
 	t_point	size;
+	t_point	init;
+	t_point	neighbor;
+	t_point	cur;
+	int	dx[4];
+	int	dy[4];
+	int	nx;
+	int	ny;
+	bool	**visited;
 }			t_map;
 
 typedef struct s_scene
