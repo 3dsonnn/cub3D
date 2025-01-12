@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/12 05:32:09 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/12 16:32:59 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC =	src/main.c 						\
 		src/checks/elements.c 			\
 		src/checks/map_utils.c 			\
 		src/checks/elements_utils.c 	\
+		src/t_row/t_row.c 				\
+		src/t_row/t_row_aux.c 			\
 
 LIBFT =	libft/libft.a
 MINILIBX = $(MLXPATH)/libmlx.a
