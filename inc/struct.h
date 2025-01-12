@@ -6,13 +6,14 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 05:11:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 05:24:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include <stdbool.h>
 typedef enum ID
 {
 	NO,

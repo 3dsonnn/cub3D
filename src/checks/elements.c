@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/11 17:34:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 05:29:03 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_id(char *line, int flag)
 	return (0);
 }
 
-static void	check_color_range(t_scene *scene, int len, int **rgb)
+static void	check_color_range(t_scene *scene, int len, int rgb[3])
 {
 	char	*aux;
 
@@ -43,16 +43,22 @@ static void	check_color_range(t_scene *scene, int len, int **rgb)
 	len = ft_strlen(scene->tmp);
 	if (len < 5 || len > 11 || *scene->tmp == ',' || scene->tmp[len - 1] == ',')
 		exit_error("Syntax error in the color range of an element", scene);
-	*rgb[0] = ft_atoi(scene->tmp);
+	rgb[0] = ft_atoi(scene->tmp);
 	scene->tmp = ft_strchr(scene->tmp, ',');
 	if (*(scene->tmp + 1) == ',')
+	{
+		scene->tmp = aux;
 		exit_error("Syntax error in the color range of an element", scene);
-	*rgb[1] = ft_atoi(scene->tmp + 1);
+	}
+	rgb[1] = ft_atoi(scene->tmp + 1);
 	scene->tmp = ft_strchr(scene->tmp, ',');
-	*rgb[2] = ft_atoi(scene->tmp + 1);
-	if (!(*rgb[0] >= 0 && *rgb[0] <= 255) || !(*rgb[1] >= 0 && *rgb[1] <= 255)
-		|| !(*rgb[2] >= 0 && *rgb[2] <= 255))
+	rgb[2] = ft_atoi(scene->tmp + 1);
+	if (!(rgb[0] >= 0 && rgb[0] <= 255) || !(rgb[1] >= 0 && rgb[1] <= 255)
+		|| !(rgb[2] >= 0 && rgb[2] <= 255))
+	{
+		scene->tmp = aux;
 		exit_error("Color out of range in an element", scene);
+	}
 	ft_strfree(&scene->tmp);
 }
 
@@ -71,7 +77,7 @@ static void	check_fc(t_scene *scene, int i, int j, int len)
 		exit_error("Invalid element in the scene file", scene);
 	while (scene->mtx[++j])
 		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[j]);
-	check_color_range(scene, 0, &rgb);
+	check_color_range(scene, 0, rgb);
 	fill_fc(scene, *(*scene->mtx), rgb, -1);
 	ft_strfree(&scene->line);
 	ft_mtxfree(&scene->mtx);
