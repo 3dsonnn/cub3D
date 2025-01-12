@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: welepy <welepy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:22:09 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 07:11:01 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 10:16:31 by welepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void    exit_error(char *message, t_scene *scene)
     ft_mtxfree(&scene->mtx);
     ft_mtxfree(&scene->map.content);
     (void)return_value;
-	exit(1);
+    exit(1);
 }

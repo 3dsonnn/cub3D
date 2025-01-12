@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 20:53:07 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 09:26:56 by marcsilv         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "mlx_int.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *newnode)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	t_list	*tmp;
-
-	if (!(*lst))
-		*lst = newnode;
-	else
-	{
-		tmp = ft_lstlast(*lst);
-		tmp->next = newnode;
-	}
+	XCloseDisplay(xvar->display);
 }

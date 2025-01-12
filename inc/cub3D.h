@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 05:37:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 09:56:56 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
-# include "mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "struct.h"
 # include <errno.h>
 # include <fcntl.h>
