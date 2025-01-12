@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 10:51:39 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 15:36:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,44 +63,53 @@ static void	check_color_range(t_scene *scene, int len, int rgb[3])
 
 static void	check_fc(t_scene *scene, int i, int j, int len)
 {
+	int		rgb[3];
 	char	*aux;
-	int	rgb[3];
+	char	**mtx;
+	char	ID;
 
 	while (scene->line[++i])
 		if (!ft_strchr("0123456789 ,", scene->line[i]))
 			exit_error("Invalid element in the scene file", scene);
-	scene->mtx = ft_split(scene->line, ' ');
-	len = ft_mtxlen(scene->mtx);
-	if (len < 2 || len > 6 || (strcmp(*scene->mtx, "F") && strcmp(*scene->mtx,
-				"C")) || strcmp(scene->mtx[1], ",") == 0
-		|| strcmp(scene->mtx[len - 1], ",") == 0)
+	mtx = ft_split(scene->line, ' ');
+	len = ft_mtxlen(mtx);
+	if (len < 2 || len > 6 || (strcmp(*mtx, "F") && strcmp(*mtx, "C"))
+		|| strcmp(mtx[1], ",") == 0 || strcmp(mtx[len - 1], ",") == 0)
+	{
+		ft_mtxfree(&mtx);
 		exit_error("Invalid element in the scene file", scene);
-	while (scene->mtx[++j])
-		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[j]);
+	}
+	while (mtx[++j])
+		scene->tmp = ft_strjoin_free(scene->tmp, mtx[j]);
+	ID = *mtx[0];
+	ft_mtxfree(&mtx);
 	aux = scene->tmp;
 	check_color_range(scene, 0, rgb);
-	fill_fc(scene, *(*scene->mtx), rgb, -1);
+	fill_fc(scene, ID, rgb, -1);
 	ft_strfree(&scene->line);
-	ft_mtxfree(&scene->mtx);
 	ft_strfree(&aux);
 }
 
-static void	check_texture(t_scene *scene)
+static void	check_texture(t_scene *scene, int fd)
 {
-	int	fd;
+	char	**mtx;
 
-	scene->mtx = ft_split(scene->line, ' ');
-	if (ft_mtxlen(scene->mtx) != 2)
+	mtx = ft_split(scene->line, ' ');
+	if (ft_mtxlen(mtx) != 2)
+	{
+		ft_mtxfree(&mtx);
 		exit_error("Invalid path to a texture element: It cannot contain spaces",
 			scene);
-	fd = open(scene->mtx[1], O_RDONLY);
+	}
+	fd = open(mtx[1], O_RDONLY);
 	if (fd < 0)
 	{
+		ft_mtxfree(&mtx);
 		scene->tmp = ft_strjoin("Invalid path to a texture element: ",
 				strerror(errno));
 		exit_error(scene->tmp, scene);
 	}
-	ft_mtxfree(&scene->mtx);
+	ft_mtxfree(&mtx);
 	fill_texture(scene, *scene->line, fd);
 	ft_strfree(&scene->line);
 }
@@ -120,7 +129,7 @@ void	check_element(t_scene *scene)
 		if (ft_strncmp((scene->line + 3) + ft_strlen(scene->line + 3) - 4,
 				".xpm", 4))
 			exit_error("Invalid extension to a texture's path", scene);
-		check_texture(scene);
+		check_texture(scene, 0);
 	}
 	if (check_id(scene->line, 1))
 	{

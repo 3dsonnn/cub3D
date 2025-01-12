@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 11:00:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/12 16:35:33 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	fill_map(t_scene *scene, t_map *map)
 			exit_error("There cannot be empty lines inside the map content", scene);
 		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
 			exit_error("Invalid character inside the map", scene);
-		scene->mtx = ft_mtxdup(map->content);
-        ft_mtxfree(&map->content);
-        ft_addstr_mtx(&map->content, scene->mtx, scene->line);
+		add_row(&map->head, new_row(scene->line));
         ft_strfree(&scene->line);
 	}
+	map->content = row_to_mtx(map->head);
+	free_rows(&map->head);
     map->size.x = ft_longestr_mtx(map->content);
     map->size.y = ft_mtxlen(map->content);
 	fill_map_aux(scene, map);
