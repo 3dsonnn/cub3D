@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 15:36:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:54:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	check_fc(t_scene *scene, int i, int j, int len)
 	ft_strfree(&aux);
 }
 
-static void	check_texture(t_scene *scene, int fd)
+static void	check_texture(t_scene *scene)
 {
 	char	**mtx;
 
@@ -101,16 +101,15 @@ static void	check_texture(t_scene *scene, int fd)
 		exit_error("Invalid path to a texture element: It cannot contain spaces",
 			scene);
 	}
-	fd = open(mtx[1], O_RDONLY);
-	if (fd < 0)
+	if (open(mtx[1], O_RDONLY) < 0)
 	{
 		ft_mtxfree(&mtx);
 		scene->tmp = ft_strjoin("Invalid path to a texture element: ",
 				strerror(errno));
 		exit_error(scene->tmp, scene);
 	}
+	fill_texture(scene, *scene->line, mtx[1]);
 	ft_mtxfree(&mtx);
-	fill_texture(scene, *scene->line, fd);
 	ft_strfree(&scene->line);
 }
 
@@ -129,7 +128,7 @@ void	check_element(t_scene *scene)
 		if (ft_strncmp((scene->line + 3) + ft_strlen(scene->line + 3) - 4,
 				".xpm", 4))
 			exit_error("Invalid extension to a texture's path", scene);
-		check_texture(scene, 0);
+		check_texture(scene);
 	}
 	if (check_id(scene->line, 1))
 	{

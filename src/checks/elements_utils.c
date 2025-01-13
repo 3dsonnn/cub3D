@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 09:21:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 10:04:42 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:57:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,33 @@ static  void    check_duplicate_id(t_scene *scene, char ID)
     ft_swaptr((void **)&scene->elements, (void **)&scene->tmp);
 }
 
-static  void	fill_texture_aux(t_scene *scene, char ID, int fd)
+static  void	fill_texture_aux(t_scene *scene, char ID, char *path)
 {
 	if (ID == 'N')
 	{
-		scene->walls[NO].fd = fd;
+		scene->walls[NO].path = ft_strdup(path);
 		scene->walls[NO].id = NO;
 	}
 	else if (ID == 'S')
 	{
-		scene->walls[SO].fd = fd;
+		scene->walls[SO].path = ft_strdup(path);
 		scene->walls[SO].id = SO;
 	}
 	else if (ID == 'W')
 	{
-		scene->walls[WE].fd = fd;
+		scene->walls[WE].path = ft_strdup(path);
 		scene->walls[WE].id = WE;
 	}
 	else if (ID == 'E')
 	{
-		scene->walls[EA].fd = fd;
+		scene->walls[EA].path = ft_strdup(path);
 		scene->walls[EA].id = EA;
 	}
 	else
 		exit_error("Invalid element in the scene file", scene);
 }
 
-void	fill_texture(t_scene *scene, char ID, int fd)
+void	fill_texture(t_scene *scene, char ID, char *path)
 {
     if (!scene->elements)
 	{
@@ -55,7 +55,7 @@ void	fill_texture(t_scene *scene, char ID, int fd)
 		return ;
 	}
 	check_duplicate_id(scene, ID);
-    fill_texture_aux(scene, ID, fd);
+    fill_texture_aux(scene, ID, path);
 }
 
 void	fill_fc(t_scene *scene, char ID, int *rgb, int i)
