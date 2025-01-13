@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/13 09:58:01 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 15:17:07 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ typedef struct s_fc
 typedef struct s_wall
 {
 	t_ID			id;
-	int				fd;
+	char			*path;
+	void			*img;
+	int				width;
+	int				height;
 }					t_wall;
 
 typedef struct s_map
@@ -73,7 +76,9 @@ typedef struct s_img
 
 typedef struct s_cub
 {
-	t_img			*img;
+	void			*mlx;
+	void			*win;
+	t_img			img[4];
 	t_scene			scene;
 }					t_cub;
 
