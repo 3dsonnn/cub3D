@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 18:05:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 09:58:01 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ typedef enum ID
 	C
 }					t_ID;
 
-typedef struct s_wall
+typedef struct s_rows
 {
-	t_ID			id;
-	int				fd;
-}					t_wall;
+	char			*str;
+	struct s_rows	*next;
+}					t_rows;
 
 typedef struct s_fc
 {
@@ -37,11 +37,11 @@ typedef struct s_fc
 	int				rgb[3];
 }					t_fc;
 
-typedef struct s_rows
+typedef struct s_wall
 {
-	char			*str;
-	struct s_rows	*next;
-}					t_rows;
+	t_ID			id;
+	int				fd;
+}					t_wall;
 
 typedef struct s_map
 {

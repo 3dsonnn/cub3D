@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 19:14:23 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 09:39:14 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ int		rowlen(t_rows *head);
 char	**row_to_mtx(t_rows *head);
 void	free_rows(t_rows **head);
 t_rows	*new_row(char *str);
+
+//  DELETE IT LATER
+void	print_map(t_map *map);
 
 #endif
