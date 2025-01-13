@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 19:27:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 19:14:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 09:14:43 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ static void	check_empty_spaces(t_scene *scene, t_map *map)
 			if (map->content[p[1]][p[2]] == '0')
 				if (map->content[p[1] + 1][p[2]] == ' ' || map->content[p[1]
 					- 1][p[2]] == ' ' || map->content[p[1]][p[2] + 1] == ' '
-					|| map->content[p[1]][p[2] - 1] == ' ')
-					exit_error("Invalid map: a 0 cannot touch a space", scene);
+					|| map->content[p[1]][p[2] - 1] == ' ' || map->content[p[1]
+					- 1][p[2] - 1] == ' ' || map->content[p[1] - 1][p[2]
+					+ 1] == ' ' || map->content[p[1] + 1][p[2] - 1] == ' '
+					|| map->content[p[1] + 1][p[2] + 1] == ' ')
+					exit_error("Invalid map: a 0 cannot be surrounded by a space",
+						scene);
 	}
 }
 
@@ -55,18 +59,17 @@ static void	check_start_pos(t_scene *scene, t_map *map)
 			if (map->content[p[1]][p[2]] == map->start)
 				if (map->content[p[1] + 1][p[2]] == ' ' || map->content[p[1]
 					- 1][p[2]] == ' ' || map->content[p[1]][p[2] + 1] == ' '
-					|| map->content[p[1]][p[2] - 1] == ' ')
-					exit_error("Invalid map: the start position cannot touch a space",
+					|| map->content[p[1]][p[2] - 1] == ' ' || map->content[p[1]
+					+ 1][p[2] + 1] == ' ' || map->content[p[1] + 1][p[2]
+					- 1] == ' ' || map->content[p[1] - 1][p[2] + 1] == ' '
+					|| map->content[p[1] - 1][p[2] - 1] == ' ')
+					exit_error("Invalid map: the start position cannot be surrounded by a space",
 						scene);
 	}
 }
 
-static void	check_spaces(t_scene *scene, t_map *map)
+static void	check_spaces(t_scene *scene, t_map *map, int x, int y)
 {
-	int	x;
-	int	y;
-
-	y = -1;
 	while (++y < map->size.y)
 	{
 		x = -1;
@@ -78,8 +81,15 @@ static void	check_spaces(t_scene *scene, t_map *map)
 					|| (y < map->size.y - 1 && !ft_strchr(" 1", map->content[y
 							+ 1][x])) || (x > 0 && !ft_strchr(" 1",
 							map->content[y][x - 1])) || (x < map->size.x - 1
-						&& !ft_strchr(" 1", map->content[y][x + 1])))
-					exit_error("Invalid map: a space can only touch another space or a wall",
+						&& !ft_strchr(" 1", map->content[y][x + 1])) || (y > 0
+						&& x > 0 && !ft_strchr(" 1", map->content[y - 1][x
+							- 1])) || (y > 0 && x < map->size.x - 1
+						&& !ft_strchr(" 1", map->content[y - 1][x + 1]))
+					|| (y < map->size.y - 1 && x > 0 && !ft_strchr(" 1",
+							map->content[y + 1][x - 1])) || (y < map->size.y - 1
+						&& x < map->size.x - 1 && !ft_strchr(" 1",
+							map->content[y + 1][x + 1])))
+					exit_error("Invalid map: a space can only be surrounded another space or a wall",
 						scene);
 			}
 		}
@@ -90,7 +100,7 @@ void	is_surrounded(t_scene *scene, t_map *map, int y)
 {
 	check_empty_spaces(scene, map);
 	check_start_pos(scene, map);
-	check_spaces(scene, map);
+	check_spaces(scene, map, -1, -1);
 	ft_replace_char(*map->content, '1', '*');
 	ft_replace_char(map->content[map->size.y - 1], '1', '*');
 	while (++y < map->size.y)
@@ -101,5 +111,5 @@ void	is_surrounded(t_scene *scene, t_map *map, int y)
 			map->content[y][map->size.x - 1] = '*';
 	}
 	my_flood_fill(map, -1, -1);
-	//flood_fill(map->content, map->size, map->start);
+	// flood_fill(map->content, map->size, map->start);
 }
