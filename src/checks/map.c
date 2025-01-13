@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 18:37:14 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 09:27:29 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	fill_map(t_scene *scene, t_map *map)
 		scene->line = get_next_line(scene->fd);
 		if (!scene->line)
 			break ;
-		scene->line[ft_strlen(scene->line) - 1] = '\0';
+		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
+			scene->line[ft_strlen(scene->line) - 1] = '\0';
 		if (!*scene->line || ft_strspace(scene->line))
 			exit_error("There cannot be empty lines inside the map content", scene);
 		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
