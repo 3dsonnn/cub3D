@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/13 09:27:29 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/15 10:40:04 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	check_starting_position(t_scene *scene, t_map *map)
 			if (ft_strchr("NSEW", map->content[i][j]))
 			{
 				map->start = map->content[i][j];
+				map->spos.x = j;
+				map->spos.y = i;
 				flag++;
 			}
 		}

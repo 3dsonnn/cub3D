@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/13 20:26:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/15 10:25:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	check_texture(t_scene *scene)
 	if (ft_mtxlen(mtx) != 2)
 	{
 		ft_mtxfree(&mtx);
-		exit_error("Invalid path to a texture element: It cannot contain spaces",
+		exit_error("Invalid path to a texture element: It cannot contain more than two informations",
 			scene);
 	}
 	if (open(mtx[1], O_RDONLY) < 0)

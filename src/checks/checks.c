@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/13 18:35:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/15 10:20:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ static void	check_elements(t_scene *scene, int i)
 {
 	check_element(scene);
 	i++;
-	while (-42 && i != 6)
+	while (i != 6)
 	{
 		scene->line = get_next_line(scene->fd);
 		if (!scene->line)
 			exit_error("Missing elements in the scene file", scene);
-		scene->line[ft_strlen(scene->line) - 1] = '\0';
+		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
+			scene->line[ft_strlen(scene->line) - 1] = '\0';
 		if (!*scene->line || ft_strspace(scene->line))
 		{
 			ft_strfree(&scene->line);
