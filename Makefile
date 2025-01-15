@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/13 11:33:02 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/15 00:27:45 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC =	src/main.c 						\
 		src/t_row/t_row_aux.c 			\
 		src/my_mlx/my_mlx_init.c 		\
 		src/my_mlx/my_mlx_hook.c 		\
+		src/my_mlx/my_mlx_utils.c 		\
 
 LIBFT =	libft/libft.a
 MINILIBX = $(MLXPATH)/libmlx.a

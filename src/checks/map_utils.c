@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 19:27:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/13 09:14:43 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/13 11:37:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,24 @@ static void	check_spaces(t_scene *scene, t_map *map, int x, int y)
 	}
 }
 
-void	is_surrounded(t_scene *scene, t_map *map, int y)
+void	is_surrounded(t_scene *scene, t_map *map)
 {
+	// int	y;
+
+	// y = -1;
 	check_empty_spaces(scene, map);
 	check_start_pos(scene, map);
 	check_spaces(scene, map, -1, -1);
-	ft_replace_char(*map->content, '1', '*');
-	ft_replace_char(map->content[map->size.y - 1], '1', '*');
-	while (++y < map->size.y)
-	{
-		if (*map->content[y] == '1')
-			*map->content[y] = '*';
-		if (map->content[y][map->size.x - 1] == '1')
-			map->content[y][map->size.x - 1] = '*';
-	}
-	my_flood_fill(map, -1, -1);
-	// flood_fill(map->content, map->size, map->start);
+	// ft_replace_char(*map->content, '1', '*');
+	// ft_replace_char(map->content[map->size.y - 1], '1', '*');
+	// while (++y < map->size.y)
+	// {
+	// 	if (*map->content[y] == '1')
+	// 		*map->content[y] = '*';
+	// 	if (map->content[y][map->size.x - 1] == '1')
+	// 		map->content[y][map->size.x - 1] = '*';
+	// }
+	// my_flood_fill(map, -1, -1);
+	// print_map(map);
+	// flood_fill(map->content, map->size, (t_point){0, 0});
 }
