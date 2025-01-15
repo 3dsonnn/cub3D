@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 11:37:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/15 13:23:49 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	my_mlx_new_image(t_cub *cub)
 			if (cub->scene.map.content[j][i] == '1')
 			{
 				draw_y = start_y;
-				while (draw_y < start_y + block_height && draw_y < HEIGHT)
+				while (draw_y < start_y - 1 + block_height && draw_y < HEIGHT)
 				{
 					draw_x = start_x;
-					while (draw_x < start_x + block_width && draw_x < WIDTH)
+					while (draw_x < start_x - 1 + block_width && draw_x < WIDTH)
 					{
 						my_mlx_pixel_put(&cub->img, draw_x, draw_y, 0x0000FF);
 						draw_x++;
@@ -63,10 +63,10 @@ void	my_mlx_new_image(t_cub *cub)
 						cub->player.x = start_x;
 				}
 				draw_y = start_y;
-				while (draw_y < start_y + block_height && draw_y < HEIGHT)
+				while (draw_y < start_y - 1 + block_height && draw_y < HEIGHT)
 				{
 					draw_x = start_x;
-					while (draw_x < start_x + block_width && draw_x < WIDTH)
+					while (draw_x < start_x - 1 + block_width && draw_x < WIDTH)
 					{
 						my_mlx_pixel_put(&cub->img, draw_x, draw_y, 0xD3D3D3);
 						draw_x++;
@@ -77,10 +77,10 @@ void	my_mlx_new_image(t_cub *cub)
 			else if (cub->scene.map.content[j][i] == ' ')
 			{
 				draw_y = start_y;
-				while (draw_y < start_y + block_height && draw_y < HEIGHT)
+				while (draw_y < start_y - 1 + block_height && draw_y < HEIGHT)
 				{
 					draw_x = start_x;
-					while (draw_x < start_x + block_width && draw_x < WIDTH)
+					while (draw_x < start_x - 1 + block_width && draw_x < WIDTH)
 					{
 						my_mlx_pixel_put(&cub->img, draw_x, draw_y, 0xFFFFFF);
 						draw_x++;
@@ -94,7 +94,8 @@ void	my_mlx_new_image(t_cub *cub)
 	}
 }
 
-void	draw_player(t_cub *cub)
+
+static void	drwa_player_ray(t_cub *cub)
 {
 	int	x;
 	int	y;
@@ -108,7 +109,21 @@ void	draw_player(t_cub *cub)
 			my_mlx_pixel_put(&cub->img, x, y, 0xFF0000);
 	}
 }
+void	draw_player(t_cub *cub)
+{
+	int	x;
+	int	y;
 
+	y = cub->player.y + HEIGHT / cub->scene.map.size.y / 2;
+	printf("Player position: %d %d\n", cub->player.x, cub->player.y);
+	while (cub->player.y < --y)
+	{
+		x = cub->player.x + WIDTH / cub->scene.map.size.x / 2;
+		while (x-- > cub->player.x)
+			my_mlx_pixel_put(&cub->img, x, y, 0xFF0000);
+	}
+	drwa_player_ray(cub);
+}
 void	display(t_cub *cub)
 {
 	mlx_clear_window(cub->mlx, cub->win);
