@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 02:21:31 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/15 08:31:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define WIDTH 1920
-# define HEIGHT 1020
+# define WIDTH 800
+# define HEIGHT 500
 # define ESC 65307
 # define LEFT 65362
 # define RIGHT 65364
-# define AKEY 65
-# define DKEY 68
-# define SKEY 83
-# define WKEY 87
+# define AKEY 97
+# define DKEY 100
+# define SKEY 115
+# define WKEY 119
 
 //  DELETE IT LATER
 void		print_map(t_map *map);
