@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 02:01:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/15 11:09:20 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	my_mlx_xpm_file_to_image(t_cub *cub, int i, int j)
 		ft_strfree(&cub->scene.walls[i].path);
 	}
 }
-
+/*
 static void	paint_floor_and_ceiling(t_cub *cub, int x, int y)
 {
 	int	fc[2];
@@ -59,7 +59,7 @@ static void	paint_floor_and_ceiling(t_cub *cub, int x, int y)
 		}
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
-}
+}*/
 
 void	my_mlx_init(t_cub *cub)
 {
@@ -69,14 +69,7 @@ void	my_mlx_init(t_cub *cub)
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 			&cub->img.line_len, &cub->img.endian);
-	paint_floor_and_ceiling(cub, -1, -1);
-	// mlx_put_image_to_window(cub->mlx, cub->win, cub->scene.walls->img.img, 0,
-	// 	0);
-	// mlx_put_image_to_window(cub->mlx, cub->win, cub->scene.walls[1].img.img,
-	// 	cub->scene.walls->width, 0);
-	// mlx_put_image_to_window(cub->mlx, cub->win, cub->scene.walls[2].img.img,
-	// 	cub->scene.walls[0].width + cub->scene.walls[1].width, 0);
-	// mlx_put_image_to_window(cub->mlx, cub->win, cub->scene.walls[3].img.img,
-	// 	cub->scene.walls[0].width + cub->scene.walls[1].width
-	// 	+ cub->scene.walls[2].width, 0);
+	//paint_floor_and_ceiling(cub, -1, -1);
+	cub->player.x = 0;
+	cub->player.y = 0;
 }
