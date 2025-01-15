@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 06:10:10 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/15 11:10:18 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,12 @@ typedef struct s_scene
 	t_wall			walls[4];
 }					t_scene;
 
-typedef struct s_player
-{
-	int			x;
-	int			y;
-}					t_player;
-
 typedef struct s_cub
 {
 	void			*mlx;
 	void			*win;
 	t_img			img;
-	t_player		player;
+	t_point			player;
 	t_scene			scene;
 }					t_cub;
 

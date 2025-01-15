@@ -6,11 +6,11 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/15 00:27:45 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/15 11:22:19 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#.SILENT:
+.SILENT:
 
 NAME = cub3D
 
@@ -24,7 +24,6 @@ SRC =	src/main.c 						\
 		src/error.c 					\
 		src/checks/map.c 				\
 		src/checks/checks.c 			\
-		src/checks/map_aux.c 			\
 		src/checks/elements.c 			\
 		src/checks/map_utils.c 			\
 		src/checks/elements_utils.c 	\
@@ -33,6 +32,8 @@ SRC =	src/main.c 						\
 		src/my_mlx/my_mlx_init.c 		\
 		src/my_mlx/my_mlx_hook.c 		\
 		src/my_mlx/my_mlx_utils.c 		\
+		src/cub3D/cub3D.c 				\
+		src/cub3D/minimap.c 			\
 
 LIBFT =	libft/libft.a
 MINILIBX = $(MLXPATH)/libmlx.a
