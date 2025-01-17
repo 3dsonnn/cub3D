@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/17 13:11:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/17 15:20:07 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-# define MINIWIDTH 192
-# define MINIHEIGHT 108
+# define MINIWIDTH 1900
+# define MINIHEIGHT 1020
 
 # define ESC 65307
 
