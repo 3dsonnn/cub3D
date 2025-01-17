@@ -6,34 +6,38 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/15 11:22:19 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/17 09:37:54 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 
 NAME = cub3D
-
+#	-Wall -Wextra -Werror
 CC = cc
 MLXPATH = minilibx-linux
-FLAGS = -Wall -Wextra -Werror -I./$(MLXPATH) -O3
+FLAGS = -I./$(MLXPATH) -O3
 LIBS =	-L./$(MLXPATH) -lmlx -lX11 -lXext -lm
 RM = rm -rf
 
-SRC =	src/main.c 						\
-		src/error.c 					\
-		src/checks/map.c 				\
-		src/checks/checks.c 			\
-		src/checks/elements.c 			\
-		src/checks/map_utils.c 			\
-		src/checks/elements_utils.c 	\
-		src/t_row/t_row.c 				\
-		src/t_row/t_row_aux.c 			\
-		src/my_mlx/my_mlx_init.c 		\
-		src/my_mlx/my_mlx_hook.c 		\
-		src/my_mlx/my_mlx_utils.c 		\
-		src/cub3D/cub3D.c 				\
-		src/cub3D/minimap.c 			\
+SRC =	src/main.c 							\
+		src/error.c 						\
+		src/checks/map.c 					\
+		src/checks/checks.c 				\
+		src/checks/elements.c 				\
+		src/checks/map_utils.c 				\
+		src/checks/elements_utils.c 		\
+		src/t_row/t_row.c 					\
+		src/t_row/t_row_aux.c 				\
+		src/my_mlx/my_mlx_init.c 			\
+		src/my_mlx/my_mlx_hook.c 			\
+		src/my_mlx/my_mlx_utils.c 			\
+		src/cub3D/cub3D.c 					\
+		src/free.c 							\
+		src/minimap/minimap.c 				\
+		src/minimap/minimap_init.c 			\
+		src/minimap/minimap_init_utils.c	\
+		src/minimap/minimap_refresh.c 		\
 
 LIBFT =	libft/libft.a
 MINILIBX = $(MLXPATH)/libmlx.a

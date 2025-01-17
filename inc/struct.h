@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 11:10:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/17 12:28:21 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,60 @@ typedef struct s_scene
 	t_wall			walls[4];
 }					t_scene;
 
+typedef struct s_plane
+{
+	int				x0;
+	int				x;
+	int				y0;
+	int				y;
+}					t_plane;
+
+typedef struct s_tile
+{
+	char			id;
+	int				color;
+	t_plane			pos;
+	struct s_tile	*prev;
+	struct s_tile	*next;
+	struct s_tile	*up;
+	struct s_tile	*down;
+}					t_tile;
+
+typedef struct s_player
+{
+	int				i;
+	int				j;
+	t_point			size;
+	t_plane			pos;
+	t_plane			to_wall;
+	t_point			fov;
+	t_point			dir;
+	struct s_tile	*prev;
+	struct s_tile	*next;
+	struct s_tile	*up;
+	struct s_tile	*down;
+}					t_player;
+
+typedef struct s_mmap
+{
+	int				width;
+	int				height;
+	int				remainder_width;
+	int				remainder_height;
+	int				extra_width;
+	int				extra_height;
+	t_tile			**tiles;
+	t_img			img;
+}					t_mmap;
+
 typedef struct s_cub
 {
 	void			*mlx;
 	void			*win;
 	t_img			img;
-	t_point			player;
+	t_point			size;
+	t_mmap			minimap;
+	t_player		player;
 	t_scene			scene;
 }					t_cub;
 
