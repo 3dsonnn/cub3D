@@ -6,13 +6,13 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 11:36:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/17 12:53:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static int	mlx_close(t_cub *cub)
+static int	my_mlx_close(t_cub *cub)
 {
 	int	i;
 
@@ -26,40 +26,76 @@ static int	mlx_close(t_cub *cub)
 	exit(0);
 }
 
-static int	mlx_key_press(int keycode, t_cub *cub)
+static int	my_mlx_key_press(int keycode, t_cub *cub)
 {
 	if (keycode == ESC)
-		mlx_close(cub);
-	if (keycode == WKEY)
+		my_mlx_close(cub);
+	else if (keycode == WKEY || keycode == UP)
 	{
-		cub->player.y -= 10;
+		if (cub->player.pos.y0 - cub->player.size.y <= cub->player.up->pos.y)
+		{
+			if (cub->player.up->id != '1')
+			{
+				cub->player.pos.y0 -= cub->player.size.y;
+				cub->minimap.tiles[cub->player.i - 1][cub->player.j].id == 'E';
+			}
+		}
+		else
+			cub->player.pos.y0 -= cub->player.size.y;
 	}
-	if (keycode == AKEY)
+	else if (keycode == SKEY || keycode == DOWN)
 	{
-		cub->player.x -= 10;
+		if (cub->player.pos.y0 + cub->player.size.y >= cub->player.down->pos.y0)
+		{
+			if (cub->player.down->id != '1')
+			{
+				cub->player.pos.y0 += cub->player.size.y;
+				cub->minimap.tiles[cub->player.i + 1][cub->player.j].id == 'E';
+			}
+		}
+		else
+			cub->player.pos.y0 += cub->player.size.y;
 	}
-	if (keycode == SKEY)
+	else if (keycode == DKEY || keycode == RIGHT)
 	{
-		cub->player.y += 10;
+		if (cub->player.pos.x0 + cub->player.size.x >= cub->player.next->pos.x0)
+		{
+			if (cub->player.next->id != '1')
+			{
+				cub->player.pos.x0 += cub->player.size.x;
+				cub->minimap.tiles[cub->player.i][cub->player.j + 1].id == 'E';
+			}
+		}
+		else
+			cub->player.pos.x0 += cub->player.size.x;
 	}
-	if (keycode == DKEY)
+	else if (keycode == AKEY || keycode == LEFT)
 	{
-		cub->player.x += 10;
+		if (cub->player.pos.x0 - cub->player.size.x <= cub->player.prev->pos.x)
+		{
+			if (cub->player.prev->id != '1')
+			{
+				cub->player.pos.x0 += cub->player.size.x;
+				cub->minimap.tiles[cub->player.i][cub->player.j - 1].id == 'E';
+			}
+		}
+		else
+			cub->player.pos.x0 += cub->player.size.x;
 	}
-	display(cub);
+	cub3D(cub);
 	return (0);
 }
 
-// static int	mlx_key_release(int keycode, t_cub *cub)
-// {
-// 	if (keycode == ESC)
-// 		mlx_close(cub);
-// 	return (0);
-// }
+static int	my_mlx_mouse_motion(int x, int y, t_cub *cub)
+{
+    (void)cub;
+	printf("Mouse position: x=%d\ty=%d\n", x, y);
+	return (0);
+}
 
 void	my_mlx_hook(t_cub *cub)
 {
-	mlx_hook(cub->win, 2, 1L << 0, mlx_key_press, cub);
-	mlx_hook(cub->win, 17, 1L << 17, mlx_close, cub);
-    //mlx_hook(cub->win, 6, 1L << 6, mlx_mouse_motion, cub);
+	mlx_hook(cub->win, 2, 1L << 0, my_mlx_key_press, cub);
+	mlx_hook(cub->win, 17, 1L << 17, my_mlx_close, cub);
+    mlx_hook(cub->win, 6, 1L << 6, my_mlx_mouse_motion, cub);
 }
