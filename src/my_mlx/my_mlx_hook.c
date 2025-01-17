@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/17 12:53:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/17 15:47:43 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 		my_mlx_close(cub);
 	else if (keycode == WKEY || keycode == UP)
 	{
+		printf("x0=%d\tx=%d\ty0=%d\ty=%d\n", cub->player.pos.x0, cub->player.pos.x, cub->player.pos.y0, cub->player.pos.y);
 		if (cub->player.pos.y0 - cub->player.size.y <= cub->player.up->pos.y)
 		{
 			if (cub->player.up->id != '1')
 			{
 				cub->player.pos.y0 -= cub->player.size.y;
-				cub->minimap.tiles[cub->player.i - 1][cub->player.j].id == 'E';
+				cub->minimap.tiles[cub->player.i - 1][cub->player.j].id = 'E';
 			}
 		}
 		else
@@ -45,12 +46,13 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 	}
 	else if (keycode == SKEY || keycode == DOWN)
 	{
+		printf("x0=%d\tx=%d\ty0=%d\ty=%d\n", cub->player.pos.x0, cub->player.pos.x, cub->player.pos.y0, cub->player.pos.y);
 		if (cub->player.pos.y0 + cub->player.size.y >= cub->player.down->pos.y0)
 		{
 			if (cub->player.down->id != '1')
 			{
 				cub->player.pos.y0 += cub->player.size.y;
-				cub->minimap.tiles[cub->player.i + 1][cub->player.j].id == 'E';
+				cub->minimap.tiles[cub->player.i + 1][cub->player.j].id = 'E';
 			}
 		}
 		else
@@ -58,12 +60,13 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 	}
 	else if (keycode == DKEY || keycode == RIGHT)
 	{
+		printf("x0=%d\tx=%d\ty0=%d\ty=%d\n", cub->player.pos.x0, cub->player.pos.x, cub->player.pos.y0, cub->player.pos.y);
 		if (cub->player.pos.x0 + cub->player.size.x >= cub->player.next->pos.x0)
 		{
 			if (cub->player.next->id != '1')
 			{
 				cub->player.pos.x0 += cub->player.size.x;
-				cub->minimap.tiles[cub->player.i][cub->player.j + 1].id == 'E';
+				cub->minimap.tiles[cub->player.i][cub->player.j + 1].id = 'E';
 			}
 		}
 		else
@@ -71,12 +74,13 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 	}
 	else if (keycode == AKEY || keycode == LEFT)
 	{
+		printf("x0=%d\tx=%d\ty0=%d\ty=%d\n", cub->player.pos.x0, cub->player.pos.x, cub->player.pos.y0, cub->player.pos.y);
 		if (cub->player.pos.x0 - cub->player.size.x <= cub->player.prev->pos.x)
 		{
 			if (cub->player.prev->id != '1')
 			{
 				cub->player.pos.x0 += cub->player.size.x;
-				cub->minimap.tiles[cub->player.i][cub->player.j - 1].id == 'E';
+				cub->minimap.tiles[cub->player.i][cub->player.j - 1].id = 'E';
 			}
 		}
 		else
