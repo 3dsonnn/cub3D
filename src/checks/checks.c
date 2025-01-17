@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 10:20:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/16 19:11:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ static void	check_map(t_scene *scene, t_map *map)
 		exit_error("Invalid map: it's too small", scene);
 	check_starting_position(scene, map);
 	is_surrounded(scene, map);
-	print_map(map);
 }
 
-void	checks(t_scene *scene, int ac, char **av)
+static	void    init_scene(t_scene *scene)
 {
-	scene->tmp = NULL;
+    scene->tmp = NULL;
 	scene->line = NULL;
 	scene->elements = NULL;
 	scene->map.head = NULL;
@@ -88,8 +87,13 @@ void	checks(t_scene *scene, int ac, char **av)
 	scene->walls[1].path = NULL;
 	scene->walls[2].path = NULL;
 	scene->walls[3].path = NULL;
-	check_args(scene, ac, av);
-	check_elements(scene, 0);
-	ft_strfree(&scene->elements);
-	check_map(scene, &scene->map);
+}
+
+void	checks(t_cub *cub, int ac, char **av)
+{
+	init_scene(&cub->scene);
+	check_args(&cub->scene, ac, av);
+	check_elements(&cub->scene, 0);
+	ft_strfree(&cub->scene.elements);
+	check_map(&cub->scene, &cub->scene.map);
 }
