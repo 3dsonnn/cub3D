@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/17 14:36:36 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/17 15:52:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static	void	paint_tile(t_cub *cub, t_tile tile)
 	}
 }
 
+
 void	minimap(t_cub *cub, int i, int j)
 {
 	mlx_clear_window(cub->mlx, cub->win);
@@ -69,5 +70,5 @@ void	minimap(t_cub *cub, int i, int j)
 		}
 	}
 	draw_player(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 10, 10);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 0, 0);
 }

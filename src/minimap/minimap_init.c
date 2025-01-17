@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 02:08:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/17 11:19:37 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/17 15:17:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,16 +130,4 @@ void	init_minimap(t_cub *cub, int i, int j)
 	cub->minimap.extra_width = cub->minimap.remainder_width / 2;
 	cub->minimap.extra_height = cub->minimap.remainder_height / 2;
 	init_tiles(cub, 0, 0);
-	for (int i = -1; ++i < cub->scene.map.size.y;)
-	{
-		for (int j = -1; ++j < cub->scene.map.size.x;)
-		{
-			printf("color=%d\tx0[%d][%d]=%d\tx[%d][%d]=%d\ty0[%d][%d]=%d\ty[%d][%d]=%d\n",
-				cub->minimap.tiles[i][j].color, i, j,
-				cub->minimap.tiles[i][j].pos.x0, i, j,
-				cub->minimap.tiles[i][j].pos.x, i, j,
-				cub->minimap.tiles[i][j].pos.y0, i, j,
-				cub->minimap.tiles[i][j].pos.y);
-		}
-	}
 }
