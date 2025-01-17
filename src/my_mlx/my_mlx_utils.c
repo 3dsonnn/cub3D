@@ -6,13 +6,13 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:53:50 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 11:07:17 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/16 17:00:18 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-inline int	mlx_get_rgb_color(int r, int g, int b)
+inline int	my_mlx_get_rgb_color(int r, int g, int b)
 {
 	return ((r << 16) | (g << 8) | b);
 }
