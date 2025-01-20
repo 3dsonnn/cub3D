@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/17 15:52:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/20 00:38:44 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	void	draw_player(t_cub *cub)
 		x0 = cub->player.pos.x0;
 		while (x0 < x)
 		{
-			my_mlx_pixel_put(&cub->minimap.img, x0, y0, 0xFFFF00);
+			my_mlx_pixel_put(&cub->minimap.img, x0, y0, 0xFF0000);
 			x0++;
 		}
 		y0++;
@@ -49,26 +49,24 @@ static	void	paint_tile(t_cub *cub, t_tile tile)
 		x0 = tile.pos.x0;
 		while (x0 < x)
 		{
-			my_mlx_pixel_put(&cub->minimap.img, x0, y0, tile.color);
+			if (x0 == tile.pos.x0 || x0 == x - 1 || y0 == tile.pos.y0 || y0 == y - 1)
+				my_mlx_pixel_put(&cub->minimap.img, x0, y0, 0xFFFFFF);
+			else
+				my_mlx_pixel_put(&cub->minimap.img, x0, y0, tile.color);
 			x0++;
 		}
 		y0++;
 	}
 }
 
-
 void	minimap(t_cub *cub, int i, int j)
 {
-	mlx_clear_window(cub->mlx, cub->win);
-	refresh_minimap(cub, -1, -1);
-	while (++i < cub->size.y)
+	while (++i < cub->scene.map.size.y)
 	{
 		j = -1;
-		while (++j < cub->size.x)
-		{
-			paint_tile(cub, cub->minimap.tiles[i][j]);
-		}
+		while (++j < cub->scene.map.size.x)
+				paint_tile(cub, cub->minimap.tiles[i][j]);
 	}
 	draw_player(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 60, 30);
 }
