@@ -6,26 +6,26 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:31:23 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 16:35:57 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/21 09:37:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-void	add_row(t_rows **head, t_rows *new)
+void	add_row(t_rows **head, t_rows *_new)
 {
 	t_rows	*tmp;
 
-	if (!head || !new)
+	if (!head || !_new)
 		return ;
 	tmp = *head;
 	if (!tmp)
-		*head = new;
+		*head = _new;
 	else
 	{
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = new;
+		tmp->next = _new;
 	}
 }
 

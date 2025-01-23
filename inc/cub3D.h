@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/20 02:15:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 09:07:11 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define PI 3.14159265359
+# define FOV 180.0
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -40,6 +40,15 @@
 # define DKEY 100
 # define SKEY 115
 # define WKEY 119
+
+# define NUMLEFT 65430
+# define NUMRIGHT 65432
+# define NUMUP 65431
+# define NUMUPLEFT 65429
+# define NUMUPRIGHT 65434
+# define NUMDOWN 65433
+# define NUMDOWNLEFT 65436
+# define NUMDOWNRIGHT 65435
 
 # define UP 65362
 # define DOWN 65364
@@ -64,7 +73,7 @@ void		check_starting_position(t_scene *scene, t_map *map);
 void		exit_error(char *message, t_scene *scene);
 
 //  T_ROW
-void		add_row(t_rows **head, t_rows *new);
+void		add_row(t_rows **head, t_rows *_new);
 int			rowlen(t_rows *head);
 char		**row_to_mtx(t_rows *head);
 void		free_rows(t_rows **head);
@@ -81,14 +90,17 @@ void		my_mlx_pixel_put(t_img *image, int x, int y, int color);
 extern int	my_mlx_get_rgb_color(int r, int g, int b);
 
 //  PLAYER
-void	init_player(t_cub *cub, int i, int j);
-void	get_ifpos(t_cub *cub);
-void	move_player(t_cub *cub, t_plane flag);
-int	check_players_newpos_overlap(t_cub *cub, t_plane flag);
-int	check_player_left(t_cub *cub);
-int	check_player_right(t_cub *cub);
-int	check_player_down(t_cub *cub);
-int	check_player_up(t_cub *cub);
+void		init_player(t_cub *cub, int i, int j);
+void		move_player(t_cub *cub, t_plane flag);
+void		rotate_player(t_cub *cub, int flag);
+int			check_players_newpos_overlap(t_cub *cub, t_plane flag);
+int			check_player_left(t_cub *cub, t_plane new_pos, int i);
+int			check_player_right(t_cub *cub, t_plane new_pos, int i);
+int			check_player_down(t_cub *cub, t_plane new_pos, int i);
+int			check_player_up(t_cub *cub, t_plane new_pos, int i);
+void		draw_player(t_cub *cub);
+void		draw_fov(t_cub *cub);
+int			check_if_same_tile(t_plane tile, int tilex0, int x, int y);
 
 //  CUB3D
 void		cub3D(t_cub *cub);
@@ -96,11 +108,11 @@ void		display(t_cub *cub);
 
 //  MINIMAP
 void		minimap(t_cub *cub, int i, int j);
-void	init_minimap(t_cub *cub, int i, int j);
-void	link_tiles(t_cub *cub, int i, int j);
-void	init_tiles(t_cub *cub, int i, int j);
-void	set_tiles_colors(t_cub *cub, int i, int j);
-
+void		init_minimap(t_cub *cub, int i, int j);
+void		link_tiles(t_cub *cub, int i, int j);
+void		init_tiles(t_cub *cub, int i, int j);
+void		set_tiles_colors(t_cub *cub, int i, int j);
+void		cast_rays(t_cub *cub, int i);
 //  FREE
 void		all_free(t_cub *cub, int i);
 

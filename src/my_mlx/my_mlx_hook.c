@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/18 20:17:47 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 06:39:02 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,20 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 {
 	if (keycode == ESC)
 		my_mlx_close(cub);
-	else if (keycode == WKEY || keycode == UP)
+	else if (keycode == WKEY)
 		move_player(cub, (t_plane){1, 0, 0, 0});
-	else if (keycode == SKEY || keycode == DOWN)
+	else if (keycode == SKEY)
 		move_player(cub, (t_plane){0, 1, 0, 0});
-	else if (keycode == DKEY || keycode == RIGHT)
+	else if (keycode == DKEY)
 		move_player(cub, (t_plane){0, 0, 1, 0});
-	else if (keycode == AKEY || keycode == LEFT)
+	else if (keycode == AKEY)
 		move_player(cub, (t_plane){0, 0, 0, 1});
-	cub3D(cub);
+	else if (keycode == RIGHT)
+		rotate_player(cub, 1);
+	else if (keycode == LEFT)
+		rotate_player(cub, 0);
+	if (cub->flag)
+		cub3D(cub);
 	return (0);
 }
 

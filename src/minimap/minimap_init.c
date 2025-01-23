@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 02:08:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/19 23:34:22 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/21 16:23:27 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	set_tiles_ids(t_cub *cub, int i, int j)
 			else if (cub->scene.map.content[i][j] == ' ')
 				cub->minimap.tiles[i][j].id = ' ';
 			else
-				cub->minimap.tiles[i][j].id = 'E';
+				cub->minimap.tiles[i][j].id = cub->scene.map.start;
 		}
 	}
 }

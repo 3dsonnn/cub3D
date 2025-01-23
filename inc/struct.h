@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/20 01:28:02 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 10:30:22 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ typedef enum IFPOS
 	IFDOWNLEFT,
 	IFDOWNRIGHT
 }					t_IFPOS;
+
+typedef struct s_dpoint
+{
+	double			x;
+	double			y;
+}					t_dpoint;
+
+typedef struct s_dplane
+{
+	double			x0;
+	double			x;
+	double			y0;
+	double			y;
+}					t_dplane;
+
+typedef struct s_plane
+{
+	int				x0;
+	int				x;
+	int				y0;
+	int				y;
+}					t_plane;
 
 typedef struct s_rows
 {
@@ -85,14 +107,6 @@ typedef struct s_scene
 	t_wall			walls[4];
 }					t_scene;
 
-typedef struct s_plane
-{
-	int				x0;
-	int				x;
-	int				y0;
-	int				y;
-}					t_plane;
-
 typedef struct s_tile
 {
 	char			id;
@@ -108,14 +122,24 @@ typedef struct s_tile
 	struct s_tile	*downright;
 }					t_tile;
 
+typedef struct s_ray
+{
+	t_point			face;
+	t_dpoint		hor;
+	t_dpoint		vert;
+	t_dpoint		step;
+	double			angle;
+	double			tan;
+}					t_ray;
+
 typedef struct s_player
 {
 	t_point			size;
 	t_plane			pos;
-	t_plane			ifpos[8];
-	t_plane			to_wall;
-	t_point			fov;
-	t_point			dir;
+	t_dpoint		fov;
+	t_dplane		dir;
+	double			ray_step;
+	double			angle;
 	struct s_tile	*tile;
 }					t_player;
 
@@ -131,6 +155,7 @@ typedef struct s_mmap
 
 typedef struct s_cub
 {
+	int				flag;
 	void			*mlx;
 	void			*win;
 	t_img			img;

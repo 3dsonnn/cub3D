@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/20 00:56:58 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 06:37:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	my_mlx_init(t_cub *cub)
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 			&cub->img.line_len, &cub->img.endian);
+	cub->flag = 0;
 	paint_floor_and_ceiling(cub, -1, -1);
 	init_minimap(cub, -1, -1);
 	ft_mtxfree(&cub->scene.map.content);

@@ -6,105 +6,110 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/20 03:04:37 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 07:23:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static void	move_player_up(t_cub *cub)
+static void	move_player_up(t_cub *cub, int i)
 {
-	if (cub->player.pos.y0 - cub->player.size.y <= cub->player.tile->up->pos.y)
+	t_tile	*neighbors[] = {cub->player.tile->up, cub->player.tile->upleft,
+			cub->player.tile->upright, cub->player.tile->down,
+			cub->player.tile->downleft, cub->player.tile->downright,
+			cub->player.tile->left, cub->player.tile->right};
+
+	cub->player.pos.x0 += (int)round(cub->player.size.x * cub->player.dir.x);
+	cub->player.pos.y0 += (int)round(cub->player.size.y * cub->player.dir.y);
+	while (++i < 8)
 	{
-		if (cub->player.tile->up->id != '1')
+		if (neighbors[i] && check_if_same_tile(neighbors[i]->pos,
+				neighbors[i]->pos.x0, cub->player.pos.x0, cub->player.pos.y0))
 		{
-			cub->player.pos.y0 -= cub->player.size.y;
-			cub->player.pos.y -= cub->player.size.y;
-			cub->player.tile->up->id = 'E';
+			neighbors[i]->id = 'E';
 			cub->player.tile->id = '\0';
-			cub->player.tile = cub->player.tile->up;
+			cub->player.tile = neighbors[i];
 		}
-	}
-	else
-	{
-		cub->player.pos.y0 -= cub->player.size.y;
-		cub->player.pos.y -= cub->player.size.y;
 	}
 }
 
-static void	move_player_down(t_cub *cub)
+static void	move_player_down(t_cub *cub, int i)
 {
-	if (cub->player.pos.y
-		+ cub->player.size.y >= cub->player.tile->down->pos.y0)
+	t_tile	*neighbors[] = {cub->player.tile->up, cub->player.tile->upleft,
+			cub->player.tile->upright, cub->player.tile->down,
+			cub->player.tile->downleft, cub->player.tile->downright,
+			cub->player.tile->left, cub->player.tile->right};
+
+	cub->player.pos.x0 -= (int)round(cub->player.size.x * cub->player.dir.x);
+	cub->player.pos.y0 -= (int)round(cub->player.size.y * cub->player.dir.y);
+	while (++i < 8)
 	{
-		if (cub->player.tile->down->id != '1')
+		if (neighbors[i] && check_if_same_tile(neighbors[i]->pos,
+				neighbors[i]->pos.x0, cub->player.pos.x0, cub->player.pos.y0))
 		{
-			cub->player.pos.y0 += cub->player.size.y;
-			cub->player.pos.y += cub->player.size.y;
-			cub->player.tile->down->id = 'E';
+			neighbors[i]->id = 'E';
 			cub->player.tile->id = '\0';
-			cub->player.tile = cub->player.tile->down;
+			cub->player.tile = neighbors[i];
 		}
-	}
-	else
-	{
-		cub->player.pos.y0 += cub->player.size.y;
-		cub->player.pos.y += cub->player.size.y;
 	}
 }
 
-static void	move_player_right(t_cub *cub)
+static void	move_player_right(t_cub *cub, int i)
 {
-	if (cub->player.pos.x
-		+ cub->player.size.x >= cub->player.tile->right->pos.x0)
+	t_tile	*neighbors[] = {cub->player.tile->up, cub->player.tile->upleft,
+			cub->player.tile->upright, cub->player.tile->down,
+			cub->player.tile->downleft, cub->player.tile->downright,
+			cub->player.tile->left, cub->player.tile->right};
+
+	cub->player.pos.x0 -= (int)round(cub->player.size.x * cub->player.dir.x0);
+	cub->player.pos.y0 -= (int)round(cub->player.size.y * cub->player.dir.y0);
+	while (++i < 8)
 	{
-		if (cub->player.tile->right->id != '1')
+		if (neighbors[i] && check_if_same_tile(neighbors[i]->pos,
+				neighbors[i]->pos.x0, cub->player.pos.x0, cub->player.pos.y0))
 		{
-			cub->player.pos.x0 += cub->player.size.x;
-			cub->player.pos.x += cub->player.size.x;
-			cub->player.tile->right->id = 'E';
+			neighbors[i]->id = 'E';
 			cub->player.tile->id = '\0';
-			cub->player.tile = cub->player.tile->right;
+			cub->player.tile = neighbors[i];
 		}
-	}
-	else
-	{
-		cub->player.pos.x0 += cub->player.size.x;
-		cub->player.pos.x += cub->player.size.x;
 	}
 }
 
-static void	move_player_left(t_cub *cub)
+static void	move_player_left(t_cub *cub, int i)
 {
-	if (cub->player.pos.x0
-		- cub->player.size.x <= cub->player.tile->left->pos.x)
+	t_tile	*neighbors[] = {cub->player.tile->up, cub->player.tile->upleft,
+			cub->player.tile->upright, cub->player.tile->down,
+			cub->player.tile->downleft, cub->player.tile->downright,
+			cub->player.tile->left, cub->player.tile->right};
+
+	cub->player.pos.x0 += (int)round(cub->player.size.x * cub->player.dir.x0);
+	cub->player.pos.y0 += (int)round(cub->player.size.y * cub->player.dir.y0);
+	while (++i < 8)
 	{
-		if (cub->player.tile->left->id != '1')
+		if (neighbors[i] && check_if_same_tile(neighbors[i]->pos,
+				neighbors[i]->pos.x0, cub->player.pos.x0, cub->player.pos.y0))
 		{
-			cub->player.pos.x0 -= cub->player.size.x;
-			cub->player.pos.x -= cub->player.size.x;
-			cub->player.tile->left->id = 'E';
+			neighbors[i]->id = 'E';
 			cub->player.tile->id = '\0';
-			cub->player.tile = cub->player.tile->left;
+			cub->player.tile = neighbors[i];
 		}
-	}
-	else
-	{
-		cub->player.pos.x0 -= cub->player.size.x;
-		cub->player.pos.x -= cub->player.size.x;
 	}
 }
 
 void	move_player(t_cub *cub, t_plane flag)
 {
 	if (check_players_newpos_overlap(cub, flag))
+	{
+		cub->flag = 0;
 		return ;
+	}
+	cub->flag = 1;
 	if (flag.x0)
-		move_player_up(cub);
+		move_player_up(cub, -1);
 	else if (flag.x)
-		move_player_down(cub);
+		move_player_down(cub, -1);
 	else if (flag.y0)
-		move_player_right(cub);
+		move_player_right(cub, -1);
 	else if (flag.y)
-		move_player_left(cub);
+		move_player_left(cub, -1);
 }

@@ -6,33 +6,11 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/20 00:38:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 10:41:52 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
-
-static	void	draw_player(t_cub *cub)
-{
-	int	x0;
-	int	x;
-	int	y0;
-	int	y;
-
-	y0 = cub->player.pos.y0;
-	x = cub->player.pos.x;
-	y = cub->player.pos.y;
-	while (y0 < y)
-	{
-		x0 = cub->player.pos.x0;
-		while (x0 < x)
-		{
-			my_mlx_pixel_put(&cub->minimap.img, x0, y0, 0xFF0000);
-			x0++;
-		}
-		y0++;
-	}
-}
 
 static	void	paint_tile(t_cub *cub, t_tile tile)
 {
@@ -68,5 +46,7 @@ void	minimap(t_cub *cub, int i, int j)
 				paint_tile(cub, cub->minimap.tiles[i][j]);
 	}
 	draw_player(cub);
+	draw_fov(cub);
+	//cast_rays(cub, -1);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 60, 30);
 }
