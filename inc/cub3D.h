@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 09:07:11 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 15:32:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void		link_tiles(t_cub *cub, int i, int j);
 void		init_tiles(t_cub *cub, int i, int j);
 void		set_tiles_colors(t_cub *cub, int i, int j);
 void		cast_rays(t_cub *cub, int i);
+void		draw_ray(t_cub *cub, t_ray ray);
+
 //  FREE
 void		all_free(t_cub *cub, int i);
 

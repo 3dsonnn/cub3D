@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 02:08:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/21 16:23:27 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 15:49:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	set_tiles_colors(t_cub *cub, int i, int j)
 
 void	init_minimap(t_cub *cub, int i, int j)
 {
-	cub->minimap.tilewidth = (int)ceil(MINIWIDTH / cub->scene.map.size.x);
-	cub->minimap.tileheight = (int)ceil(MINIHEIGHT / cub->scene.map.size.y);
+	cub->minimap.tilewidth = (int)floor(MINIWIDTH / cub->scene.map.size.x);
+	cub->minimap.tileheight = (int)floor(MINIHEIGHT / cub->scene.map.size.y);
 	cub->minimap.miniwidth = cub->minimap.tilewidth * cub->scene.map.size.x;
 	cub->minimap.miniheight = cub->minimap.tileheight * cub->scene.map.size.y;
 	cub->minimap.img.img = mlx_new_image(cub->mlx, cub->minimap.miniwidth,

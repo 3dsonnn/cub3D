@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/23 09:00:04 by efinda           ###   ########.fr        #
+#    Updated: 2025/01/23 13:34:48 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC =	src/main.c 									\
 		src/minimap/minimap_init_tiles.c			\
 		src/minimap/minimap_link_tiles.c			\
 		src/minimap/cast_rays.c						\
+		src/minimap/cast_rays_utils.c				\
 		src/player/player.c 						\
 		src/player/players_movements_0.c 			\
 		src/player/players_movements_1.c 			\

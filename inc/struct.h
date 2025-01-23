@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 10:30:22 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 12:37:03 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ typedef struct s_ray
 	t_dpoint		step;
 	double			angle;
 	double			tan;
+	double			dhor;
+	double			dvert;
 }					t_ray;
 
 typedef struct s_player

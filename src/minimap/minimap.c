@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 10:41:52 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 18:10:16 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	minimap(t_cub *cub, int i, int j)
 	}
 	draw_player(cub);
 	draw_fov(cub);
-	//cast_rays(cub, -1);
+	cast_rays(cub, -1);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 60, 30);
 }

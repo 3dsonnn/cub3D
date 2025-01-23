@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 09:02:16 by efinda           ###   ########.fr       */
+/*   Updated: 2025/01/23 16:27:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ static void	get_starting_angle(t_cub *cub, char spawning_orientation)
 		cub->player.angle = 180;
 	else if ('S' == spawning_orientation)
 		cub->player.angle = 270;
+	cub->player.fov.x = fmod(cub->player.angle - (FOV / 2) + 360.0, 360.0);
+	cub->player.fov.y = fmod(cub->player.angle + (FOV / 2), 360.0);
 }
 
 void	init_player(t_cub *cub, int i, int j)
 {
 	cub->player.size.x = (int)floor(cub->minimap.tilewidth / 7);
 	cub->player.size.y = (int)floor(cub->minimap.tileheight / 7);
-	cub->player.ray_step = FOV / MINIWIDTH;
+	cub->player.ray_step = FOV / cub->minimap.miniwidth;
 	while (++i < cub->scene.map.size.y)
 	{
 		j = -1;
