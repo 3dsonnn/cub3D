@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_math.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/13 14:57:40 by efinda           ###   ########.fr       */
+/*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
+/*   Updated: 2025/02/10 15:14:02 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../../inc/cub3D.h"
 
-int	main(int ac, char **av)
+double	normalize_angle(double angle)
 {
-	t_cub	cub;
+    double  result;
 
-	checks(&cub, ac, av);
-	init_mlx(&cub, -1);
-	init_rays(&cub);
-	init_minimap(&cub, -1, -1);
-	init_player(&cub);
-	cub3D(&cub, -1);
-	my_mlx_hook(&cub);
-	mlx_loop(cub.mlx);
-	return (0);
+    result = remainder(angle, (2 * M_PI));
+    if (result < 0)
+        result += (2 * M_PI);
+    return (result);
 }

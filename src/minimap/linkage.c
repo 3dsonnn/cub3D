@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_link_tiles.c                               :+:      :+:    :+:   */
+/*   linkage.c			                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 18:53:42 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/21 16:15:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/01 19:13:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	link_vertical_boundary_tiles(t_cub *cub, int i, int j)
 	link_horizontal_boundary_tiles(cub, -1, -1);
 }
 
-static	void	link_corners(t_cub *cub)
+static void	link_corners(t_cub *cub)
 {
 	cub->minimap.tiles[0][0].downright = &cub->minimap.tiles[1][1];
 	cub->minimap.tiles[cub->scene.map.size.y
@@ -120,5 +120,4 @@ void	link_tiles(t_cub *cub, int i, int j)
 				+ 1];
 		}
 	}
-	init_tiles(cub, 0, 0);
 }

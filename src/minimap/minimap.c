@@ -6,47 +6,36 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 18:10:16 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/10 14:30:16 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static	void	paint_tile(t_cub *cub, t_tile tile)
+static void	draw_mini_player(t_cub *cub)
 {
-	int	x0;
-	int	x;
-	int	y0;
-	int	y;
+	int		radius;
+	t_plane	crd;
 
-	y0 = tile.pos.y0;
-	x = tile.pos.x;
-	y = tile.pos.y;
-	while (y0 < y)
-	{
-		x0 = tile.pos.x0;
-		while (x0 < x)
-		{
-			if (x0 == tile.pos.x0 || x0 == x - 1 || y0 == tile.pos.y0 || y0 == y - 1)
-				my_mlx_pixel_put(&cub->minimap.img, x0, y0, 0xFFFFFF);
-			else
-				my_mlx_pixel_put(&cub->minimap.img, x0, y0, tile.color);
-			x0++;
-		}
-		y0++;
-	}
+	radius = 5;
+	while (--radius >= 0)
+		bresenham_circle(cub, cub->player.pos.x0, cub->player.pos.y0, radius);
+	cub->player.pos.x = cub->player.pos.x0 + ((cub->player.size * 2)
+			* cos(cub->player.angle * (M_PI / 180.0)));
+	cub->player.pos.y = cub->player.pos.y0 - ((cub->player.size * 2)
+			* sin(cub->player.angle * (M_PI / 180.0)));
+	crd.x0 = (int)cub->player.pos.x0;
+	crd.x = (int)cub->player.pos.x;
+	crd.y = (int)cub->player.pos.y0;
+	crd.y0 = (int)cub->player.pos.y;
+	bresenham_line(cub, crd, (t_point){0, 0}, (t_point){0, 0});
 }
 
 void	minimap(t_cub *cub, int i, int j)
 {
-	while (++i < cub->scene.map.size.y)
-	{
-		j = -1;
-		while (++j < cub->scene.map.size.x)
-				paint_tile(cub, cub->minimap.tiles[i][j]);
-	}
-	draw_player(cub);
-	draw_fov(cub);
-	cast_rays(cub, -1);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 60, 30);
+	if (cub->minimap.box)
+		paint_box(cub, cub->minimap.corners[TOPLEFT]);
+	else
+		paint(cub, -1, -1);
+	draw_mini_player(cub);
 }

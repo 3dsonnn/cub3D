@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_mlx_hook.c                                      :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 06:39:02 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/13 03:11:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static int	my_mlx_close(t_cub *cub)
 	int	i;
 
 	i = -1;
+	free_tiles(cub);
 	while (++i < 4)
-		mlx_destroy_image(cub->mlx, cub->scene.walls[i].img.img);
+		mlx_destroy_image(cub->mlx, cub->scene.textures[i].img.img);
 	mlx_destroy_image(cub->mlx, cub->img.img);
 	mlx_destroy_window(cub->mlx, cub->win);
 	mlx_destroy_display(cub->mlx);
@@ -42,8 +43,9 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 		rotate_player(cub, 1);
 	else if (keycode == LEFT)
 		rotate_player(cub, 0);
-	if (cub->flag)
-		cub3D(cub);
+	else
+		return (0);
+	cub3D(cub, -1);
 	return (0);
 }
 

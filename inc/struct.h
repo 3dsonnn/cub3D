@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 12:37:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/13 14:50:45 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,26 @@ typedef enum ID
 	NO,
 	SO,
 	WE,
-	EA,
-	F,
-	C
+	EA
 }					t_ID;
 
-typedef enum IFPOS
+typedef enum CORNERS
 {
-	IFUP,
-	IFDOWN,
-	IFLEFT,
-	IFRIGHT,
-	IFUPLEFT,
-	IFUPRIGHT,
-	IFDOWNLEFT,
-	IFDOWNRIGHT
-}					t_IFPOS;
+	TOPLEFT,
+	TOPRIGHT,
+	BOTTLEFT,
+	BOTTRIGHT
+}					t_CORNERS;
+
+typedef struct s_iter
+{
+	int				i;
+	int				j;
+	int				k;
+	int				l;
+	int				m;
+	int				n;
+}					t_iter;
 
 typedef struct s_dpoint
 {
@@ -66,26 +70,26 @@ typedef struct s_rows
 typedef struct s_img
 {
 	void			*img;
-	char			*addr;
-	int				bpp;
+	int				*addr;
 	int				line_len;
+	int				bpp;
 	int				endian;
+	int				width;
+	int				height;
 }					t_img;
 
 typedef struct s_fc
 {
-	t_ID			id;
+	int				color;
 	int				rgb[3];
 }					t_fc;
 
-typedef struct s_wall
+typedef struct s_texture
 {
 	t_ID			id;
 	char			*path;
-	int				width;
-	int				height;
 	t_img			img;
-}					t_wall;
+}					t_texture;
 
 typedef struct s_map
 {
@@ -104,14 +108,14 @@ typedef struct s_scene
 	char			*elements;
 	t_map			map;
 	t_fc			fc[2];
-	t_wall			walls[4];
+	t_texture		textures[4];
 }					t_scene;
 
 typedef struct s_tile
 {
-	char			id;
+	char			*id;
 	int				color;
-	t_plane			pos;
+	t_point			crd;
 	struct s_tile	*up;
 	struct s_tile	*down;
 	struct s_tile	*left;
@@ -122,48 +126,66 @@ typedef struct s_tile
 	struct s_tile	*downright;
 }					t_tile;
 
+typedef struct s_col
+{
+	double		dist;
+	int			height;
+	int			top;
+	int			bottom;
+	int			dist_from_top;
+	t_texture	*texture;
+}				t_col;
+
+typedef struct s_intersection
+{
+	double		dist;
+	t_dpoint	step;
+	t_dpoint	crd;
+	t_dpoint	wall;
+	int			intersected;
+}				t_intersection;
+
 typedef struct s_ray
 {
-	t_point			face;
-	t_dpoint		hor;
-	t_dpoint		vert;
-	t_dpoint		step;
 	double			angle;
+	double			dist;
 	double			tan;
-	double			dhor;
-	double			dvert;
+	t_point			dir;
+	t_dpoint		wall;
+	t_intersection	hor;
+	t_intersection	ver;
+	t_col			col;
 }					t_ray;
 
 typedef struct s_player
 {
-	t_point			size;
-	t_plane			pos;
+	t_dplane		pos;
 	t_dpoint		fov;
 	t_dplane		dir;
-	double			ray_step;
 	double			angle;
-	struct s_tile	*tile;
+	int				size;
+	t_tile			*neighbors[8];
 }					t_player;
 
 typedef struct s_mmap
 {
-	int				miniwidth;
-	int				miniheight;
-	int				tilewidth;
-	int				tileheight;
+	int				box;
+	int				tilesize;
+	t_tile			*cur;
+	t_tile			*corners[4];
 	t_tile			**tiles;
-	t_img			img;
 }					t_mmap;
 
 typedef struct s_cub
 {
-	int				flag;
 	void			*mlx;
 	void			*win;
 	t_img			img;
+	t_scene			scene;
 	t_mmap			minimap;
 	t_player		player;
-	t_scene			scene;
+	t_ray			*rays;
+	double			ppd;
 }					t_cub;
 
 #endif

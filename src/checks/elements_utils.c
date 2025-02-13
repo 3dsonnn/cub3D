@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 09:21:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/13 19:19:25 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/13 00:46:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ static  void	fill_texture_aux(t_scene *scene, char ID, char *path)
 {
 	if (ID == 'N')
 	{
-		scene->walls[NO].path = ft_strdup(path);
-		scene->walls[NO].id = NO;
+		scene->textures[NO].path = ft_strdup(path);
+		scene->textures[NO].id = NO;
 	}
 	else if (ID == 'S')
 	{
-		scene->walls[SO].path = ft_strdup(path);
-		scene->walls[SO].id = SO;
+		scene->textures[SO].path = ft_strdup(path);
+		scene->textures[SO].id = SO;
 	}
 	else if (ID == 'W')
 	{
-		scene->walls[WE].path = ft_strdup(path);
-		scene->walls[WE].id = WE;
+		scene->textures[WE].path = ft_strdup(path);
+		scene->textures[WE].id = WE;
 	}
 	else if (ID == 'E')
 	{
-		scene->walls[EA].path = ft_strdup(path);
-		scene->walls[EA].id = EA;
+		scene->textures[EA].path = ft_strdup(path);
+		scene->textures[EA].id = EA;
 	}
 	else
 		exit_error("Invalid element in the scene file", scene);
@@ -63,17 +63,11 @@ void	fill_fc(t_scene *scene, char ID, int *rgb, int i)
 	else
         check_duplicate_id(scene, ID);
 	if (ID == 'C')
-	{
-		scene->fc[0].id = C;
 		while (++i < 3)
-			scene->fc[0].rgb[i] = rgb[i];
-	}
+			scene->fc[CEILING].rgb[i] = rgb[i];
 	else if (ID == 'F')
-	{
-		scene->fc[1].id = F;
 		while (++i < 3)
-			scene->fc[1].rgb[i] = rgb[i];
-	}
+			scene->fc[FLOOR].rgb[i] = rgb[i];
 	else
 		exit_error("Invalid element in the scene file", scene);
 }

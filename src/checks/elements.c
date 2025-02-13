@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 10:25:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/13 00:46:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ static int	check_id(char *line, int flag)
 {
 	if (flag)
 	{
-		if (ft_strncmp(line, "C ", 2) == 0)
+		if (!ft_strncmp(line, "C ", 2))
 			return (1);
-		if (ft_strncmp(line, "F ", 2) == 0)
+		if (!ft_strncmp(line, "F ", 2))
 			return (1);
 	}
 	else
 	{
-		if (ft_strncmp(line, "NO ", 3) == 0)
+		if (!ft_strncmp(line, "NO ", 3))
 			return (1);
-		if (ft_strncmp(line, "SO ", 3) == 0)
+		if (!ft_strncmp(line, "SO ", 3))
 			return (1);
-		if (ft_strncmp(line, "WE ", 3) == 0)
+		if (!ft_strncmp(line, "WE ", 3))
 			return (1);
-		if (ft_strncmp(line, "EA ", 3) == 0)
+		if (!ft_strncmp(line, "EA ", 3))
 			return (1);
 	}
 	return (0);
@@ -74,7 +74,7 @@ static void	check_fc(t_scene *scene, int i, int j, int len)
 	mtx = ft_split(scene->line, ' ');
 	len = ft_mtxlen(mtx);
 	if (len < 2 || len > 6 || (strcmp(*mtx, "F") && strcmp(*mtx, "C"))
-		|| strcmp(mtx[1], ",") == 0 || strcmp(mtx[len - 1], ",") == 0)
+		|| !strcmp(mtx[1], ",") || !strcmp(mtx[len - 1], ","))
 	{
 		ft_mtxfree(&mtx);
 		exit_error("Invalid element in the scene file", scene);

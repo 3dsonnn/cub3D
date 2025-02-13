@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/23 15:32:36 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/13 15:14:05 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,103 +19,108 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
 
-# define FOV 180.0
+# define CEILING 0
+# define FLOOR 1
+# define TILE_SIZE 64
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define SPEED 3.0
+# define FOV 2.09439510239
+# define DEG_TO_RAD(angle) ((angle) * (M_PI / 180.0))
 
-# define MINIWIDTH 1728
-# define MINIHEIGHT 972
+#define FACE_DOWN(angle) ((angle) > 0 && (angle) < M_PI)
+#define FACE_UP(angle)   (!(FACE_DOWN(angle)))
+#define FACE_RIGHT(angle) ((angle) < M_PI_2 || (angle) > (3 * M_PI_2))
+#define FACE_LEFT(angle)  (!(FACE_RIGHT(angle)))
 
 # define ESC 65307
-
 # define AKEY 97
 # define DKEY 100
 # define SKEY 115
 # define WKEY 119
-
-# define NUMLEFT 65430
-# define NUMRIGHT 65432
-# define NUMUP 65431
-# define NUMUPLEFT 65429
-# define NUMUPRIGHT 65434
-# define NUMDOWN 65433
-# define NUMDOWNLEFT 65436
-# define NUMDOWNRIGHT 65435
-
 # define UP 65362
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
 
-//  DELETE IT LATER
+# define BLACK 0x000000
+# define WHITE 0xFFFFFF
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
 
 //  CHECKS
-void		checks(t_cub *cub, int ac, char **av);
-//      ELEMENTS
 void		check_element(t_scene *scene);
-void		fill_texture(t_scene *scene, char ID, char *path);
-void		fill_fc(t_scene *scene, char ID, int *rgb, int i);
-//      MAP
 void		escape_empty_lines(t_scene *scene);
 void		fill_map(t_scene *scene, t_map *map);
+void		checks(t_cub *cub, int ac, char **av);
 void		is_surrounded(t_scene *scene, t_map *map);
+void		fill_texture(t_scene *scene, char ID, char *path);
+void		fill_fc(t_scene *scene, char ID, int *rgb, int i);
 void		check_starting_position(t_scene *scene, t_map *map);
 
-//  ERRORS
-void		exit_error(char *message, t_scene *scene);
-
-//  T_ROW
-void		add_row(t_rows **head, t_rows *_new);
-int			rowlen(t_rows *head);
-char		**row_to_mtx(t_rows *head);
-void		free_rows(t_rows **head);
-t_rows		*new_row(char *str);
-
 //  MY_MLX
-void		my_mlx_init(t_cub *cub);
-
-//  MY_MLX_HOOK
 void		my_mlx_hook(t_cub *cub);
-
-//  MY_MLX_UTILS
-void		my_mlx_pixel_put(t_img *image, int x, int y, int color);
+void		init_mlx(t_cub *cub, int i);
 extern int	my_mlx_get_rgb_color(int r, int g, int b);
+void        my_mlx_free(t_cub *cub, char *message, t_plane flag);
+extern void	my_mlx_pixel_put(t_img *image, int x, int y, int color);
 
 //  PLAYER
-void		init_player(t_cub *cub, int i, int j);
-void		move_player(t_cub *cub, t_plane flag);
+void		init_player(t_cub *cub);
+extern void	update_neighbors(t_cub *cub);
 void		rotate_player(t_cub *cub, int flag);
-int			check_players_newpos_overlap(t_cub *cub, t_plane flag);
-int			check_player_left(t_cub *cub, t_plane new_pos, int i);
-int			check_player_right(t_cub *cub, t_plane new_pos, int i);
-int			check_player_down(t_cub *cub, t_plane new_pos, int i);
-int			check_player_up(t_cub *cub, t_plane new_pos, int i);
-void		draw_player(t_cub *cub);
-void		draw_fov(t_cub *cub);
-int			check_if_same_tile(t_plane tile, int tilex0, int x, int y);
+void		move_player(t_cub *cub, t_plane flag);
+extern int	same_tile(t_cub *cub, t_tile *tile, int x, int y);
+
+//  RAYS
+inline  void    init_rays(t_cub *cub);
+void            get_rays(t_cub *cub, int i);
+void            check_horizontal_intersection(t_cub *cub, int i);
+void            check_vertical_intersection(t_cub *cub, int i);
+int         i   s_wall(t_cub *cub, double x, double y);
+int         i   nside_map(t_cub *cub, double x, double y);
 
 //  CUB3D
-void		cub3D(t_cub *cub);
+void        cub3D(t_cub *cub, int i);
 void		display(t_cub *cub);
 
 //  MINIMAP
-void		minimap(t_cub *cub, int i, int j);
 void		init_minimap(t_cub *cub, int i, int j);
 void		link_tiles(t_cub *cub, int i, int j);
-void		init_tiles(t_cub *cub, int i, int j);
-void		set_tiles_colors(t_cub *cub, int i, int j);
+void		update_corners(t_cub *cub);
+void		paint(t_cub *cub, int i, int j);
+void		paint_box(t_cub *cub, t_tile *topleft);
+void		minimap(t_cub *cub, int i, int j);
 void		cast_rays(t_cub *cub, int i);
 void		draw_ray(t_cub *cub, t_ray ray);
+void		paint_tile(t_cub *cub, int i, int j, int color);
 
-//  FREE
-void		all_free(t_cub *cub, int i);
+//  BOUNDING_BOX
+void		update_bounding_box(t_cub *cub);
+t_tile		*get_topleft(t_cub *cub, t_tile *tmp, int i);
+t_tile		*get_topright(t_cub *cub, t_tile *tmp, int i);
+t_tile		*get_bottleft(t_cub *cub, t_tile *tmp, int i);
+t_tile		*get_bottright(t_cub *cub, t_tile *tmp, int i);
+void		paint_bounding_box(t_cub *cub, t_tile *cur, t_tile *y);
+
+//  UTILS
+void		free_tiles(t_cub *cub);
+double      normalize_angle(double angle);
+void		exit_error(char *message, t_scene *scene);
+void		bresenham_circle(t_cub *cub, int cx, int cy, int radius);
+void		bresenham_line(t_cub *cub, t_plane crd, t_point dist, t_point dir);
+
+//  T_ROW
+t_rows		*new_row(char *str);
+int			rowlen(t_rows *head);
+void		free_rows(t_rows **head);
+char		**row_to_mtx(t_rows *head);
+void		add_row(t_rows **head, t_rows *_new);
 
 #endif

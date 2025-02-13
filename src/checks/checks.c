@@ -6,7 +6,7 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/16 19:11:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/13 00:47:01 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ static void	check_elements(t_scene *scene, int i)
 
 static void	check_map(t_scene *scene, t_map *map)
 {
-	int	p[3];
-
-	ft_memset(p, -1, 3 * sizeof(int));
 	scene->line = get_next_line(scene->fd);
 	if (!scene->line)
 		exit_error("The map is missing in the scene file", scene);
@@ -83,10 +80,10 @@ static	void    init_scene(t_scene *scene)
 	scene->elements = NULL;
 	scene->map.head = NULL;
 	scene->map.content = NULL;
-	scene->walls[0].path = NULL;
-	scene->walls[1].path = NULL;
-	scene->walls[2].path = NULL;
-	scene->walls[3].path = NULL;
+	scene->textures[0].path = NULL;
+	scene->textures[1].path = NULL;
+	scene->textures[2].path = NULL;
+	scene->textures[3].path = NULL;
 }
 
 void	checks(t_cub *cub, int ac, char **av)

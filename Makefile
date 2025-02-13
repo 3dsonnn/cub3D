@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/01/23 13:34:48 by efinda           ###   ########.fr        #
+#    Updated: 2025/02/10 11:32:01 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,32 +21,34 @@ LIBS =	-L./$(MLXPATH) -lmlx -lX11 -lXext -lm
 RM = rm -rf
 
 SRC =	src/main.c 									\
-		src/error.c 								\
 		src/checks/map.c 							\
 		src/checks/checks.c 						\
 		src/checks/elements.c 						\
 		src/checks/map_utils.c 						\
 		src/checks/elements_utils.c 				\
+		src/my_mlx/init.c 							\
+		src/my_mlx/hooks.c 							\
+		src/my_mlx/utils.c 							\
+		src/minimap/init.c 							\
+		src/minimap/paint.c 						\
+		src/minimap/minimap.c 						\
+		src/minimap/linkage.c						\
+		src/minimap/bounding_box.c					\
+		src/cub3D/cub3D.c 							\
+		src/player/aux.c 							\
+		src/player/init.c 							\
+		src/player/move.c 							\
+		src/player/rotation.c						\
+		src/raycast/get_rays.c						\
+		src/raycast/vertical.c						\
+		src/raycast/horizontal.c					\
+		src/raycast/aux.c							\
 		src/t_row/t_row.c 							\
 		src/t_row/t_row_aux.c 						\
-		src/my_mlx/my_mlx_init.c 					\
-		src/my_mlx/my_mlx_hook.c 					\
-		src/my_mlx/my_mlx_utils.c 					\
-		src/cub3D/cub3D.c 							\
-		src/free.c 									\
-		src/minimap/minimap.c 						\
-		src/minimap/minimap_init.c 					\
-		src/minimap/minimap_init_tiles.c			\
-		src/minimap/minimap_link_tiles.c			\
-		src/minimap/cast_rays.c						\
-		src/minimap/cast_rays_utils.c				\
-		src/player/player.c 						\
-		src/player/players_movements_0.c 			\
-		src/player/players_movements_1.c 			\
-		src/player/players_movements_2.c 			\
-		src/player/players_rotation.c				\
-		src/player/player_draw.c					\
-		src/player/player_fov.c						\
+		src/utils/free.c 							\
+		src/utils/error.c 							\
+		src/utils/ft_math.c							\
+		src/utils/bresenham.c						\
 
 LIBFT =	libft/libft.a
 MINILIBX = $(MLXPATH)/libmlx.a

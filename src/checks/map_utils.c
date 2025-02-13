@@ -89,7 +89,7 @@ static void	check_spaces(t_scene *scene, t_map *map, int x, int y)
 							map->content[y + 1][x - 1])) || (y < map->size.y - 1
 						&& x < map->size.x - 1 && !ft_strchr(" 1",
 							map->content[y + 1][x + 1])))
-					exit_error("Invalid map: a space can only be surrounded another space or a wall",
+					exit_error("Invalid map: a space can only be surrounded by another space or a wall",
 						scene);
 			}
 		}

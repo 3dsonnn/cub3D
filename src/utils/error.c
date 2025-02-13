@@ -6,11 +6,11 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:22:09 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 12:07:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/13 00:46:44 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../../inc/cub3D.h"
 
 void    exit_error(char *message, t_scene *scene)
 {
@@ -26,6 +26,6 @@ void    exit_error(char *message, t_scene *scene)
     ft_mtxfree(&scene->map.content);
     i = -1;
     while (++i < 4)
-        ft_strfree(&scene->walls[i].path);
+        ft_strfree(&scene->textures[i].path);
     exit(1);
 }
