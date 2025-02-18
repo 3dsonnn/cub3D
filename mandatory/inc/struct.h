@@ -141,14 +141,14 @@ typedef struct s_ray
 	t_intersection	ver;
 	t_col			col;
 }					t_ray;
-
+	
 typedef struct s_player
 {
 	t_dpoint		pos;
 	t_dplane		dir;
 	double			angle;
 }					t_player;
-
+	
 typedef struct s_cub
 {
 	void			*mlx;

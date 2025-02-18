@@ -6,7 +6,7 @@
 #    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/02/13 16:56:30 by efinda           ###   ########.fr        #
+#    Updated: 2025/02/17 03:48:45 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC =	src/main.c 									\
 		src/checks/elements.c 						\
 		src/checks/map_utils.c 						\
 		src/checks/elements_utils.c 				\
+		src/checks/explicit_errors.c 				\
 		src/my_mlx/init.c 							\
 		src/my_mlx/hooks.c 							\
 		src/my_mlx/utils.c 							\

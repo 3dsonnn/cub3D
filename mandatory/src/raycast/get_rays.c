@@ -6,11 +6,19 @@
 /*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/15 15:19:00 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/16 17:26:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
+
+inline void    init_rays(t_cub *cub)
+{
+    cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
+    if (!cub->rays)
+        my_mlx_free(cub, "Failed to allocate memory for rays", (t_plane){-1, 4, 1, 1});
+    cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
+}
 
 static  void    choose_intersection(t_cub *cub, int i)
 {
@@ -67,12 +75,4 @@ void    get_rays(t_cub *cub, int i)
         choose_intersection(cub, i);
         get_column(cub, i);
     }
-}
-
-inline void    init_rays(t_cub *cub)
-{
-    cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
-    if (!cub->rays)
-        my_mlx_free(cub, "Failed to allocate memory for rays", (t_plane){-1, 4, 1, 1});
-    cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
 }
