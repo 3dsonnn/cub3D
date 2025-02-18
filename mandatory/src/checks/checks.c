@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/17 06:38:06 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:51:22 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	check_map(t_scene *scene, t_map *map)
 	ft_strfree(&scene->line);
 	fill_map(scene, map);
 	if (map->size.x < 3 || map->size.y < 3)
-		exit_error("Invalid map: it's too small", scene);
+		exit_error("Invalid map: too small", scene);
 	check_starting_position(scene, map, -1, -1);
 	is_surrounded(scene, map);
 }
