@@ -6,15 +6,15 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/19 16:40:43 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/19 19:43:47 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static	void	fill_map_aux(t_scene *scene, t_map *map)
+static void	fill_map_aux(t_scene *scene, t_map *map)
 {
-	int i;
+	int	i;
 	int	len;
 
 	i = -1;
@@ -31,7 +31,7 @@ static	void	fill_map_aux(t_scene *scene, t_map *map)
 		}
 	}
 }
-static	void	check_last_lines(t_scene *scene)
+static void	check_last_lines(t_scene *scene)
 {
 	if (!scene->line)
 		return ;
@@ -44,7 +44,8 @@ static	void	check_last_lines(t_scene *scene)
 		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
 			scene->line[ft_strlen(scene->line) - 1] = '\0';
 		if (!*scene->line && ft_strspace(scene->line))
-			exit_error("The map content always has to be the last information on the file", scene);
+			exit_error("The map content always has to be the last information on the file",
+				scene);
 		ft_strfree(&scene->line);
 	}
 }
@@ -54,23 +55,28 @@ void	fill_map(t_scene *scene, t_map *map)
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);
+		scene->line_nbr++;
 		if (!scene->line)
 			break ;
 		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
 			scene->line[ft_strlen(scene->line) - 1] = '\0';
-		if (!*scene->line || ft_strspace(scene->line))
+		if (!*scene->line)
 			break ;
 		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
-			exit_error("Invalid character inside the map", scene);
+		{
+			scene->aux = ft_itoa(scene->line_nbr);
+			exit_error(get_explicit_error_message(scene,
+					(t_strs){"Invalid character inside the map content on line ",
+					scene->aux, " of the scene file", NULL, NULL, NULL}),
+				scene);
+		}
 		add_row(&map->head, new_row(scene->line));
-        ft_strfree(&scene->line);
+		ft_strfree(&scene->line);
 	}
 	check_last_lines(scene);
 	map->content = row_to_mtx(map->head);
 	free_rows(&map->head);
 	fill_map_aux(scene, map);
-    map->size.x = ft_strlen(*map->content);
-    map->size.y = ft_mtxlen(map->content);
 }
 
 char	*skip_empty_lines(t_scene *scene)
