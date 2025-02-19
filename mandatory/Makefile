@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/02/17 03:48:45 by efinda           ###   ########.fr        #
+#    Updated: 2025/02/18 22:26:45 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,10 @@ SRC =	src/main.c 									\
 		src/checks/map.c 							\
 		src/checks/checks.c 						\
 		src/checks/elements.c 						\
+		src/checks/textures.c						\
 		src/checks/map_utils.c 						\
-		src/checks/elements_utils.c 				\
 		src/checks/explicit_errors.c 				\
+		src/checks/ceiling_and_floor.c				\
 		src/my_mlx/init.c 							\
 		src/my_mlx/hooks.c 							\
 		src/my_mlx/utils.c 							\

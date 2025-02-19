@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/15 13:27:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:44:12 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,16 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define FLOOR 1
-# define CEILING 0
 # define TILE 64
 
 # define DEG_TO_RAD(angle) ((angle) * (M_PI / 180.0))
 # define FOV DEG_TO_RAD(120)
 # define SPEED 3.0
 
-#define FACE_DOWN(angle) ((angle) > 0 && (angle) < M_PI)
-#define FACE_UP(angle)   (!(FACE_DOWN(angle)))
-#define FACE_RIGHT(angle) ((angle) < M_PI_2 || (angle) > (3 * M_PI_2))
-#define FACE_LEFT(angle)  (!(FACE_RIGHT(angle)))
+# define FACE_DOWN(angle) ((angle) > 0 && (angle) < M_PI)
+# define FACE_UP(angle) (!(FACE_DOWN(angle)))
+# define FACE_RIGHT(angle) ((angle) < M_PI_2 || (angle) > (3 * M_PI_2))
+# define FACE_LEFT(angle) (!(FACE_RIGHT(angle)))
 
 # define ESC 65307
 # define AKEY 97
@@ -46,20 +44,23 @@
 # define RIGHT 65363
 
 //  CHECKS
+char        *get_element_str(char c);
+void        check_fc(t_scene *scene);
+void        check_texture(t_scene *scene);
 void		check_element(t_scene *scene);
-void		escape_empty_lines(t_scene *scene);
+char        *skip_empty_lines(t_scene *scene);
 void		fill_map(t_scene *scene, t_map *map);
 void		checks(t_cub *cub, int ac, char **av);
 void		is_surrounded(t_scene *scene, t_map *map);
-void		fill_texture(t_scene *scene, char ID, char *path);
-void		fill_fc(t_scene *scene, char ID, int *rgb, int i);
+void        check_duplicate_id(t_scene *scene, char ID);
+char        *get_explicit_error_message(t_scene *scene, t_strs strs);
 void		check_starting_position(t_scene *scene, t_map *map, int i, int j);
 
 //  MY_MLX
 void		my_mlx_hook(t_cub *cub);
 void		init_mlx(t_cub *cub, int i);
 extern int	my_mlx_get_rgb_color(int r, int g, int b);
-void        my_mlx_free(t_cub *cub, char *message, t_plane flag);
+void		my_mlx_free(t_cub *cub, char *message, t_plane flag);
 extern void	my_mlx_pixel_put(t_img *image, int x, int y, int color);
 
 //  PLAYER
@@ -68,19 +69,19 @@ void		rotate_player(t_cub *cub, int flag);
 void		move_player(t_cub *cub, t_dpoint new_pos, t_plane flag);
 
 //  RAYS
-inline  void    init_rays(t_cub *cub);
-void            get_rays(t_cub *cub, int i);
-void            check_horizontal_intersection(t_cub *cub, int i);
-void            check_vertical_intersection(t_cub *cub, int i);
-int             is_wall(t_cub *cub, double x, double y);
-int             inside_map(t_cub *cub, double x, double y);
+inline void	init_rays(t_cub *cub);
+void		get_rays(t_cub *cub, int i);
+void		check_horizontal_intersection(t_cub *cub, int i);
+void		check_vertical_intersection(t_cub *cub, int i);
+int			is_wall(t_cub *cub, double x, double y);
+int			inside_map(t_cub *cub, double x, double y);
 
 //  CUB3D
-void        cub3D(t_cub *cub, int i);
+void		cub3D(t_cub *cub, int i);
 void		display(t_cub *cub);
 
 //  UTILS
-double      ft_normalizer(double angle);
+double		ft_normalizer(double angle);
 void		exit_error(char *message, t_scene *scene);
 void		bresenham_circle(t_cub *cub, int cx, int cy, int radius);
 void		bresenham_line(t_cub *cub, t_plane crd, t_point dist, t_point dir);

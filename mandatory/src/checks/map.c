@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/15 01:43:47 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:40:43 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,24 @@ void	fill_map(t_scene *scene, t_map *map)
     map->size.y = ft_mtxlen(map->content);
 }
 
-void	escape_empty_lines(t_scene *scene)
+char	*skip_empty_lines(t_scene *scene)
 {
-	ft_strfree(&scene->line);
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);
+		scene->line_nbr++;
 		if (!scene->line)
-			exit_error("The map is missing in the scene file", scene);
-		scene->line[ft_strlen(scene->line) - 1] = '\0';
-		if (!*scene->line || ft_strspace(scene->line))
+			return (scene->line);
+		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
+			scene->line[ft_strlen(scene->line) - 1] = '\0';
+		if (!*scene->line)
 		{
 			ft_strfree(&scene->line);
 			continue ;
 		}
-        break ;
+		return (scene->line);
 	}
-} 
+}
 
 void	check_starting_position(t_scene *scene, t_map *map, int i, int j)
 {

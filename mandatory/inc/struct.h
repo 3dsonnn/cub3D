@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/15 01:36:05 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/19 15:47:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ typedef struct s_iter
 	int				m;
 	int				n;
 }					t_iter;
+
+typedef struct s_strs
+{
+	char	*s1;
+	char	*s2;
+	char	*s3;
+	char	*s4;
+	char	*s5;
+	char	*s6;
+}					t_strs;
 
 typedef struct s_dpoint
 {
@@ -78,12 +88,6 @@ typedef struct s_img
 	int				height;
 }					t_img;
 
-typedef struct s_fc
-{
-	int				color;
-	int				rgb[3];
-}					t_fc;
-
 typedef struct s_texture
 {
 	t_ID			id;
@@ -103,11 +107,15 @@ typedef struct s_map
 typedef struct s_scene
 {
 	int				fd;
+	int				floor;
+	int				ceiling;
+	int				line_nbr;
+	char			**mtx;
+	char			*aux;
 	char			*tmp;
 	char			*line;
 	char			*elements;
 	t_map			map;
-	t_fc			fc[2];
 	t_texture		textures[4];
 }					t_scene;
 
