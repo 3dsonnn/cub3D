@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 08:29:10 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:59:40 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			is_wall(t_cub *cub, double x, double y);
 int			inside_map(t_cub *cub, double x, double y);
 
 //  CUB3D
-void		cub3D(t_cub *cub, int i);
+void		cub3D(t_cub *cub);
 void		display(t_cub *cub);
 
 //  UTILS

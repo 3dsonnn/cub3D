@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 09:55:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 19:42:42 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	check_element(t_scene *scene)
 		check_fc(scene);
 	else
 	{
+		scene->line_nbr_str = ft_itoa(scene->line_nbr);
 		exit_error(get_explicit_error_message(scene,
 			(t_strs){"Invalid element on line ", scene->line_nbr_str,
 			" of the scene file", NULL, NULL, NULL}), scene);

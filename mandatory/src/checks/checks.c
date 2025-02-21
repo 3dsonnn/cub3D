@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 13:18:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 19:30:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	check_map(t_scene *scene, t_map *map)
 {
 	check_map_aux(scene, map);
 	fill_map(scene, map);
-	map->size.x = ft_strlen(*map->content);
+	map->size.x = ft_longestr_mtx(map->content);
 	map->size.y = ft_mtxlen(map->content);
 	fulfill_map(scene, map);
 	if (map->size.x < 3 || map->size.y < 3)

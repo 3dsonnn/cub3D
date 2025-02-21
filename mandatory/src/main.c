@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/13 15:46:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:00:03 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	init_mlx(&cub, -1);
 	init_rays(&cub);
 	init_player(&cub);
-	cub3D(&cub, -1);
+	cub3D(&cub);
 	my_mlx_hook(&cub);
 	mlx_loop(cub.mlx);
 	return (0);

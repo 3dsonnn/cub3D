@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:22:11 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 09:54:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 19:56:47 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	check_texture(t_scene *scene)
 	check_texture_aux(scene, ID);
 	if (open(scene->mtx[1], O_RDONLY) < 0)
 	{
+		scene->line_nbr_str = ft_itoa(scene->line_nbr);
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Invalid path to the ", ID, " texture on line ",
 				scene->line_nbr_str, ": ", strerror(errno)}), scene);

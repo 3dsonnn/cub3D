@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/15 01:24:13 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:59:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static int	my_mlx_close(t_cub *cub)
 	i = -1;
 	ft_mtxfree(&cub->scene.map.content);
 	while (++i < 4)
-		mlx_destroy_image(cub->mlx, cub->scene.textures[i].img.img);
+	mlx_destroy_image(cub->mlx, cub->scene.textures[i].img.img);
 	mlx_destroy_image(cub->mlx, cub->img.img);
 	mlx_destroy_window(cub->mlx, cub->win);
 	mlx_destroy_display(cub->mlx);
+	free(cub->rays);
 	free(cub->mlx);
 	exit(0);
 }
@@ -45,7 +46,7 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 		rotate_player(cub, 0);
 	else
 		return (0);
-	cub3D(cub, -1);
+	cub3D(cub);
 	return (0);
 }
 
