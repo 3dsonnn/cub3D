@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:23:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/19 16:10:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 09:56:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	fill_fc(t_scene *scene, char ID, int rgb[3], int i)
 {
 	if (!scene->elements)
-		scene->elements = ft_strdup(&ID);
+		scene->elements = ft_strdup((char []){ID, '\0'});
 	else
 		check_duplicate_id(scene, ID);
 	if (ID == 'C')
@@ -30,21 +30,21 @@ static void	check_color_range(t_scene *scene, int rgb[3], char *ID, char *aux)
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ",
+				" element on line ", scene->line_nbr_str, ": ",
 				"Red color is out of the range [0, 255]"}), scene);
 	}
 	if (!(rgb[1] >= 0 && rgb[1] <= 255))
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ",
+				" element on line ", scene->line_nbr_str, ": ",
 				"Green color is out of the range [0, 255]"}), scene);
 	}
 	if (!(rgb[2] >= 0 && rgb[2] <= 255))
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ",
+				" element on line ", scene->line_nbr_str, ": ",
 				"Blue color is out of the range [0, 255]"}), scene);
 	}
 	scene->tmp = aux;
@@ -57,25 +57,25 @@ static void	first_checks(t_scene *scene, char *ID, int i)
 	if (ft_strchr_count(scene->line, ',') != 2)
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Incorrect number of commas on the ", ID,
-				" element on line ", scene->aux, NULL, NULL}), scene);
+				" element on line ", scene->line_nbr_str, NULL, NULL}), scene);
 	if (ft_strlen(scene->line) < 7)
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ", "too short"}), scene);
+				" element on line ", scene->line_nbr_str, ": ", "too short"}), scene);
 	while (scene->line[++i])
 		if (!ft_strchr("0123456789 ,", scene->line[i]))
 			exit_error(get_explicit_error_message(scene,
 					(t_strs){"Invalid character on the ", ID,
-					" element on line ", scene->aux, NULL, NULL}), scene);
+					" element on line ", scene->line_nbr_str, NULL, NULL}), scene);
 	scene->mtx = ft_split(scene->line + 2, ' ');
 	if (ft_mtxlen(scene->mtx) < 1)
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ", "too short"}), scene);
+				" element on line ", scene->line_nbr_str, ": ", "too short"}), scene);
 	if (ft_mtxlen(scene->mtx) > 5)
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ", "too long"}), scene);
-	if (!strcmp(*scene->mtx, ","))
+				" element on line ", scene->line_nbr_str, ": ", "too long"}), scene);
+	if (!ft_strcmp(*scene->mtx, ","))
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ",
+				" element on line ", scene->line_nbr_str, ": ",
 				"the color range cannot start with a ','"}), scene);
 }
 
@@ -83,9 +83,9 @@ static void	keep_checking(t_scene *scene, char *ID, int rgb[3], int i)
 {
 	char	*aux;
 
-	if (!strcmp(scene->mtx[ft_mtxlen(scene->mtx) - 1], ","))
+	if (!ft_strcmp(scene->mtx[ft_mtxlen(scene->mtx) - 1], ","))
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ",
+				" element on line ", scene->line_nbr_str, ": ",
 				"the color range cannot end with a ','"}), scene);
 	while (scene->mtx[++i])
 		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[i]);
@@ -96,7 +96,7 @@ static void	keep_checking(t_scene *scene, char *ID, int rgb[3], int i)
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", ID,
-				" element on line ", scene->aux, ": ",
+				" element on line ", scene->line_nbr_str, ": ",
 				"the color range cannot contain consecutive commas"}), scene);
 	}
 	rgb[1] = ft_atoi(scene->tmp + 1);
@@ -111,10 +111,9 @@ void	check_fc(t_scene *scene)
 	char	*ID;
 	
 	ID = get_element_str(*scene->line);
-	scene->aux = ft_itoa(scene->line_nbr);
 	first_checks(scene, ID, 1);
 	keep_checking(scene, ID, rgb, -1);
-	ft_strfree(&scene->aux);
+	ft_strfree(&scene->line_nbr_str);
 	ft_strfree(&scene->line);
 	ft_mtxfree(&scene->mtx);
 }

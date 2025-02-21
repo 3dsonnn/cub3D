@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/19 16:44:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 08:29:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
@@ -51,6 +52,7 @@ void		check_element(t_scene *scene);
 char        *skip_empty_lines(t_scene *scene);
 void		fill_map(t_scene *scene, t_map *map);
 void		checks(t_cub *cub, int ac, char **av);
+void        fulfill_map(t_scene *scene, t_map *map);
 void		is_surrounded(t_scene *scene, t_map *map);
 void        check_duplicate_id(t_scene *scene, char ID);
 char        *get_explicit_error_message(t_scene *scene, t_strs strs);
@@ -69,7 +71,7 @@ void		rotate_player(t_cub *cub, int flag);
 void		move_player(t_cub *cub, t_dpoint new_pos, t_plane flag);
 
 //  RAYS
-inline void	init_rays(t_cub *cub);
+extern void	init_rays(t_cub *cub);
 void		get_rays(t_cub *cub, int i);
 void		check_horizontal_intersection(t_cub *cub, int i);
 void		check_vertical_intersection(t_cub *cub, int i);

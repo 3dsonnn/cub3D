@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/19 15:47:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 09:56:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ typedef struct s_scene
 	int				ceiling;
 	int				line_nbr;
 	char			**mtx;
-	char			*aux;
 	char			*tmp;
 	char			*line;
 	char			*elements;
+	char			*line_nbr_str;
 	t_map			map;
 	t_texture		textures[4];
 }					t_scene;

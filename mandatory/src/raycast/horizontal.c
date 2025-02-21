@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/15 15:19:04 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 01:01:47 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static  void    get_first_intersection(t_cub *cub, t_intersection *tmp, int i)
 {
 	tmp->crd.y = floor(cub->player.pos.y / TILE) * TILE;
-    if (FACE_DOWN(ray->angle))
+    if (FACE_DOWN(cub->rays[i].angle))
         tmp->crd.y += TILE;
     tmp->crd.x = cub->player.pos.x + ((tmp->crd.y - cub->player.pos.y) / cub->rays[i].tan);
 }
@@ -23,11 +23,11 @@ static  void    get_first_intersection(t_cub *cub, t_intersection *tmp, int i)
 static  void    get_steps(t_cub *cub, t_intersection *tmp, int i)
 {
 	tmp->step.y = TILE;
-	if (FACE_UP(ray->angle))
+	if (FACE_UP(cub->rays[i].angle))
 		tmp->step.y *= -1;
 	tmp->step.x = TILE / cub->rays[i].tan;
-	if ((FACE_LEFT(ray->angle) && tmp->step.x > 0)
-        || (FACE_RIGHT(ray->angle) && tmp->step.x < 0))
+	if ((FACE_LEFT(cub->rays[i].angle) && tmp->step.x > 0)
+        || (FACE_RIGHT(cub->rays[i].angle) && tmp->step.x < 0))
 		tmp->step.x *= -1;
 }
 

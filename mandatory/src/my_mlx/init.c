@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/13 15:02:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/20 13:38:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ void	init_mlx(t_cub *cub, int i)
 	if (!cub->mlx)
 		exit_error("Failed to initialize mlx", &cub->scene);
 	my_mlx_xpm_file_to_image(cub, -1);
-	cub->scene.fc[CEILING].color = my_mlx_get_rgb_color(cub->scene.fc[CEILING].rgb[0],
-			cub->scene.fc[CEILING].rgb[1], cub->scene.fc[CEILING].rgb[2]);
-	cub->scene.fc[FLOOR].color = my_mlx_get_rgb_color(cub->scene.fc[FLOOR].rgb[0],
-			cub->scene.fc[FLOOR].rgb[1], cub->scene.fc[FLOOR].rgb[2]);
 	mlx_get_screen_size(cub->mlx, &cub->img.width, &cub->img.height);
 	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height, "cub3D");
 	if (!cub->win)

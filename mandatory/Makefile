@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/02/18 22:26:45 by efinda           ###   ########.fr        #
+#    Updated: 2025/02/21 01:03:11 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,10 @@ SRC =	src/main.c 									\
 		src/my_mlx/hooks.c 							\
 		src/my_mlx/utils.c 							\
 		src/cub3D/cub3D.c 							\
-		src/player/aux.c 							\
 		src/player/init.c 							\
 		src/player/move.c 							\
 		src/player/rotation.c						\
+		src/raycast/aux.c							\
 		src/raycast/get_rays.c						\
 		src/raycast/vertical.c						\
 		src/raycast/horizontal.c					\

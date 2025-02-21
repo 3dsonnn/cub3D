@@ -19,8 +19,10 @@ int	ft_word_count(char const *s, char c)
 
 	i = 0;
 	res = 0;
-	if (!s || !*s || !ft_strchr(s, c))
+	if (!s || !*s)
 		return (res);
+	if (!ft_strchr(s, c))
+		return (++res);
 	while (s[i])
 	{
 		while (s[i] && s[i] == c)

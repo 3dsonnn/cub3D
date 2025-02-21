@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aux.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/16 16:49:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 00:58:04 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ int	is_wall(t_cub *cub, double x, double y)
 		return (1);
 	tile_x = (int)floor(x / TILE);
 	tile_y = (int)floor(y / TILE);
-	return (cub->scene.map[tile_y][tile_x] == '1');
+	if (tile_y < 0 || tile_y > cub->scene.map.size.y - 1 || tile_x < 0
+		|| tile_x > cub->scene.map.size.x - 1 || cub->scene.map.content[tile_y][tile_x] == '1')
+		return (1);
+	return (cub->scene.map.content[tile_y][tile_x] == '1');
 }

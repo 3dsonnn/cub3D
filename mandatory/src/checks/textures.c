@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:22:11 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/19 16:14:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/21 09:54:41 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,16 @@ static void	check_texture_aux(t_scene *scene, char *ID)
 {
 	if (ft_mtxlen(scene->mtx) != 2)
 	{
-		ft_mtxfree(&scene->mtx);
-		scene->aux = ft_itoa(scene->line_nbr);
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Invalid path to the ", ID, " texture on line ",
-				scene->aux, NULL, NULL}), scene);
+				scene->line_nbr_str, NULL, NULL}), scene);
 	}
 	if (ft_strlen(scene->mtx[1]) < 4 || ft_strncmp(scene->mtx[1]
 			+ ft_strlen(scene->mtx[1]) - 4, ".xpm", 4))
 	{
-		ft_mtxfree(&scene->mtx);
-		scene->aux = ft_itoa(scene->line_nbr);
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Invalid extension on the path to the ", ID,
-				" texture on line ", scene->aux, NULL, NULL}), scene);
+				" texture on line ", scene->line_nbr_str, NULL, NULL}), scene);
 	}
 }
 
@@ -58,13 +54,12 @@ void	check_texture(t_scene *scene)
 	check_texture_aux(scene, ID);
 	if (open(scene->mtx[1], O_RDONLY) < 0)
 	{
-		ft_mtxfree(&scene->mtx);
-		scene->aux = ft_itoa(scene->line_nbr);
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Invalid path to the ", ID, " texture on line ",
-				scene->aux, ": ", strerror(errno)}), scene);
+				scene->line_nbr_str, ": ", strerror(errno)}), scene);
 	}
-	fill_texture(scene, *scene->line, scene->mtx[1]);
+	fill_texture(scene, *ID, scene->mtx[1]);
+	ft_strfree(&scene->line_nbr_str);
 	ft_strfree(&scene->line);
 	ft_mtxfree(&scene->mtx);
 }
