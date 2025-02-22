@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 19:30:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:00:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	check_args(t_scene *scene, int ac, char **av)
 
 static void	check_elements(t_scene *scene)
 {
+	scene->line_nbr_str = ft_itoa(scene->line_nbr);
 	check_element(scene);
 	while (-42)
 	{
@@ -64,36 +65,9 @@ static void	check_elements(t_scene *scene)
 	ft_strfree(&scene->elements);
 }
 
-static void	check_map_aux(t_scene *scene, t_map *map)
-{
-	scene->line = get_next_line(scene->fd);
-	scene->line_nbr++;
-	if (!scene->line)
-		exit_error("The map is missing in the scene file", scene);
-	if (scene->line[ft_strlen(scene->line) - 1] == '\n')
-		scene->line[ft_strlen(scene->line) - 1] = '\0';
-	if (!*scene->line)
-	{
-		ft_strfree(&scene->line);
-		scene->tmp = skip_empty_lines(scene);
-		if (!scene->tmp)
-			exit_error("The map is missing in the scene file", scene);
-		scene->tmp = NULL;
-	}
-	if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
-	{
-		scene->line_nbr_str = ft_itoa(scene->line_nbr);
-		exit_error(get_explicit_error_message(scene,
-				(t_strs){"Invalid element on line ", scene->line_nbr_str,
-				" of the scene file", NULL, NULL, NULL}), scene);
-	}
-	add_row(&map->head, new_row(scene->line));
-	ft_strfree(&scene->line);
-}
-
 static void	check_map(t_scene *scene, t_map *map)
 {
-	check_map_aux(scene, map);
+	check_map_start(scene, map);
 	fill_map(scene, map);
 	map->size.x = ft_longestr_mtx(map->content);
 	map->size.y = ft_mtxlen(map->content);

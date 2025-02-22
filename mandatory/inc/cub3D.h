@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 16:59:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:00:34 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		checks(t_cub *cub, int ac, char **av);
 void        fulfill_map(t_scene *scene, t_map *map);
 void		is_surrounded(t_scene *scene, t_map *map);
 void        check_duplicate_id(t_scene *scene, char ID);
+void        check_map_start(t_scene *scene, t_map *map);
 char        *get_explicit_error_message(t_scene *scene, t_strs strs);
 void		check_starting_position(t_scene *scene, t_map *map, int i, int j);
 

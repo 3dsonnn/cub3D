@@ -6,11 +6,56 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 19:18:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:01:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
+
+void	check_map_start(t_scene *scene, t_map *map)
+{
+	scene->line = get_next_line(scene->fd);
+	scene->line_nbr++;
+	if (!scene->line)
+		exit_error("The map is missing in the scene file", scene);
+	if (scene->line[ft_strlen(scene->line) - 1] == '\n')
+		scene->line[ft_strlen(scene->line) - 1] = '\0';
+	if (!*scene->line)
+	{
+		ft_strfree(&scene->line);
+		scene->tmp = skip_empty_lines(scene);
+		if (!scene->tmp)
+			exit_error("The map is missing in the scene file", scene);
+		scene->tmp = NULL;
+	}
+	if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
+	{
+		scene->line_nbr_str = ft_itoa(scene->line_nbr);
+		exit_error(get_explicit_error_message(scene,
+				(t_strs){"Invalid element on line ", scene->line_nbr_str,
+				" of the scene file", NULL, NULL, NULL}), scene);
+	}
+	add_row(&map->head, new_row(scene->line));
+	ft_strfree(&scene->line);
+}
+
+static void	check_map_end(t_scene *scene)
+{
+	ft_strfree(&scene->line_nbr_str);
+	if (!scene->line)
+		return ;
+	ft_strfree(&scene->line);
+	while (-42)
+	{
+		scene->line = skip_empty_lines(scene);
+		if (!scene->line)
+			return ;
+			scene->line_nbr_str = ft_itoa(scene->line_nbr);
+		exit_error(get_explicit_error_message(scene,
+				(t_strs){"The map content always has to be the last information on the file. So the element on line ",
+				scene->line_nbr_str, " is invalid", NULL, NULL, NULL}), scene);
+	}
+}
 
 void	fulfill_map(t_scene *scene, t_map *map)
 {
@@ -29,23 +74,6 @@ void	fulfill_map(t_scene *scene, t_map *map)
 			ft_strfree(&map->content[i]);
 			ft_swaptr((void **)&map->content[i], (void **)&scene->tmp);
 		}
-	}
-}
-static void	check_last_lines(t_scene *scene)
-{
-	ft_strfree(&scene->line_nbr_str);
-	if (!scene->line)
-		return ;
-	ft_strfree(&scene->line);
-	while (-42)
-	{
-		scene->line = skip_empty_lines(scene);
-		if (!scene->line)
-			return ;
-		scene->line_nbr_str = ft_itoa(scene->line_nbr);
-		exit_error(get_explicit_error_message(scene,
-				(t_strs){"The map content always has to be the last information on the file. So the element on line ",
-				scene->line_nbr_str, " is invalid", NULL, NULL, NULL}), scene);
 	}
 }
 
@@ -73,28 +101,9 @@ void	fill_map(t_scene *scene, t_map *map)
 		ft_strfree(&scene->line);
 		ft_strfree(&scene->line_nbr_str);
 	}
-	check_last_lines(scene);
+	check_map_end(scene);
 	map->content = row_to_mtx(map->head);
 	free_rows(&map->head);
-}
-
-char	*skip_empty_lines(t_scene *scene)
-{
-	while (-42)
-	{
-		scene->line = get_next_line(scene->fd);
-		scene->line_nbr++;
-		if (!scene->line)
-			return (scene->line);
-		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
-			scene->line[ft_strlen(scene->line) - 1] = '\0';
-		if (!*scene->line)
-		{
-			ft_strfree(&scene->line);
-			continue ;
-		}
-		return (scene->line);
-	}
 }
 
 void	check_starting_position(t_scene *scene, t_map *map, int i, int j)
