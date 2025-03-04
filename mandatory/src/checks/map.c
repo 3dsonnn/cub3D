@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/22 22:01:58 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/03 22:24:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	check_map_end(t_scene *scene)
 		scene->line = skip_empty_lines(scene);
 		if (!scene->line)
 			return ;
-			scene->line_nbr_str = ft_itoa(scene->line_nbr);
+		scene->line_nbr_str = ft_itoa(scene->line_nbr);
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"The map content always has to be the last information on the file. So the element on line ",
 				scene->line_nbr_str, " is invalid", NULL, NULL, NULL}), scene);

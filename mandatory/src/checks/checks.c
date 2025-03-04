@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/22 22:00:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/04 06:45:27 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	check_map(t_scene *scene, t_map *map)
 {
 	check_map_start(scene, map);
 	fill_map(scene, map);
+	trimap(&map->content, -1, 0, (t_iter){0, 0, 0, 0, 0, 0});
 	map->size.x = ft_longestr_mtx(map->content);
 	map->size.y = ft_mtxlen(map->content);
 	fulfill_map(scene, map);

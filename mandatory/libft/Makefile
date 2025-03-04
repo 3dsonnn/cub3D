@@ -96,6 +96,8 @@ SRC = 	ctype/ft_isalnum.c				\
 	extras/ft_flood_fill.c				\
 	extras/ft_ctoa.c				\
 	extras/ft_replace_char.c			\
+	extras/ft_strpbrk.c				\
+	extras/ft_strqbrk.c				\
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror

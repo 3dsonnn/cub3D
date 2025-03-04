@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/02/22 21:58:55 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/04 12:39:03 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,14 @@ SRC =	src/main.c 									\
 		src/checks/elements.c 						\
 		src/checks/textures.c						\
 		src/checks/map_utils.c 						\
+		src/checks/is_surrounded.c 					\
 		src/checks/utils.c 							\
 		src/checks/ceiling_and_floor.c				\
 		src/my_mlx/init.c 							\
 		src/my_mlx/hooks.c 							\
 		src/my_mlx/utils.c 							\
 		src/cub3D/cub3D.c 							\
+		src/cub3D/painting.c 						\
 		src/player/init.c 							\
 		src/player/move.c 							\
 		src/player/rotation.c						\

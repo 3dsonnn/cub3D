@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 16:41:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/04 13:29:47 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static  void    get_column(t_cub *cub, int i)
     cub->rays[i].col.top = (cub->img.height - cub->rays[i].col.height) / 2;
     if (cub->rays[i].col.top < 0)
         cub->rays[i].col.top = 0;
-    cub->rays[i].col.bottom = (cub->img.height + cub->rays[i].col.height) / 2;
-    if (cub->rays[i].col.bottom > cub->img.height)
-        cub->rays[i].col.bottom = cub->img.height;
+    cub->rays[i].col.bot = (cub->img.height + cub->rays[i].col.height) / 2;
+    if (cub->rays[i].col.bot > cub->img.height)
+        cub->rays[i].col.bot = cub->img.height;
     cub->rays[i].col.dist_from_top = (cub->rays[i].col.height - cub->img.width) / 2;
     if (FACE_UP(cub->rays[i].angle) && cub->rays[i].dir.x && !cub->rays[i].dir.y)
         cub->rays[i].col.texture = &cub->scene.textures[NO];
@@ -74,5 +74,6 @@ void    get_rays(t_cub *cub, int i)
         check_vertical_intersection(cub, i);
         choose_intersection(cub, i);
         get_column(cub, i);
+	    paint(cub, i);
     }
 }

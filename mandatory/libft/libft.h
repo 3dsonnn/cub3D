@@ -143,6 +143,8 @@ void				ft_swaptr(void **p1, void **p2);
 void				ft_replace_char(char *str, char src, char dst);
 void				flood_fill(char **tab, t_point size, t_point begin);
 char				*ft_ctoa(char c);
+char				*ft_strpbrk(char *str, char *accept);
+char				*ft_strqbrk(char *str, char *accept);
 char				*ft_strcpy(char *dest, char *src);
 char				**ft_mtxdup(char **matrix);
 char				**ft_addstr_mtx(char ***matrix, char **tmp, char *str);

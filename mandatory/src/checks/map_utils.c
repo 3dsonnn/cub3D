@@ -3,102 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 19:27:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/15 11:04:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/04 06:45:20 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static void	check_empty_spaces(t_scene *scene, t_map *map)
+static int	all_space(char **map, int i)
 {
-	int	p[3];
-
-	ft_memset(p, -1, 3 * sizeof(int));
-	if (ft_strchr(*map->content, '0') || ft_strchr(map->content[map->size.y
-			- 1], '0'))
-		exit_error("Invalid map: not surrounded by walls", scene);
-	while (++(*p) < map->size.y)
-		if (*map->content[*p] == '0' || map->content[*p][map->size.x
-			- 1] == '0')
-			exit_error("Invalid map: not surrounded by walls", scene);
-	while (++(p[1]) < map->size.y)
-	{
-		p[2] = -1;
-		while (++(p[2]) < map->size.x)
-			if (map->content[p[1]][p[2]] == '0')
-				if (map->content[p[1] + 1][p[2]] == ' ' || map->content[p[1]
-					- 1][p[2]] == ' ' || map->content[p[1]][p[2] + 1] == ' '
-					|| map->content[p[1]][p[2] - 1] == ' ' || map->content[p[1]
-					- 1][p[2] - 1] == ' ' || map->content[p[1] - 1][p[2]
-					+ 1] == ' ' || map->content[p[1] + 1][p[2] - 1] == ' '
-					|| map->content[p[1] + 1][p[2] + 1] == ' ')
-					exit_error("Invalid map: a 0 cannot be surrounded by a space",
-						scene);
-	}
+	while (map[++i])
+		if (ft_strspn(map[i], " ") != ft_strlen(map[i]))
+			return (0);
+	return (1);
 }
 
-static void	check_start_pos(t_scene *scene, t_map *map)
+static int	get_indexes(char **map, int *begin, int *end)
 {
-	int	p[3];
-
-	ft_memset(p, -1, 3 * sizeof(int));
-	if (ft_strchr(*map->content, map->start)
-		|| ft_strchr(map->content[map->size.y - 1], map->start))
-		exit_error("Invalid map: not surrounded by walls", scene);
-	while (++(*p) < map->size.y)
-		if (*map->content[*p] == map->start || map->content[*p][map->size.x
-			- 1] == map->start)
-			exit_error("Invalid map: not surrounded by walls", scene);
-	while (++(p[1]) < map->size.y)
-	{
-		p[2] = -1;
-		while (++(p[2]) < map->size.x)
-			if (map->content[p[1]][p[2]] == map->start)
-				if (map->content[p[1] + 1][p[2]] == ' ' || map->content[p[1]
-					- 1][p[2]] == ' ' || map->content[p[1]][p[2] + 1] == ' '
-					|| map->content[p[1]][p[2] - 1] == ' ' || map->content[p[1]
-					+ 1][p[2] + 1] == ' ' || map->content[p[1] + 1][p[2]
-					- 1] == ' ' || map->content[p[1] - 1][p[2] + 1] == ' '
-					|| map->content[p[1] - 1][p[2] - 1] == ' ')
-					exit_error("Invalid map: the start position cannot be surrounded by a space",
-						scene);
-	}
+	while (map[++(*begin)] && (ft_strspn(map[(*begin)],
+				" ") == ft_strlen(map[(*begin)])))
+		;
+	while (map[--(*end)] && (ft_strspn(map[(*end)],
+				" ") == ft_strlen(map[(*end)])))
+		;
+	if (!*begin && !map[*end + 1])
+		return (1);
+	return (0);
 }
 
-static void	check_spaces(t_scene *scene, t_map *map, int x, int y)
+void	trimap(char ***map, int begin, int end, t_iter iter)
 {
-	while (++y < map->size.y)
-	{
-		x = -1;
-		while (++x < map->size.x)
-		{
-			if (map->content[y][x] == ' ')
-			{
-				if ((y > 0 && !ft_strchr(" 1", map->content[y - 1][x]))
-					|| (y < map->size.y - 1 && !ft_strchr(" 1", map->content[y
-							+ 1][x])) || (x > 0 && !ft_strchr(" 1",
-							map->content[y][x - 1])) || (x < map->size.x - 1
-						&& !ft_strchr(" 1", map->content[y][x + 1])) || (y > 0
-						&& x > 0 && !ft_strchr(" 1", map->content[y - 1][x
-							- 1])) || (y > 0 && x < map->size.x - 1
-						&& !ft_strchr(" 1", map->content[y - 1][x + 1]))
-					|| (y < map->size.y - 1 && x > 0 && !ft_strchr(" 1",
-							map->content[y + 1][x - 1])) || (y < map->size.y - 1
-						&& x < map->size.x - 1 && !ft_strchr(" 1",
-							map->content[y + 1][x + 1])))
-					exit_error("Invalid map: a space can only be surrounded by another space or a wall",
-						scene);
-			}
-		}
-	}
-}
+	char	**new;
 
-void	is_surrounded(t_scene *scene, t_map *map)
-{
-	check_empty_spaces(scene, map);
-	check_start_pos(scene, map);
-	check_spaces(scene, map, -1, -1);
+	if (!map || !(*map) || !(*map)[0] || all_space(*map, -1))
+		return ;
+	end = ft_mtxlen(*map);
+	if (get_indexes(*map, &begin, &end))
+		return ;
+	new = (char **)malloc(sizeof(char *) * (end - begin + 2));
+	if (!new)
+		return ;
+	while (begin - 1 != end)
+	{
+		new[iter.i] = ft_strdup((*map)[begin]);
+		iter.i++;
+		begin++;
+	}
+	new[iter.i] = NULL;
+	ft_mtxfree(map);
+	*map = new;
 }

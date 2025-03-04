@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   ft_strqbrk.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 12:35:13 by efinda           ###   ########.fr       */
+/*   Created: 2025/02/24 22:56:32 by efinda            #+#    #+#             */
+/*   Updated: 2025/03/02 16:48:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../libft.h"
 
-void	cub3D(t_cub *cub)
+char	*ft_strqbrk(char *str, char *accept)
 {
-	//player(cub);
-	//minimap(cub, -1, -1);
-	get_rays(cub, -1);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
+	if (!str || !accept)
+		return (NULL);
+	while (*str)
+	{
+		if (!ft_strchr(accept, *str))
+			return (str);
+		str++;
+	}
+	return (NULL);
 }
