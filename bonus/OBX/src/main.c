@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 19:01:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/02/05 23:28:11 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D_bonus.h"
+#include "../inc/obx.h"
 
 int	main(int ac, char **av)
 {
-	t_cub	cub;
+	t_obx	obx;
 
-	checks(&cub, ac, av);
-	init_mlx(&cub, -1);
-	init_minimap(&cub, -1, -1);
-	init_rays(&cub);
-	init_player(&cub);
-	cub3D(&cub);
-	my_mlx_hook(&cub);
-	mlx_loop(cub.mlx);
+	checks(&obx.map, ac, av);
+	my_mlx_init(&obx, -1, -1);
+	my_mlx_hook(&obx);
+	bounding_box(&obx, -1, -1);
+	mlx_loop(obx.mlx);
 	return (0);
 }

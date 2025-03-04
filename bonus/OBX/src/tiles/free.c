@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 19:01:51 by efinda           ###   ########.fr       */
+/*   Created: 2025/02/05 23:34:10 by efinda            #+#    #+#             */
+/*   Updated: 2025/02/05 23:42:04 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D_bonus.h"
+#include "../../inc/obx.h"
 
-int	main(int ac, char **av)
+void	free_tiles(t_obx *obx)
 {
-	t_cub	cub;
+	int	i;
 
-	checks(&cub, ac, av);
-	init_mlx(&cub, -1);
-	init_minimap(&cub, -1, -1);
-	init_rays(&cub);
-	init_player(&cub);
-	cub3D(&cub);
-	my_mlx_hook(&cub);
-	mlx_loop(cub.mlx);
-	return (0);
+	i = -1;
+	while (++i < obx->map.size.y)
+		free(obx->tiles[i]);
+	free(obx->tiles);
 }

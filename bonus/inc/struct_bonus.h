@@ -6,14 +6,14 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:26:29 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/04 18:54:29 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_BONUS_H
 # define STRUCT_BONUS_H
 
-typedef enum ID
+typedef enum e_ID
 {
 	NO,
 	SO,
@@ -21,7 +21,7 @@ typedef enum ID
 	EA
 }					t_ID;
 
-typedef enum CORNERS
+typedef enum e_CORNERS
 {
 	TOPLEFT,
 	TOPRIGHT,
@@ -156,7 +156,27 @@ typedef struct s_player
 	t_dplane		dir;
 	double			angle;
 }					t_player;
-	
+
+typedef struct s_tile
+{
+	char			id;
+	int				color;
+	t_point			crd;
+	struct s_tile	*up;
+	struct s_tile	*down;
+	struct s_tile	*left;
+	struct s_tile	*right;
+}					t_tile;
+
+typedef struct s_mmap
+{
+	int				box;
+	int				tilesize;
+	t_tile			*cur;
+	t_tile			*corners[4];
+	t_tile			**tiles;
+}					t_mmap;
+
 typedef struct s_cub
 {
 	void			*mlx;
@@ -165,6 +185,7 @@ typedef struct s_cub
 	t_scene			scene;
 	t_player		player;
 	t_ray			*rays;
+	t_mmap			minimap;
 	double			ppd;
 }					t_cub;
 

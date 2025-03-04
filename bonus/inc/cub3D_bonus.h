@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:26:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/04 19:17:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUB3D_BONUS_H
 
 # include "../../libft/libft.h"
-# include "struct_bonus.h"
 # include "mlx.h"
+# include "struct_bonus.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
@@ -44,6 +44,12 @@
 # define LEFT 65361
 # define RIGHT 65363
 
+# define BLACK 0x000000
+# define WHITE 0xFFFFFF
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+
 //  CHECKS
 char		*get_element_str(char c);
 void		check_fc(t_scene *scene);
@@ -59,6 +65,11 @@ void		check_map_start(t_scene *scene, t_map *map);
 void		trimap(char ***map, int begin, int end, t_iter iter);
 char		*get_explicit_error_message(t_scene *scene, t_strs strs);
 void		check_starting_position(t_scene *scene, t_map *map, int i, int j);
+
+// MINIMAP
+void		init_minimap(t_cub *cub, int i, int j);
+void		link_tiles(t_cub *cub, int i, int j);
+void		set_tiles(t_cub *cub, int i, int j);
 
 //  MY_MLX
 void		my_mlx_hook(t_cub *cub);

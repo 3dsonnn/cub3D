@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/04 17:40:10 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/04 19:43:31 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,9 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/utils/error_bonus.c 							\
 			bonus/src/utils/ft_math_bonus.c							\
 			bonus/src/utils/bresenham_bonus.c						\
+			bonus/src/minimap/init_bonus.c							\
+			bonus/src/minimap/linkage_bonus.c						\
+			bonus/src/minimap/settings_bonus.c						\
 
 LIBFTPATH = libft
 LIBFT =	$(LIBFTPATH)/libft.a
