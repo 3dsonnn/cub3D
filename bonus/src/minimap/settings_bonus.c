@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 19:09:47 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 19:43:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 02:52:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 static void	set_tiles_aux(t_cub *cub, char c, int i, int j)
 {
-	if (c == '1')
+	if (i == cub->scene.map.spos.y && j == cub->scene.map.spos.x)
+	{
+		cub->minimap.tiles[i][j].id = 'C';
+		cub->minimap.tiles[i][j].color = RED;
+		cub->minimap.cur = &cub->minimap.tiles[i][j];
+	}
+	else if (c == '1')
 	{
 		cub->minimap.tiles[i][j].id = '1';
 		cub->minimap.tiles[i][j].color = BLUE;
@@ -27,13 +33,7 @@ static void	set_tiles_aux(t_cub *cub, char c, int i, int j)
 	else if (c == ' ')
 	{
 		cub->minimap.tiles[i][j].id = ' ';
-		cub->minimap.tiles[i][j].color = 0xD3D3D3;
-	}
-	else
-	{
-		cub->minimap.tiles[i][j].id = 'S';
-		cub->minimap.tiles[i][j].color = RED;
-		cub->minimap.cur = &cub->minimap.tiles[i][j];
+		cub->minimap.tiles[i][j].color = -42;
 	}
 }
 
@@ -46,9 +46,9 @@ void	set_tiles(t_cub *cub, int i, int j)
 		{
 			cub->minimap.tiles[i][j].crd.x = j;
 			cub->minimap.tiles[i][j].crd.y = i;
-			set_id(cub, cub->scene.map.content[i][j], i, j);
+			set_tiles_aux(cub, cub->scene.map.content[i][j], i, j);
 		}
 	}
-	update_cub(cub, cub->minimap.cur, (t_plane){0, 0, 0, 0}, (t_iter){-1, -1,
+	update_obx(cub, cub->minimap.cur, (t_plane){0, 0, 0, 0}, (t_iter){-1, -1,
 		-1, -1, -1, -1});
 }

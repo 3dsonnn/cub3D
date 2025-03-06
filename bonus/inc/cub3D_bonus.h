@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 19:17:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 01:05:02 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,13 @@ char		*get_explicit_error_message(t_scene *scene, t_strs strs);
 void		check_starting_position(t_scene *scene, t_map *map, int i, int j);
 
 // MINIMAP
-void		init_minimap(t_cub *cub, int i, int j);
-void		link_tiles(t_cub *cub, int i, int j);
+void		minimap(t_cub *cub, int i, int j);
 void		set_tiles(t_cub *cub, int i, int j);
+void		link_tiles(t_cub *cub, int i, int j);
+void		init_minimap(t_cub *cub, int i, int j);
+void		paint_obx(t_cub *cub, t_tile *topleft);
+void		paint_minimap_tile(t_cub *cub, int i, int j, int color);
+void		update_obx(t_cub *cub, t_tile *cur, t_plane plane, t_iter iter);
 
 //  MY_MLX
 void		my_mlx_hook(t_cub *cub);
