@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/20 13:43:27 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:42:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,26 @@
 
 static void	get_starting_angle(t_cub *cub, char spawning_orientation)
 {
-	if ('N' == spawning_orientation)
+	if (spawning_orientation == 'N')
 		cub->player.angle = DEG_TO_RAD(270.0);
-	else if ('S' == spawning_orientation)
+	else if (spawning_orientation == 'S')
 		cub->player.angle = DEG_TO_RAD(90.0);
-	else if ('E' == spawning_orientation)
+	else if (spawning_orientation == 'E')
 		cub->player.angle = DEG_TO_RAD(0.0);
-	else if ('W' == spawning_orientation)
+	else if (spawning_orientation == 'W')
 		cub->player.angle = DEG_TO_RAD(180.0);
 }
 
 void	init_player(t_cub *cub)
 {
+	double	plane_length;
+
+	plane_length = tan(FOV / 2.0);
 	cub->player.pos.x = (cub->scene.map.spos.x * TILE) + (TILE / 2);
 	cub->player.pos.y = (cub->scene.map.spos.y * TILE) + (TILE / 2);
 	get_starting_angle(cub, cub->scene.map.start);
-	rotate_player(cub, -1);
+	cub->player.dir.x = cos(cub->player.angle);
+	cub->player.dir.y = sin(cub->player.angle);
+	cub->player.plane.x = -cub->player.dir.y * plane_length;
+	cub->player.plane.y = cub->player.dir.x * plane_length;
 }

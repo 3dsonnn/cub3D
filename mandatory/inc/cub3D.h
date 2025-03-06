@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 06:48:29 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 10:26:20 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define DEG_TO_RAD(angle) ((angle) * (M_PI / 180.0))
 # define FOV DEG_TO_RAD(120)
 # define SPEED 3.0
+# define ROT 0.1
 
 # define FACE_DOWN(angle) ((angle) > 0 && (angle) < M_PI)
 # define FACE_UP(angle) (!(FACE_DOWN(angle)))
@@ -71,8 +72,9 @@ extern int			my_mlx_get_pixel(t_img *image, int x, int y);
 
 //  PLAYER
 void				init_player(t_cub *cub);
-void				rotate_player(t_cub *cub, int flag);
-void				move_player(t_cub *cub, t_dpoint new_pos, t_plane flag);
+void				rotate_player(t_cub *cub, int angle_delta);
+void				move_player(t_cub *cub, double forward, double strafe,
+						t_dpoint new_pos);
 
 //  RAYS
 extern void			init_rays(t_cub *cub);
