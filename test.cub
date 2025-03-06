@@ -1,8 +1,8 @@
 
-NO ./images/W1.xpm
-SO ./images/W1.xpm
-WE ./images/W1.xpm
-EA ./images/W1.xpm
+NO ./images/texture1.xpm
+SO ./images/texture2.xpm
+WE ./images/texture3.xpm
+EA ./images/texture4.xpm
 F  0,225,0
 C  0,0,225
 

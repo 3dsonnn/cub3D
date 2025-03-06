@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:23:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/22 21:56:23 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 05:01:42 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	keep_checking(t_scene *scene, char *ID, int rgb[3], int i)
 				"the color range cannot contain consecutive commas"}), scene);
 	}
 	rgb[1] = ft_atoi(scene->tmp + 1);
-	scene->tmp = ft_strchr(scene->tmp, ',');
+	scene->tmp = ft_strchr(scene->tmp + 1, ',');
 	rgb[2] = ft_atoi(scene->tmp + 1);
 	check_color_range(scene, rgb, ID, aux);
 }

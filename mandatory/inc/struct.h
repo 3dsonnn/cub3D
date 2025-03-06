@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 12:45:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 04:50:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@ typedef enum ID
 	EA
 }					t_ID;
 
-typedef enum CORNERS
-{
-	TOPLEFT,
-	TOPRIGHT,
-	BOTTLEFT,
-	BOTTRIGHT
-}					t_CORNERS;
-
 typedef struct s_iter
 {
 	int				i;
@@ -41,12 +33,12 @@ typedef struct s_iter
 
 typedef struct s_strs
 {
-	char	*s1;
-	char	*s2;
-	char	*s3;
-	char	*s4;
-	char	*s5;
-	char	*s6;
+	char			*s1;
+	char			*s2;
+	char			*s3;
+	char			*s4;
+	char			*s5;
+	char			*s6;
 }					t_strs;
 
 typedef struct s_dpoint
@@ -121,22 +113,21 @@ typedef struct s_scene
 
 typedef struct s_col
 {
-	double		dist;
-	int			height;
-	int			top;
-	int			bot;
-	int			dist_from_top;
-	t_texture	*texture;
-}				t_col;
+	double			dist;
+	int				height;
+	int				top;
+	int				bot;
+	int				dist_from_top;
+}					t_col;
 
 typedef struct s_intersection
 {
-	double		dist;
-	t_dpoint	step;
-	t_dpoint	crd;
-	t_dpoint	wall;
-	int			intersected;
-}				t_intersection;
+	double			dist;
+	t_dpoint		step;
+	t_dpoint		crd;
+	t_dpoint		wall;
+	int				intersected;
+}					t_intersection;
 
 typedef struct s_ray
 {
@@ -148,15 +139,16 @@ typedef struct s_ray
 	t_intersection	hor;
 	t_intersection	ver;
 	t_col			col;
+	t_texture		*texture;
 }					t_ray;
-	
+
 typedef struct s_player
 {
 	t_dpoint		pos;
 	t_dplane		dir;
 	double			angle;
 }					t_player;
-	
+
 typedef struct s_cub
 {
 	void			*mlx;

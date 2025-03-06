@@ -6,16 +6,16 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 02:53:05 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 03:06:52 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-void	update_cur_tile(t_cub *cub, double x, double y)
+static void	update_cur_tile(t_cub *cub, double x, double y)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = (int)floor(y / TILE);
 	j = (int)floor(x / TILE);

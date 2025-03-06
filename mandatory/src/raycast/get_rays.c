@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 13:29:47 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 06:49:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,20 @@ static  void    get_column(t_cub *cub, int i)
     if (cub->rays[i].col.bot > cub->img.height)
         cub->rays[i].col.bot = cub->img.height;
     cub->rays[i].col.dist_from_top = (cub->rays[i].col.height - cub->img.width) / 2;
-    if (FACE_UP(cub->rays[i].angle) && cub->rays[i].dir.x && !cub->rays[i].dir.y)
-        cub->rays[i].col.texture = &cub->scene.textures[NO];
-    if (FACE_DOWN(cub->rays[i].angle) && cub->rays[i].dir.x && !cub->rays[i].dir.y)
-        cub->rays[i].col.texture = &cub->scene.textures[SO];
-    if (FACE_RIGHT(cub->rays[i].angle) && cub->rays[i].dir.y && !cub->rays[i].dir.x)
-        cub->rays[i].col.texture = &cub->scene.textures[EA];
-    if (FACE_LEFT(cub->rays[i].angle) && cub->rays[i].dir.y && !cub->rays[i].dir.x)
-        cub->rays[i].col.texture = &cub->scene.textures[WE];
 }
 
-void    get_rays(t_cub *cub, int i)
+void    get_rays(t_cub *cub, int j)
 {
-    while (++i < cub->img.width)
+    while (++j < cub->img.width)
     {
-        cub->rays[i].angle = cub->player.angle + atan((i - cub->img.width / 2) / cub->ppd);
-        cub->rays[i].angle = ft_normalizer(cub->rays[i].angle);
-        cub->rays[i].tan = tan(cub->rays[i].angle);
-        check_horizontal_intersection(cub, i);
-        check_vertical_intersection(cub, i);
-        choose_intersection(cub, i);
-        get_column(cub, i);
-	    paint(cub, i);
+        cub->rays[j].angle = cub->player.angle + atan((j - cub->img.width / 2) / cub->ppd);
+        cub->rays[j].angle = ft_normalizer(cub->rays[j].angle);
+        cub->rays[j].tan = tan(cub->rays[j].angle);
+        check_horizontal_intersection(cub, j);
+        check_vertical_intersection(cub, j);
+        choose_intersection(cub, j);
+        get_column(cub, j);
+        cub->rays[j].texture = get_texture(cub, cub->rays[j].angle, cub->rays[j].dir);
+	    paint(cub, -1, j, (t_point){0, 0});
     }
 }

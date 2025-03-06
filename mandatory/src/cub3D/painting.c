@@ -6,53 +6,31 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:34:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 13:29:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/06 07:07:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static void	paint_ceiling_and_floor(t_cub *cub, int j)
+void	paint(t_cub *cub, int i, int j, t_point pixel)
 {
-	int	i;
-
-	i = -1;
-	while (++i < cub->img.height)
-	{
-		if (i < cub->img.height / 2)
-			my_mlx_pixel_put(&cub->img, j, i, cub->scene.ceiling);
-		else
-			my_mlx_pixel_put(&cub->img, j, i, cub->scene.floor);
-	}
-}
-
-static void	paint_column(t_cub *cub, int i)
-{
-	int	y;
-	int	index;
-	int	offset_x;
-	int	offset_y;
-	int	offset_index;
-
-	if (cub->rays[i].dir.y)
-		offset_x = (int)cub->rays[i].ver.wall.y % TILE;
+	if (cub->rays[j].dir.y)
+		pixel.x = (int)cub->rays[j].ver.wall.y % TILE;
 	else
-		offset_x = (int)cub->rays[i].hor.wall.x % TILE;
-	y = cub->rays[i].col.top;
-	while (y < cub->rays[i].col.bot)
+		pixel.x = (int)cub->rays[j].hor.wall.x % TILE;
+	while (++i < cub->rays[j].col.top)
+		my_mlx_pixel_put(&cub->img, j, i, cub->scene.ceiling);
+	while (i < cub->rays[j].col.bot)
 	{
-		offset_y = (y + cub->rays[i].col.dist_from_top) * ((double)TILE
-				/ cub->rays[i].col.height);
-		index = (y * cub->img.line_len) + i;
-		offset_index = offset_x + (offset_y
-				* cub->rays[i].col.texture->img.line_len);
-		cub->img.addr[index] = cub->rays[i].col.texture->img.addr[offset_index];
-		y++;
+		pixel.y = (i + cub->rays[j].col.dist_from_top) * ((double)TILE
+				/ cub->rays[j].col.height);
+		my_mlx_pixel_put(&cub->img, j, i,
+			my_mlx_get_pixel(&cub->rays[j].texture->img, pixel.x, pixel.y));
+		i++;
 	}
-}
-
-void	paint(t_cub *cub, int i)
-{
-	paint_ceiling_and_floor(cub, i);
-	paint_column(cub, i);
+	while (i < cub->img.height)
+	{
+		my_mlx_pixel_put(&cub->img, j, i, cub->scene.floor);
+		i++;
+	}
 }
