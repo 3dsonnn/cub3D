@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 16:42:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/08 11:21:27 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,11 @@ static void	get_starting_angle(t_cub *cub, char spawning_orientation)
 
 void	init_player(t_cub *cub)
 {
-	double	plane_length;
-
-	plane_length = tan(FOV / 2.0);
 	cub->player.pos.x = (cub->scene.map.spos.x * TILE) + (TILE / 2);
 	cub->player.pos.y = (cub->scene.map.spos.y * TILE) + (TILE / 2);
 	get_starting_angle(cub, cub->scene.map.start);
 	cub->player.dir.x = cos(cub->player.angle);
 	cub->player.dir.y = sin(cub->player.angle);
-	cub->player.plane.x = -cub->player.dir.y * plane_length;
-	cub->player.plane.y = cub->player.dir.x * plane_length;
+	cub->player.plane.x = -cub->player.dir.y;
+	cub->player.plane.y = cub->player.dir.x;
 }

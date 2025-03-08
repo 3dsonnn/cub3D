@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 01:01:29 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/08 08:11:23 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static  inline  void    get_distance(t_cub *cub, int i)
     if (cub->rays[i].ver.intersected)
         cub->rays[i].ver.dist = sqrt(pow((cub->rays[i].ver.wall.x - cub->player.pos.x), 2) + pow((cub->rays[i].ver.wall.y - cub->player.pos.y), 2));
     else
-        cub->rays[i].ver.dist = -42;
+        cub->rays[i].ver.dist = DBL_MAX;
 }
 
 void    check_vertical_intersection(t_cub *cub, int i)

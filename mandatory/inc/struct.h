@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 09:47:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/08 11:18:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ typedef struct s_col
 	int				height;
 	int				top;
 	int				bot;
-	int				dist_from_top;
 }					t_col;
 
 typedef struct s_intersection
@@ -145,8 +144,8 @@ typedef struct s_ray
 typedef struct s_player
 {
 	t_dpoint		pos;
-	t_dplane		dir;
-	t_dplane		plane;
+	t_dpoint		dir;
+	t_dpoint		plane;
 	double			angle;
 }					t_player;
 

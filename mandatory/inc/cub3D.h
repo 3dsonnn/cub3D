@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 10:26:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/09 00:36:44 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
+# include <float.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/time.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 # define TILE 64
 
 # define DEG_TO_RAD(angle) ((angle) * (M_PI / 180.0))
 # define FOV DEG_TO_RAD(120)
-# define SPEED 3.0
+# define SPEED 5.0
 # define ROT 0.1
 
 # define FACE_DOWN(angle) ((angle) > 0 && (angle) < M_PI)
@@ -44,6 +45,9 @@
 # define WKEY 119
 # define LEFT 65361
 # define RIGHT 65363
+
+# define BLACK 0x000000
+# define WHITE 0xFFFFFF
 
 //  CHECKS
 char				*get_element_str(char c);
@@ -72,13 +76,12 @@ extern int			my_mlx_get_pixel(t_img *image, int x, int y);
 
 //  PLAYER
 void				init_player(t_cub *cub);
-void				rotate_player(t_cub *cub, int angle_delta);
+void				rotate_player(t_cub *cub, double angle_delta);
 void				move_player(t_cub *cub, double forward, double strafe,
 						t_dpoint new_pos);
 
 //  RAYS
 extern void			init_rays(t_cub *cub);
-void				get_rays(t_cub *cub, int i);
 void				check_horizontal_intersection(t_cub *cub, int i);
 void				check_vertical_intersection(t_cub *cub, int i);
 int					is_wall(t_cub *cub, double x, double y);
@@ -86,7 +89,7 @@ int					inside_map(t_cub *cub, double x, double y);
 extern t_texture	*get_texture(t_cub *cub, double angle, t_point dir);
 
 //  CUB3D
-void				cub3D(t_cub *cub);
+void				cub3D(t_cub *cub, int j);
 
 // PAINTING
 void				paint(t_cub *cub, int i, int j, t_point pixel);

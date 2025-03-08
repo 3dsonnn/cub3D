@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/06 09:51:19 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/08 07:20:04 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/player/init.c 							\
 		mandatory/src/player/move.c 							\
 		mandatory/src/raycast/aux.c								\
-		mandatory/src/raycast/get_rays.c						\
+		mandatory/src/raycast/init_rays.c						\
 		mandatory/src/raycast/vertical.c						\
 		mandatory/src/raycast/horizontal.c						\
 		mandatory/src/t_row/t_row.c 							\

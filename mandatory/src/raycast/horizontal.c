@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 04:25:39 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/08 08:11:29 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static  void    get_first_intersection(t_cub *cub, t_intersection *tmp, int i)
 	tmp->crd.y = floor(cub->player.pos.y / TILE) * TILE;
     if (FACE_DOWN(cub->rays[i].angle))
         tmp->crd.y += TILE;
-    tmp->crd.x = /*cub->player.pos.x + */((tmp->crd.y - cub->player.pos.y) / cub->rays[i].tan);
+    tmp->crd.x = cub->player.pos.x + ((tmp->crd.y - cub->player.pos.y) / cub->rays[i].tan);
 }
 
 static  void    get_steps(t_cub *cub, t_intersection *tmp, int i)
@@ -36,7 +36,7 @@ static  inline  void    get_distance(t_cub *cub, int i)
     if (cub->rays[i].hor.intersected)
         cub->rays[i].hor.dist = sqrt(pow((cub->rays[i].hor.wall.x - cub->player.pos.x), 2) + pow((cub->rays[i].hor.wall.y - cub->player.pos.y), 2));
     else
-        cub->rays[i].hor.dist = -42;
+        cub->rays[i].hor.dist = DBL_MAX;
 }
 
 void    check_horizontal_intersection(t_cub *cub, int i)

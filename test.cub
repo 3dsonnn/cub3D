@@ -1,15 +1,15 @@
 
-NO ./images/texture1.xpm
-SO ./images/texture2.xpm
-WE ./images/texture3.xpm
-EA ./images/texture4.xpm
+NO ./images/a.xpm
+SO ./images/aa.xpm
+WE ./images/c.xpm
+EA ./images/ao.xpm
 F  0,225,0
 C  0,0,225
 
                                        
         1111111111111111111111111 
-        1000000110110000000000001 
-        101100011100000000S000001 
+        100000011011000000W000001 
+        1011000111000000000000001 
         1001000010000000000000001 
 111111111011000001110000000000001 
 100000000011000001110111111111111 
