@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:26:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/03 22:26:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/09 02:29:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	check_empty_spaces(t_scene *scene, t_map *map)
 
 	ft_memset(p, -1, 3 * sizeof(int));
 	if (ft_strchr(*map->content, '0') || ft_strchr(map->content[map->size.y
-			- 1], '0'))
+				- 1], '0'))
 		exit_error("Invalid map: not surrounded by walls", scene);
 	while (++(*p) < map->size.y)
 		if (*map->content[*p] == '0' || map->content[*p][map->size.x
@@ -35,7 +35,8 @@ static void	check_empty_spaces(t_scene *scene, t_map *map)
 					- 1][p[2] - 1] == ' ' || map->content[p[1] - 1][p[2]
 					+ 1] == ' ' || map->content[p[1] + 1][p[2] - 1] == ' '
 					|| map->content[p[1] + 1][p[2] + 1] == ' ')
-					exit_error("Invalid map: a 0 cannot be surrounded by a space",
+					exit_error("Invalid map: a 0 cannot be \
+						surrounded by a space",
 						scene);
 	}
 }
@@ -63,7 +64,8 @@ static void	check_start_pos(t_scene *scene, t_map *map)
 					+ 1][p[2] + 1] == ' ' || map->content[p[1] + 1][p[2]
 					- 1] == ' ' || map->content[p[1] - 1][p[2] + 1] == ' '
 					|| map->content[p[1] - 1][p[2] - 1] == ' ')
-					exit_error("Invalid map: the start position cannot be surrounded by a space",
+					exit_error("Invalid map: the start position\
+						 cannot be surrounded by a space",
 						scene);
 	}
 }
@@ -89,7 +91,8 @@ static void	check_spaces(t_scene *scene, t_map *map, int x, int y)
 							map->content[y + 1][x - 1])) || (y < map->size.y - 1
 						&& x < map->size.x - 1 && !ft_strchr(" 1",
 							map->content[y + 1][x + 1])))
-					exit_error("Invalid map: a space can only be surrounded by another space or a wall",
+					exit_error("Invalid map: a space can only be \
+						surrounded by another space or a wall",
 						scene);
 			}
 		}

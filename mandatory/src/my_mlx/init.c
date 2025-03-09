@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/08 20:49:16 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/09 02:23:38 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	my_mlx_free(t_cub *cub, char *message, t_plane flag)
 	exit_error(message, &cub->scene);
 }
 
+static inline void	check_error(t_cub *cub, int i)
+{
+	if (!cub->scene.textures[i].img.img)
+	{
+		cub->scene.tmp = ft_strjoin("Failed to load image from ",
+				cub->scene.textures[i].path);
+		my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, (i - 1), 0, 1});
+	}
+}
+
 static void	my_mlx_xpm_file_to_image(t_cub *cub, int i)
 {
 	while (++i < 4)
@@ -33,18 +43,16 @@ static void	my_mlx_xpm_file_to_image(t_cub *cub, int i)
 		cub->scene.textures[i].img.img = mlx_xpm_file_to_image(cub->mlx,
 				cub->scene.textures[i].path, &cub->scene.textures[i].img.width,
 				&cub->scene.textures[i].img.height);
-		if (!cub->scene.textures[i].img.img)
-		{
-			cub->scene.tmp = ft_strjoin("Failed to load image from ",
-					cub->scene.textures[i].path);
-			my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, (i - 1), 0, 1});
-		}
-		cub->scene.textures[i].img.addr = (int *)mlx_get_data_addr(cub->scene.textures[i].img.img,
-				&cub->scene.textures[i].img.bpp, &cub->scene.textures[i].img.line_len,
+		check_error(cub, i);
+		cub->scene.textures[i].img.addr = (int *)
+			mlx_get_data_addr(cub->scene.textures[i].img.img,
+				&cub->scene.textures[i].img.bpp,
+				&cub->scene.textures[i].img.line_len,
 				&cub->scene.textures[i].img.endian);
 		if (!cub->scene.textures[i].img.addr)
 		{
-			cub->scene.tmp = ft_strjoin("Failed to get the address of image from ",
+			cub->scene.tmp = ft_strjoin("Failed to get the \
+				address of image from ",
 					cub->scene.textures[i].path);
 			my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, (i + 1), 0, 1});
 		}
@@ -60,18 +68,21 @@ void	init_mlx(t_cub *cub, int i)
 		exit_error("Failed to initialize mlx", &cub->scene);
 	my_mlx_xpm_file_to_image(cub, -1);
 	mlx_get_screen_size(cub->mlx, &cub->img.width, &cub->img.height);
-	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height, "cub3D");
+	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height,
+			"cub3D");
 	if (!cub->win)
 		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
 	cub->img.img = mlx_new_image(cub->mlx, cub->img.width, cub->img.height);
 	if (!cub->img.img)
-		my_mlx_free(cub, "Failed to create the main image", (t_plane){-1, 4, 1, 1});
+		my_mlx_free(cub, "Failed to create the main image", (t_plane){-1, 4, 1,
+			1});
 	cub->img.addr = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 			&cub->img.line_len, &cub->img.endian);
 	if (!cub->img.addr)
 	{
 		mlx_destroy_image(cub->mlx, cub->img.img);
-		my_mlx_free(cub, "Failed to get the address of the main image", (t_plane){-1, 4, 1, 1});
+		my_mlx_free(cub, "Failed to get the address of the main image",
+			(t_plane){-1, 4, 1, 1});
 	}
 	cub->img.line_len /= 4;
 }

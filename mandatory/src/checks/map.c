@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/03 22:24:10 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/09 02:13:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	check_map_end(t_scene *scene)
 			return ;
 		scene->line_nbr_str = ft_itoa(scene->line_nbr);
 		exit_error(get_explicit_error_message(scene,
-				(t_strs){"The map content always has to be the last information on the file. So the element on line ",
+				(t_strs){"The map content always has to be the last information on the file. \
+				So the element on line ",
 				scene->line_nbr_str, " is invalid", NULL, NULL, NULL}), scene);
 	}
 }
@@ -93,7 +94,8 @@ void	fill_map(t_scene *scene, t_map *map)
 		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
 		{
 			exit_error(get_explicit_error_message(scene,
-					(t_strs){"Invalid character inside the map content on line ",
+					(t_strs){"Invalid character inside \
+					the map content on line ",
 					scene->line_nbr_str, " of the scene file", NULL, NULL,
 					NULL}), scene);
 		}

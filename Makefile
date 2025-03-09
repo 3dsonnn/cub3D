@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/08 07:20:04 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/09 02:03:15 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = cub3D
 NAME_BONUS = cub3D_bonus
 
 CC = cc
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 SRC =	mandatory/src/main.c 									\
@@ -43,7 +43,6 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/t_row/t_row_aux.c 						\
 		mandatory/src/utils/error.c 							\
 		mandatory/src/utils/ft_math.c							\
-		mandatory/src/utils/bresenham.c							\
 
 SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/checks/map_bonus.c 							\

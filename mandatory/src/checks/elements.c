@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/22 21:51:21 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/09 02:28:01 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ void	check_duplicate_id(t_scene *scene, char ID)
 	{
 		if (ID == 'C' || ID == 'F')
 			exit_error(get_explicit_error_message(scene, (t_strs){"Duplicated ",
-					get_element_str(ID), " element on line ", scene->line_nbr_str, NULL,
-					NULL}), scene);
+					get_element_str(ID), " element on line ",
+					scene->line_nbr_str, NULL, NULL}), scene);
 		else
 			exit_error(get_explicit_error_message(scene,
 					(t_strs){"Duplicate path to the ", get_element_str(ID),
-					" texture on line ", scene->line_nbr_str, NULL, NULL}), scene);
+					" texture on line ", scene->line_nbr_str, NULL, NULL}),
+				scene);
 	}
 	scene->tmp = ft_strjoin(scene->elements, (char []){ID, '\0'});
 	ft_strfree(&scene->elements);
@@ -82,7 +83,7 @@ void	check_element(t_scene *scene)
 	else
 	{
 		exit_error(get_explicit_error_message(scene,
-			(t_strs){"Invalid element on line ", scene->line_nbr_str,
-			" of the scene file", NULL, NULL, NULL}), scene);
+				(t_strs){"Invalid element on line ", scene->line_nbr_str,
+				" of the scene file", NULL, NULL, NULL}), scene);
 	}
 }

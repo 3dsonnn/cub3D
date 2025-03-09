@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/08 11:18:36 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/09 02:57:45 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ typedef struct s_strs
 	char			*s6;
 }					t_strs;
 
+typedef struct s_plane
+{
+	int				x0;
+	int				x;
+	int				y0;
+	int				y;
+}					t_plane;
+
 typedef struct s_dpoint
 {
 	double			x;
@@ -54,14 +62,6 @@ typedef struct s_dplane
 	double			y0;
 	double			y;
 }					t_dplane;
-
-typedef struct s_plane
-{
-	int				x0;
-	int				x;
-	int				y0;
-	int				y;
-}					t_plane;
 
 typedef struct s_rows
 {

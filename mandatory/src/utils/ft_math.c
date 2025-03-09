@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_math.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/15 13:28:02 by efinda           ###   ########.fr       */
+/*   Created: 2025/03/09 02:05:24 by efinda            #+#    #+#             */
+/*   Updated: 2025/03/09 02:42:09 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 double	ft_normalizer(double angle)
 {
-    double  result;
+	double	result;
 
-    result = remainder(angle, (2 * M_PI));
-    if (result < 0)
-        result += (2 * M_PI);
-    return (result);
+	result = remainder(angle, (2 * M_PI));
+	if (result < 0)
+		result += (2 * M_PI);
+	return (result);
 }
