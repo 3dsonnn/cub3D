@@ -1,8 +1,8 @@
 
-NO ./images/a.xpm
-SO ./images/aa.xpm
-WE ./images/c.xpm
-EA ./images/ao.xpm
+NO ./images/kaka.xpm
+SO ./images/sama.xpm
+WE ./images/blue.xpm
+EA ./images/wall.xpm
 F  0,225,0
 C  0,0,225
 
