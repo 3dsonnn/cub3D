@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:32:53 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 14:51:23 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static  void    get_first_intersection(t_cub *cub, t_intersection *tmp, int i)
 {
 	tmp->crd.x = floor(cub->player.pos.x / TILE) * TILE;
-    if (FACE_RIGHT(cub->rays[i].angle))
+    if (face_right(cub->rays[i].angle))
         tmp->crd.x += TILE;
     tmp->crd.y = cub->player.pos.y + ((tmp->crd.x - cub->player.pos.x) * cub->rays[i].tan);
 }
@@ -23,11 +23,11 @@ static  void    get_first_intersection(t_cub *cub, t_intersection *tmp, int i)
 static  void    get_steps(t_cub *cub, t_intersection *tmp, int i)
 {
     tmp->step.x = TILE;
-	if (FACE_LEFT(cub->rays[i].angle))
+	if (!face_right(cub->rays[i].angle))
 		tmp->step.x *= -1;
 	tmp->step.y = TILE * cub->rays[i].tan;
-	if ((FACE_UP(cub->rays[i].angle) && tmp->step.y > 0)
-        || (FACE_DOWN(cub->rays[i].angle) && tmp->step.y < 0))
+	if ((!face_down(cub->rays[i].angle) && tmp->step.y > 0)
+        || (face_down(cub->rays[i].angle) && tmp->step.y < 0))
 		tmp->step.y *= -1;
 }
 
@@ -36,7 +36,7 @@ static  inline  void    get_distance(t_cub *cub, int i)
     if (cub->rays[i].ver.intersected)
         cub->rays[i].ver.dist = sqrt(pow((cub->rays[i].ver.wall.x - cub->player.pos.x), 2) + pow((cub->rays[i].ver.wall.y - cub->player.pos.y), 2));
     else
-        cub->rays[i].ver.dist = -42;
+        cub->rays[i].ver.dist = DBL_MAX;
 }
 
 void    check_vertical_intersection(t_cub *cub, int i)
@@ -46,13 +46,13 @@ void    check_vertical_intersection(t_cub *cub, int i)
     cub->rays[i].ver.intersected = 0;
     get_first_intersection(cub, &tmp, i);
     get_steps(cub, &tmp, i);
-    if (FACE_LEFT(cub->rays[i].angle))
+    if (!face_right(cub->rays[i].angle))
         tmp.crd.x -= 1;
     while (inside_map(cub, tmp.crd.x, tmp.crd.y))
     {
         if (is_wall(cub, tmp.crd.x, tmp.crd.y))
         {
-            if (FACE_LEFT(cub->rays[i].angle))
+            if (!face_right(cub->rays[i].angle))
                 tmp.crd.x += 1;
             cub->rays[i].ver.wall.x = tmp.crd.x;
             cub->rays[i].ver.wall.y = tmp.crd.y;

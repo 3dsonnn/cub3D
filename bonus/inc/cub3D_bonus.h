@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 01:05:02 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:55:47 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,16 @@
 # include "struct_bonus.h"
 # include <errno.h>
 # include <fcntl.h>
+# include <float.h>
 # include <math.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/time.h>
 # include <unistd.h>
 
-# define TILE 64
-
-# define DEG_TO_RAD(angle) ((angle) * (M_PI / 180.0))
-# define FOV DEG_TO_RAD(120)
-# define SPEED 3.0
-
-# define FACE_DOWN(angle) ((angle) > 0 && (angle) < M_PI)
-# define FACE_UP(angle) (!(FACE_DOWN(angle)))
-# define FACE_RIGHT(angle) ((angle) < M_PI_2 || (angle) > (3 * M_PI_2))
-# define FACE_LEFT(angle) (!(FACE_RIGHT(angle)))
+# define TILE	64
+# define ROT	0.1
+# define SPEED	5.0
+# define FOV	2.094395102393195
 
 # define ESC 65307
 # define AKEY 97
@@ -81,11 +74,12 @@ void		init_mlx(t_cub *cub, int i);
 extern int	my_mlx_get_rgb_color(int r, int g, int b);
 void		my_mlx_free(t_cub *cub, char *message, t_plane flag);
 extern void	my_mlx_pixel_put(t_img *image, int x, int y, int color);
+extern int			my_mlx_get_pixel(t_img *image, int x, int y);
 
 //  PLAYER
 void		init_player(t_cub *cub);
-void		rotate_player(t_cub *cub, int flag);
-void		move_player(t_cub *cub, t_dpoint new_pos, t_plane flag);
+void        rotate_player(t_cub *cub, double angle_delta);
+void	    move_player(t_cub *cub, double forward, double strafe, t_dpoint new_pos);
 
 //  RAYS
 extern void	init_rays(t_cub *cub);
@@ -94,18 +88,22 @@ void		check_horizontal_intersection(t_cub *cub, int i);
 void		check_vertical_intersection(t_cub *cub, int i);
 int			is_wall(t_cub *cub, double x, double y);
 int			inside_map(t_cub *cub, double x, double y);
+extern int			face_down(double angle);
+extern int			face_right(double angle);
+extern t_texture	*get_texture(t_cub *cub, double angle, t_point dir);
 
 //  CUB3D
 void		cub3D(t_cub *cub);
 
 // PAINTING
-void		paint(t_cub *cub, int i);
+void				paint(t_cub *cub, int i, int j, t_point pixel);
 
 //  UTILS
 double		ft_normalizer(double angle);
 void		exit_error(char *message, t_scene *scene);
 void		bresenham_circle(t_cub *cub, int cx, int cy, int radius);
 void		bresenham_line(t_cub *cub, t_plane crd, t_point dist, t_point dir);
+void        free_tiles(t_tile ***tiles, int i, int size);
 
 //  T_ROW
 t_rows		*new_row(char *str);

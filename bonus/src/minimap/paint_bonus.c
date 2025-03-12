@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 00:56:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 19:25:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ void	paint_minimap_tile(t_cub *cub, int i, int j, int color)
 	int	y0;
 	int	y;
 
-	y0 = i * cub->minimap.tilesize;
-	x = (j + 1) * cub->minimap.tilesize;
-	y = (i + 1) * cub->minimap.tilesize;
+	y0 = i * cub->minimap.tilesize + 10;
+	x = (j + 1) * cub->minimap.tilesize + 10;
+	y = (i + 1) * cub->minimap.tilesize + 10;
 	while (y0 < y)
 	{
-		x0 = j * cub->minimap.tilesize;
+		x0 = j * cub->minimap.tilesize + 10;
 		while (x0 < x)
 		{
-			if (x0 == j * cub->minimap.tilesize || x0 == x - 1 || y0 == i
-				* cub->minimap.tilesize || y0 == y - 1)
-				my_mlx_pixel_put(&cub->img, x0, y0, 0xFFFFFF);
-			else
+			// if (x0 == j * cub->minimap.tilesize || x0 == x - 1 || y0 == i
+			// 	* cub->minimap.tilesize || y0 == y - 1)
+			// 	my_mlx_pixel_put(&cub->img, x0, y0, 0xFFFFFF);
+			// else
 				my_mlx_pixel_put(&cub->img, x0, y0, color);
 			x0++;
 		}
