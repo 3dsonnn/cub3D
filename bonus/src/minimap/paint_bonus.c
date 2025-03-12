@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 19:25:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 20:27:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	paint_minimap_tile(t_cub *cub, int i, int j, int color)
 		x0 = j * cub->minimap.tilesize + 10;
 		while (x0 < x)
 		{
-			// if (x0 == j * cub->minimap.tilesize || x0 == x - 1 || y0 == i
-			// 	* cub->minimap.tilesize || y0 == y - 1)
-			// 	my_mlx_pixel_put(&cub->img, x0, y0, 0xFFFFFF);
-			// else
+			if (x0 == j * cub->minimap.tilesize || x0 == x - 1 || y0 == i
+				* cub->minimap.tilesize || y0 == y - 1)
+				my_mlx_pixel_put(&cub->img, x0, y0, 0xFFFFFF);
+			else
 				my_mlx_pixel_put(&cub->img, x0, y0, color);
 			x0++;
 		}
@@ -44,11 +44,11 @@ void	paint_obx(t_cub *cub, t_tile *topleft)
 	t_point pos;
 
 	pos = (t_point){-1, -1};
-	while (++(pos.y) < 11)
+	while (++(pos.y) < cub->minimap.bounds.y + 1)
 	{
 		pos.x = -1;
 		tmp = topleft;
-		while (++(pos.x) < 11)
+		while (++(pos.x) < cub->minimap.bounds.x + 1)
 		{
 			if (tmp->id == ' ')
 				;

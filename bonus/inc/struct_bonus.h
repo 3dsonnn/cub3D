@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 14:59:50 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 20:01:40 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_tile
 typedef struct s_mmap
 {
 	int				box;
+	t_point			bounds;
 	int				tilesize;
 	t_tile			*cur;
 	t_tile			*corners[4];

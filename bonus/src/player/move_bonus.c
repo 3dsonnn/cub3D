@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 19:08:07 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 20:08:48 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static void	update_cur_tile(t_cub *cub, double x, double y)
 	cub->minimap.cur = &cub->minimap.tiles[i][j];
 	cub->minimap.cur->id = 'C';
 	cub->minimap.cur->color = RED;
-	update_obx(cub, cub->minimap.cur, (t_plane){0, 0, 0, 0}, (t_iter){-1, -1,
-		-1, -1, -1, -1});
+	update_obx(cub);
 }
 
 void	move_player(t_cub *cub, double forward, double strafe, t_dpoint new_pos)
