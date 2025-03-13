@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 23:47:47 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 08:49:44 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ void				check_starting_position(t_scene *scene, t_map *map, int i,
 						int j);
 
 // MINIMAP
-void				minimap(t_cub *cub, int i, int j);
+void				minimap(t_cub *cub);
 void				set_tiles(t_cub *cub, int i, int j);
 void				link_tiles(t_cub *cub, int i, int j);
 void				init_minimap(t_cub *cub, int i, int j);
-void				paint_obx(t_cub *cub, t_tile *topleft);
+void				paint_obx(t_cub *cub, t_tile *topleft, t_point *minip);
 void				paint_minimap_tile(t_cub *cub, int i, int j, int color);
 void				update_obx(t_cub *cub);
+void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
@@ -103,7 +104,7 @@ void				paint(t_cub *cub, int i, int j, t_point pixel);
 //  UTILS
 double				ft_normalizer(double angle);
 void				exit_error(char *message, t_scene *scene);
-void				bresenham_circle(t_cub *cub, int cx, int cy, int radius);
+void				bresenham_circle(t_img *img, int cx, int cy, int radius);
 void				bresenham_line(t_bresenham_line line);
 void				free_tiles(t_tile ***tiles, int i, int size);
 
