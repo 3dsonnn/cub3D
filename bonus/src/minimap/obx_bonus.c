@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:51:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 22:37:53 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 10:59:01 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 static void	edge_cases(t_cub *cub, t_plane plane)
 {
-	if (plane.x - 10 > 0)
+	if (!cub->minimap.corners[TOPRIGHT]->right && (plane.x - 10) >= 0)
 	{
-		if (!cub->minimap.corners[TOPRIGHT]->right)
-			cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[plane.y0][plane.x
-				- 10];
-		if (!cub->minimap.corners[BOTTRIGHT]->right)
-			cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[cub->minimap.corners[TOPLEFT]->crd.y][plane.x
-				- 10];
+		cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[plane.y0][plane.x
+			- 10];
 		cub->minimap.bounds.x = 10;
 	}
-	if (!cub->minimap.corners[BOTTLEFT]->down && (plane.y - 10) > 0)
+	if (!cub->minimap.corners[BOTTLEFT]->down && (plane.y - 10) >= 0)
 	{
 		cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[plane.y
 			- 10][plane.x0];
 		cub->minimap.bounds.y = 10;
+	}
+	if (!cub->minimap.corners[BOTTRIGHT]->right && (plane.x - 10) >= 0)
+	{
+		cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[cub->minimap.corners[TOPLEFT]->crd.y][plane.x
+			- 10];
+		cub->minimap.bounds.x = 10;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 22:35:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 09:27:05 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,19 @@ typedef struct s_bresenham_line
 	t_point			dir;
 	int				error;
 	int				updated_error;
+	int				color;
 	t_img			*img;
 }					t_bresenham_line;
+
+typedef struct s_bresenham_circle
+{
+	t_point			center;
+	t_point			crd;
+	int				radius;
+	int				decision;
+	int				color;
+	t_img			*img;
+}					t_bresenham_circle;
 
 typedef struct s_texture
 {

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 08:49:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 10:39:45 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ void	paint_obx(t_cub *cub, t_tile *topleft, t_point *minip)
 		tmp = topleft;
 		while (++(pos.x) < cub->minimap.bounds.x + 1)
 		{
-			if (tmp->id == ' ')
-				;
-			else
-				paint_minimap_tile(cub, pos.y, pos.x, tmp->color);
 			if (tmp->id == 'C')
 			{
 				minip->x = pos.x * cub->minimap.tilesize + 10;
 				minip->y = pos.y * cub->minimap.tilesize + 10;
 			}
+			if (tmp->id == ' ')
+				;
+			else
+				paint_minimap_tile(cub, pos.y, pos.x, tmp->color);
 			tmp = tmp->right;
 		}
 		topleft = topleft->down;

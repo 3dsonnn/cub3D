@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 08:49:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 09:39:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void				paint(t_cub *cub, int i, int j, t_point pixel);
 //  UTILS
 double				ft_normalizer(double angle);
 void				exit_error(char *message, t_scene *scene);
-void				bresenham_circle(t_img *img, int cx, int cy, int radius);
+void				bresenham_circle(t_bresenham_circle circle);
 void				bresenham_line(t_bresenham_line line);
 void				free_tiles(t_tile ***tiles, int i, int size);
 

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 07:48:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 08:43:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 09:40:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,26 @@ static inline int	map(int old_value, int old_limits[2], int new_limits[2])
 	return ((int)(new_limits[0] + ratio * new_range));
 }
 
+static inline void	init_circle(t_bresenham_circle *circle, int cx, int cy,
+		int radius)
+{
+	circle->color = RED;
+	circle->center.x = cx;
+	circle->center.y = cy;
+	circle->radius = radius;
+	circle->crd.x = -1;
+	circle->crd.y = radius;
+	circle->decision = 3 - 2 * radius;
+}
+
 void	miniplayer(t_cub *cub, t_point base, t_point tile_min)
 {
 	t_bresenham_line	line;
+	t_bresenham_circle	circle;
 
 	line.img = &cub->img;
+	circle.img = &cub->img;
+	line.color = GREEN;
 	line.crd.x0 = map((int)cub->player.pos.x, (int[]){tile_min.x, tile_min.x
 			+ TILE}, (int[]){base.x, base.x + cub->minimap.tilesize});
 	line.crd.y0 = map((int)cub->player.pos.y, (int[]){tile_min.y, tile_min.y
@@ -42,5 +57,6 @@ void	miniplayer(t_cub *cub, t_point base, t_point tile_min)
 	line.crd.y0++;
 	line.crd.y++;
 	bresenham_line(line);
-    bresenham_circle(&cub->img, --line.crd.x0, --line.crd.y0, 3);
+	init_circle(&circle, --line.crd.x0, --line.crd.y0, 3);
+	bresenham_circle(circle);
 }

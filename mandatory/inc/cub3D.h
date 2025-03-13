@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:58:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 10:29:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <unistd.h>
 
 # define TILE	64
-# define ROT	0.1
+# define ROT	0.05
 # define SPEED	5.0
 # define FOV	2.094395102393195
 
