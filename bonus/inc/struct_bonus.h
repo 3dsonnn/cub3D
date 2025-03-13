@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 20:01:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 22:35:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ typedef struct s_iter
 
 typedef struct s_strs
 {
-	char	*s1;
-	char	*s2;
-	char	*s3;
-	char	*s4;
-	char	*s5;
-	char	*s6;
+	char			*s1;
+	char			*s2;
+	char			*s3;
+	char			*s4;
+	char			*s5;
+	char			*s6;
 }					t_strs;
 
 typedef struct s_dpoint
@@ -88,6 +88,16 @@ typedef struct s_img
 	int				height;
 }					t_img;
 
+typedef struct s_bresenham_line
+{
+	t_plane			crd;
+	t_point			dist;
+	t_point			dir;
+	int				error;
+	int				updated_error;
+	t_img			*img;
+}					t_bresenham_line;
+
 typedef struct s_texture
 {
 	t_ID			id;
@@ -121,20 +131,20 @@ typedef struct s_scene
 
 typedef struct s_col
 {
-	double		dist;
-	int			height;
-	int			top;
-	int			bot;
-}				t_col;
+	double			dist;
+	int				height;
+	int				top;
+	int				bot;
+}					t_col;
 
 typedef struct s_intersection
 {
-	double		dist;
-	t_dpoint	step;
-	t_dpoint	crd;
-	t_dpoint	wall;
-	int			intersected;
-}				t_intersection;
+	double			dist;
+	t_dpoint		step;
+	t_dpoint		crd;
+	t_dpoint		wall;
+	int				intersected;
+}					t_intersection;
 
 typedef struct s_ray
 {
@@ -148,7 +158,7 @@ typedef struct s_ray
 	t_col			col;
 	t_texture		*texture;
 }					t_ray;
-	
+
 typedef struct s_player
 {
 	t_dpoint		pos;

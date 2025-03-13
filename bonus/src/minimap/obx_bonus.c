@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:51:48 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 20:27:17 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 22:37:53 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,19 @@ static void	edge_cases(t_cub *cub, t_plane plane)
 	if (plane.x - 10 > 0)
 	{
 		if (!cub->minimap.corners[TOPRIGHT]->right)
-        {
 			cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[plane.y0][plane.x
 				- 10];
-            cub->minimap.bounds.x = 10;
-        }
 		if (!cub->minimap.corners[BOTTRIGHT]->right)
-        {
 			cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[cub->minimap.corners[TOPLEFT]->crd.y][plane.x
 				- 10];
-            cub->minimap.bounds.x = 10;
-        }
+		cub->minimap.bounds.x = 10;
 	}
 	if (!cub->minimap.corners[BOTTLEFT]->down && (plane.y - 10) > 0)
-    {
+	{
 		cub->minimap.corners[TOPLEFT] = &cub->minimap.tiles[plane.y
 			- 10][plane.x0];
-        cub->minimap.bounds.x = 10;
-    }
+		cub->minimap.bounds.y = 10;
+	}
 }
 
 static t_plane	get_indexes(t_cub *cub, t_tile *cur, t_tile *tmp[4],
@@ -68,7 +63,7 @@ void	update_obx(t_cub *cub)
 	cub->minimap.corners[TOPRIGHT] = &cub->minimap.tiles[plane.y0][plane.x];
 	cub->minimap.corners[BOTTLEFT] = &cub->minimap.tiles[plane.y][plane.x0];
 	cub->minimap.corners[BOTTRIGHT] = &cub->minimap.tiles[plane.y][plane.x];
-    cub->minimap.bounds.x = plane.x - plane.x0;
-    cub->minimap.bounds.y = plane.y - plane.y0;
+	cub->minimap.bounds.x = abs(plane.x - plane.x0);
+	cub->minimap.bounds.y = abs(plane.y - plane.y0);
 	edge_cases(cub, plane);
 }

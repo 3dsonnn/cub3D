@@ -6,52 +6,45 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:28:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:33:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 02:21:13 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	init_line(t_plane crd, t_point *dist, t_point *dir, int *error)
+static void	init_line(t_bresenham_line *line)
 {
-	dist->x = abs(crd.x - crd.x0);
-	dist->y = -abs(crd.y - crd.y0);
-	if (crd.x0 < crd.x)
-		dir->x = 1;
+	line->dist.x = abs(line->crd.x - line->crd.x0);
+	line->dist.y = -abs(line->crd.y - line->crd.y0);
+	if (line->crd.x0 < line->crd.x)
+		line->dir.x = 1;
 	else
-		dir->x = -1;
-	if (crd.y0 < crd.y)
-		dir->y = 1;
+		line->dir.x = -1;
+	if (line->crd.y0 < line->crd.y)
+		line->dir.y = 1;
 	else
-		dir->y = -1;
-	*error = dist->x + dist->y;
+		line->dir.y = -1;
+	line->error = line->dist.x + line->dist.y;
 }
 
-void	bresenham_line(t_cub *cub, t_plane crd, t_point dist, t_point dir)
+void	bresenham_line(t_bresenham_line line)
 {
-	int	error;
-	int	updated_error;
-
-	init_line(crd, &dist, &dir, &error);
+	init_line(&line);
 	while (1)
 	{
-		my_mlx_pixel_put(&cub->img, crd.x0, crd.y0, 0xFF0000);
-		if (crd.x0 == crd.x && crd.y0 == crd.y)
+		my_mlx_pixel_put(line.img, line.crd.x0, line.crd.y0, GREEN);
+		if (line.crd.x0 == line.crd.x && line.crd.y0 == line.crd.y)
 			break ;
-		updated_error = 2 * error;
-		if (updated_error >= dist.y)
+		line.updated_error = 2 * line.error;
+		if (line.updated_error >= line.dist.y)
 		{
-			if (crd.x0 == crd.x)
-				break ;
-			error += dist.y;
-			crd.x0 += dir.x;
+			line.error += line.dist.y;
+			line.crd.x0 += line.dir.x;
 		}
-		if (updated_error <= dist.x)
+		if (line.updated_error <= line.dist.x)
 		{
-			if (crd.y0 == crd.y)
-				break ;
-			error += dist.x;
-			crd.y0 += dir.y;
+			line.error += line.dist.x;
+			line.crd.y0 += line.dir.y;
 		}
 	}
 }

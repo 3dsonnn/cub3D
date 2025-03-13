@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 20:27:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 23:58:48 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	paint_minimap_tile(t_cub *cub, int i, int j, int color)
 		x0 = j * cub->minimap.tilesize + 10;
 		while (x0 < x)
 		{
-			if (x0 == j * cub->minimap.tilesize || x0 == x - 1 || y0 == i
-				* cub->minimap.tilesize || y0 == y - 1)
-				my_mlx_pixel_put(&cub->img, x0, y0, 0xFFFFFF);
+			if (x0 == j * cub->minimap.tilesize + 10 || x0 == x - 1 || y0 == i
+				* cub->minimap.tilesize + 10 || y0 == y - 1)
+				my_mlx_pixel_put(&cub->img, x0, y0, WHITE);
 			else
 				my_mlx_pixel_put(&cub->img, x0, y0, color);
 			x0++;

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 20:09:06 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/12 23:47:47 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <unistd.h>
 
 # define TILE 64
-# define ROT 0.1
+# define ROT 0.05
 # define SPEED 5.0
 # define FOV 2.094395102393195
 
@@ -104,8 +104,7 @@ void				paint(t_cub *cub, int i, int j, t_point pixel);
 double				ft_normalizer(double angle);
 void				exit_error(char *message, t_scene *scene);
 void				bresenham_circle(t_cub *cub, int cx, int cy, int radius);
-void				bresenham_line(t_cub *cub, t_plane crd, t_point dist,
-						t_point dir);
+void				bresenham_line(t_bresenham_line line);
 void				free_tiles(t_tile ***tiles, int i, int size);
 
 //  T_ROW

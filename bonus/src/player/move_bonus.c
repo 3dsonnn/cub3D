@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 20:08:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 02:20:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ static void	update_cur_tile(t_cub *cub, double x, double y)
 	i = (int)floor(y / TILE);
 	j = (int)floor(x / TILE);
 	cub->minimap.cur->id = '0';
-	cub->minimap.cur->color = WHITE;
 	cub->minimap.cur = &cub->minimap.tiles[i][j];
 	cub->minimap.cur->id = 'C';
-	cub->minimap.cur->color = RED;
 	update_obx(cub);
 }
 
