@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:22:11 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:29:09 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:01:48 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	check_texture_aux(t_scene *scene, char *ID)
 				(t_strs){"Invalid path to the ", ID, " texture on line ",
 				scene->line_nbr_str, NULL, NULL}), scene);
 	}
-	if (ft_strlen(scene->mtx[1]) < 4 || ft_strncmp(scene->mtx[1]
-			+ ft_strlen(scene->mtx[1]) - 4, ".xpm", 4))
+	if (ft_strlen(scene->mtx[1]) < 4 || ft_strcmp(scene->mtx[1]
+			+ ft_strlen(scene->mtx[1]) - 4, ".xpm"))
 	{
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Invalid extension on the path to the ", ID,
