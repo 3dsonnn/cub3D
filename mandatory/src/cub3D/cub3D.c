@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:27:02 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 09:17:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static void	get_column(t_cub *cub, int i)
 	cub->rays[i].col.dist = cub->rays[i].dist
 		* cos(ft_normalizer(cub->rays[i].angle - cub->player.angle));
 	cub->rays[i].col.height = (int)(TILE / cub->rays[i].col.dist * cub->ppd);
-	cub->rays[i].col.top = (cub->img.height - cub->rays[i].col.height) / 2;
+	cub->rays[i].col.top = (int)(cub->img.height - cub->rays[i].col.height) / 2;
 	// if (cub->rays[i].col.top < 0)
 	//     cub->rays[i].col.top = 0;
-	cub->rays[i].col.bot = (cub->img.height + cub->rays[i].col.height) / 2;
+	cub->rays[i].col.bot = (int)(cub->img.height + cub->rays[i].col.height) / 2;
 	if (cub->rays[i].col.bot > cub->img.height)
 		cub->rays[i].col.bot = cub->img.height;
 }
