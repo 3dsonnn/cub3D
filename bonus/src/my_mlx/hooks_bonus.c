@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 16:57:52 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/14 21:00:39 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,17 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 	return (0);
 }
 
+int	my_mlx_mouse_motion(int x, int y, t_cub *cub)
+{
+	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
+	ft_printf("Mouse event: x=%d, y=%d\n", x, y);
+	cub3D(cub);
+	return(0);
+}
+
 void	my_mlx_hook(t_cub *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 0, my_mlx_key_press, cub);
 	mlx_hook(cub->win, 17, 1L << 17, my_mlx_close, cub);
+	mlx_hook(cub->win, 6, 1L << 6, my_mlx_mouse_motion, cub);
 }

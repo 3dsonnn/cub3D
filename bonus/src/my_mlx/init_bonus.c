@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:03:50 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/14 23:12:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void	init_mlx(t_cub *cub, int i)
 			(t_plane){-1, 4, 1, 1});
 	}
 	cub->img.line_len /= 4;
+	mlx_mouse_hide(cub->mlx, cub->win);
 }

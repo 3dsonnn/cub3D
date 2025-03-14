@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 09:27:05 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:16:05 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_bresenham_circle
 {
 	t_point			center;
 	t_point			crd;
+	t_plane			axis;
 	int				radius;
 	int				decision;
 	int				color;

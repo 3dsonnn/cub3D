@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:28:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 09:39:42 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/13 16:15:48 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,47 @@ void	bresenham_line(t_bresenham_line line)
 	}
 }
 
+static	void	paint_loop(t_img *img, t_point x_axis, int y, int color)
+{
+	int	i;
+
+	i = x_axis.x;
+	while (i <= x_axis.y)
+	{
+        my_mlx_pixel_put(img, i, y, color);
+		i++;
+	}
+}
+
 void	bresenham_circle(t_bresenham_circle circle)
 {
     while (++circle.crd.x <= circle.crd.y)
     {
         // Draw horizontal lines for each y level using symmetry
-        int y_pos = circle.center.y + circle.crd.y;
-        int y_neg = circle.center.y - circle.crd.y;
-        int x_left = circle.center.x - circle.crd.x;
-        int x_right = circle.center.x + circle.crd.x;
+		circle.axis.y = circle.center.y + circle.crd.y;
+        circle.axis.y0 = circle.center.y - circle.crd.y;
+        circle.axis.x0 = circle.center.x - circle.crd.x;
+        circle.axis.x = circle.center.x + circle.crd.x;
         
         // Fill from x_left to x_right at y_pos
-        for (int i = x_left; i <= x_right; i++)
-                my_mlx_pixel_put(circle.img, i, y_pos, circle.color);
+		paint_loop(circle.img, (t_point){circle.axis.x0, circle.axis.x}, circle.axis.y, circle.color);
 
         // Fill from x_left to x_right at y_neg (if different from y_pos)
-        if (y_neg != y_pos)
-            for (int i = x_left; i <= x_right; i++)
-                    my_mlx_pixel_put(circle.img, i, y_neg, circle.color);
+		if (circle.axis.y0 != circle.axis.y)
+			paint_loop(circle.img, (t_point){circle.axis.x0, circle.axis.x}, circle.axis.y0, circle.color);
 
         // For the swapped octants (when x and y are swapped)
-        y_pos = circle.center.y + circle.crd.x;
-        y_neg = circle.center.y - circle.crd.x;
-        x_left = circle.center.x - circle.crd.y;
-        x_right = circle.center.x + circle.crd.y;
+		circle.axis.y = circle.center.y + circle.crd.x;
+        circle.axis.y0 = circle.center.y - circle.crd.x;
+        circle.axis.x0 = circle.center.x - circle.crd.y;
+        circle.axis.x = circle.center.x + circle.crd.y;
 
         // Fill from x_left to x_right at y_pos
-        for (int i = x_left; i <= x_right; i++)
-                my_mlx_pixel_put(circle.img, i, y_pos, circle.color);
+		paint_loop(circle.img, (t_point){circle.axis.x0, circle.axis.x}, circle.axis.y, circle.color);
 
         // Fill from x_left to x_right at y_neg (if different)
-        if (y_neg != y_pos)
-            for (int i = x_left; i <= x_right; i++)
-                    my_mlx_pixel_put(circle.img, i, y_neg, circle.color);
+		if (circle.axis.y0 != circle.axis.y)
+			paint_loop(circle.img, (t_point){circle.axis.x0, circle.axis.x}, circle.axis.y0, circle.color);
 
         // Update decision parameter
         if (circle.decision < 0)
