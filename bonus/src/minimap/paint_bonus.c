@@ -6,11 +6,33 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 16:16:29 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/15 07:06:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
+
+int blend_colors(int bg, int fg, float alpha)
+{
+    int r, g, b;
+    
+    // Extract RGB components
+    int bg_r = (bg >> 16) & 0xFF;
+    int bg_g = (bg >> 8) & 0xFF;
+    int bg_b = bg & 0xFF;
+
+    int fg_r = (fg >> 16) & 0xFF;
+    int fg_g = (fg >> 8) & 0xFF;
+    int fg_b = fg & 0xFF;
+
+    // Apply blending formula
+    r = (int)((fg_r * alpha) + (bg_r * (1 - alpha)));
+    g = (int)((fg_g * alpha) + (bg_g * (1 - alpha)));
+    b = (int)((fg_b * alpha) + (bg_b * (1 - alpha)));
+
+    // Reassemble blended color
+    return (r << 16) | (g << 8) | b;
+}
 
 void	paint_minimap_tile(t_cub *cub, int i, int j, int color)
 {
@@ -31,7 +53,7 @@ void	paint_minimap_tile(t_cub *cub, int i, int j, int color)
 				* cub->minimap.tilesize + 10 || y0 == y - 1)
 				my_mlx_pixel_put(&cub->img, x0, y0, WHITE);
 			else
-				my_mlx_pixel_put(&cub->img, x0, y0, color);
+				my_mlx_pixel_put(&cub->img, x0, y0, blend_colors(color, my_mlx_get_pixel(&cub->img, x0, y0), 0.5));
 			x0++;
 		}
 		y0++;
