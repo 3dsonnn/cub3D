@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 17:19:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/15 03:20:05 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 	init_player(&cub);
 	cub3D(&cub);
 	my_mlx_hook(&cub);
+	my_mlx_mouse_motion(&cub.mouse);
 	mlx_loop(cub.mlx);
 	return (0);
 }

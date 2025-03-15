@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 09:39:58 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/15 03:24:34 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../../libft/libft.h"
 # include "mlx.h"
 # include "struct_bonus.h"
+# include <X11/Xlib.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <float.h>
@@ -23,6 +24,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <pthread.h>
 
 # define TILE 64
 # define ROT 0.05
@@ -72,6 +74,8 @@ void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
+int					my_mlx_key_press(int keycode, t_cub *cub);
+void				my_mlx_mouse_motion(t_mouse_motion *mouse);
 void				init_mlx(t_cub *cub, int i);
 extern int			my_mlx_get_rgb_color(int r, int g, int b);
 void				my_mlx_free(t_cub *cub, char *message, t_plane flag);

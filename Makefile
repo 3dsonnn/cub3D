@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/13 07:49:17 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/15 02:36:33 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/my_mlx/init_bonus.c 							\
 			bonus/src/my_mlx/hooks_bonus.c 							\
 			bonus/src/my_mlx/utils_bonus.c 							\
+			bonus/src/my_mlx/my_mlx_mouse_motion_bonus.c			\
 			bonus/src/cub3D/cub3D_bonus.c 							\
 			bonus/src/cub3D/painting_bonus.c 						\
 			bonus/src/player/init_bonus.c 							\

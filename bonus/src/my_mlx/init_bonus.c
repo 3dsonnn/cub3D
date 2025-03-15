@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/14 23:12:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/15 03:37:07 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,8 @@ static void	my_mlx_xpm_file_to_image(t_cub *cub, int i)
 	}
 }
 
-void	init_mlx(t_cub *cub, int i)
+static	void	my_mlx_new_image(t_cub *cub)
 {
-	cub->mlx = mlx_init();
-	if (!cub->mlx)
-		exit_error("Failed to initialize mlx", &cub->scene);
-	my_mlx_xpm_file_to_image(cub, -1);
-	mlx_get_screen_size(cub->mlx, &cub->img.width, &cub->img.height);
-	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height,
-			"cub3D");
-	if (!cub->win)
-		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
 	cub->img.img = mlx_new_image(cub->mlx, cub->img.width, cub->img.height);
 	if (!cub->img.img)
 		my_mlx_free(cub, "Failed to create the main image", (t_plane){-1, 4, 1,
@@ -78,5 +69,22 @@ void	init_mlx(t_cub *cub, int i)
 			(t_plane){-1, 4, 1, 1});
 	}
 	cub->img.line_len /= 4;
+}
+
+void	init_mlx(t_cub *cub, int i)
+{
+	if (!XInitThreads())
+		exit_error("Failed to initialize X11 threads", &cub->scene);
+	cub->mlx = mlx_init();
+	if (!cub->mlx)
+			exit_error("Failed to initialize mlx", &cub->scene);
+	my_mlx_xpm_file_to_image(cub, -1);
+	mlx_get_screen_size(cub->mlx, &cub->img.width, &cub->img.height);
+	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height,
+			"cub3D");
+	if (!cub->win)
+		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
+	my_mlx_new_image(cub);
 	mlx_mouse_hide(cub->mlx, cub->win);
+	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
 }
