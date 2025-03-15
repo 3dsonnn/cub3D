@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 03:00:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/15 04:20:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static void	check_map(t_scene *scene, t_map *map)
 
 void	checks(t_cub *cub, int ac, char **av)
 {
-	cub->mouse.cub = cub;
 	cub->scene.tmp = NULL;
 	cub->scene.mtx = NULL;
 	cub->scene.line = NULL;

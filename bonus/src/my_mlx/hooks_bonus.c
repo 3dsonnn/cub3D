@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 03:29:36 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/15 04:26:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	my_mlx_close(t_cub *cub)
 	int	i;
 
 	i = -1;
-	cub->mouse.exit = 1;
 	free_tiles(&cub->minimap.tiles, -1, cub->scene.map.size.y);
 	while (++i < 4)
 		mlx_destroy_image(cub->mlx, cub->scene.textures[i].img.img);
@@ -26,11 +25,10 @@ static int	my_mlx_close(t_cub *cub)
 	mlx_destroy_display(cub->mlx);
 	free(cub->rays);
 	free(cub->mlx);
-	// pthread_detach(cub->mouse.thread);
 	exit(0);
 }
 
-int	my_mlx_key_press(int keycode, t_cub *cub)
+static	int	my_mlx_key_press(int keycode, t_cub *cub)
 {
 	if (keycode == ESC)
 		my_mlx_close(cub);
@@ -52,8 +50,24 @@ int	my_mlx_key_press(int keycode, t_cub *cub)
 	return (0);
 }
 
+static	int	my_mlx_mouse_motion(t_cub *cub)
+{
+	t_point	crd;
+
+	mlx_mouse_get_pos(cub->mlx, cub->win, &crd.x, &crd.y);
+	if (crd.x != (int)(cub->img.width / 2))
+	{
+		if (crd.x < (int)(cub->img.width / 2))
+			my_mlx_key_press(LEFT, cub);
+		else
+			my_mlx_key_press(RIGHT, cub);
+		mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
+	}
+}
+
 void	my_mlx_hook(t_cub *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 0, my_mlx_key_press, cub);
 	mlx_hook(cub->win, 17, 1L << 17, my_mlx_close, cub);
+	mlx_loop_hook(cub->mlx, my_mlx_mouse_motion, cub);
 }

@@ -6,16 +6,13 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 03:30:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/15 04:20:09 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_BONUS_H
 # define STRUCT_BONUS_H
 
-# include <stdatomic.h>
-
-typedef	struct s_cub t_cub;
 typedef enum e_ID
 {
 	NO,
@@ -203,15 +200,7 @@ typedef struct s_mmap
 	t_tile			**tiles;
 }					t_mmap;
 
-typedef struct s_mouse_motion
-{
-	pthread_t		thread;
-	t_cub			*cub;
-	t_point			crd;
-	atomic_int		exit;
-}					t_mouse_motion;
-
-struct s_cub
+typedef struct s_cub
 {
 	void			*mlx;
 	void			*win;
@@ -220,8 +209,7 @@ struct s_cub
 	t_player		player;
 	t_ray			*rays;
 	t_mmap			minimap;
-	t_mouse_motion	mouse;
 	double			ppd;
-};
+}					t_cub;
 
 #endif
