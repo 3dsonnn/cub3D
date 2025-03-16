@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 10:29:50 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 09:16:21 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define ROT	0.05
 # define SPEED	5.0
 # define FOV	2.094395102393195
+# define PLAYER_RADIUS 10
 
 # define ESC 65307
 # define AKEY 97

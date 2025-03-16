@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 19:51:36 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 09:16:40 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 # include <string.h>
 # include <unistd.h>
 
-# define TILE 64
-# define ROT 0.05
-# define SPEED 5.0
-# define FOV 2.094395102393195
+# define TILE	64
+# define ROT	0.05
+# define SPEED	5.0
+# define FOV	2.094395102393195
+# define PLAYER_RADIUS 10
 
+# define SPACE 32
+# define CTRL 65507
 # define ESC 65307
 # define AKEY 97
 # define DKEY 100

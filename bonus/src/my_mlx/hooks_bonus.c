@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 04:26:50 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 08:21:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static	int	my_mlx_key_press(int keycode, t_cub *cub)
 	else
 		return (0);
 	cub3D(cub);
-	return (0);
 }
 
 static	int	my_mlx_mouse_motion(t_cub *cub)
