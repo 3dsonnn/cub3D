@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 19:17:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 20:13:44 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static	int	my_mlx_key_press(int keycode, t_cub *cub)
 		rotate_player(cub, -ROT);
 	else if (keycode == ALT)
 		alt(cub);
+	else if (keycode == SPACE)
+		space(cub);
 	else
 		return (0);
 	cub3D(cub);
@@ -55,7 +57,7 @@ static	int	my_mlx_mouse_motion(t_cub *cub)
 {
 	t_point	crd;
 
-    if (cub->alt)
+    if (cub->hooks.alt)
 		return (0);
 	mlx_mouse_get_pos(cub->mlx, cub->win, &crd.x, &crd.y);
 	if (crd.x != (int)(cub->img.width / 2))

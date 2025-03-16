@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 19:07:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 20:03:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,13 @@ typedef struct s_mmap
 	t_tile			**tiles;
 }					t_mmap;
 
+typedef	struct s_hook
+{
+	int				alt;
+	int				space;
+}	t_hook;
+
+
 typedef struct s_cub
 {
 	void			*mlx;
@@ -209,8 +216,8 @@ typedef struct s_cub
 	t_player		player;
 	t_ray			*rays;
 	t_mmap			minimap;
+	t_hook			hooks;
 	double			ppd;
-	int				alt;
 }					t_cub;
 
 #endif

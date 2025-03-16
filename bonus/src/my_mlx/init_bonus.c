@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 19:57:07 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 20:04:33 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	init_mlx(t_cub *cub, int i)
 	if (!cub->win)
 		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
 	my_mlx_new_image(cub);
+	mlx_do_key_autorepeatoff(cub->mlx);
 	mlx_mouse_hide(cub->mlx, cub->win);
 	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
 }

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 19:22:52 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 20:08:45 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
 extern void			alt(t_cub *cub);
+extern void			space(t_cub *cub);
 void				init_mlx(t_cub *cub, int i);
 extern int			my_mlx_get_rgb_color(int r, int g, int b);
 int					my_mlx_get_transparent_color(int back, int fore,
