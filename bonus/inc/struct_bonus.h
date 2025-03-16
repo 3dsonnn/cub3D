@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 04:20:09 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 19:07:03 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ typedef struct s_cub
 	t_ray			*rays;
 	t_mmap			minimap;
 	double			ppd;
+	int				alt;
 }					t_cub;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 10:43:14 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 19:22:52 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@
 # include <string.h>
 # include <unistd.h>
 
-# define TILE	64
-# define ROT	0.05
-# define SPEED	5.0
-# define FOV	2.094395102393195
+# define FONT "-sony-fixed-medium-r-normal--24-240-75-75-c-120-iso8859-1"
+
+# define TILE 64
+# define ROT 0.05
+# define SPEED 5.0
+# define FOV 2.094395102393195
 # define PLAYER_RADIUS 10
 
 # define SPACE 32
+# define ALT 65513
 # define CTRL 65507
 # define ESC 65307
 # define AKEY 97
@@ -75,6 +78,7 @@ void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
+extern void			alt(t_cub *cub);
 void				init_mlx(t_cub *cub, int i);
 extern int			my_mlx_get_rgb_color(int r, int g, int b);
 int					my_mlx_get_transparent_color(int back, int fore,
