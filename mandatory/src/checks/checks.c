@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 13:15:06 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 10:31:22 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static void	check_map(t_scene *scene, t_map *map)
 {
 	check_map_start(scene, map);
 	fill_map(scene, map);
-	trimap(&map->content, -1, 0, (t_iter){0, 0, 0, 0, 0, 0});
+	map->content = row_to_mtx(map->head);
+	free_rows(&map->head);
 	map->size.x = ft_longestr_mtx(map->content);
 	map->size.y = ft_mtxlen(map->content);
 	fulfill_map(scene, map);
@@ -77,7 +78,7 @@ static void	check_map(t_scene *scene, t_map *map)
 				(t_strs){"Invalid map: too small", NULL, NULL, NULL, NULL,
 				NULL}), scene);
 	check_starting_position(scene, map, -1, -1);
-	is_surrounded(scene, map);
+	is_surrounded(scene, map, (t_point){0, 0});
 }
 
 void	checks(t_cub *cub, int ac, char **av)

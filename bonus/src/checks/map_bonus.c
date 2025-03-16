@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:28:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 10:47:34 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ void	fill_map(t_scene *scene, t_map *map)
 		ft_strfree(&scene->line_nbr_str);
 	}
 	check_map_end(scene);
-	map->content = row_to_mtx(map->head);
-	free_rows(&map->head);
 }
 
 void	check_starting_position(t_scene *scene, t_map *map, int i, int j)
@@ -119,9 +117,7 @@ void	check_starting_position(t_scene *scene, t_map *map, int i, int j)
 			if (ft_strchr("NSEW", map->content[i][j]))
 			{
 				map->start = map->content[i][j];
-				map->content[i][j] = '0';
-				map->spos.x = j;
-				map->spos.y = i;
+				map->spos = (t_point){.x = j, .y = i};
 				flag++;
 			}
 		}

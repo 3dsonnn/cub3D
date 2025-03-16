@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 09:16:21 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/16 10:31:39 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 # include <string.h>
 # include <unistd.h>
 
-# define TILE	64
-# define ROT	0.05
-# define SPEED	5.0
-# define FOV	2.094395102393195
+# define TILE 64
+# define ROT 0.05
+# define SPEED 5.0
+# define FOV 2.094395102393195
 # define PLAYER_RADIUS 10
 
 # define ESC 65307
@@ -50,10 +50,9 @@ char				*skip_empty_lines(t_scene *scene);
 void				fill_map(t_scene *scene, t_map *map);
 void				checks(t_cub *cub, int ac, char **av);
 void				fulfill_map(t_scene *scene, t_map *map);
-void				is_surrounded(t_scene *scene, t_map *map);
+void				is_surrounded(t_scene *scene, t_map *map, t_point iter);
 void				check_duplicate_id(t_scene *scene, char ID);
 void				check_map_start(t_scene *scene, t_map *map);
-void				trimap(char ***map, int begin, int end, t_iter iter);
 char				*get_explicit_error_message(t_scene *scene, t_strs strs);
 void				check_starting_position(t_scene *scene, t_map *map, int i,
 						int j);

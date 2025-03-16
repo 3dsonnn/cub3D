@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/15 04:22:15 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/16 10:48:50 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/checks/checks.c 							\
 		mandatory/src/checks/elements.c 						\
 		mandatory/src/checks/textures.c							\
-		mandatory/src/checks/map_utils.c 						\
 		mandatory/src/checks/is_surrounded.c 					\
 		mandatory/src/checks/utils.c 							\
 		mandatory/src/checks/ceiling_and_floor.c				\
@@ -49,7 +48,6 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/checks/checks_bonus.c 						\
 			bonus/src/checks/elements_bonus.c 						\
 			bonus/src/checks/textures_bonus.c						\
-			bonus/src/checks/map_utils_bonus.c 						\
 			bonus/src/checks/is_surrounded_bonus.c 					\
 			bonus/src/checks/utils_bonus.c 							\
 			bonus/src/checks/ceiling_and_floor_bonus.c				\
