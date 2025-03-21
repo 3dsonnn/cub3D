@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks_bonus_aux.c                                  :+:      :+:    :+:   */
+/*   hooks_aux_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 19:10:28 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 20:13:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/21 23:36:27 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-inline	void	space(t_cub *cub)
+inline void	space(t_cub *cub)
 {
 	if (cub->hooks.space)
 	{
@@ -26,7 +26,7 @@ inline	void	space(t_cub *cub)
 	}
 }
 
-inline	void	alt(t_cub *cub)
+inline void	alt(t_cub *cub)
 {
 	if (cub->hooks.alt)
 	{
