@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 20:08:45 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/21 23:04:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ extern void			alt(t_cub *cub);
 extern void			space(t_cub *cub);
 void				init_mlx(t_cub *cub, int i);
 extern int			my_mlx_get_rgb_color(int r, int g, int b);
+extern void			my_mlx_get_rgb_values(int color, int rgb[3]);
 int					my_mlx_get_transparent_color(int back, int fore,
 						double level);
 void				my_mlx_free(t_cub *cub, char *message, t_plane flag);
