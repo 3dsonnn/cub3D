@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 18:48:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/21 23:11:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void				init_mlx(t_cub *cub, int i);
 extern int			my_mlx_get_rgb_color(int r, int g, int b);
 void				my_mlx_free(t_cub *cub, char *message, t_plane flag);
 extern void			my_mlx_pixel_put(t_img *image, int x, int y, int color);
-extern int			my_mlx_get_pixel(t_img *image, int x, int y);
+extern int			my_mlx_get_pixel(t_img image, int x, int y);
 
 //  PLAYER
 void				init_player(t_cub *cub);

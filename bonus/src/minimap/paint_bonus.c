@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 19:56:14 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/21 23:11:57 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	paint_minimap_tile(t_cub *cub, int i, int j, int color)
 				my_mlx_pixel_put(&cub->img, x0, y0, WHITE);
 			else
 				my_mlx_pixel_put(&cub->img, x0, y0,
-					my_mlx_get_transparent_color(my_mlx_get_pixel(&cub->img, x0,
+					my_mlx_get_transparent_color(my_mlx_get_pixel(cub->img, x0,
 							y0), color, .5));
 			x0++;
 		}

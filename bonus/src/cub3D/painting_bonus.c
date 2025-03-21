@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:34:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 09:18:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/21 23:12:00 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	paint(t_cub *cub, int i, int j, t_point pixel)
 		pixel.y = (cub->rays[j].texture->img.height * (i
 					- cub->rays[j].col.top)) / cub->rays[j].col.height;
 		my_mlx_pixel_put(&cub->img, j, i,
-			my_mlx_get_pixel(&cub->rays[j].texture->img, pixel.x, pixel.y));
+			my_mlx_get_pixel(cub->rays[j].texture->img, pixel.x, pixel.y));
 		i++;
 	}
 	while (i < cub->img.height)

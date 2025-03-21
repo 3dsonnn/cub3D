@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:53:50 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/08 09:50:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/21 23:11:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ inline void	my_mlx_pixel_put(t_img *image, int x, int y, int color)
 	*(image->addr + y * image->line_len + x) = color;
 }
 
-inline int	my_mlx_get_pixel(t_img *image, int x, int y)
+inline int	my_mlx_get_pixel(t_img image, int x, int y)
 {
-	if (!image || x < 0 || x >= image->width || y < 0 || y >= image->height)
+	if (x < 0 || x >= image.width || y < 0 || y >= image.height)
 		return (BLACK);
-	return (*(image->addr + y * image->line_len + x));
+	return (*(image.addr + y * image.line_len + x));
 }
