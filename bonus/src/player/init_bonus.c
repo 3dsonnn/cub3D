@@ -33,4 +33,5 @@ void	init_player(t_cub *cub)
 	cub->player.dir.y = sin(cub->player.angle);
 	cub->player.plane.x = -cub->player.dir.y;
 	cub->player.plane.y = cub->player.dir.x;
+	cub->player.health = 100;
 }

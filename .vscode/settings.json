@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "cub3d_bonus.h": "c",
+        "fcntl.h": "c",
+        "float.h": "c",
+        "stdlib.h": "c"
+    }
+}

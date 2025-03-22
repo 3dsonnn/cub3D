@@ -125,4 +125,6 @@ void				free_rows(t_rows **head);
 char				**row_to_mtx(t_rows *head);
 void				add_row(t_rows **head, t_rows *_new);
 
+void draw_health_bar(void *mlx, void *win, int health,t_cub *cub);
+
 #endif

@@ -34,3 +34,25 @@ void	paint(t_cub *cub, int i, int j, t_point pixel)
 		i++;
 	}
 }
+
+void draw_rect(void *mlx, void *win, int x, int y, int width, int height, int color, t_cub *cub)
+{
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+			my_mlx_pixel_put(&cub->img, x + j, y + i, color);
+        }
+    }
+}
+
+void draw_health_bar(void *mlx, void *win, int health, t_cub *cub) 
+{
+    int bar_width = 400;
+    int bar_height = 40;
+    int x = 20;
+    int y = 900;
+
+    int current_width = (bar_width * health) / 100;
+
+    draw_rect(mlx, win, x, y, bar_width, bar_height, 0x333333, cub);
+    draw_rect(mlx, win, x, y, current_width, bar_height, 0xFF0000, cub);
+}

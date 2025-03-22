@@ -177,6 +177,7 @@ typedef struct s_player
 	t_dplane		dir;
 	t_dpoint		plane;
 	double			angle;
+	int					health;
 }					t_player;
 
 typedef struct s_tile
@@ -218,6 +219,7 @@ typedef struct s_cub
 	t_mmap			minimap;
 	t_hook			hooks;
 	double			ppd;
+	void 			*crosshair;
 }					t_cub;
 
 #endif

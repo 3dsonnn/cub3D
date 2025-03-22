@@ -73,10 +73,16 @@ static	void	my_mlx_new_image(t_cub *cub)
 
 void	init_mlx(t_cub *cub, int i)
 {
+	int	crosshair_height;
+	int crosshair_width;
+
+	crosshair_height = 64;
+	crosshair_width = 64;
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 			exit_error("Failed to initialize mlx", &cub->scene);
 	my_mlx_xpm_file_to_image(cub, -1);
+	cub->crosshair = mlx_xpm_file_to_image(cub->mlx, "./animated_sprites/crosshair2.xpm", &crosshair_width, &crosshair_height);
 	mlx_get_screen_size(cub->mlx, &cub->img.width, &cub->img.height);
 	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height,
 			"cub3D");
