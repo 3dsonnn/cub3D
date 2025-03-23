@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 08:49:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 18:00:59 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void	init_player(t_cub *cub)
 	cub->player.dir.y = sin(cub->player.angle);
 	cub->player.plane.x = -cub->player.dir.y;
 	cub->player.plane.y = cub->player.dir.x;
+	cub->player.idle = true;
+	cub->player.shooting = false;
+	cub->player.recharging = false;
 	mlx_do_key_autorepeatoff(cub->mlx);
 }
