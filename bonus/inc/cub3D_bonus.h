@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 13:04:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 18:56:59 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 # include <fcntl.h>
 # include <float.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/time.h>
 # include <unistd.h>
 
 # define FONT "-sony-fixed-medium-r-normal--24-240-75-75-c-120-iso8859-1"
@@ -139,4 +141,5 @@ void				free_rows(t_rows **head);
 char				**row_to_mtx(t_rows *head);
 void				add_row(t_rows **head, t_rows *_new);
 
+long				get_current_time(void);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 13:06:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 18:12:22 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ typedef enum e_player_img
 	RECHARGING_05,
 	RECHARGING_06,
 	RECHARGING_IDLE,
+	SHOOTING_01,
+	SHOOTING_02,
 	SHELL_01,
 	SHELL_02,
 	SHELL_03,
 	SHELL_04,
 	SHELL_05,
-	SHOOTING_01,
-	SHOOTING_02,
 	SHOOTING_IDLE
 }					t_player_img;
 
@@ -252,7 +252,12 @@ typedef struct s_player
 	t_dpoint		plane;
 	double			angle;
 	t_nbr			health;
+	bool			idle;
+	bool			shooting;
+	bool			recharging;
 	t_img			imgs[20];
+	int current_frame;
+	long last_frame_time;
 }					t_player;
 
 typedef struct s_mmap
