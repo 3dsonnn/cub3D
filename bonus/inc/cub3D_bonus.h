@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 13:04:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 16:31:17 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ extern int			my_mlx_get_pixel(t_img image, int x, int y);
 void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
 						int flag);
 t_img				my_mlx_resize_img(void *mlx, t_img img, t_point new_size);
-void				my_mlx_draw_ret_to_img(t_img *img, t_point crd,
+void				my_mlx_draw_horizontal_lines_to_img(t_img *img, t_point crd,
 						t_point size, int color);
 
 //  PLAYER

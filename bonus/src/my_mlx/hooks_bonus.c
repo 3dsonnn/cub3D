@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 20:13:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 14:08:08 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	my_mlx_close(t_cub *cub)
 		mlx_destroy_image(cub->mlx, cub->scene.textures[i].img.img);
 	mlx_destroy_image(cub->mlx, cub->img.img);
 	mlx_destroy_window(cub->mlx, cub->win);
+	mlx_do_key_autorepeaton(cub->mlx);
 	mlx_destroy_display(cub->mlx);
 	free(cub->rays);
 	free(cub->mlx);
