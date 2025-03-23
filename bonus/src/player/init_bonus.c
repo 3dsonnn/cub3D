@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/12 14:58:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 08:49:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	init_player(t_cub *cub)
 {
 	cub->player.pos.x = (cub->scene.map.spos.x * TILE) + (TILE / 2);
 	cub->player.pos.y = (cub->scene.map.spos.y * TILE) + (TILE / 2);
+	cub->player.health = (t_nbr){.value = 100, .str = NULL};
 	get_starting_angle(cub, cub->scene.map.start);
 	cub->player.dir.x = cos(cub->player.angle);
 	cub->player.dir.y = sin(cub->player.angle);
 	cub->player.plane.x = -cub->player.dir.y;
 	cub->player.plane.y = cub->player.dir.x;
+	mlx_do_key_autorepeatoff(cub->mlx);
 }

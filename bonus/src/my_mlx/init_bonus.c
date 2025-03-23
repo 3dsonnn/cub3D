@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 20:04:33 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 12:37:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	my_mlx_free(t_cub *cub, char *message, t_plane flag)
 	exit_error(message, &cub->scene);
 }
 
-static void	my_mlx_xpm_file_to_image(t_cub *cub, int i)
+static void	get_textures_images(t_cub *cub, int i)
 {
 	while (++i < 4)
 	{
@@ -71,19 +71,20 @@ static	void	my_mlx_new_image(t_cub *cub)
 	cub->img.line_len /= 4;
 }
 
-void	init_mlx(t_cub *cub, int i)
+void	init_mlx(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
-			exit_error("Failed to initialize mlx", &cub->scene);
-	my_mlx_xpm_file_to_image(cub, -1);
-	mlx_get_screen_size(cub->mlx, &cub->img.width, &cub->img.height);
+		exit_error("Failed to initialize mlx", &cub->scene);
+	get_textures_images(cub, -1);
+	check_player_images(cub, -1);
+	cub->img.width = WIDTH;
+	cub->img.height = HEIGHT;
 	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height,
 			"cub3D");
 	if (!cub->win)
 		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
 	my_mlx_new_image(cub);
-	mlx_do_key_autorepeatoff(cub->mlx);
 	mlx_mouse_hide(cub->mlx, cub->win);
 	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
 }

@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/21 23:58:59 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/23 09:31:59 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/cub3D/painting_bonus.c 						\
 			bonus/src/player/init_bonus.c 							\
 			bonus/src/player/move_bonus.c 							\
+			bonus/src/player/check_images.c							\
+			bonus/src/player/player.c 								\
 			bonus/src/raycast/aux_bonus.c							\
 			bonus/src/raycast/get_rays_bonus.c						\
 			bonus/src/raycast/vertical_bonus.c						\

@@ -6,12 +6,33 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 20:03:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 13:06:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_BONUS_H
 # define STRUCT_BONUS_H
+
+# define CROSSHAIR_PATH "bonus/config/animated_sprites/crosshair.xpm"
+# define IDLE_PATH "bonus/config/animated_sprites/shotgun/idle.xpm"
+# define PUTTING_01_PATH "bonus/config/animated_sprites/shotgun/putting01.xpm"
+# define PUTTING_02_PATH "bonus/config/animated_sprites/shotgun/putting02.xpm"
+# define PUTTING_03_PATH "bonus/config/animated_sprites/shotgun/putting03.xpm"
+# define RECHARGING_01_PATH "bonus/config/animated_sprites/shotgun/recharging01.xpm"
+# define RECHARGING_02_PATH "bonus/config/animated_sprites/shotgun/recharging02.xpm"
+# define RECHARGING_03_PATH "bonus/config/animated_sprites/shotgun/recharging03.xpm"
+# define RECHARGING_04_PATH "bonus/config/animated_sprites/shotgun/recharging04.xpm"
+# define RECHARGING_05_PATH "bonus/config/animated_sprites/shotgun/recharging05.xpm"
+# define RECHARGING_06_PATH "bonus/config/animated_sprites/shotgun/recharging06.xpm"
+# define RECHARGING_IDLE_PATH "bonus/config/animated_sprites/shotgun/recharging_idle.xpm"
+# define SHELL_01_PATH "bonus/config/animated_sprites/shotgun/shell01.xpm"
+# define SHELL_02_PATH "bonus/config/animated_sprites/shotgun/shell02.xpm"
+# define SHELL_03_PATH "bonus/config/animated_sprites/shotgun/shell03.xpm"
+# define SHELL_04_PATH "bonus/config/animated_sprites/shotgun/shell04.xpm"
+# define SHELL_05_PATH "bonus/config/animated_sprites/shotgun/shell05.xpm"
+# define SHOOTING_01_PATH "bonus/config/animated_sprites/shotgun/shooting01.xpm"
+# define SHOOTING_02_PATH "bonus/config/animated_sprites/shotgun/shooting02.xpm"
+# define SHOOTING_IDLE_PATH "bonus/config/animated_sprites/shotgun/shooting_idle.xpm"
 
 typedef enum e_ID
 {
@@ -20,6 +41,36 @@ typedef enum e_ID
 	WE,
 	EA
 }					t_ID;
+
+typedef struct s_img_path
+{
+	int				key;
+	char			*path;
+}					t_img_path;
+
+typedef enum e_player_img
+{
+	CROSSHAIR,
+	IDLE,
+	PUTTING_01,
+	PUTTING_02,
+	PUTTING_03,
+	RECHARGING_01,
+	RECHARGING_02,
+	RECHARGING_03,
+	RECHARGING_04,
+	RECHARGING_05,
+	RECHARGING_06,
+	RECHARGING_IDLE,
+	SHELL_01,
+	SHELL_02,
+	SHELL_03,
+	SHELL_04,
+	SHELL_05,
+	SHOOTING_01,
+	SHOOTING_02,
+	SHOOTING_IDLE
+}					t_player_img;
 
 typedef enum e_CORNERS
 {
@@ -77,6 +128,12 @@ typedef struct s_rows
 	struct s_rows	*next;
 }					t_rows;
 
+typedef struct s_nbr
+{
+	int				value;
+	char			*str;
+}					t_nbr;
+
 typedef struct s_img
 {
 	void			*img;
@@ -110,6 +167,12 @@ typedef struct s_bresenham_circle
 	t_img			*img;
 }					t_bresenham_circle;
 
+typedef struct s_hook
+{
+	int				alt;
+	int				space;
+}					t_hook;
+
 typedef struct s_texture
 {
 	t_ID			id;
@@ -140,6 +203,17 @@ typedef struct s_scene
 	t_map			map;
 	t_texture		textures[4];
 }					t_scene;
+
+typedef struct s_tile
+{
+	char			id;
+	int				color;
+	t_point			crd;
+	struct s_tile	*up;
+	struct s_tile	*down;
+	struct s_tile	*left;
+	struct s_tile	*right;
+}					t_tile;
 
 typedef struct s_col
 {
@@ -177,18 +251,9 @@ typedef struct s_player
 	t_dplane		dir;
 	t_dpoint		plane;
 	double			angle;
+	t_nbr			health;
+	t_img			imgs[20];
 }					t_player;
-
-typedef struct s_tile
-{
-	char			id;
-	int				color;
-	t_point			crd;
-	struct s_tile	*up;
-	struct s_tile	*down;
-	struct s_tile	*left;
-	struct s_tile	*right;
-}					t_tile;
 
 typedef struct s_mmap
 {
@@ -199,13 +264,6 @@ typedef struct s_mmap
 	t_tile			*corners[4];
 	t_tile			**tiles;
 }					t_mmap;
-
-typedef	struct s_hook
-{
-	int				alt;
-	int				space;
-}	t_hook;
-
 
 typedef struct s_cub
 {
