@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/21 23:10:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 08:44:02 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	t_cub	cub;
 
 	checks(&cub, ac, av);
-	init_mlx(&cub, -1);
+	init_mlx(&cub);
 	init_minimap(&cub, -1, -1);
 	init_rays(&cub);
 	init_player(&cub);

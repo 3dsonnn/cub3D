@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/22 01:20:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 13:04:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <unistd.h>
 
 # define FONT "-sony-fixed-medium-r-normal--24-240-75-75-c-120-iso8859-1"
+
+# define WIDTH 1920
+# define HEIGHT 1010
 
 # define TILE 64
 # define ROT 0.05
@@ -48,6 +51,7 @@
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
+# define DARK_GRAY 0x333333
 # define TRANSPARENT 0xFF000000
 
 //  CHECKS
@@ -81,7 +85,7 @@ void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 void				my_mlx_hook(t_cub *cub);
 extern void			alt(t_cub *cub);
 extern void			space(t_cub *cub);
-void				init_mlx(t_cub *cub, int i);
+void				init_mlx(t_cub *cub);
 extern int			my_mlx_get_rgb_color(int r, int g, int b);
 extern void			my_mlx_get_rgb_values(int color, int rgb[3]);
 int					my_mlx_get_transparent_color(int back, int fore,
@@ -89,14 +93,19 @@ int					my_mlx_get_transparent_color(int back, int fore,
 void				my_mlx_free(t_cub *cub, char *message, t_plane flag);
 extern void			my_mlx_pixel_put(t_img *image, int x, int y, int color);
 extern int			my_mlx_get_pixel(t_img image, int x, int y);
-void				my_mlx_put_img_to_img(t_img *dst, t_img src, int x, int y);
+void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
+						int flag);
 t_img				my_mlx_resize_img(void *mlx, t_img img, t_point new_size);
+void				my_mlx_draw_ret_to_img(t_img *img, t_point crd,
+						t_point size, int color);
 
 //  PLAYER
 void				init_player(t_cub *cub);
 void				rotate_player(t_cub *cub, double angle_delta);
 void				move_player(t_cub *cub, double forward, double strafe,
 						t_dpoint new_pos);
+void				player(t_cub *cub);
+void				check_player_images(t_cub *cub, int i);
 
 //  RAYS
 extern void			init_rays(t_cub *cub);

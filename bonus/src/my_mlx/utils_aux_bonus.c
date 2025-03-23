@@ -6,20 +6,34 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 23:37:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/22 01:51:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 12:38:20 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-void	my_mlx_put_img_to_img(t_img *dst, t_img src, int x, int y)
+static int	my_mlx_put_img_to_img_init(t_img *dst, t_img src, t_point crd,
+		t_plane *dst_iter)
+{
+	if (!dst || crd.x < 0 || crd.x >= dst->width || crd.y < 0
+		|| crd.y >= dst->height)
+		return (1);
+	if (crd.x + src.width > dst->width)
+		src.width = dst->width - crd.x;
+	if (crd.y + src.height > dst->height)
+		src.height = dst->height - crd.y;
+	*dst_iter = (t_plane){crd.x, crd.x, crd.y, crd.y};
+	return (0);
+}
+
+void	my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd, int flag)
 {
 	t_point	src_iter;
 	t_plane	dst_iter;
+	int		color;
 
-	if (!dst || x < 0 || x >= dst->width || y < 0 || y >= dst->height)
+	if (my_mlx_put_img_to_img_init(dst, src, crd, &dst_iter))
 		return ;
-	dst_iter = (t_plane){x, x, y, y};
 	src_iter.y = -1;
 	while (++src_iter.y < src.height)
 	{
@@ -27,8 +41,9 @@ void	my_mlx_put_img_to_img(t_img *dst, t_img src, int x, int y)
 		dst_iter.x = dst_iter.x0;
 		while (++src_iter.x < src.width)
 		{
-			my_mlx_pixel_put(dst, dst_iter.x, dst_iter.y, my_mlx_get_pixel(src,
-					src_iter.x, src_iter.y));
+			color = my_mlx_get_pixel(src, src_iter.x, src_iter.y);
+			if (!flag || color != TRANSPARENT)
+				my_mlx_pixel_put(dst, dst_iter.x, dst_iter.y, color);
 			dst_iter.x++;
 		}
 		dst_iter.y++;
@@ -77,4 +92,24 @@ t_img	my_mlx_resize_img(void *mlx, t_img img, t_point new_size)
 	fill_img(img, &res, -1, -1);
 	mlx_destroy_image(mlx, img.img);
 	return (res);
+}
+
+void	my_mlx_draw_ret_to_img(t_img *img, t_point crd, t_point size, int color)
+{
+	t_point	iter;
+
+	iter = (t_point){.x = -1, .y = -1};
+	if (!img || crd.x < 0 || crd.x > img->width || crd.y < 0
+		|| crd.y > img->height || size.x <= 0 || size.y <= 0)
+		return ;
+	if (crd.x + size.x > img->width)
+		size.x = img->width - crd.x;
+	if (crd.y + size.y > img->height)
+		size.y = img->height - crd.y;
+	while (++iter.y < size.y)
+	{
+		iter.x = -1;
+		while (++iter.x < size.x)
+			my_mlx_pixel_put(img, crd.x + iter.x, crd.y + iter.y, color);
+	}
 }
