@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_images.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 23:28:02 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 10:38:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/23 18:05:29 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static char	*get_path_aux(int key)
 	if (key == 11)
 		return (RECHARGING_IDLE_PATH);
 	if (key == 12)
-		return (SHELL_01_PATH);
-	if (key == 13)
-		return (SHELL_02_PATH);
-	if (key == 14)
-		return (SHELL_03_PATH);
-	if (key == 15)
-		return (SHELL_04_PATH);
-	if (key == 16)
-		return (SHELL_05_PATH);
-	if (key == 17)
 		return (SHOOTING_01_PATH);
-	if (key == 18)
+	if (key == 13)
 		return (SHOOTING_02_PATH);
+	if (key == 14)
+		return (SHELL_01_PATH);
+	if (key == 15)
+		return (SHELL_02_PATH);
+	if (key == 16)
+		return (SHELL_03_PATH);
+	if (key == 17)
+		return (SHELL_04_PATH);
+	if (key == 18)
+		return (SHELL_05_PATH);
 	if (key == 19)
 		return (SHOOTING_IDLE_PATH);
 	return (NULL);
@@ -85,7 +85,6 @@ static int	my_mlx_xpm_file_to_image(t_cub *cub, t_img *img, char *path)
 		return (1);
 	}
 	img->line_len /= 4;
-	*img = my_mlx_resize_img(cub->mlx, *img, (t_point){16, 16});
 	return (0);
 }
 
@@ -99,5 +98,11 @@ void	check_player_images(t_cub *cub, int i)
 				mlx_destroy_image(cub->mlx, cub->player.imgs[i].img);
 			my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, 4, 0, 1});
 		}
+		if (!i)
+			cub->player.imgs[i] = my_mlx_resize_img(cub->mlx,
+					cub->player.imgs[i], (t_point){16, 16});
+		else
+			cub->player.imgs[i] = my_mlx_resize_img(cub->mlx,
+					cub->player.imgs[i], (t_point){512, 512});
 	}
 }
