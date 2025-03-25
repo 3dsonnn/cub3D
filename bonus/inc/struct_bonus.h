@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 16:42:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/25 01:42:16 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ typedef enum e_player_img
 	RECHARGING_05,
 	RECHARGING_06,
 	RECHARGING_IDLE,
+	SHOOTING_01,
+	SHOOTING_02,
 	SHELL_01,
 	SHELL_02,
 	SHELL_03,
 	SHELL_04,
 	SHELL_05,
-	SHOOTING_01,
-	SHOOTING_02,
 	SHOOTING_IDLE
 }					t_player_img;
 
@@ -248,10 +248,14 @@ typedef struct s_ray
 typedef struct s_player
 {
 	t_dpoint		pos;
-	t_dplane		dir;
+	t_dpoint		dir;
 	t_dpoint		plane;
 	double			angle;
+	int				updown;
 	t_nbr			health;
+	bool			idle;
+	bool			shooting;
+	bool			recharging;
 	t_img			imgs[20];
 }					t_player;
 

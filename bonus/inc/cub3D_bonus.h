@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 16:31:17 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/25 02:25:37 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../../libft/libft.h"
 # include "mlx.h"
+# include <stdbool.h>
 # include "struct_bonus.h"
 # include <errno.h>
 # include <fcntl.h>
@@ -22,12 +23,15 @@
 # include <math.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/time.h>
 # include <unistd.h>
 
 # define FONT "-sony-fixed-medium-r-normal--24-240-75-75-c-120-iso8859-1"
 
 # define WIDTH 1920
 # define HEIGHT 1010
+# define HALF_WIDTH 960
+# define HALF_HEIGHT 505
 
 # define TILE 64
 # define ROT 0.05
@@ -45,6 +49,8 @@
 # define WKEY 119
 # define LEFT 65361
 # define RIGHT 65363
+# define UP 65362
+# define DOWN 65364
 
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
@@ -83,8 +89,7 @@ void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
-extern void			alt(t_cub *cub);
-extern void			space(t_cub *cub);
+extern void			alt_space(t_cub *cub, int keycode);
 void				init_mlx(t_cub *cub);
 extern int			my_mlx_get_rgb_color(int r, int g, int b);
 extern void			my_mlx_get_rgb_values(int color, int rgb[3]);
@@ -101,9 +106,8 @@ void				my_mlx_draw_horizontal_lines_to_img(t_img *img, t_point crd,
 
 //  PLAYER
 void				init_player(t_cub *cub);
-void				rotate_player(t_cub *cub, double angle_delta);
-void				move_player(t_cub *cub, double forward, double strafe,
-						t_dpoint new_pos);
+int					move_player(t_cub *cub, int keycode);
+int					rotate_player(t_cub *cub, int keycode);
 void				player(t_cub *cub);
 void				check_player_images(t_cub *cub, int i);
 

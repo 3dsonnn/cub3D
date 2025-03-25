@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 11:21:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/25 02:18:37 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static  void    get_column(t_cub *cub, int i)
 {
     cub->rays[i].col.dist = cub->rays[i].dist * cos(ft_normalizer(cub->rays[i].angle - cub->player.angle));
     cub->rays[i].col.height = (int)(TILE / cub->rays[i].col.dist * cub->ppd);
-    cub->rays[i].col.top = (cub->img.height - cub->rays[i].col.height) / 2;
+    cub->rays[i].col.top = ((cub->img.height - cub->rays[i].col.height) / 2) + cub->player.updown;
     // if (cub->rays[i].col.top < 0)
     //     cub->rays[i].col.top = 0;
-    cub->rays[i].col.bot = (cub->img.height + cub->rays[i].col.height) / 2;
+    cub->rays[i].col.bot = ((cub->img.height + cub->rays[i].col.height) / 2) + cub->player.updown;
     if (cub->rays[i].col.bot > cub->img.height)
         cub->rays[i].col.bot = cub->img.height;
 }

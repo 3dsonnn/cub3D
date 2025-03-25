@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 14:08:08 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/25 02:25:42 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,46 +29,55 @@ static int	my_mlx_close(t_cub *cub)
 	exit(0);
 }
 
-static	int	my_mlx_key_press(int keycode, t_cub *cub)
+static int	my_mlx_key_press(int keycode, t_cub *cub)
 {
 	if (keycode == ESC)
 		my_mlx_close(cub);
-	else if (keycode == WKEY)
-		move_player(cub, 1, 0, cub->player.pos);
-	else if (keycode == SKEY)
-		move_player(cub, -1, 0, cub->player.pos);
-	else if (keycode == DKEY)
-		move_player(cub, 0, 1, cub->player.pos);
-	else if (keycode == AKEY)
-		move_player(cub, 0, -1, cub->player.pos);
-	else if (keycode == RIGHT)
-		rotate_player(cub, ROT);
-	else if (keycode == LEFT)
-		rotate_player(cub, -ROT);
-	else if (keycode == ALT)
-		alt(cub);
-	else if (keycode == SPACE)
-		space(cub);
+	else if (keycode == WKEY || keycode == SKEY || keycode == AKEY
+		|| keycode == DKEY)
+	{
+		if (move_player(cub, keycode))
+			return (0);
+	}
+	else if (keycode == RIGHT || keycode == LEFT || keycode == UP
+		|| keycode == DOWN)
+	{
+		if (rotate_player(cub, keycode))
+			return (0);
+	}
+	else if (keycode == ALT || keycode == SPACE)
+		alt_space(cub, keycode);
 	else
 		return (0);
 	cub3D(cub);
+	return (0);
 }
 
-static	int	my_mlx_mouse_motion(t_cub *cub)
+static int	my_mlx_mouse_motion(t_cub *cub)
 {
-	t_point	crd;
+	static bool	flag = true;
+	t_point		crd;
 
-    if (cub->hooks.alt)
+	if (cub->hooks.alt)
 		return (0);
 	mlx_mouse_get_pos(cub->mlx, cub->win, &crd.x, &crd.y);
-	if (crd.x != (int)(cub->img.width / 2))
+	if (flag && abs(crd.x - HALF_WIDTH) > 10)
 	{
-		if (crd.x < (int)(cub->img.width / 2))
+		if (crd.x - HALF_WIDTH < 0)
 			my_mlx_key_press(LEFT, cub);
 		else
 			my_mlx_key_press(RIGHT, cub);
-		mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
+		mlx_mouse_move(cub->mlx, cub->win, HALF_WIDTH, HALF_HEIGHT);
 	}
+	else if (!flag && abs(crd.y - HALF_HEIGHT) > 10)
+	{
+		if (crd.y - HALF_HEIGHT < 0)
+			my_mlx_key_press(UP, cub);
+		else
+			my_mlx_key_press(DOWN, cub);
+		mlx_mouse_move(cub->mlx, cub->win, HALF_WIDTH, HALF_HEIGHT);
+	}
+	flag = !flag;
 	return (0);
 }
 
