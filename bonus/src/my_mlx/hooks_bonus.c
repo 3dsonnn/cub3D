@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/27 15:07:23 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:25:05 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	update_shooting_animation(t_cub *cub)
 
 int	render_frame(t_cub *cub)
 {
-	// my_mlx_mouse_motion(cub);
+	my_mlx_mouse_motion(cub);
 	mlx_clear_window(cub->mlx, cub->win);
 	if (cub->player.shooting)
 		update_shooting_animation(cub);
