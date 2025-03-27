@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 23:28:02 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 18:05:29 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:24:24 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ static char	*get_path_aux(int key)
 	if (key == 18)
 		return (SHELL_05_PATH);
 	if (key == 19)
+		return (SHELL_06_PATH);
+	if (key == 20)
+		return (SHELL_07_PATH);
+	if (key == 21)
+		return (SHELL_08_PATH);
+	if (key == 22)
+		return (SHELL_09_PATH);
+	if (key == 23)
 		return (SHOOTING_IDLE_PATH);
 	return (NULL);
 }
@@ -90,9 +98,18 @@ static int	my_mlx_xpm_file_to_image(t_cub *cub, t_img *img, char *path)
 
 void	check_player_images(t_cub *cub, int i)
 {
-	while (++i < 20)
+	const char	*paths[24] = {CROSSHAIR_PATH, IDLE_PATH, PUTTING_01_PATH,
+			PUTTING_02_PATH, PUTTING_03_PATH, RECHARGING_01_PATH,
+			RECHARGING_02_PATH, RECHARGING_03_PATH, RECHARGING_04_PATH,
+			RECHARGING_05_PATH, RECHARGING_06_PATH, RECHARGING_IDLE_PATH,
+			SHOOTING_01_PATH, SHOOTING_02_PATH, SHELL_01_PATH, SHELL_02_PATH,
+			SHELL_03_PATH, SHELL_04_PATH, SHELL_05_PATH, SHELL_06_PATH,
+			SHELL_07_PATH, SHELL_08_PATH, SHELL_09_PATH, SHOOTING_IDLE_PATH};
+
+	while (++i < 24)
 	{
-		if (my_mlx_xpm_file_to_image(cub, &cub->player.imgs[i], get_path(i)))
+		if (my_mlx_xpm_file_to_image(cub, &cub->player.imgs[i],
+				(char *)paths[i]))
 		{
 			while (--i >= 0)
 				mlx_destroy_image(cub->mlx, cub->player.imgs[i].img);
@@ -103,6 +120,13 @@ void	check_player_images(t_cub *cub, int i)
 					cub->player.imgs[i], (t_point){16, 16});
 		else
 			cub->player.imgs[i] = my_mlx_resize_img(cub->mlx,
-					cub->player.imgs[i], (t_point){512, 512});
+					cub->player.imgs[i], (t_point){512, 490});
 	}
+	cub->player.imgs[i].img = mlx_new_image(cub->mlx, 512, 490);
+	cub->player.imgs[i].width = 512;
+	cub->player.imgs[i].height = 490;
+	cub->player.imgs[i].addr = (int *)mlx_get_data_addr(cub->player.imgs[i].img,
+			&cub->player.imgs[i].bpp, &cub->player.imgs[i].line_len,
+			&cub->player.imgs[i].endian);
+	cub->player.imgs[i].line_len /= 4;
 }

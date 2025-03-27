@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_aux_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 23:37:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 12:38:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/27 13:15:48 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,32 @@ void	my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd, int flag)
 			color = my_mlx_get_pixel(src, src_iter.x, src_iter.y);
 			if (!flag || color != TRANSPARENT)
 				my_mlx_pixel_put(dst, dst_iter.x, dst_iter.y, color);
+			dst_iter.x++;
+		}
+		dst_iter.y++;
+	}
+}
+
+void	my_mlx_put_gun(t_cub *cub, t_img *dst, t_img src, t_point crd)
+{
+	t_point	src_iter;
+	t_plane	dst_iter;
+	int		color;
+
+	if (my_mlx_put_img_to_img_init(dst, src, crd, &dst_iter))
+		return ;
+	src_iter.y = -1;
+	while (++src_iter.y < src.height)
+	{
+		src_iter.x = -1;
+		dst_iter.x = dst_iter.x0;
+		while (++src_iter.x < src.width)
+		{
+			color = my_mlx_get_pixel(src, src_iter.x, src_iter.y);
+			if (color == TRANSPARENT)
+				color = my_mlx_get_pixel(cub->player.imgs[TMP], src_iter.x,
+						src_iter.y);
+			my_mlx_pixel_put(dst, dst_iter.x, dst_iter.y, color);
 			dst_iter.x++;
 		}
 		dst_iter.y++;

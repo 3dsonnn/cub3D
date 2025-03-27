@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 18:54:07 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:07:23 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,24 +88,32 @@ int	mouse_hook(int keycode, int x, int y, t_cub *cub)
 void	update_shooting_animation(t_cub *cub)
 {
 	long	current_time;
+	static int		i = 0;
 
 	current_time = get_current_time();
-	if (current_time - cub->player.last_frame_time >= 50) // 100ms per frame
+	if (current_time - cub->player.last_frame_time >= 35)
 	{
 		cub->player.last_frame_time = current_time;
-		if (cub->player.current_frame <= SHELL_05)
+		if (cub->player.current_frame <= SHELL_08)
 		{
 			// cub->img = cub->player.imgs[cub->player.current_frame];
-			my_mlx_put_img_to_img(&cub->img,
+			my_mlx_put_gun(cub, &cub->img,
 				cub->player.imgs[cub->player.current_frame],
 				(t_point){cub->img.width / 2, cub->img.height
-				- cub->player.imgs[cub->player.current_frame].height}, 1);
-			cub->player.current_frame++;
+				- cub->player.imgs[cub->player.current_frame].height});
+			i++;
+			if (i % 2 == 0)
+				cub->player.current_frame++;
 		}
 		else
 		{
 			cub->player.shooting = false;
 			cub->player.idle = true;
+			cub->player.current_frame = IDLE;
+			my_mlx_put_gun(cub, &cub->img,
+			cub->player.imgs[cub->player.current_frame],
+			(t_point){cub->img.width / 2, cub->img.height
+			- cub->player.imgs[cub->player.current_frame].height});
 		}
 	}
 }

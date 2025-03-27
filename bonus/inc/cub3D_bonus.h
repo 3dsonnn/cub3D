@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 18:56:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:16:14 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "../../libft/libft.h"
 # include "mlx.h"
+# include <stdbool.h>
 # include "struct_bonus.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <float.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
@@ -100,6 +100,8 @@ void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
 t_img				my_mlx_resize_img(void *mlx, t_img img, t_point new_size);
 void				my_mlx_draw_ret_to_img(t_img *img, t_point crd,
 						t_point size, int color);
+void	my_mlx_put_gun(t_cub *cub, t_img *dst, t_img src, t_point crd);
+
 
 //  PLAYER
 void				init_player(t_cub *cub);

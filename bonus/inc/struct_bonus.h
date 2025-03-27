@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 18:12:22 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:40:06 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # define SHELL_03_PATH "bonus/config/animated_sprites/shotgun/shell03.xpm"
 # define SHELL_04_PATH "bonus/config/animated_sprites/shotgun/shell04.xpm"
 # define SHELL_05_PATH "bonus/config/animated_sprites/shotgun/shell05.xpm"
+# define SHELL_06_PATH "bonus/config/animated_sprites/shotgun/shell06.xpm"
+# define SHELL_07_PATH "bonus/config/animated_sprites/shotgun/shell07.xpm"
+# define SHELL_08_PATH "bonus/config/animated_sprites/shotgun/shell08.xpm"
+# define SHELL_09_PATH "bonus/config/animated_sprites/shotgun/shell09.xpm"
 # define SHOOTING_01_PATH "bonus/config/animated_sprites/shotgun/shooting01.xpm"
 # define SHOOTING_02_PATH "bonus/config/animated_sprites/shotgun/shooting02.xpm"
 # define SHOOTING_IDLE_PATH "bonus/config/animated_sprites/shotgun/shooting_idle.xpm"
@@ -69,7 +73,11 @@ typedef enum e_player_img
 	SHELL_03,
 	SHELL_04,
 	SHELL_05,
-	SHOOTING_IDLE
+	SHELL_06,
+	SHELL_07,
+	SHELL_08,
+	SHELL_09,
+	TMP
 }					t_player_img;
 
 typedef enum e_CORNERS
@@ -255,7 +263,7 @@ typedef struct s_player
 	bool			idle;
 	bool			shooting;
 	bool			recharging;
-	t_img			imgs[20];
+	t_img			imgs[24];
 	int current_frame;
 	long last_frame_time;
 }					t_player;
@@ -284,3 +292,4 @@ typedef struct s_cub
 }					t_cub;
 
 #endif
+
