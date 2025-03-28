@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 18:00:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:25:55 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_player(t_cub *cub)
 	cub->player.plane.y = cub->player.dir.x;
 	cub->player.idle = true;
 	cub->player.shooting = false;
+	cub->player.ammo = 8;
 	cub->player.recharging = false;
 	mlx_do_key_autorepeatoff(cub->mlx);
 }

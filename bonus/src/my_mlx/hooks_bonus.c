@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/27 17:25:05 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:32:07 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	mouse_hook(int keycode, int x, int y, t_cub *cub)
 {
 	if (keycode == 1 && cub->player.idle)
 	{
+		if (cub->player.ammo-- < 0)
+			cub->player.ammo = 0;
 		cub->player.idle = false;
 		cub->player.shooting = true;
 		cub->player.current_frame = SHOOTING_01;
