@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/25 02:25:37 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/29 09:10:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "../../libft/libft.h"
 # include "mlx.h"
-# include <stdbool.h>
 # include "struct_bonus.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <float.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
@@ -135,6 +135,7 @@ void				exit_error(char *message, t_scene *scene);
 void				bresenham_circle(t_bresenham_circle circle);
 void				bresenham_line(t_bresenham_line line);
 void				free_tiles(t_tile ***tiles, int i, int size);
+unsigned long long	get_current_time(void);
 
 //  T_ROW
 t_rows				*new_row(char *str);
