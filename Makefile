@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/25 00:25:43 by efinda           ###   ########.fr        #
+#    Updated: 2025/03/29 10:22:53 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,6 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/player/init_bonus.c 							\
 			bonus/src/player/move_bonus.c 							\
 			bonus/src/player/rotate_bonus.c							\
-			bonus/src/player/check_images_bonus.c					\
 			bonus/src/player/player_bonus.c 						\
 			bonus/src/raycast/aux_bonus.c							\
 			bonus/src/raycast/get_rays_bonus.c						\
@@ -81,6 +80,8 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/minimap/paint_bonus.c							\
 			bonus/src/minimap/minimap_bonus.c						\
 			bonus/src/minimap/miniplayer_bonus.c					\
+			bonus/src/sprites/init_bonus.c							\
+			bonus/src/sprites/sprites_bonus.c						\
 
 LIBFTPATH = libft
 LIBFT =	$(LIBFTPATH)/libft.a

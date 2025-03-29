@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/25 02:25:42 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/29 09:31:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,25 @@ static int	my_mlx_mouse_motion(t_cub *cub)
 	return (0);
 }
 
+int	my_mlx_mouse_click(int keycode, int x, int y, t_cub *cub)
+{
+	if (keycode == 1 && cub->player.idle)
+	{
+		if (cub->player.ammo-- < 0)
+			cub->player.ammo = 0;
+		cub->player.idle = false;
+		cub->player.shooting = true;
+		cub->player.current_frame = SHOOTING_01;
+		cub->player.last_frame_time = get_current_time();
+			// Implement this function to get current time in milliseconds
+	}
+	return (0);
+}
+
 void	my_mlx_hook(t_cub *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 0, my_mlx_key_press, cub);
 	mlx_hook(cub->win, 17, 1L << 17, my_mlx_close, cub);
+	mlx_hook(cub->win, 4, 1L << 2, my_mlx_mouse_click, cub);
 	mlx_loop_hook(cub->mlx, my_mlx_mouse_motion, cub);
 }

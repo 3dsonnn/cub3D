@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/29 09:10:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/29 10:37:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <fcntl.h>
 # include <float.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
@@ -32,6 +31,8 @@
 # define HEIGHT 1010
 # define HALF_WIDTH 960
 # define HALF_HEIGHT 505
+# define GUN_WIDTH 640
+# define GUN_HEIGHT 640
 
 # define TILE 64
 # define ROT 0.05
@@ -109,7 +110,11 @@ void				init_player(t_cub *cub);
 int					move_player(t_cub *cub, int keycode);
 int					rotate_player(t_cub *cub, int keycode);
 void				player(t_cub *cub);
-void				check_player_images(t_cub *cub, int i);
+
+// SPRITES
+void				init_sprites(t_cub *cub);
+void				get_frames_images(t_cub *cub, int i);
+void				put_gun_frame(t_cub *cub, t_img frame);
 
 //  RAYS
 extern void			init_rays(t_cub *cub);

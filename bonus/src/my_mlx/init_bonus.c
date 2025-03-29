@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/24 18:20:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/29 11:00:07 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ static	void	my_mlx_new_image(t_cub *cub)
 
 void	init_mlx(t_cub *cub)
 {
+	if (!XInitThreads())
+		exit_error("Failed to initialize X11 threads", &cub->scene);
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 		exit_error("Failed to initialize mlx", &cub->scene);
 	get_textures_images(cub, -1);
-	check_player_images(cub, -1);
+	get_frames_images(cub, -1);
 	cub->img.width = WIDTH;
 	cub->img.height = HEIGHT;
 	cub->win = mlx_new_window(cub->mlx, cub->img.width, cub->img.height,
