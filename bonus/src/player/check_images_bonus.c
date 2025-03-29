@@ -6,11 +6,37 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 23:28:02 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/24 17:06:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/29 08:59:23 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
+
+static int	get_clear_img(t_cub *cub, t_img *img, int i)
+{
+	if (i != 24)
+		return (0);
+	img->img = mlx_new_image(cub->mlx, 640, 640);
+	if (!img->img)
+	{
+		get_explicit_error_message(&cub->scene,
+			(t_strs){"Failed to create the clear image", NULL, NULL, NULL, NULL,
+			NULL});
+		return (1);
+	}
+	img->addr = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->line_len,
+			&img->endian);
+	if (!img->addr)
+	{
+		mlx_destroy_image(cub->mlx, img->img);
+		get_explicit_error_message(&cub->scene,
+			(t_strs){"Failed to get the address of the clear image", NULL, NULL,
+			NULL, NULL, NULL});
+		return (1);
+	}
+	img->line_len /= 4;
+	return (0);
+}
 
 static int	my_mlx_xpm_file_to_image(t_cub *cub, t_img *img, char *path)
 {
@@ -40,16 +66,12 @@ static int	my_mlx_xpm_file_to_image(t_cub *cub, t_img *img, char *path)
 
 void	check_player_images(t_cub *cub, int i)
 {
-	const char	*paths[20] = {CROSSHAIR_PATH, IDLE_PATH, PUTTING_01_PATH,
-		PUTTING_02_PATH, PUTTING_03_PATH, RECHARGING_01_PATH,
-		RECHARGING_02_PATH, RECHARGING_03_PATH, RECHARGING_04_PATH,
-		RECHARGING_05_PATH, RECHARGING_06_PATH, RECHARGING_IDLE_PATH,
-		SHOOTING_01_PATH, SHOOTING_02_PATH, SHELL_01_PATH, SHELL_02_PATH,
-		SHELL_03_PATH, SHELL_04_PATH, SHELL_05_PATH, SHOOTING_IDLE_PATH};
+	const char	*paths[25] = PATHS;
 
-	while (++i < 20)
+	while (++i < 25)
 	{
-		if (my_mlx_xpm_file_to_image(cub, &cub->player.imgs[i],
+		if (get_clear_img(cub, &cub->player.imgs[i], i)
+			|| my_mlx_xpm_file_to_image(cub, &cub->player.imgs[i],
 				(char *)paths[i]))
 		{
 			while (--i >= 0)

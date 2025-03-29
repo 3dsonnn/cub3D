@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/25 01:42:16 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/29 08:51:25 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCT_BONUS_H
 
 # define CROSSHAIR_PATH "bonus/config/animated_sprites/crosshair.xpm"
+# define CARTRIDGE_PATH "bonus/config/animated_sprites/cartridge.xpm"
 # define IDLE_PATH "bonus/config/animated_sprites/shotgun/idle.xpm"
 # define PUTTING_01_PATH "bonus/config/animated_sprites/shotgun/putting01.xpm"
 # define PUTTING_02_PATH "bonus/config/animated_sprites/shotgun/putting02.xpm"
@@ -30,9 +31,45 @@
 # define SHELL_03_PATH "bonus/config/animated_sprites/shotgun/shell03.xpm"
 # define SHELL_04_PATH "bonus/config/animated_sprites/shotgun/shell04.xpm"
 # define SHELL_05_PATH "bonus/config/animated_sprites/shotgun/shell05.xpm"
+# define SHELL_06_PATH "bonus/config/animated_sprites/shotgun/shell06.xpm"
+# define SHELL_07_PATH "bonus/config/animated_sprites/shotgun/shell07.xpm"
+# define SHELL_08_PATH "bonus/config/animated_sprites/shotgun/shell08.xpm"
+# define SHELL_09_PATH "bonus/config/animated_sprites/shotgun/shell09.xpm"
 # define SHOOTING_01_PATH "bonus/config/animated_sprites/shotgun/shooting01.xpm"
 # define SHOOTING_02_PATH "bonus/config/animated_sprites/shotgun/shooting02.xpm"
 # define SHOOTING_IDLE_PATH "bonus/config/animated_sprites/shotgun/shooting_idle.xpm"
+
+# define PATHS {CROSSHAIR_PATH, CARTRIDGE_PATH, IDLE_PATH, PUTTING_01_PATH, PUTTING_02_PATH, PUTTING_03_PATH, RECHARGING_01_PATH, RECHARGING_02_PATH, RECHARGING_03_PATH, RECHARGING_04_PATH, RECHARGING_05_PATH RECHARGING_06_PATH, RECHARGING_IDLE_PATH, SHOOTING_01_PATH, SHOOTING_02_PATH, SHELL_01_PATH, SHELL_02_PATH, SHELL_03_PATH, SHELL_04_PATH, SHELL_05_PATH, SHELL_06_PATH, SHELL_07_PATH, SHELL_08_PATH, SHELL_09_PATH, SHOOTING_IDLE_PATH}
+
+typedef enum e_player_img
+{
+	CROSSHAIR,
+	CARTRIDGE,
+	IDLE,
+	PUTTING_01,
+	PUTTING_02,
+	PUTTING_03,
+	RECHARGING_01,
+	RECHARGING_02,
+	RECHARGING_03,
+	RECHARGING_04,
+	RECHARGING_05,
+	RECHARGING_06,
+	RECHARGING_IDLE,
+	SHELL_01,
+	SHELL_02,
+	SHELL_03,
+	SHELL_04,
+	SHELL_05,
+	SHELL_06,
+	SHELL_07,
+	SHELL_08,
+	SHELL_09,
+	SHOOTING_01,
+	SHOOTING_02,
+	SHOOTING_IDLE,
+	CLEAR
+}					t_player_img;
 
 typedef enum e_ID
 {
@@ -47,30 +84,6 @@ typedef struct s_img_path
 	int				key;
 	char			*path;
 }					t_img_path;
-
-typedef enum e_player_img
-{
-	CROSSHAIR,
-	IDLE,
-	PUTTING_01,
-	PUTTING_02,
-	PUTTING_03,
-	RECHARGING_01,
-	RECHARGING_02,
-	RECHARGING_03,
-	RECHARGING_04,
-	RECHARGING_05,
-	RECHARGING_06,
-	RECHARGING_IDLE,
-	SHOOTING_01,
-	SHOOTING_02,
-	SHELL_01,
-	SHELL_02,
-	SHELL_03,
-	SHELL_04,
-	SHELL_05,
-	SHOOTING_IDLE
-}					t_player_img;
 
 typedef enum e_CORNERS
 {
@@ -256,7 +269,7 @@ typedef struct s_player
 	bool			idle;
 	bool			shooting;
 	bool			recharging;
-	t_img			imgs[20];
+	t_img			imgs[26];
 }					t_player;
 
 typedef struct s_mmap
