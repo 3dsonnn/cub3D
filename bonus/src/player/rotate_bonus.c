@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 22:22:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/25 02:17:39 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/01 19:56:47 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	rotate_player(t_cub *cub, int keycode)
 		rotate_sideways(cub, keycode);
 		return (0);
 	}
-	else if ((keycode == UP && (cub->player.updown + 10) > 200)
-		|| (keycode == DOWN && (cub->player.updown - 10) < -200))
+	else if ((keycode == UP && (cub->player.updown + 10) > 600)
+		|| (keycode == DOWN && (cub->player.updown - 10) < -600))
 		return (1);
 	if (keycode == UP)
 		cub->player.updown += 10;
