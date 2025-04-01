@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/29 11:03:39 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/01 20:52:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@
 # define SHOOTING_02_PATH "bonus/config/animated_sprites/shotgun/shooting02.xpm"
 # define SHOOTING_IDLE_PATH "bonus/config/animated_sprites/shotgun/shooting_idle.xpm"
 
-# define PATHS {CROSSHAIR_PATH, CARTRIDGE_PATH, IDLE_PATH, PUTTING_01_PATH, PUTTING_02_PATH, PUTTING_03_PATH, RECHARGING_01_PATH, RECHARGING_02_PATH, RECHARGING_03_PATH, RECHARGING_04_PATH, RECHARGING_05_PATH, RECHARGING_06_PATH, RECHARGING_IDLE_PATH, SHOOTING_01_PATH, SHOOTING_02_PATH, SHELL_01_PATH, SHELL_02_PATH, SHELL_03_PATH, SHELL_04_PATH, SHELL_05_PATH, SHELL_06_PATH, SHELL_07_PATH, SHELL_08_PATH, SHELL_09_PATH, SHOOTING_IDLE_PATH}
-
-typedef struct s_cub t_cub;
-
 typedef enum e_frames
 {
 	CROSSHAIR,
@@ -74,7 +70,8 @@ typedef enum e_frames
 	SHOOTING_01,
 	SHOOTING_02,
 	SHOOTING_IDLE,
-	CLEAR
+	CLEAR,
+	HEALTH_BAR
 }						t_frames;
 
 typedef enum e_ID
@@ -188,8 +185,8 @@ typedef struct s_bresenham_circle
 
 typedef struct s_hook
 {
-	int					alt;
-	int					space;
+	bool				alt;
+	bool				space;
 }						t_hook;
 
 typedef struct s_texture
@@ -234,14 +231,6 @@ typedef struct s_tile
 	struct s_tile		*right;
 }						t_tile;
 
-typedef struct s_col
-{
-	double				dist;
-	int					height;
-	int					top;
-	int					bot;
-}						t_col;
-
 typedef struct s_intersection
 {
 	double				dist;
@@ -256,18 +245,18 @@ typedef struct s_ray
 	double				angle;
 	double				dist;
 	double				tan;
+	int					height;
+	int					top;
+	int					bot;
 	t_point				dir;
 	t_dpoint			wall;
 	t_intersection		hor;
 	t_intersection		ver;
-	t_col				col;
-	t_texture			*texture;
+	t_img				img;
 }						t_ray;
 
 typedef struct s_sprite
 {
-	pthread_t			thread;
-	t_cub				*cub;
 	int					ammo;
 	t_nbr				health;
 	bool				idle;
@@ -275,7 +264,7 @@ typedef struct s_sprite
 	bool				recharging;
 	int					cur_frame_index;
 	unsigned long long	last_frame_time;
-	t_img				frames[26];
+	t_img				imgs[27];
 }						t_sprite;
 
 typedef struct s_player
@@ -290,6 +279,7 @@ typedef struct s_player
 typedef struct s_mmap
 {
 	int					box;
+	t_img				img;
 	t_point				bounds;
 	int					tilesize;
 	t_tile				*cur;
@@ -302,9 +292,9 @@ typedef struct s_cub
 	void				*mlx;
 	void				*win;
 	t_img				img;
+	t_ray				*rays;
 	t_scene				scene;
 	t_player			player;
-	t_ray				*rays;
 	t_mmap				minimap;
 	t_hook				hooks;
 	t_sprite			sprites;

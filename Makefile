@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/03/29 10:22:53 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/01 18:18:56 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/utils/ft_math.c							\
 
 SRC_BONUS =	bonus/src/main_bonus.c 									\
+			bonus/src/init/init_bonus.c								\
+			bonus/src/init/mlx_init_bonus.c							\
 			bonus/src/checks/map_bonus.c 							\
 			bonus/src/checks/checks_bonus.c 						\
 			bonus/src/checks/elements_bonus.c 						\
@@ -51,28 +53,24 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/checks/is_surrounded_bonus.c 					\
 			bonus/src/checks/utils_bonus.c 							\
 			bonus/src/checks/ceiling_and_floor_bonus.c				\
-			bonus/src/my_mlx/init_bonus.c 							\
-			bonus/src/my_mlx/hooks_bonus.c 							\
-			bonus/src/my_mlx/hooks_aux_bonus.c 						\
-			bonus/src/my_mlx/pixel_manipulation_bonus.c 			\
-			bonus/src/my_mlx/image_manipulation_bonus.c 			\
-			bonus/src/my_mlx/geometric_shapes.c 					\
+			bonus/src/hooks/hooks_bonus.c 							\
+			bonus/src/hooks/hooks_aux_bonus.c 						\
+			bonus/src/hooks/image_manipulation_bonus.c 				\
 			bonus/src/cub3D/cub3D_bonus.c 							\
 			bonus/src/cub3D/painting_bonus.c 						\
 			bonus/src/player/init_bonus.c 							\
 			bonus/src/player/move_bonus.c 							\
 			bonus/src/player/rotate_bonus.c							\
-			bonus/src/player/player_bonus.c 						\
 			bonus/src/raycast/aux_bonus.c							\
 			bonus/src/raycast/get_rays_bonus.c						\
 			bonus/src/raycast/vertical_bonus.c						\
 			bonus/src/raycast/horizontal_bonus.c					\
 			bonus/src/t_row/t_row_bonus.c 							\
 			bonus/src/t_row/t_row_aux_bonus.c 						\
+			bonus/src/utils/bresenham_bonus.c						\
+			bonus/src/utils/free_bonus.c 							\
 			bonus/src/utils/error_bonus.c 							\
 			bonus/src/utils/ft_math_bonus.c							\
-			bonus/src/utils/bresenham_bonus.c						\
-			bonus/src/utils/free_bonus.c							\
 			bonus/src/minimap/init_bonus.c							\
 			bonus/src/minimap/linkage_bonus.c						\
 			bonus/src/minimap/settings_bonus.c						\
@@ -82,6 +80,16 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/minimap/miniplayer_bonus.c					\
 			bonus/src/sprites/init_bonus.c							\
 			bonus/src/sprites/sprites_bonus.c						\
+			bonus/src/my_mlx/my_mlx_init_img_bonus.c				\
+			bonus/src/my_mlx/my_mlx_pixel_put_bonus.c				\
+			bonus/src/my_mlx/my_mlx_get_pixel_bonus.c				\
+			bonus/src/my_mlx/my_mlx_new_img_bonus.c					\
+			bonus/src/my_mlx/my_mlx_destroy_img_bonus.c				\
+			bonus/src/my_mlx/my_mlx_resize_img_bonus.c				\
+			bonus/src/my_mlx/my_mlx_get_rgb_color_bonus.c			\
+			bonus/src/my_mlx/my_mlx_get_rgb_values_bonus.c			\
+			bonus/src/my_mlx/my_mlx_get_data_addr_bonus.c			\
+			bonus/src/my_mlx/my_mlx_get_transparent_color_bonus.c	\
 
 LIBFTPATH = libft
 LIBFT =	$(LIBFTPATH)/libft.a

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/29 10:37:24 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/01 21:06:06 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "../../libft/libft.h"
 # include "mlx.h"
+# include "my_mlx_bonus.h"
 # include "struct_bonus.h"
+# include <X11/Xlib.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <float.h>
@@ -33,6 +35,8 @@
 # define HALF_HEIGHT 505
 # define GUN_WIDTH 640
 # define GUN_HEIGHT 640
+# define HEALTH_BAR_WIDTH 300
+# define HEALTH_BAR_HEIGHT 30
 
 # define TILE 64
 # define ROT 0.05
@@ -73,7 +77,6 @@ void				fulfill_map(t_scene *scene, t_map *map);
 void				is_surrounded(t_scene *scene, t_map *map, t_point iter);
 void				check_duplicate_id(t_scene *scene, char ID);
 void				check_map_start(t_scene *scene, t_map *map);
-void				trimap(char ***map, int begin, int end, t_iter iter);
 char				*get_explicit_error_message(t_scene *scene, t_strs strs);
 void				check_starting_position(t_scene *scene, t_map *map, int i,
 						int j);
@@ -82,7 +85,7 @@ void				check_starting_position(t_scene *scene, t_map *map, int i,
 void				minimap(t_cub *cub);
 void				set_tiles(t_cub *cub, int i, int j);
 void				link_tiles(t_cub *cub, int i, int j);
-void				init_minimap(t_cub *cub, int i, int j);
+void				init_minimap(t_cub *cub);
 void				paint_obx(t_cub *cub, t_tile *topleft, t_point *minip);
 void				paint_minimap_tile(t_cub *cub, int i, int j, int color);
 void				update_obx(t_cub *cub);
@@ -92,16 +95,8 @@ void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 void				my_mlx_hook(t_cub *cub);
 extern void			alt_space(t_cub *cub, int keycode);
 void				init_mlx(t_cub *cub);
-extern int			my_mlx_get_rgb_color(int r, int g, int b);
-extern void			my_mlx_get_rgb_values(int color, int rgb[3]);
-int					my_mlx_get_transparent_color(int back, int fore,
-						double level);
-void				my_mlx_free(t_cub *cub, char *message, t_plane flag);
-extern void			my_mlx_pixel_put(t_img *image, int x, int y, int color);
-extern int			my_mlx_get_pixel(t_img image, int x, int y);
 void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
 						int flag);
-t_img				my_mlx_resize_img(void *mlx, t_img img, t_point new_size);
 void				my_mlx_draw_horizontal_lines_to_img(t_img *img, t_point crd,
 						t_point size, int color);
 
@@ -112,34 +107,37 @@ int					rotate_player(t_cub *cub, int keycode);
 void				player(t_cub *cub);
 
 // SPRITES
-void				init_sprites(t_cub *cub);
-void				get_frames_images(t_cub *cub, int i);
+void				get_sprites_images(t_cub *cub, int i);
 void				put_gun_frame(t_cub *cub, t_img frame);
 
 //  RAYS
 extern void			init_rays(t_cub *cub);
 void				get_rays(t_cub *cub, int i);
-void				check_horizontal_intersection(t_cub *cub, int i);
-void				check_vertical_intersection(t_cub *cub, int i);
+void				check_horizontal_intersection(t_cub *cub, t_ray *ray);
+void				check_vertical_intersection(t_cub *cub, t_ray *ray);
 int					is_wall(t_cub *cub, double x, double y);
 int					inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
 extern int			face_right(double angle);
-extern t_texture	*get_texture(t_cub *cub, double angle, t_point dir);
+void				get_texture_img(t_cub *cub, t_ray *ray, double angle,
+						t_point dir);
 
 //  CUB3D
+void				init_dfl(t_cub *cub);
 void				cub3D(t_cub *cub);
 
 // PAINTING
-void				paint(t_cub *cub, int i, int j, t_point pixel);
+void				paint_column(t_cub *cub, t_ray *ray, t_point iter, t_point pixel);
 
 //  UTILS
 double				ft_normalizer(double angle);
 int					ft_map(int old_value, int old_limits[2], int new_limits[2]);
 void				exit_error(char *message, t_scene *scene);
+void				my_mlx_error_free(t_cub *cub, char *message);
 void				bresenham_circle(t_bresenham_circle circle);
 void				bresenham_line(t_bresenham_line line);
 void				free_tiles(t_tile ***tiles, int i, int size);
+void				destroy_all_imgs(t_cub *cub);
 unsigned long long	get_current_time(void);
 
 //  T_ROW
