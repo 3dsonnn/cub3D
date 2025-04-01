@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:22:09 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:34:00 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/31 17:04:14 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,21 @@ void    exit_error(char *message, t_scene *scene)
     while (++i < 4)
         ft_strfree(&scene->textures[i].path);
     exit(1);
+}
+
+void	my_mlx_error_free(t_cub *cub, char *message)
+{
+	destroy_all_imgs(cub);
+	if (cub->win)
+	{
+		mlx_destroy_window(cub->mlx, cub->win);
+		cub->win = NULL;
+	}
+	if (cub->mlx)
+	{
+		mlx_destroy_display(cub->mlx);
+		free(cub->mlx);
+		cub->mlx = NULL;
+	}
+	exit_error(message, &cub->scene);
 }
