@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 08:44:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/01 20:48:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ inline int	face_right(double angle)
 	return ((angle < M_PI_2 || angle > (3 * M_PI_2)));
 }
 
-inline t_texture	*get_texture(t_cub *cub, double angle, t_point dir)
+void	get_texture_img(t_cub *cub, t_ray *ray, double angle, t_point dir)
 {
 	if (!face_down(angle) && dir.x && !dir.y)
-		return (&cub->scene.textures[NO]);
+		ray->img = cub->scene.textures[NO].img;
 	if (face_down(angle) && dir.x && !dir.y)
-		return (&cub->scene.textures[SO]);
+		ray->img = cub->scene.textures[SO].img;
 	if (face_right(angle) && dir.y && !dir.x)
-		return (&cub->scene.textures[EA]);
+		ray->img = cub->scene.textures[EA].img;
 	if (!face_right(angle) && dir.y && !dir.x)
-		return (&cub->scene.textures[WE]);
-	return (NULL);
+		ray->img = cub->scene.textures[WE].img;
 }
