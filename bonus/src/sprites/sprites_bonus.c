@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:22:21 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/29 10:33:58 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/01 19:20:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	draw_health_bar(t_cub *cub, t_point bar_size, t_point iter)
 
 void	player(t_cub *cub)
 {
-	draw_health_bar(cub, (t_point){300, 30}, (t_point){-1, -1});
-	my_mlx_put_img_to_img(&cub->img, cub->sprites.frames[CROSSHAIR],
-		(t_point){(cub->img.width - cub->sprites.frames[CROSSHAIR].width) / 2,
-		(cub->img.height - cub->sprites.frames[CROSSHAIR].height) / 2}, 1);
+	// draw_health_bar(cub, (t_point){300, 30}, (t_point){-1, -1});
+	my_mlx_put_img_to_img(&cub->img, cub->sprites.imgs[CROSSHAIR],
+		(t_point){(cub->img.width - cub->sprites.imgs[CROSSHAIR].width) / 2,
+		(cub->img.height - cub->sprites.imgs[CROSSHAIR].height) / 2}, 1);
 }

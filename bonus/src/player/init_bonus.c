@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/29 10:17:38 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/31 12:50:53 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ void	init_player(t_cub *cub)
 	cub->player.dir.y = sin(cub->player.angle);
 	cub->player.plane.x = -cub->player.dir.y;
 	cub->player.plane.y = cub->player.dir.x;
-	cub->player.updown = 0;
 	mlx_do_key_autorepeatoff(cub->mlx);
 }
