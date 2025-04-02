@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_rays.c                                        :+:      :+:    :+:   */
+/*   my_mlx_get_rgb_values_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/31 13:34:11 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/01 17:13:12 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/01 17:13:31 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../../inc/my_mlx_bonus.h"
 
-inline void	init_rays(t_cub *cub)
+inline void	my_mlx_get_rgb_values(int color, int rgb[3])
 {
-	cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
-	if (!cub->rays)
-		my_mlx_free(cub, "Failed to allocate memory for rays", (t_plane){-1, 4,
-			1, 1});
-	cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
+	rgb[0] = (color >> 16) & 0xFF;
+	rgb[1] = (color >> 8) & 0xFF;
+	rgb[2] = color & 0xFF;
 }

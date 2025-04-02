@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_rays.c                                        :+:      :+:    :+:   */
+/*   my_mlx_get_pixel_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/31 13:34:11 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/01 15:30:24 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/01 16:03:41 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../../inc/my_mlx_bonus.h"
 
-inline void	init_rays(t_cub *cub)
+inline int	my_mlx_get_pixel(t_img img, int x, int y)
 {
-	cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
-	if (!cub->rays)
-		my_mlx_free(cub, "Failed to allocate memory for rays", (t_plane){-1, 4,
-			1, 1});
-	cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
+	if (!img.addr || x < 0 || x >= img.width || y < 0 || y >= img.height)
+		return (TRANSPARENT);
+	return (*(img.addr + y * img.line_len + x));
 }

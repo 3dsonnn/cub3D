@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 20:04:06 by efinda           ###   ########.fr       */
+/*   Updated: 2025/03/31 12:36:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,6 @@ static void	check_map(t_scene *scene, t_map *map)
 
 void	checks(t_cub *cub, int ac, char **av)
 {
-	cub->hooks.alt = 0;
-	cub->hooks.space = 0;
-	cub->scene.tmp = NULL;
-	cub->scene.mtx = NULL;
-	cub->scene.line = NULL;
-	cub->scene.line_nbr = 0;
-	cub->scene.elements = NULL;
-	cub->scene.map.head = NULL;
-	cub->scene.map.content = NULL;
-	cub->scene.line_nbr_str = NULL;
-	cub->scene.textures[NO].path = NULL;
-	cub->scene.textures[SO].path = NULL;
-	cub->scene.textures[WE].path = NULL;
-	cub->scene.textures[EA].path = NULL;
 	check_args(&cub->scene, ac, av);
 	check_elements(&cub->scene);
 	check_map(&cub->scene, &cub->scene.map);

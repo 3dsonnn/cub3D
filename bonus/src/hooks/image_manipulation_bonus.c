@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:02 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 14:35:14 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/01 17:23:02 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,46 +50,22 @@ void	my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd, int flag)
 	}
 }
 
-static void	fill_img(t_img src, t_img *dst, int x, int y)
+void	my_mlx_draw_horizontal_lines_to_img(t_img *img, t_point crd, t_point size, int color)
 {
-	t_point	offset;
-	int		pixel;
+	t_point	iter;
 
-	while (++y < dst->height)
+	iter = (t_point){.x = -1, .y = -1};
+	if (!img || crd.x < 0 || crd.x > img->width || crd.y < 0
+		|| crd.y > img->height || size.x <= 0 || size.y <= 0)
+		return ;
+	if (crd.x + size.x > img->width)
+		size.x = img->width - crd.x;
+	if (crd.y + size.y > img->height)
+		size.y = img->height - crd.y;
+	while (++iter.y < size.y)
 	{
-		x = -1;
-		while (++x < dst->width)
-		{
-			offset.x = ft_map(x, (int[]){0, dst->width}, (int[]){0, src.width});
-			offset.y = ft_map(y, (int[]){0, dst->height}, (int[]){0,
-					src.height});
-			pixel = my_mlx_get_pixel(src, offset.x, offset.y);
-			my_mlx_pixel_put(dst, x, y, pixel);
-		}
+		iter.x = -1;
+		while (++iter.x < size.x)
+			my_mlx_pixel_put(img, crd.x + iter.x, crd.y + iter.y, color);
 	}
-}
-
-t_img	my_mlx_resize_img(void *mlx, t_img img, t_point new_size)
-{
-	t_img	res;
-
-	if (new_size.x <= 0 || new_size.y <= 0 || (img.width == new_size.x
-			&& img.height == new_size.y))
-		return (img);
-	res.img = mlx_new_image(mlx, new_size.x, new_size.y);
-	if (!res.img)
-		return (img);
-	res.addr = (int *)mlx_get_data_addr(res.img, &res.bpp, &res.line_len,
-			&res.endian);
-	if (!res.addr)
-	{
-		mlx_destroy_image(mlx, res.img);
-		return (img);
-	}
-	res.line_len /= 4;
-	res.width = new_size.x;
-	res.height = new_size.y;
-	fill_img(img, &res, -1, -1);
-	mlx_destroy_image(mlx, img.img);
-	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 19:09:47 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 19:27:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/02 03:35:05 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	set_tiles_aux(t_cub *cub, char c, int i, int j)
 	else if (c == ' ')
 	{
 		cub->minimap.tiles[i][j].id = ' ';
-		cub->minimap.tiles[i][j].color = -42;
+		cub->minimap.tiles[i][j].color = TRANSPARENT;
 	}
 }
 
@@ -48,5 +48,5 @@ void	set_tiles(t_cub *cub, int i, int j)
 			}
 		}
 	}
-	update_obx(cub);
+	update_obx(cub, cub->minimap.corners, cub->minimap.tiles);
 }

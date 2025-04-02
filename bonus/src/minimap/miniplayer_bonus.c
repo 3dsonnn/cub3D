@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 07:48:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/21 23:24:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/02 03:47:37 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	miniplayer(t_cub *cub, t_point base, t_point tile_min)
 	t_bresenham_line	line;
 	t_bresenham_circle	circle;
 
-	line.img = &cub->img;
-	circle.img = &cub->img;
+	line.img = &cub->minimap.img;
+	circle.img = &cub->minimap.img;
 	line.color = GREEN;
 	line.crd.x0 = ft_map((int)cub->player.pos.x, (int[]){tile_min.x, tile_min.x
 			+ TILE}, (int[]){base.x, base.x + cub->minimap.tilesize});
