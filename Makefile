@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/01 18:18:56 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/02 03:37:00 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,6 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/minimap/linkage_bonus.c						\
 			bonus/src/minimap/settings_bonus.c						\
 			bonus/src/minimap/obx_bonus.c							\
-			bonus/src/minimap/paint_bonus.c							\
 			bonus/src/minimap/minimap_bonus.c						\
 			bonus/src/minimap/miniplayer_bonus.c					\
 			bonus/src/sprites/init_bonus.c							\

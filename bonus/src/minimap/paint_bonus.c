@@ -6,37 +6,33 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/21 23:11:57 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/02 03:35:17 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-void	paint_minimap_tile(t_cub *cub, int i, int j, int color)
+void	paint_minimap_tile(t_cub *cub, t_plane edges, t_point iter, int color)
 {
-	int	x0;
-	int	x;
-	int	y0;
-	int	y;
-
-	y0 = i * cub->minimap.tilesize + 10;
-	x = (j + 1) * cub->minimap.tilesize + 10;
-	y = (i + 1) * cub->minimap.tilesize + 10;
-	while (y0 < y)
+	while (edges.y0 < edges.y)
 	{
-		x0 = j * cub->minimap.tilesize + 10;
-		while (x0 < x)
+		edges.x0 = iter.x * cub->minimap.tilesize;
+		while (edges.x0 < edges.x)
 		{
-			if (x0 == j * cub->minimap.tilesize + 10 || x0 == x - 1 || y0 == i
-				* cub->minimap.tilesize + 10 || y0 == y - 1)
-				my_mlx_pixel_put(&cub->img, x0, y0, WHITE);
+			if (color == TRANSPARENT)
+				my_mlx_pixel_put(&cub->minimap.img, edges.x0, edges.y0,
+					my_mlx_get_pixel(cub->img, edges.x0 + 10, edges.y0 + 10));
+			else if (edges.x0 == iter.x * cub->minimap.tilesize
+				|| edges.x0 == edges.x - 1 || edges.y0 == iter.y
+				* cub->minimap.tilesize || edges.y0 == edges.y - 1)
+				my_mlx_pixel_put(&cub->minimap.img, edges.x0, edges.y0, WHITE);
 			else
-				my_mlx_pixel_put(&cub->img, x0, y0,
-					my_mlx_get_transparent_color(my_mlx_get_pixel(cub->img, x0,
-							y0), color, .5));
-			x0++;
+				my_mlx_pixel_put(&cub->minimap.img, edges.x0, edges.y0,
+					my_mlx_get_transparent_color(my_mlx_get_pixel(cub->img,
+							edges.x0 + 10, edges.y0 + 10), color, .5));
+			edges.x0++;
 		}
-		y0++;
+		edges.y0++;
 	}
 }
 
@@ -57,10 +53,10 @@ void	paint_obx(t_cub *cub, t_tile *topleft, t_point *minip)
 				minip->x = pos.x * cub->minimap.tilesize + 10;
 				minip->y = pos.y * cub->minimap.tilesize + 10;
 			}
-			if (tmp->id == ' ')
-				;
-			else
-				paint_minimap_tile(cub, pos.y, pos.x, tmp->color);
+			paint_minimap_tile(cub, (t_plane){0, ((pos.x + 1)
+					* cub->minimap.tilesize), (pos.y * cub->minimap.tilesize),
+				((pos.y + 1) * cub->minimap.tilesize)}, (t_point){pos.x, pos.y},
+				tmp->color);
 			tmp = tmp->right;
 		}
 		topleft = topleft->down;

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 21:06:06 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/02 03:37:20 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ void				minimap(t_cub *cub);
 void				set_tiles(t_cub *cub, int i, int j);
 void				link_tiles(t_cub *cub, int i, int j);
 void				init_minimap(t_cub *cub);
-void				paint_obx(t_cub *cub, t_tile *topleft, t_point *minip);
-void				paint_minimap_tile(t_cub *cub, int i, int j, int color);
-void				update_obx(t_cub *cub);
+void				update_obx(t_cub *cub, t_tile *corners[4], t_tile **tiles);
 void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 
 //  MY_MLX
@@ -127,7 +125,8 @@ void				init_dfl(t_cub *cub);
 void				cub3D(t_cub *cub);
 
 // PAINTING
-void				paint_column(t_cub *cub, t_ray *ray, t_point iter, t_point pixel);
+void				paint_column(t_cub *cub, t_ray *ray, t_point iter,
+						t_point pixel);
 
 //  UTILS
 double				ft_normalizer(double angle);

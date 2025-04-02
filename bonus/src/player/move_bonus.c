@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/25 00:34:23 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/02 00:46:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	update_cur_tile(t_cub *cub, double x, double y)
 	cub->minimap.cur->id = '0';
 	cub->minimap.cur = &cub->minimap.tiles[i][j];
 	cub->minimap.cur->id = 'C';
-	update_obx(cub);
+	update_obx(cub, cub->minimap.corners, cub->minimap.tiles);
 }
 
 static int	obx_overlaps_wall(t_dpoint pos, t_point check)
