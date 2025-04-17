@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/21 23:18:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 08:51:42 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../../libft/libft.h"
 # include "mlx.h"
 # include "struct.h"
+# include "my_mlx.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <float.h>
@@ -24,6 +25,8 @@
 # include <string.h>
 # include <unistd.h>
 
+# define WIDTH 1920
+# define HEIGHT 1010
 # define TILE 64
 # define ROT 0.05
 # define SPEED 5.0
@@ -40,16 +43,18 @@
 
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
+# define TRANSPARENT 0xFF000000
 
 //  CHECKS
+void				init_dfl(t_cub *cub, int i);
 char				*get_element_str(char c);
 void				check_fc(t_scene *scene);
 void				check_texture(t_scene *scene);
-void				check_element(t_scene *scene);
-char				*skip_empty_lines(t_scene *scene);
+void				check_element(t_scene *scene, int *flag);
+void				skip_empty_lines(t_scene *scene);
+void				fulfill_map(t_scene *scene, t_map *map);
 void				fill_map(t_scene *scene, t_map *map);
 void				checks(t_cub *cub, int ac, char **av);
-void				fulfill_map(t_scene *scene, t_map *map);
 void				is_surrounded(t_scene *scene, t_map *map, t_point iter);
 void				check_duplicate_id(t_scene *scene, char ID);
 void				check_map_start(t_scene *scene, t_map *map);
@@ -60,10 +65,7 @@ void				check_starting_position(t_scene *scene, t_map *map, int i,
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
 void				init_mlx(t_cub *cub, int i);
-extern int			my_mlx_get_rgb_color(int r, int g, int b);
 void				my_mlx_free(t_cub *cub, char *message, t_plane flag);
-extern void			my_mlx_pixel_put(t_img *image, int x, int y, int color);
-extern int			my_mlx_get_pixel(t_img image, int x, int y);
 
 //  PLAYER
 void				init_player(t_cub *cub);
@@ -73,19 +75,16 @@ void				move_player(t_cub *cub, double forward, double strafe,
 
 //  RAYS
 extern void			init_rays(t_cub *cub);
-void				check_horizontal_intersection(t_cub *cub, int i);
-void				check_vertical_intersection(t_cub *cub, int i);
+void				check_horizontal_intersection(t_cub *cub, t_ray *ray);
+void				check_vertical_intersection(t_cub *cub, t_ray *ray);
 int					is_wall(t_cub *cub, double x, double y);
 int					inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
 extern int			face_right(double angle);
-extern t_texture	*get_texture(t_cub *cub, double angle, t_point dir);
+void				get_texture(t_cub *cub, t_ray *ray, double angle, t_point dir);
 
 //  CUB3D
 void				cub3d(t_cub *cub, int j);
-
-// PAINTING
-void				paint(t_cub *cub, int i, int j, t_point pixel);
 
 //  UTILS
 double				ft_normalizer(double angle);

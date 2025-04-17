@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:23:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:14:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:51:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,21 @@ static void	check_color_range(t_scene *scene, int rgb[3], char *id, char *aux)
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ",
+				" element on line ", scene->line_nbr.str, ": ",
 				"Red color is out of the range [0, 255]"}), scene);
 	}
 	if (!(rgb[1] >= 0 && rgb[1] <= 255))
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ",
+				" element on line ", scene->line_nbr.str, ": ",
 				"Green color is out of the range [0, 255]"}), scene);
 	}
 	if (!(rgb[2] >= 0 && rgb[2] <= 255))
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ",
+				" element on line ", scene->line_nbr.str, ": ",
 				"Blue color is out of the range [0, 255]"}), scene);
 	}
 	scene->tmp = aux;
@@ -56,26 +56,26 @@ static void	first_checks(t_scene *scene, char *id, int i)
 {
 	if (ft_strlen(scene->line) < 7)
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ", "too short"}),
+				" element on line ", scene->line_nbr.str, ": ", "too short"}),
 			scene);
 	while (scene->line[++i])
 		if (!ft_strchr("0123456789 ,", scene->line[i]))
 			exit_error(get_explicit_error_message(scene,
 					(t_strs){"Invalid character on the ", id,
-					" element on line ", scene->line_nbr_str, NULL, NULL}),
+					" element on line ", scene->line_nbr.str, NULL, NULL}),
 				scene);
 	scene->mtx = ft_split(scene->line + 2, ' ');
 	if (ft_mtxlen(scene->mtx) < 1)
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ", "too short"}),
+				" element on line ", scene->line_nbr.str, ": ", "too short"}),
 			scene);
 	if (ft_mtxlen(scene->mtx) > 5)
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ", "too long"}),
+				" element on line ", scene->line_nbr.str, ": ", "too long"}),
 			scene);
 	if (!ft_strcmp(*scene->mtx, ","))
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ",
+				" element on line ", scene->line_nbr.str, ": ",
 				"the color range cannot start with a ','"}), scene);
 }
 
@@ -85,7 +85,7 @@ static void	keep_checking(t_scene *scene, char *id, int rgb[3], int i)
 
 	if (!ft_strcmp(scene->mtx[ft_mtxlen(scene->mtx) - 1], ","))
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ",
+				" element on line ", scene->line_nbr.str, ": ",
 				"the color range cannot end with a ','"}), scene);
 	while (scene->mtx[++i])
 		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[i]);
@@ -96,7 +96,7 @@ static void	keep_checking(t_scene *scene, char *id, int rgb[3], int i)
 	{
 		scene->tmp = aux;
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr_str, ": ",
+				" element on line ", scene->line_nbr.str, ": ",
 				"the color range cannot contain consecutive commas"}), scene);
 	}
 	rgb[1] = ft_atoi(scene->tmp + 1);
@@ -114,10 +114,10 @@ void	check_fc(t_scene *scene)
 	if (ft_strchr_count(scene->line, ',') != 2)
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Incorrect number of commas on the ", id,
-				" element on line ", scene->line_nbr_str, NULL, NULL}), scene);
+				" element on line ", scene->line_nbr.str, NULL, NULL}), scene);
 	first_checks(scene, id, 1);
 	keep_checking(scene, id, rgb, -1);
-	ft_strfree(&scene->line_nbr_str);
+	ft_strfree(&scene->line_nbr.str);
 	ft_strfree(&scene->line);
 	ft_mtxfree(&scene->mtx);
 }

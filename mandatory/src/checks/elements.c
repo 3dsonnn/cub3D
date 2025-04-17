@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:28:01 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:56:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	check_duplicate_id(t_scene *scene, char ID)
 		if (ID == 'C' || ID == 'F')
 			exit_error(get_explicit_error_message(scene, (t_strs){"Duplicated ",
 					get_element_str(ID), " element on line ",
-					scene->line_nbr_str, NULL, NULL}), scene);
+					scene->line_nbr.str, NULL, NULL}), scene);
 		else
 			exit_error(get_explicit_error_message(scene,
 					(t_strs){"Duplicate path to the ", get_element_str(ID),
-					" texture on line ", scene->line_nbr_str, NULL, NULL}),
+					" texture on line ", scene->line_nbr.str, NULL, NULL}),
 				scene);
 	}
 	scene->tmp = ft_strjoin(scene->elements, (char []){ID, '\0'});
@@ -71,7 +71,7 @@ void	check_duplicate_id(t_scene *scene, char ID)
 	ft_swaptr((void **)&scene->elements, (void **)&scene->tmp);
 }
 
-void	check_element(t_scene *scene)
+void	check_element(t_scene *scene, int *flag)
 {
 	scene->tmp = ft_strtrim(scene->line, " ");
 	ft_strfree(&scene->line);
@@ -80,10 +80,16 @@ void	check_element(t_scene *scene)
 		check_texture(scene);
 	else if (check_id(scene->line, 1))
 		check_fc(scene);
+	else if (ft_strlen(scene->elements) == 6
+		&& ft_strspn(scene->line, "01 NSEW") == ft_strlen(scene->line))
+	{
+		*flag = 1;
+		return ;
+	}
 	else
 	{
 		exit_error(get_explicit_error_message(scene,
-				(t_strs){"Invalid element on line ", scene->line_nbr_str,
+				(t_strs){"Invalid element on line ", scene->line_nbr.str,
 				" of the scene file", NULL, NULL, NULL}), scene);
 	}
 }

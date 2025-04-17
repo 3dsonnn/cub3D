@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 07:53:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 08:50:40 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_wall(t_cub *cub, double x, double y)
 		|| tile_x > cub->scene.map.size.x - 1
 		|| cub->scene.map.content[tile_y][tile_x] == '1')
 		return (1);
-	return (cub->scene.map.content[tile_y][tile_x] == '1');
+	return (0);
 }
 
 inline int	face_down(double angle)
@@ -47,15 +47,14 @@ inline int	face_right(double angle)
 	return ((angle < M_PI_2 || angle > (3 * M_PI_2)));
 }
 
-inline t_texture	*get_texture(t_cub *cub, double angle, t_point dir)
+void	get_texture(t_cub *cub, t_ray *ray, double angle, t_point dir)
 {
 	if (!face_down(angle) && dir.x && !dir.y)
-		return (&cub->scene.textures[NO]);
-	if (face_down(angle) && dir.x && !dir.y)
-		return (&cub->scene.textures[SO]);
-	if (face_right(angle) && dir.y && !dir.x)
-		return (&cub->scene.textures[EA]);
-	if (!face_right(angle) && dir.y && !dir.x)
-		return (&cub->scene.textures[WE]);
-	return (NULL);
+		ray->img = cub->scene.textures[NO].img;
+	else if (face_down(angle) && dir.x && !dir.y)
+		ray->img = cub->scene.textures[SO].img;
+	else if (face_right(angle) && dir.y && !dir.x)
+		ray->img = cub->scene.textures[EA].img;
+	else if (!face_right(angle) && dir.y && !dir.x)
+		ray->img = cub->scene.textures[WE].img;
 }

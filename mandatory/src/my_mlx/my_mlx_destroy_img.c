@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   my_mlx_destroy_img.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 07:48:10 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/01 16:49:00 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/16 23:44:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../../inc/my_mlx.h"
 
-int	main(int ac, char **av)
+void	my_mlx_destroy_img(void *mlx, t_img *img)
 {
-	t_cub	cub;
-
-	init_dfl(&cub, -1);
-	checks(&cub, ac, av);
-	init_mlx(&cub, -1);
-	init_rays(&cub);
-	init_player(&cub);
-	cub3d(&cub, -1);
-	my_mlx_hook(&cub);
-	mlx_loop(cub.mlx);
-	return (0);
+	if (mlx && img && img->img)
+	{
+		mlx_destroy_image(mlx, img->img);
+        my_mlx_init_img(img);
+	}
 }
