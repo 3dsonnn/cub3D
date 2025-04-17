@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 08:51:04 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 10:10:25 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	get_column(t_cub *cub, t_ray *ray)
 		ray->bot = cub->img.height;
 }
 
-void	cub3d(t_cub *cub, int j)
+void	raycast(t_cub *cub, int j)
 {
 	while (++j < cub->img.width)
 	{

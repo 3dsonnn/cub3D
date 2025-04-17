@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:22:11 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 01:52:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 09:33:27 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	fill_texture(t_scene *scene, char id, char *path)
 	else
 		check_duplicate_id(scene, id);
 	if (id == 'N')
-		scene->textures[NO] = (t_texture){.id = NO, .path = ft_strdup(path)};
+		scene->textures[NO].path = ft_strdup(path);
 	else if (id == 'S')
-		scene->textures[SO] = (t_texture){.id = SO, .path = ft_strdup(path)};
+		scene->textures[SO].path = ft_strdup(path);
 	else if (id == 'W')
-		scene->textures[WE] = (t_texture){.id = WE, .path = ft_strdup(path)};
+		scene->textures[WE].path = ft_strdup(path);
 	else if (id == 'E')
-		scene->textures[EA] = (t_texture){.id = EA, .path = ft_strdup(path)};
+		scene->textures[EA].path = ft_strdup(path);
 }
 
 static void	check_texture_aux(t_scene *scene, char *id)

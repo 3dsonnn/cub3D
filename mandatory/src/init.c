@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 08:39:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 09:34:21 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	init_dfl(t_cub *cub, int i)
 		.start = '\0', .spos = (t_point){0, 0}, .size = (t_point){0, 0}};
 	while (++i < 4)
 	{
-		cub->scene.textures[i] = (t_texture){.id = 0, .path = NULL};
+		cub->scene.textures[i].path = NULL;
 		my_mlx_init_img(&cub->scene.textures[i].img);
 	}
 	cub->player = (t_player){.angle = 0.0, .pos = (t_dpoint){0.0, 0.0},
