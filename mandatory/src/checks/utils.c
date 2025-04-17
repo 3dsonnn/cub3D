@@ -6,20 +6,20 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 03:49:02 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/22 21:59:13 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:50:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-char	*skip_empty_lines(t_scene *scene)
+void	skip_empty_lines(t_scene *scene)
 {
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);
-		scene->line_nbr++;
+		scene->line_nbr.value++;
 		if (!scene->line)
-			return (scene->line);
+			return ;
 		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
 			scene->line[ft_strlen(scene->line) - 1] = '\0';
 		if (!*scene->line)
@@ -27,7 +27,7 @@ char	*skip_empty_lines(t_scene *scene)
 			ft_strfree(&scene->line);
 			continue ;
 		}
-		return (scene->line);
+		return ;
 	}
 }
 

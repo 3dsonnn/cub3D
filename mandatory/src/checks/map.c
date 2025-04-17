@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 10:45:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 02:24:22 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	check_map_start(t_scene *scene, t_map *map)
 {
-	scene->line = get_next_line(scene->fd);
-	scene->line_nbr++;
 	if (!scene->line)
 		exit_error("The map is missing in the scene file", scene);
 	if (scene->line[ft_strlen(scene->line) - 1] == '\n')
@@ -23,16 +21,15 @@ void	check_map_start(t_scene *scene, t_map *map)
 	if (!*scene->line)
 	{
 		ft_strfree(&scene->line);
-		scene->tmp = skip_empty_lines(scene);
-		if (!scene->tmp)
+		skip_empty_lines(scene);
+		if (!scene->line)
 			exit_error("The map is missing in the scene file", scene);
-		scene->tmp = NULL;
 	}
 	if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
 	{
-		scene->line_nbr_str = ft_itoa(scene->line_nbr);
+		scene->line_nbr.str = ft_itoa(scene->line_nbr.value);
 		exit_error(get_explicit_error_message(scene,
-				(t_strs){"Invalid element on line ", scene->line_nbr_str,
+				(t_strs){"Invalid element on line ", scene->line_nbr.str,
 				" of the scene file", NULL, NULL, NULL}), scene);
 	}
 	add_row(&map->head, new_row(scene->line));
@@ -41,20 +38,20 @@ void	check_map_start(t_scene *scene, t_map *map)
 
 static void	check_map_end(t_scene *scene, t_map *map)
 {
-	ft_strfree(&scene->line_nbr_str);
+	ft_strfree(&scene->line_nbr.str);
 	if (!scene->line)
 		return ;
 	ft_strfree(&scene->line);
 	while (-42)
 	{
-		scene->line = skip_empty_lines(scene);
+		skip_empty_lines(scene);
 		if (!scene->line)
 			return ;
-		scene->line_nbr_str = ft_itoa(scene->line_nbr);
+		scene->line_nbr.str = ft_itoa(scene->line_nbr.value);
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"The map content always has to be the last information on the file. \
 				So the element on line ",
-				scene->line_nbr_str, " is invalid", NULL, NULL, NULL}), scene);
+				scene->line_nbr.str, " is invalid", NULL, NULL, NULL}), scene);
 	}
 }
 
@@ -83,8 +80,8 @@ void	fill_map(t_scene *scene, t_map *map)
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);
-		scene->line_nbr++;
-		scene->line_nbr_str = ft_itoa(scene->line_nbr);
+		scene->line_nbr = (t_nbr){.value = scene->line_nbr.value++,
+			.str = ft_itoa(scene->line_nbr.value)};
 		if (!scene->line)
 			break ;
 		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
@@ -96,12 +93,12 @@ void	fill_map(t_scene *scene, t_map *map)
 			exit_error(get_explicit_error_message(scene,
 					(t_strs){"Invalid character inside \
 					the map content on line ",
-					scene->line_nbr_str, " of the scene file", NULL, NULL,
+					scene->line_nbr.str, " of the scene file", NULL, NULL,
 					NULL}), scene);
 		}
 		add_row(&map->head, new_row(scene->line));
 		ft_strfree(&scene->line);
-		ft_strfree(&scene->line_nbr_str);
+		ft_strfree(&scene->line_nbr.str);
 	}
 	check_map_end(scene, map);
 }
