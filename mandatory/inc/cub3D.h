@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 08:51:42 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 09:27:00 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ extern void			init_rays(t_cub *cub);
 void				check_horizontal_intersection(t_cub *cub, t_ray *ray);
 void				check_vertical_intersection(t_cub *cub, t_ray *ray);
 int					is_wall(t_cub *cub, double x, double y);
-int					inside_map(t_cub *cub, double x, double y);
+extern int			inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
 extern int			face_right(double angle);
 void				get_texture(t_cub *cub, t_ray *ray, double angle, t_point dir);

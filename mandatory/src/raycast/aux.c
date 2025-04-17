@@ -6,13 +6,13 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 08:50:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 09:31:12 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-int	inside_map(t_cub *cub, double x, double y)
+inline	int	inside_map(t_cub *cub, double x, double y)
 {
 	if (x >= 0 && x < cub->scene.map.size.x * TILE && y >= 0
 		&& y < cub->scene.map.size.y * TILE)
@@ -49,12 +49,12 @@ inline int	face_right(double angle)
 
 void	get_texture(t_cub *cub, t_ray *ray, double angle, t_point dir)
 {
-	if (!face_down(angle) && dir.x && !dir.y)
+	if (!face_down(angle) && dir.x)
 		ray->img = cub->scene.textures[NO].img;
-	else if (face_down(angle) && dir.x && !dir.y)
+	else if (face_down(angle) && dir.x)
 		ray->img = cub->scene.textures[SO].img;
-	else if (face_right(angle) && dir.y && !dir.x)
+	else if (face_right(angle) && dir.y)
 		ray->img = cub->scene.textures[EA].img;
-	else if (!face_right(angle) && dir.y && !dir.x)
+	else if (!face_right(angle) && dir.y)
 		ray->img = cub->scene.textures[WE].img;
 }
