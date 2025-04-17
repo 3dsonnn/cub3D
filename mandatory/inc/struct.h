@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 09:32:34 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 11:36:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ typedef enum ID
 	WE,
 	EA
 }					t_ID;
-
-typedef struct s_iter
-{
-	int				i;
-	int				j;
-	int				k;
-	int				l;
-	int				m;
-	int				n;
-}					t_iter;
 
 typedef struct s_strs
 {
@@ -54,14 +44,6 @@ typedef struct s_dpoint
 	double			x;
 	double			y;
 }					t_dpoint;
-
-typedef struct s_dplane
-{
-	double			x0;
-	double			x;
-	double			y0;
-	double			y;
-}					t_dplane;
 
 typedef struct s_rows
 {

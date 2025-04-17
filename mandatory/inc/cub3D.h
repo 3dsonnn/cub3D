@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 10:12:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 11:39:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 # define LEFT 65361
 # define RIGHT 65363
 
-# define BLACK 0x000000
-# define WHITE 0xFFFFFF
 # define TRANSPARENT 0xFF000000
 
 //  CHECKS

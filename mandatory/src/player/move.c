@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 09:19:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 11:42:45 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	rotate_player(t_cub *cub, double angle_delta)
 {
 	cub->player.angle += angle_delta;
 	cub->player.angle = ft_normalizer(cub->player.angle);
-	cub->player.dir.x = cos(cub->player.angle);
-	cub->player.dir.y = sin(cub->player.angle);
-	cub->player.plane.x = -cub->player.dir.y;
-	cub->player.plane.y = cub->player.dir.x;
+	cub->player.dir = (t_dpoint){.x = cos(cub->player.angle), .y = sin(cub->player.angle)};
+	cub->player.plane = (t_dpoint){.x = -cub->player.dir.y, .y = cub->player.dir.x};
 }
