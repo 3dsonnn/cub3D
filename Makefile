@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/17 01:10:49 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/17 08:46:38 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,9 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/init.c 									\
 		mandatory/src/hooks.c 									\
 		mandatory/src/cub3D/cub3D.c 							\
-		mandatory/src/cub3D/painting.c 							\
 		mandatory/src/player/init.c 							\
 		mandatory/src/player/move.c 							\
 		mandatory/src/raycast/aux.c								\
-		mandatory/src/raycast/init_rays.c						\
 		mandatory/src/raycast/vertical.c						\
 		mandatory/src/raycast/horizontal.c						\
 		mandatory/src/t_row/t_row.c 							\

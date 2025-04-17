@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 01:44:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 08:48:33 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,6 @@ typedef struct s_scene
 	t_texture		textures[4];
 }					t_scene;
 
-typedef struct s_col
-{
-	double			dist;
-	int				height;
-	int				top;
-	int				bot;
-}					t_col;
-
 typedef struct s_intersection
 {
 	double			dist;
@@ -138,12 +130,14 @@ typedef struct s_ray
 	double			angle;
 	double			dist;
 	double			tan;
+	int				top;
+	int				bot;
+	int				height;
 	t_point			dir;
 	t_dpoint		wall;
 	t_intersection	hor;
 	t_intersection	ver;
-	t_col			col;
-	t_texture		*texture;
+	t_img			img;
 }					t_ray;
 
 typedef struct s_player

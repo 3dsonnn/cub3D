@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 18:34:52 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 07:48:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 {
 	t_cub	cub;
 
+	init_dfl(&cub, -1);
 	checks(&cub, ac, av);
 	init_mlx(&cub, -1);
 	init_rays(&cub);

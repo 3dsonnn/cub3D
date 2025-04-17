@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 02:22:50 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 08:51:42 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <string.h>
 # include <unistd.h>
 
+# define WIDTH 1920
+# define HEIGHT 1010
 # define TILE 64
 # define ROT 0.05
 # define SPEED 5.0
@@ -44,6 +46,7 @@
 # define TRANSPARENT 0xFF000000
 
 //  CHECKS
+void				init_dfl(t_cub *cub, int i);
 char				*get_element_str(char c);
 void				check_fc(t_scene *scene);
 void				check_texture(t_scene *scene);
@@ -72,19 +75,16 @@ void				move_player(t_cub *cub, double forward, double strafe,
 
 //  RAYS
 extern void			init_rays(t_cub *cub);
-void				check_horizontal_intersection(t_cub *cub, int i);
-void				check_vertical_intersection(t_cub *cub, int i);
+void				check_horizontal_intersection(t_cub *cub, t_ray *ray);
+void				check_vertical_intersection(t_cub *cub, t_ray *ray);
 int					is_wall(t_cub *cub, double x, double y);
 int					inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
 extern int			face_right(double angle);
-extern t_texture	*get_texture(t_cub *cub, double angle, t_point dir);
+void				get_texture(t_cub *cub, t_ray *ray, double angle, t_point dir);
 
 //  CUB3D
 void				cub3d(t_cub *cub, int j);
-
-// PAINTING
-void				paint(t_cub *cub, int i, int j, t_point pixel);
 
 //  UTILS
 double				ft_normalizer(double angle);
