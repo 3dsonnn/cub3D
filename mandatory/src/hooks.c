@@ -6,11 +6,11 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 02:53:45 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:11:18 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../inc/cub3D.h"
 
 static int	my_mlx_close(t_cub *cub)
 {

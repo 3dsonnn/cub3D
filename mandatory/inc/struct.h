@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:57:45 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:44:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ typedef struct s_rows
 	struct s_rows	*next;
 }					t_rows;
 
+typedef struct s_nbr
+{
+	int					value;
+	char				*str;
+}						t_nbr;
+
 typedef struct s_img
 {
 	void			*img;
@@ -101,12 +107,11 @@ typedef struct s_scene
 	int				fd;
 	int				floor;
 	int				ceiling;
-	int				line_nbr;
 	char			**mtx;
 	char			*tmp;
 	char			*line;
 	char			*elements;
-	char			*line_nbr_str;
+	t_nbr			line_nbr;
 	t_map			map;
 	t_texture		textures[4];
 }					t_scene;

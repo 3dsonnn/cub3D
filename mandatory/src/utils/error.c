@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:22:09 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:03:03 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:52:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exit_error(char *message, t_scene *scene)
 	free_rows(&scene->map.head);
 	ft_strfree(&scene->elements);
 	ft_mtxfree(&scene->map.content);
-	ft_strfree(&scene->line_nbr_str);
+	ft_strfree(&scene->line_nbr.str);
 	i = -1;
 	while (++i < 4)
 		ft_strfree(&scene->textures[i].path);

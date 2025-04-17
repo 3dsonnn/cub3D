@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/02 03:37:00 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/17 01:10:49 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,8 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/checks/is_surrounded.c 					\
 		mandatory/src/checks/utils.c 							\
 		mandatory/src/checks/ceiling_and_floor.c				\
-		mandatory/src/my_mlx/init.c 							\
-		mandatory/src/my_mlx/hooks.c 							\
-		mandatory/src/my_mlx/utils.c 							\
+		mandatory/src/init.c 									\
+		mandatory/src/hooks.c 									\
 		mandatory/src/cub3D/cub3D.c 							\
 		mandatory/src/cub3D/painting.c 							\
 		mandatory/src/player/init.c 							\
@@ -42,6 +41,15 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/t_row/t_row_aux.c 						\
 		mandatory/src/utils/error.c 							\
 		mandatory/src/utils/ft_math.c							\
+		mandatory/src/my_mlx/my_mlx_init_img.c					\
+		mandatory/src/my_mlx/my_mlx_pixel_put.c					\
+		mandatory/src/my_mlx/my_mlx_get_pixel.c					\
+		mandatory/src/my_mlx/my_mlx_new_img.c					\
+		mandatory/src/my_mlx/my_mlx_destroy_img.c				\
+		mandatory/src/my_mlx/my_mlx_resize_img.c				\
+		mandatory/src/my_mlx/my_mlx_get_rgb_color.c				\
+		mandatory/src/my_mlx/my_mlx_get_rgb_values.c			\
+		mandatory/src/my_mlx/my_mlx_get_data_addr.c				\
 
 SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/init/init_bonus.c								\

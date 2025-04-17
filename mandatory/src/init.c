@@ -6,11 +6,11 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/09 02:23:38 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:11:11 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../inc/cub3D.h"
 
 void	my_mlx_free(t_cub *cub, char *message, t_plane flag)
 {
