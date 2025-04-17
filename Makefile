@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/17 08:46:38 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/17 10:14:44 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/checks/ceiling_and_floor.c				\
 		mandatory/src/init.c 									\
 		mandatory/src/hooks.c 									\
-		mandatory/src/cub3D/cub3D.c 							\
 		mandatory/src/player/init.c 							\
 		mandatory/src/player/move.c 							\
+		mandatory/src/raycast/raycast.c 						\
 		mandatory/src/raycast/aux.c								\
 		mandatory/src/raycast/vertical.c						\
 		mandatory/src/raycast/horizontal.c						\
@@ -46,7 +46,6 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/my_mlx/my_mlx_destroy_img.c				\
 		mandatory/src/my_mlx/my_mlx_resize_img.c				\
 		mandatory/src/my_mlx/my_mlx_get_rgb_color.c				\
-		mandatory/src/my_mlx/my_mlx_get_rgb_values.c			\
 		mandatory/src/my_mlx/my_mlx_get_data_addr.c				\
 
 SRC_BONUS =	bonus/src/main_bonus.c 									\

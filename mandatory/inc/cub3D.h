@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 09:27:00 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/17 10:12:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void				rotate_player(t_cub *cub, double angle_delta);
 void				move_player(t_cub *cub, double forward, double strafe,
 						t_dpoint new_pos);
 
-//  RAYS
+//  RAYCAST
+void				raycast(t_cub *cub, int j);
 extern void			init_rays(t_cub *cub);
 void				check_horizontal_intersection(t_cub *cub, t_ray *ray);
 void				check_vertical_intersection(t_cub *cub, t_ray *ray);
@@ -82,9 +83,6 @@ extern int			inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
 extern int			face_right(double angle);
 void				get_texture(t_cub *cub, t_ray *ray, double angle, t_point dir);
-
-//  CUB3D
-void				cub3d(t_cub *cub, int j);
 
 //  UTILS
 double				ft_normalizer(double angle);
