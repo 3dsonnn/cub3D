@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/21 10:13:34 by welepy           ###   ########.fr       */
+/*   Updated: 2025/04/21 11:30:29 by welepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	check_doors(char **map, int rows, int cols)
 				door.east  = map[door.i][door.j + 1] == '1';
 				door.vertical_check = door.north && door.south;
 				door.horizontal_check = door.west && door.east;
-				if (!door.vertical_check && !door.horizontal_check)
+				if ((!door.vertical_check && !door.horizontal_check) || (door.i == 0 || door.i == rows - 1 || door.j == 0 || door.j == cols - 1))
 					exit_error("sla errno", NULL);
 			}
 			door.j++;
