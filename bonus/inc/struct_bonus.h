@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/28 13:16:01 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/21 10:13:09 by welepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,21 @@ typedef struct s_img_path
 	int				key;
 	char			*path;
 }					t_img_path;
+
+typedef struct s_door
+{
+	int	i;
+	int j;
+
+	int	north;
+	int	south;
+	int	west;
+	int	east;
+
+	int	vertical_check;
+	int	horizontal_check;
+
+}				t_door;
 
 typedef enum e_player_img
 {

@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/27 14:31:11 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/21 10:13:34 by welepy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,33 @@ static void	check_map(t_scene *scene, t_map *map)
 				NULL}), scene);
 	check_starting_position(scene, map, -1, -1);
 	is_surrounded(scene, map, (t_point){0, 0});
+}
+
+void	check_doors(char **map, int rows, int cols)
+{
+	t_door	door;
+
+	door.i = 1;
+	while (door.i < rows - 1)
+	{
+		door.j = 1;
+		while (door.j < cols - 1)
+		{
+			if (map[door.i][door.j] == 'D')
+			{
+				door.north = map[door.i - 1][door.j] == '1';
+				door.south = map[door.i + 1][door.j] == '1';
+				door.west  = map[door.i][door.j - 1] == '1';
+				door.east  = map[door.i][door.j + 1] == '1';
+				door.vertical_check = door.north && door.south;
+				door.horizontal_check = door.west && door.east;
+				if (!door.vertical_check && !door.horizontal_check)
+					exit_error("sla errno", NULL);
+			}
+			door.j++;
+		}
+		door.i++;
+	}
 }
 
 void	checks(t_cub *cub, int ac, char **av)
