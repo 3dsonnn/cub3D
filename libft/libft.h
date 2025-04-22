@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:02:24 by efinda            #+#    #+#             */
-/*   Updated: 2025/01/12 10:00:27 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:50:22 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 char				**ft_split(char const *str, char c);
-char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -142,18 +141,15 @@ void				ft_strfree(char **str);
 void				ft_swaptr(void **p1, void **p2);
 void				ft_replace_char(char *str, char src, char dst);
 void				flood_fill(char **tab, t_point size, t_point begin);
-char				*ft_ctoa(char c);
 char				*ft_strpbrk(char *str, char *accept);
 char				*ft_strqbrk(char *str, char *accept);
 char				*ft_strcpy(char *dest, char *src);
 char				**ft_mtxdup(char **matrix);
 char				**ft_addstr_mtx(char ***matrix, char **tmp, char *str);
 char				*ft_strndup(char *str, int n);
-char				*ft_strjoin_space_free(char *str, char *buffer);
-char				*ft_strjoin_free(char *str, char *buffer);
-char				*ft_strjoin_free_both(char *str, char *buffer);
+char				*ft_strjoin(char *str, char *buffer, int flag);
 char				**ft_lstmtx(t_list *lst);
-char				*ft_join(char *new_str, char *str, char *buffer);
+void				ft_join(char **new_str, char *str, char *buffer);
 char				**ft_realloc(char **matrix, char **tmp, int old_size,
 						int new_size);
 
