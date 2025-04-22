@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:22:11 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/13 15:01:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:54:37 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	fill_texture(t_scene *scene, char ID, char *path)
 {
 	if (!scene->elements)
-		scene->elements = ft_ctoa(ID);
+		scene->elements = ft_strdup((char []){ID, '\0'});
 	else
 		check_duplicate_id(scene, ID);
 	if (ID == 'N')

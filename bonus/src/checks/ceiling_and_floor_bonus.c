@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:23:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/06 00:45:38 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:42:38 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	keep_checking(t_scene *scene, char *ID, int rgb[3], int i)
 				" element on line ", scene->line_nbr_str, ": ",
 				"the color range cannot end with a ','"}), scene);
 	while (scene->mtx[++i])
-		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[i]);
+		scene->tmp = ft_strjoin(scene->tmp, scene->mtx[i], 1);
 	aux = scene->tmp;
 	rgb[0] = ft_atoi(scene->tmp);
 	scene->tmp = ft_strchr(scene->tmp, ',');

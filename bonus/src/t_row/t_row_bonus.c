@@ -6,17 +6,17 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:18:27 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:33:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-t_rows	*new_row(char *str)
+t_row	*new_row(char *str)
 {
-	t_rows	*row;
+	t_row	*row;
 
-	row = (t_rows *)malloc(sizeof(t_rows));
+	row = (t_row *)malloc(sizeof(t_row));
 	if (!row)
 		return (NULL);
 	row->str = ft_strdup(str);
@@ -24,9 +24,9 @@ t_rows	*new_row(char *str)
 	return (row);
 }
 
-void	free_rows(t_rows **head)
+void	free_rows(t_row **head)
 {
-	t_rows	*tmp;
+	t_row	*tmp;
 
 	if (!head || !*head)
 		return ;
@@ -40,10 +40,10 @@ void	free_rows(t_rows **head)
 	*head = NULL;
 }
 
-char	**row_to_mtx(t_rows *head)
+char	**row_to_mtx(t_row *head)
 {
 	char	**mtx;
-	t_rows	*tmp;
+	t_row	*tmp;
 	int		i;
 
 	if (!head)

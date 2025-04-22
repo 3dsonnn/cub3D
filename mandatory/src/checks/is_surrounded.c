@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:26:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 07:40:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/21 21:30:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ void	is_surrounded(t_scene *scene, t_map *map, t_point iter)
 				&& is_surrounded_aux(map->content, iter.y, iter.x))
 				|| (map->content[iter.y][iter.x] == map->start
 				&& is_surrounded_aux(map->content, iter.y, iter.x)))
+			{
+				ft_printf("%d...\n", scene->line_nbr.value + iter.y);
 				exit_error("Invalid map: not surrounded by walls",
 					scene);
+			}
 		}
 	}
 	map->content[map->spos.y][map->spos.x] = '0';

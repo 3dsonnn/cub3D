@@ -6,15 +6,15 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:31:23 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:33:24 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-void	add_row(t_rows **head, t_rows *_new)
+void	add_row(t_row **head, t_row *_new)
 {
-	t_rows	*tmp;
+	t_row	*tmp;
 
 	if (!head || !_new)
 		return ;
@@ -29,10 +29,10 @@ void	add_row(t_rows **head, t_rows *_new)
 	}
 }
 
-int	rowlen(t_rows *head)
+int	rowlen(t_row *head)
 {
 	int		len;
-	t_rows	*tmp;
+	t_row	*tmp;
 
 	len = 0;
 	tmp = head;

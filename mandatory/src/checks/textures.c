@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:22:11 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 09:33:27 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:53:58 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	fill_texture(t_scene *scene, char id, char *path)
 {
 	if (!scene->elements)
-		scene->elements = ft_ctoa(id);
+		scene->elements = ft_strdup((char []){id, '\0'});
 	else
 		check_duplicate_id(scene, id);
 	if (id == 'N')
@@ -49,7 +49,7 @@ void	check_texture(t_scene *scene)
 {
 	char	*id;
 
-	id = get_element_str(*scene->line);
+	id = get_element_name(*scene->line);
 	scene->mtx = ft_split(scene->line, ' ');
 	check_texture_aux(scene, id);
 	if (open(scene->mtx[1], O_RDONLY) < 0)
@@ -60,6 +60,7 @@ void	check_texture(t_scene *scene)
 	}
 	fill_texture(scene, *id, scene->mtx[1]);
 	ft_strfree(&scene->line_nbr.str);
+	ft_strfree(&scene->line_cpy);
 	ft_strfree(&scene->line);
 	ft_mtxfree(&scene->mtx);
 }

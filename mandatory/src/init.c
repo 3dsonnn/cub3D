@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 09:34:21 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:51:21 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	convert_textures_to_imgs(t_cub *cub, t_texture textures[4], int i)
 		if (!textures[i].img.img)
 		{
 			cub->scene.tmp = ft_strjoin("Failed to load image from ",
-				textures[i].path);
+				textures[i].path, 2);
 			my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, (i - 1), 0, 1});
 		}
 		my_mlx_get_data_addr(&textures[i].img);
@@ -48,7 +48,7 @@ static void	convert_textures_to_imgs(t_cub *cub, t_texture textures[4], int i)
 		{
 			cub->scene.tmp = ft_strjoin("Failed to get the \
 				address of image from ",
-					textures[i].path);
+					textures[i].path, 2);
 			my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, (i + 1), 0, 1});
 		}
 		ft_strfree(&textures[i].path);
@@ -84,8 +84,8 @@ void	init_dfl(t_cub *cub, int i)
 	cub->win = NULL;
 	my_mlx_init_img(&cub->img);
 	cub->scene = (t_scene){.fd = 0, .floor = 0, .ceiling = 0,
-		.mtx = NULL, .tmp = NULL, .line = NULL, .elements = NULL,
-		.line_nbr = (t_nbr){.value = 0, .str = NULL}};
+		.mtx = NULL, .tmp = NULL, .line = NULL, .line_cpy = NULL,
+		.elements = NULL, .line_nbr = (t_nbr){.value = 0, .str = NULL}};
 	cub->scene.map = (t_map){.head = NULL, .content = NULL,
 		.start = '\0', .spos = (t_point){0, 0}, .size = (t_point){0, 0}};
 	while (++i < 4)

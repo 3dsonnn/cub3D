@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 21:16:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:51:27 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	get_textures_images(t_cub *cub, t_texture textures[4], int i)
 		if (!textures[i].img.img)
 		{
 			cub->scene.tmp = ft_strjoin("Failed to load image from ",
-					textures[i].path);
+					textures[i].path, 2);
 			my_mlx_error_free(cub, cub->scene.tmp);
 		}
 		my_mlx_get_data_addr(&textures[i].img);
 		if (!textures[i].img.addr)
 		{
 			cub->scene.tmp = ft_strjoin("Failed to get the address of image from ",
-					textures[i].path);
+					textures[i].path, 2);
 			my_mlx_error_free(cub, cub->scene.tmp);
 		}
 		ft_strfree(&textures[i].path);
