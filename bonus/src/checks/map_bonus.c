@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 10:47:34 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/12 14:04:33 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	fill_map(t_scene *scene, t_map *map)
 			scene->line[ft_strlen(scene->line) - 1] = '\0';
 		if (!*scene->line)
 			break ;
-		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
+		if (ft_strspn(scene->line, "01 NSEDW") != ft_strlen(scene->line))
 		{
 			exit_error(get_explicit_error_message(scene,
 					(t_strs){"Invalid character inside the map content on line ",

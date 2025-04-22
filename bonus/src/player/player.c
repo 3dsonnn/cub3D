@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 08:54:06 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/28 13:45:41 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:42:01 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	player(t_cub *cub)
 		my_mlx_put_img_to_img(&cub->img, cub->player.imgs[IDLE],
 			(t_point){cub->img.width / 2, (cub->img.height
 				- cub->player.imgs[IDLE].height)}, 1);
-	put_ammo(cub);
+	// put_ammo(cub);
 }

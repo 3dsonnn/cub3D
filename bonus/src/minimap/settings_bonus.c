@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 19:09:47 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/15 19:27:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:38 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ static void	set_tiles_aux(t_cub *cub, char c, int i, int j)
 	{
 		cub->minimap.tiles[i][j].id = ' ';
 		cub->minimap.tiles[i][j].color = -42;
+	}
+	else if (c == 'D')
+	{
+		cub->minimap.tiles[i][j].id = 'D';
+		cub->minimap.tiles[i][j].color = DARK_GRAY;
 	}
 }
 

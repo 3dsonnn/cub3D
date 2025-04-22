@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/16 09:12:38 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/16 21:14:07 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int	player_is_wall(t_cub *cub, t_dpoint pos, t_point offsets[4], int i)
 		if (check.x < 0 || check.x >= cub->scene.map.size.x || check.y < 0
 			|| check.y >= cub->scene.map.size.y)
 			return (1);
-		if (cub->minimap.tiles[check.y][check.x].id == '1'
+		if ((cub->minimap.tiles[check.y][check.x].id == '1'
+			|| cub->minimap.tiles[check.y][check.x].id == 'D')
 			&& obx_overlaps_wall(pos, check))
 			return (1);
 	}
