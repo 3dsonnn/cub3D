@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/27 14:31:11 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:08:55 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ static void	check_map(t_scene *scene, t_map *map)
 	is_surrounded(scene, map, (t_point){0, 0});
 }
 
+// void	check_doors(char **matrix)
+// {
+// 	int	x;
+// 	int y;
+
+// 	x = 0;
+// 	y = 0;
+// 	while ()
+// }
+
 void	checks(t_cub *cub, int ac, char **av)
 {
 	cub->hooks.alt = 0;
@@ -97,6 +107,7 @@ void	checks(t_cub *cub, int ac, char **av)
 	cub->scene.textures[SO].path = NULL;
 	cub->scene.textures[WE].path = NULL;
 	cub->scene.textures[EA].path = NULL;
+	// check_doors(cub->scene.map.content);
 	check_args(&cub->scene, ac, av);
 	check_elements(&cub->scene);
 	check_map(&cub->scene, &cub->scene.map);
