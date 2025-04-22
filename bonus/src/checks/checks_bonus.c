@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 15:08:55 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:33:59 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,32 +81,36 @@ static void	check_map(t_scene *scene, t_map *map)
 	is_surrounded(scene, map, (t_point){0, 0});
 }
 
-void	check_doors(char **map, int rows, int cols)
+void	check_doors(char **map, int rows, int cols, t_scene *scene)
 {
 	t_door	door;
-
-	door.i = 1;
-	while (door.i < rows - 1)
+	
+	door.i = -1;
+	while (++door.i < rows)
 	{
-		door.j = 1;
-		while (door.j < cols - 1)
+		door.j = -1;
+		while (++door.j < cols)
 		{
 			if (map[door.i][door.j] == 'D')
 			{
-				door.north = map[door.i - 1][door.j] == '1';
-				door.south = map[door.i + 1][door.j] == '1';
-				door.west  = map[door.i][door.j - 1] == '1';
-				door.east  = map[door.i][door.j + 1] == '1';
-				door.vertical_check = door.north && door.south;
-				door.horizontal_check = door.west && door.east;
-				if ((!door.vertical_check && !door.horizontal_check)
-					|| (door.i == 0 || door.i == rows - 1
-					|| door.j == 0 || door.j == cols - 1))
-					exit_error("sla errno", NULL);
+				if (door.i == 0 || door.i == rows - 1 || door.j == 0 || door.j == cols - 1)
+					exit_error("Door at the map border.", scene);
+				door.north    = map[door.i - 1][door.j];
+				door.south  = map[door.i + 1][door.j];
+				door.west  = map[door.i][door.j - 1];
+				door.east = map[door.i][door.j + 1];
+				if (door.north == 'D' || door.south == 'D' || door.west == 'D' || door.east == 'D')
+					exit_error("Double doors are not allowed.", scene);
+				if (door.north == ' ' || door.south == ' ' || door.west == ' ' || door.east == ' ')
+					exit_error("A door cannot have a space next to it.", scene);
+				door.vertical = (door.north == '1' && door.south == '1');
+				door.horizontal = (door.west == '1' && door.east == '1');
+				if (!(door.vertical && (door.west != '1' && door.east != '1')))
+					exit_error("Dead end.", scene);
+				if ((!door.vertical && !door.horizontal) || (door.vertical && door.horizontal))
+					exit_error("Missconfiguration of doors.", scene);
 			}
-			door.j++;
 		}
-		door.i++;
 	}
 }
 
@@ -126,8 +130,9 @@ void	checks(t_cub *cub, int ac, char **av)
 	cub->scene.textures[SO].path = NULL;
 	cub->scene.textures[WE].path = NULL;
 	cub->scene.textures[EA].path = NULL;
-	// check_doors(cub->scene.map.content, ft_mtxlen(cub->scene.map.content), ft_strlen(cub->scene.map.content[0]));
 	check_args(&cub->scene, ac, av);
 	check_elements(&cub->scene);
 	check_map(&cub->scene, &cub->scene.map);
+	check_doors(cub->scene.map.content, cub->scene.map.size.y,
+					cub->scene.map.size.x, &cub->scene);
 }
