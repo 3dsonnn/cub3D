@@ -55,6 +55,21 @@ typedef struct s_img_path
 	char			*path;
 }					t_img_path;
 
+typedef struct s_door
+{
+	int	i;
+	int j;
+
+	int	north;
+	int	south;
+	int	west;
+	int	east;
+
+	int	vertical_check;
+	int	horizontal_check;
+
+}				t_door;
+
 typedef enum e_player_img
 {
 	CROSSHAIR,

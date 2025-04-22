@@ -81,15 +81,34 @@ static void	check_map(t_scene *scene, t_map *map)
 	is_surrounded(scene, map, (t_point){0, 0});
 }
 
-// void	check_doors(char **matrix)
-// {
-// 	int	x;
-// 	int y;
+void	check_doors(char **map, int rows, int cols)
+{
+	t_door	door;
 
-// 	x = 0;
-// 	y = 0;
-// 	while ()
-// }
+	door.i = 1;
+	while (door.i < rows - 1)
+	{
+		door.j = 1;
+		while (door.j < cols - 1)
+		{
+			if (map[door.i][door.j] == 'D')
+			{
+				door.north = map[door.i - 1][door.j] == '1';
+				door.south = map[door.i + 1][door.j] == '1';
+				door.west  = map[door.i][door.j - 1] == '1';
+				door.east  = map[door.i][door.j + 1] == '1';
+				door.vertical_check = door.north && door.south;
+				door.horizontal_check = door.west && door.east;
+				if ((!door.vertical_check && !door.horizontal_check)
+					|| (door.i == 0 || door.i == rows - 1
+					|| door.j == 0 || door.j == cols - 1))
+					exit_error("sla errno", NULL);
+			}
+			door.j++;
+		}
+		door.i++;
+	}
+}
 
 void	checks(t_cub *cub, int ac, char **av)
 {
@@ -107,7 +126,7 @@ void	checks(t_cub *cub, int ac, char **av)
 	cub->scene.textures[SO].path = NULL;
 	cub->scene.textures[WE].path = NULL;
 	cub->scene.textures[EA].path = NULL;
-	// check_doors(cub->scene.map.content);
+	// check_doors(cub->scene.map.content, ft_mtxlen(cub->scene.map.content), ft_strlen(cub->scene.map.content[0]));
 	check_args(&cub->scene, ac, av);
 	check_elements(&cub->scene);
 	check_map(&cub->scene, &cub->scene.map);
