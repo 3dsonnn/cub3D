@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/27 13:16:14 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:41:27 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ void				check_player_images(t_cub *cub, int i);
 //  RAYS
 extern void			init_rays(t_cub *cub);
 void				get_rays(t_cub *cub, int i);
-void				check_horizontal_intersection(t_cub *cub, int i);
-void				check_vertical_intersection(t_cub *cub, int i);
+void				check_horizontal_intersection(t_cub *cub, int i, int *a);
+void				check_vertical_intersection(t_cub *cub, int i, int *a);
 int					is_wall(t_cub *cub, double x, double y);
 int					inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
 extern int			face_right(double angle);
-extern t_texture	*get_texture(t_cub *cub, double angle, t_point dir);
+extern t_texture	*get_texture(t_cub *cub, double angle, t_point dir, int a);
 
 //  CUB3D
 void				cub3D(t_cub *cub);

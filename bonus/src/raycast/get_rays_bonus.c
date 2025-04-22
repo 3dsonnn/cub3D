@@ -6,13 +6,13 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/27 15:07:35 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:05:45 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-inline void    init_rays(t_cub *cub)
+inline void	init_rays(t_cub *cub)
 {
 	cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
 	if (!cub->rays)
@@ -20,7 +20,7 @@ inline void    init_rays(t_cub *cub)
 	cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
 }
 
-static  void    choose_intersection(t_cub *cub, int i)
+static void	choose_intersection(t_cub *cub, int i)
 {
 	cub->rays[i].dir.x = 0;
 	cub->rays[i].dir.y = 0;
@@ -30,6 +30,7 @@ static  void    choose_intersection(t_cub *cub, int i)
 		cub->rays[i].wall.x = cub->rays[i].hor.wall.x;
 		cub->rays[i].wall.y = cub->rays[i].hor.wall.y;
 		cub->rays[i].dir.x = 1;
+		cub->rays[i].ver.is_door = 0;
 	}
 	else
 	{
@@ -37,6 +38,7 @@ static  void    choose_intersection(t_cub *cub, int i)
 		cub->rays[i].wall.x = cub->rays[i].ver.wall.x;
 		cub->rays[i].wall.y = cub->rays[i].ver.wall.y;
 		cub->rays[i].dir.y = 1;
+		cub->rays[i].hor.is_door = 0;
 	}
 	if (!cub->rays[i].dist)
 		(cub->rays[i].dist)++;
@@ -48,26 +50,28 @@ static void	get_column(t_cub *cub, int i)
 	cub->rays[i].col.height = (int)(TILE / cub->rays[i].col.dist * cub->ppd);
 	cub->rays[i].col.top = (cub->img.height - cub->rays[i].col.height) / 2;
 	// if (cub->rays[i].col.top < 0)
-	//     cub->rays[i].col.top = 0;
+	//	cub->rays[i].col.top = 0;
 	cub->rays[i].col.bot = (cub->img.height + cub->rays[i].col.height) / 2;
 	if (cub->rays[i].col.bot > cub->img.height)
 		cub->rays[i].col.bot = cub->img.height;
 }
 
-void    get_rays(t_cub *cub, int j)
+void	get_rays(t_cub *cub, int j)
 {
-	// int	i = cub->img.width / 3;
-	// j = i * 2;
+	int	a;
+
 	while (++j < cub->img.width)
 	{
+		cub->rays[j].ver.is_door = 0;
+		cub->rays[j].hor.is_door = 0;
 		cub->rays[j].angle = cub->player.angle + atan((j - cub->img.width / 2) / cub->ppd);
 		cub->rays[j].angle = ft_normalizer(cub->rays[j].angle);
 		cub->rays[j].tan = tan(cub->rays[j].angle);
-		check_horizontal_intersection(cub, j);
-		check_vertical_intersection(cub, j);
+		check_vertical_intersection(cub, j, &a);
+		check_horizontal_intersection(cub, j, &a);
 		choose_intersection(cub, j);
 		get_column(cub, j);
-		cub->rays[j].texture = get_texture(cub, cub->rays[j].angle, cub->rays[j].dir);
+		cub->rays[j].texture = get_texture(cub, cub->rays[j].angle, cub->rays[j].dir, j);
 		paint(cub, -1, j, (t_point){0, 0});
 	}
 	t_point big = (t_point){cub->img.width / 2, cub->img.height - 490};

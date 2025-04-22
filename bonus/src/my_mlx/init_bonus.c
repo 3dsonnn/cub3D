@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/23 12:37:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:08:38 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,9 @@ void	init_mlx(t_cub *cub)
 		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
 	my_mlx_new_image(cub);
 	mlx_mouse_hide(cub->mlx, cub->win);
+	cub->scene.door.img.img = mlx_xpm_file_to_image(cub->mlx, "./images/door.xpm", &cub->scene.door.img.width, &cub->scene.door.img.height);
+	cub->scene.door.img.addr = (int *)mlx_get_data_addr(cub->scene.door.img.img, &cub->scene.door.img.bpp, &cub->scene.door.img.line_len, &cub->scene.door.img.endian);
+	cub->scene.door.img.line_len /= 4;
+	cub->scene.door.img = my_mlx_resize_img(cub->mlx, cub->scene.door.img, (t_point){64, 64});
 	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
 }

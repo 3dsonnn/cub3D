@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/28 13:16:01 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:01:44 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define SHOOTING_02_PATH "bonus/config/animated_sprites/shotgun/shooting02.xpm"
 # define SHOOTING_IDLE_PATH "bonus/config/animated_sprites/shotgun/shooting_idle.xpm"
 # define CARTIDGE_PATH "bonus/config/cartidge.xpm"
-
+# define DOOR "./images/door.xpm"
 # define MAX_AMMO 8
 
 typedef enum e_ID
@@ -214,6 +214,7 @@ typedef struct s_scene
 	char			*line_nbr_str;
 	t_map			map;
 	t_texture		textures[4];
+	t_texture		door;
 }					t_scene;
 
 typedef struct s_tile
@@ -242,6 +243,7 @@ typedef struct s_intersection
 	t_dpoint		crd;
 	t_dpoint		wall;
 	int				intersected;
+	bool			is_door;
 }					t_intersection;
 
 typedef struct s_ray
