@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/16 21:01:44 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:05:50 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ typedef struct s_door
 	int	west;
 	int	east;
 
-	int	vertical_check;
-	int	horizontal_check;
+	int	vertical;
+	int	horizontal;
 
 }				t_door;
 

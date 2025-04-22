@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/16 21:03:41 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:26:18 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	check_horizontal_intersection(t_cub *cub, int i, int *a)
 	while (inside_map(cub, tmp.crd.x, tmp.crd.y))
 	{
 		check_wall = is_wall(cub, tmp.crd.x, tmp.crd.y);
-		ft_printf("-->%d\n", check_wall);
 		if (check_wall)
 		{
 			if (!face_down(cub->rays[i].angle))
