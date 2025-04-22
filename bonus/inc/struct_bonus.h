@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 20:52:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ typedef struct s_rows
 {
 	char				*str;
 	struct s_rows		*next;
-}						t_rows;
+}						t_row;
 
 typedef struct s_nbr
 {
@@ -198,7 +198,7 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	t_rows				*head;
+	t_row				*head;
 	char				**content;
 	char				start;
 	t_point				spos;

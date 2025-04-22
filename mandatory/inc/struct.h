@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 09:32:34 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,19 @@ typedef struct s_dplane
 	double			y;
 }					t_dplane;
 
-typedef struct s_rows
-{
-	char			*str;
-	struct s_rows	*next;
-}					t_rows;
-
 typedef struct s_nbr
 {
 	int					value;
 	char				*str;
 }						t_nbr;
+
+typedef struct s_rows
+{
+	char			*str;
+	t_nbr			line_nbr;
+	struct s_rows	*prev;
+	struct s_rows	*next;
+}					t_row;
 
 typedef struct s_img
 {
@@ -94,7 +96,7 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	t_rows			*head;
+	t_row			*head;
 	char			**content;
 	char			start;
 	t_point			spos;
@@ -109,6 +111,7 @@ typedef struct s_scene
 	char			**mtx;
 	char			*tmp;
 	char			*line;
+	char			*line_cpy;
 	char			*elements;
 	t_nbr			line_nbr;
 	t_map			map;

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/02 03:37:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,10 @@ void				destroy_all_imgs(t_cub *cub);
 unsigned long long	get_current_time(void);
 
 //  T_ROW
-t_rows				*new_row(char *str);
-int					rowlen(t_rows *head);
-void				free_rows(t_rows **head);
-char				**row_to_mtx(t_rows *head);
-void				add_row(t_rows **head, t_rows *_new);
+t_row				*new_row(char *str);
+int					rowlen(t_row *head);
+void				free_rows(t_row **head);
+char				**row_to_mtx(t_row *head);
+void				add_row(t_row **head, t_row *_new);
 
 #endif
