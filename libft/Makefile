@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: efinda <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 19:18:41 by efinda            #+#    #+#              #
-#    Updated: 2025/01/12 10:00:53 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/22 10:50:25 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ SRC = 	ctype/ft_isalnum.c				\
 	non_standard/ft_putstr_fd.c			\
 	non_standard/ft_split.c 			\
 	non_standard/ft_striteri.c			\
-	non_standard/ft_strjoin.c			\
 	non_standard/ft_strmapi.c			\
 	non_standard/ft_strtrim.c			\
 	linked_list/del.c				\
@@ -77,9 +76,7 @@ SRC = 	ctype/ft_isalnum.c				\
 	extras/ft_addstr_mtx.c				\
 	extras/ft_strndup.c				\
 	extras/ft_countstr_mtx.c			\
-	extras/ft_strjoin_space_free.c			\
-	extras/ft_strjoin_free.c			\
-	extras/ft_strjoin_free_both.c			\
+	extras/ft_strjoin.c				\
 	extras/ft_lstmtx.c				\
 	extras/ft_join.c				\
 	extras/ft_nbrlen.c				\
@@ -94,7 +91,6 @@ SRC = 	ctype/ft_isalnum.c				\
 	extras/ft_word_count.c				\
 	extras/ft_longestr_mtx.c			\
 	extras/ft_flood_fill.c				\
-	extras/ft_ctoa.c				\
 	extras/ft_replace_char.c			\
 	extras/ft_strpbrk.c				\
 	extras/ft_strqbrk.c				\
