@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 17:33:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:05:32 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void	check_doors(char **map, int rows, int cols, t_scene *scene)
 			{
 				if (door.i == 0 || door.i == rows - 1 || door.j == 0 || door.j == cols - 1)
 					exit_error("Door at the map border.", scene);
-				door.north    = map[door.i - 1][door.j];
-				door.south  = map[door.i + 1][door.j];
-				door.west  = map[door.i][door.j - 1];
+				door.north = map[door.i - 1][door.j];
+				door.south = map[door.i + 1][door.j];
+				door.west = map[door.i][door.j - 1];
 				door.east = map[door.i][door.j + 1];
 				if (door.north == 'D' || door.south == 'D' || door.west == 'D' || door.east == 'D')
 					exit_error("Double doors are not allowed.", scene);
