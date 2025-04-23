@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:18:27 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 17:06:22 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 11:25:52 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_row	*new_row(char *str, int nbr)
 	if (!row)
 		return (NULL);
 	*row = (t_row){.str = ft_strdup(str),
-		.line_nbr = (t_nbr){.value = nbr, .str = ft_itoa(nbr)},
+		.line_nbr = ft_itoa(nbr),
 		.next = NULL, .prev = NULL};
 	return (row);
 }
@@ -67,7 +67,7 @@ void	free_row(t_row **head, t_row *ref)
             cur->next->prev = cur->prev;
     }
     ft_strfree(&ref->str);
-    ft_strfree(&ref->line_nbr.str);
+    ft_strfree(&ref->line_nbr);
     free(ref);
 }
 
@@ -82,7 +82,7 @@ void	free_rows(t_row **head)
 		tmp = *head;
 		*head = (*head)->next;
 		ft_strfree(&tmp->str);
-		ft_strfree(&tmp->line_nbr.str);
+		ft_strfree(&tmp->line_nbr);
 		free(tmp);
 	}
 	*head = NULL;
