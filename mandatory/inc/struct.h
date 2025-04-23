@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 12:20:01 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ typedef enum ID
 
 typedef struct s_iter
 {
-	int				i;
-	int				j;
-	int				k;
-	int				l;
-	int				m;
-	int				n;
-}					t_iter;
+	int					i;
+	int					j;
+	int					k;
+	int					l;
+	int					m;
+	int					n;
+}						t_iter;
 
 typedef struct s_strs
 {
@@ -55,27 +55,25 @@ typedef struct s_dpoint
 	double			y;
 }					t_dpoint;
 
-typedef struct s_dplane
-{
-	double			x0;
-	double			x;
-	double			y0;
-	double			y;
-}					t_dplane;
-
 typedef struct s_nbr
 {
 	int					value;
 	char				*str;
 }						t_nbr;
 
-typedef struct s_rows
+typedef struct s_row
 {
 	char			*str;
-	t_nbr			line_nbr;
-	struct s_rows	*prev;
-	struct s_rows	*next;
+	char			*line_nbr;
+	struct s_row	*prev;
+	struct s_row	*next;
 }					t_row;
+
+typedef struct s_map_crd
+{
+	char				*str;
+	struct s_map_crd	*next;
+}					t_map_crd;
 
 typedef struct s_img
 {
@@ -97,6 +95,7 @@ typedef struct s_texture
 typedef struct s_map
 {
 	t_row			*head;
+	t_map_crd		*crds;
 	char			**content;
 	char			start;
 	t_point			spos;

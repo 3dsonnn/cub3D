@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 10:51:21 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 11:32:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	init_dfl(t_cub *cub, int i)
 	cub->scene = (t_scene){.fd = 0, .floor = 0, .ceiling = 0,
 		.mtx = NULL, .tmp = NULL, .line = NULL, .line_cpy = NULL,
 		.elements = NULL, .line_nbr = (t_nbr){.value = 0, .str = NULL}};
-	cub->scene.map = (t_map){.head = NULL, .content = NULL,
+	cub->scene.map = (t_map){.head = NULL, .crds = NULL, .content = NULL,
 		.start = '\0', .spos = (t_point){0, 0}, .size = (t_point){0, 0}};
 	while (++i < 4)
 	{
