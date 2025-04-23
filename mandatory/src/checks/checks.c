@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 18:01:02 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:09:16 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	print_rows(t_row *head)
 	if (!head)
 	{
 		ft_printf("EMPTY\n");
-        return ;
+		return ;
 	}
 	while (head)
 	{
@@ -82,15 +82,16 @@ static void	check_map(t_scene *scene, t_map *map)
 	trim_rows(&map->head);
 	if (!map->head)
 		exit_error(get_explicit_error_message(scene,
-			(t_strs){"Invalid map: it cannot be full of spaces", NULL,
-				NULL, NULL, NULL, NULL}), scene);
+				(t_strs){"Invalid map: it cannot be full of spaces", NULL, NULL,
+				NULL, NULL, NULL}), scene);
 	map->size = rows_size(map->head);
 	if (map->size.x < 3 || map->size.y < 3)
 		exit_error(get_explicit_error_message(scene,
-				(t_strs){"Invalid map: too small", NULL, NULL, NULL,
-					NULL, NULL}), scene);
+				(t_strs){"Invalid map: too small", NULL, NULL, NULL, NULL,
+				NULL}), scene);
 	fulfill_map(scene, map);
-	check_starting_position(scene, map, map->head, (t_iter){-1, -1, 0, -1, -1, -1});
+	check_starting_position(scene, map, map->head, (t_iter){-1, -1, 0, -1, -1,
+		-1});
 	is_surrounded(scene, map, map->head->next, get_last_row(map->head));
 	map->content = row_to_mtx(map->head);
 	map->content[map->spos.y][map->spos.x] = '0';

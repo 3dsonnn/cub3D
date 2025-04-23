@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:10:15 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/16 23:45:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:07:17 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ static void	fill_img(t_img *src, t_img *dst, int x, int y)
 		x = -1;
 		while (++x < dst->width)
 		{
-			offset.x = ft_map(x, (int[]){0, dst->width}, (int[]){0, src->width});
-			offset.y = ft_map(y, (int[]){0, dst->height}, (int[]){0,
+			offset.x = ft_map(x, (int []){0, dst->width}, (int []){0,
+					src->width});
+			offset.y = ft_map(y, (int []){0, dst->height}, (int []){0,
 					src->height});
 			pixel = my_mlx_get_pixel(*src, offset.x, offset.y);
 			my_mlx_pixel_put(dst, x, y, pixel);

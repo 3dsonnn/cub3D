@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 17:05:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:08:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ static void	check_map_end(t_scene *scene, t_map *map)
 			return ;
 		scene->line_nbr.str = ft_itoa(scene->line_nbr.value);
 		exit_error(get_explicit_error_message(scene,
-				(t_strs){"The map content always has to be the last information on the file.",
-				" So the element on line ", scene->line_nbr.str, " is invalid", NULL, NULL}), scene);
+				(t_strs){"The map content always has to be the last ",
+				"information on the file. So the element on line ",
+				scene->line_nbr.str, " is invalid", NULL, NULL}), scene);
 	}
 }
 
 void	fulfill_map(t_scene *scene, t_map *map)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	t_row	*tmp;
 
 	i = -1;
@@ -65,8 +66,8 @@ void	fill_map(t_scene *scene, t_map *map)
 		{
 			exit_error(get_explicit_error_message(scene,
 					(t_strs){"Invalid map: strange character inside it,",
-					" on line ", scene->line_nbr.str, " of the scene file", NULL,
-					NULL}), scene);
+					" on line ", scene->line_nbr.str, " of the scene file",
+					NULL, NULL}), scene);
 		}
 		add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
 		ft_strfree(&scene->line_nbr.str);
@@ -75,7 +76,8 @@ void	fill_map(t_scene *scene, t_map *map)
 	check_map_end(scene, map);
 }
 
-void	check_starting_position(t_scene *scene, t_map *map, t_row *head, t_iter iter)
+void	check_starting_position(t_scene *scene, t_map *map, t_row *head,
+		t_iter iter)
 {
 	while (++iter.i < map->size.y)
 	{
@@ -86,7 +88,8 @@ void	check_starting_position(t_scene *scene, t_map *map, t_row *head, t_iter ite
 			{
 				map->start = head->str[iter.j];
 				map->spos = (t_point){.x = iter.j, .y = iter.i};
-				add_map_crd(&map->crds, new_map_crd(map->start, ft_itoa(iter.j), head->line_nbr));
+				add_map_crd(&map->crds, new_map_crd(map->start, ft_itoa(iter.j),
+						head->line_nbr));
 				iter.k++;
 			}
 		}
@@ -96,7 +99,8 @@ void	check_starting_position(t_scene *scene, t_map *map, t_row *head, t_iter ite
 		exit_error("Invalid map: there isn't a start position", scene);
 	if (iter.k > 1)
 	{
-		scene->tmp = map_crds_to_str(map->crds, "Invalid map: there're more than one start position:");
+		scene->tmp = map_crds_to_str(map->crds,
+				"Invalid map: there're more than one start position:");
 		exit_error(scene->tmp, scene);
 	}
 	free_map_crds(&scene->map.crds);

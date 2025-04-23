@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 08:35:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:04:41 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ static void	get_steps(t_cub *cub, t_intersection *tmp, t_ray *ray)
 	if (!face_right(ray->angle))
 		tmp->step.x *= -1;
 	tmp->step.y = TILE * ray->tan;
-	if ((!face_down(ray->angle) && tmp->step.y > 0)
-		|| (face_down(ray->angle) && tmp->step.y < 0))
+	if ((!face_down(ray->angle) && tmp->step.y > 0) || (face_down(ray->angle)
+			&& tmp->step.y < 0))
 		tmp->step.y *= -1;
 }
 
 static inline void	get_distance(t_cub *cub, t_ray *ray)
 {
 	if (ray->ver.intersected)
-		ray->ver.dist = sqrt(pow((ray->ver.wall.x
-						- cub->player.pos.x), 2) + pow((ray->ver.wall.y
-						- cub->player.pos.y), 2));
+		ray->ver.dist = sqrt(pow((ray->ver.wall.x - cub->player.pos.x), 2)
+				+ pow((ray->ver.wall.y - cub->player.pos.y), 2));
 	else
 		ray->ver.dist = DBL_MAX;
 }
@@ -61,7 +60,8 @@ void	check_vertical_intersection(t_cub *cub, t_ray *ray)
 			ray->ver.intersected = 1;
 			break ;
 		}
-		tmp.crd = (t_dpoint){.x = tmp.crd.x + tmp.step.x, .y = tmp.crd.y + tmp.step.y};
+		tmp.crd = (t_dpoint){.x = tmp.crd.x + tmp.step.x, .y = tmp.crd.y
+			+ tmp.step.y};
 	}
 	get_distance(cub, ray);
 }

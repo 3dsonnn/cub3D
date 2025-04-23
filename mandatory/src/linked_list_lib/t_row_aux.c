@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:31:23 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 16:24:47 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:02:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,30 @@ char	**row_to_mtx(t_row *head)
 
 void	trim_rows(t_row **head)
 {
-    t_row *tmp;
-    t_row *aux;
+	t_row	*tmp;
+	t_row	*aux;
 
-    if (!head || !*head)
-        return ;
-    while (*head && ft_strspace((*head)->str))
-    {
-        tmp = *head;
-        *head = (*head)->next;
-        free_row(&tmp, tmp);
-    }
-    if (!*head)
-        return ;
+	if (!head || !*head)
+		return ;
+	while (*head && ft_strspace((*head)->str))
+	{
+		tmp = *head;
+		*head = (*head)->next;
+		free_row(&tmp, tmp);
+	}
+	if (!*head)
+		return ;
 	tmp = *head;
-    while (tmp->next && !ft_strspace(tmp->next->str))
-        tmp = tmp->next;
-    while (tmp->next && ft_strspace(tmp->next->str))
-    {
-        aux = tmp->next;
-        tmp->next = aux->next;
-        if (aux->next)
+	while (tmp->next && !ft_strspace(tmp->next->str))
+		tmp = tmp->next;
+	while (tmp->next && ft_strspace(tmp->next->str))
+	{
+		aux = tmp->next;
+		tmp->next = aux->next;
+		if (aux->next)
 			aux->next->prev = tmp;
-        free_row(&aux, aux);
-    }
+		free_row(&aux, aux);
+	}
 }
 
 t_row	*get_last_row(t_row *head)

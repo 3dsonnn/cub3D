@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:10:08 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 16:12:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:03:17 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*join_strs(t_strs strs)
 {
-    char    *res;
+	char	*res;
 
-    res = NULL;
+	res = NULL;
 	if (strs.s1)
 		res = ft_strjoin(res, strs.s1, 3);
 	if (strs.s3)
