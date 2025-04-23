@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 15:08:38 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:16:59 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,14 @@ void	init_mlx(t_cub *cub)
 		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
 	my_mlx_new_image(cub);
 	mlx_mouse_hide(cub->mlx, cub->win);
-	cub->scene.door.img.img = mlx_xpm_file_to_image(cub->mlx, "./images/door.xpm", &cub->scene.door.img.width, &cub->scene.door.img.height);
+	cub->scene.door.img.img = mlx_xpm_file_to_image(cub->mlx, DOOR, &cub->scene.door.img.width, &cub->scene.door.img.height);
 	cub->scene.door.img.addr = (int *)mlx_get_data_addr(cub->scene.door.img.img, &cub->scene.door.img.bpp, &cub->scene.door.img.line_len, &cub->scene.door.img.endian);
 	cub->scene.door.img.line_len /= 4;
 	cub->scene.door.img = my_mlx_resize_img(cub->mlx, cub->scene.door.img, (t_point){64, 64});
+
+	cub->scene.e_key.img.img = mlx_xpm_file_to_image(cub->mlx, E_TEXTURE, &cub->scene.e_key.img.width, &cub->scene.e_key.img.height);
+	cub->scene.e_key.img.addr = (int *)mlx_get_data_addr(cub->scene.e_key.img.img, &cub->scene.e_key.img.bpp, &cub->scene.e_key.img.line_len, &cub->scene.e_key.img.endian);
+	cub->scene.e_key.img.line_len /= 4;
+	cub->scene.e_key.img = my_mlx_resize_img(cub->mlx, cub->scene.e_key.img, (t_point){32, 32});
 	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
 }

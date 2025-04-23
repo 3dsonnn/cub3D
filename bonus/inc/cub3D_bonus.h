@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/16 17:41:27 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:56:53 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define SKEY 115
 # define WKEY 119
 # define LEFT 65361
+# define E_KEY 101
 # define RIGHT 65363
 
 # define BLACK 0x000000

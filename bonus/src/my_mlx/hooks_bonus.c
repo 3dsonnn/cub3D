@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/28 13:32:07 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:38:07 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ static int	my_mlx_close(t_cub *cub)
 	free(cub->rays);
 	free(cub->mlx);
 	exit(0);
+}
+
+void	open_door(t_tile *cur)
+{
+	if (cur->left->id == 'D')
+		cur->left->id = 'd';
+	if (cur->right->id == 'D')
+		cur->right->id = 'd';
+	if (cur->up->id == 'D')
+		cur->up->id = 'd';
+	if (cur->down->id == 'D')
+		cur->down->id = 'd';
 }
 
 static int	my_mlx_key_press(int keycode, t_cub *cub)
@@ -48,6 +60,12 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 		alt(cub);
 	else if (keycode == SPACE)
 		space(cub);
+	else if ((keycode == E_KEY)
+		&& (cub->minimap.cur->left->id == 'D'
+		|| cub->minimap.cur->right->id == 'D'
+		|| cub->minimap.cur->down->id == 'D'
+		|| cub->minimap.cur->up->id == 'D'))
+		open_door(cub->minimap.cur);
 	else
 		return (0);
 	cub3D(cub);
@@ -82,7 +100,6 @@ int	mouse_hook(int keycode, int x, int y, t_cub *cub)
 		cub->player.shooting = true;
 		cub->player.current_frame = SHOOTING_01;
 		cub->player.last_frame_time = get_current_time();
-			// Implement this function to get current time in milliseconds
 	}
 	return (0);
 }
@@ -120,6 +137,16 @@ void	update_shooting_animation(t_cub *cub)
 	}
 }
 
+
+void	fn(t_cub *cub, t_tile *tile)
+{
+	if (tile->left->id == 'D' || tile->right->id == 'D' || tile->down->id == 'D' || tile->up->id == 'D')
+	{
+		my_mlx_put_img_to_img(&cub->img, cub->scene.e_key.img, (t_point){(cub->img.width / 2) - (cub->scene.e_key.img.width / 2), (cub->img.height / 2)+(cub->img.height / 3)}, 1);
+	}
+	
+}
+
 int	render_frame(t_cub *cub)
 {
 	my_mlx_mouse_motion(cub);
@@ -127,6 +154,7 @@ int	render_frame(t_cub *cub)
 	if (cub->player.shooting)
 		update_shooting_animation(cub);
 	player(cub);
+	fn(cub, cub->minimap.cur);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
 	return (0);
 }
