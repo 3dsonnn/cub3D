@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 09:16:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:59:55 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,35 @@ static	void	my_mlx_new_image(t_cub *cub)
 	cub->img.line_len /= 4;
 }
 
+void	rotate_image(t_img src, t_img *dst, float angle)
+{
+	float angle_rad = angle * (M_PI / 180.0);
+	int cx = src.width / 2;
+	int cy = src.height / 2;
+
+	for (int y_new = 0; y_new < dst->height; y_new++)
+	{
+		for (int x_new = 0; x_new < dst->width; x_new++)
+		{
+			float dx = x_new - cx;
+			float dy = y_new - cy;
+			
+			float x =  cos(angle_rad) * dx + sin(angle_rad) * dy + cx;
+			float y = -sin(angle_rad) * dx + cos(angle_rad) * dy + cy;
+
+			int xi = roundf(x);
+			int yi = roundf(y);
+
+			if (xi >= 0 && xi < src.width && yi >= 0 && yi < src.height)
+			{
+				int color = my_mlx_get_pixel(src, xi, yi);
+				my_mlx_pixel_put(dst, x_new, y_new, color);
+			}
+		}
+		
+	}
+}
+
 void	init_mlx(t_cub *cub)
 {
 	cub->mlx = mlx_init();
@@ -95,5 +124,12 @@ void	init_mlx(t_cub *cub)
 	cub->scene.e_key.img.addr = (int *)mlx_get_data_addr(cub->scene.e_key.img.img, &cub->scene.e_key.img.bpp, &cub->scene.e_key.img.line_len, &cub->scene.e_key.img.endian);
 	cub->scene.e_key.img.line_len /= 4;
 	cub->scene.e_key.img = my_mlx_resize_img(cub->mlx, cub->scene.e_key.img, (t_point){32, 32});
+
+	
+
+		// cub->rotated_key.img = mlx_new_image(cub->mlx, cub->scene.e_key.img.width, cub->scene.e_key.img.height);
+		// cub->rotated_key.addr = (int *)mlx_get_data_addr(cub->rotated_key.img, &cub->rotated_key.bpp, &cub->rotated_key.line_len, &cub->rotated_key.endian);
+		// cub->rotated_key.line_len /= 4;
+		// rotate_image(cub->scene.e_key.img, &cub->rotated_key, 45);
 	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
 }

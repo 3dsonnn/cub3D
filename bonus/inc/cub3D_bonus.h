@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 09:56:53 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:41:02 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,4 +145,6 @@ char				**row_to_mtx(t_rows *head);
 void				add_row(t_rows **head, t_rows *_new);
 
 long				get_current_time(void);
+
+t_RGB	get_RGB(int color);
 #endif

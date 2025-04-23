@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:53:50 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 19:45:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:50:36 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,13 @@ inline int	my_mlx_get_pixel(t_img image, int x, int y)
 	if (!image.addr || x < 0 || x >= image.width || y < 0 || y >= image.height)
 		return (BLACK);
 	return (*(image.addr + y * image.line_len + x));
+}
+
+/*int r1 = (color_a >> 16) & 0xFF;
+int g1 = (color_a >> 8)  & 0xFF;
+int b1 = (color_a)       & 0xFF;*/
+
+t_RGB	get_RGB(int color)
+{
+	return ((t_RGB){.r = ((color >> 16) & 0xFF), .g = ((color >> 8)  & 0xFF), .b = ((color) & 0xFF)});
 }

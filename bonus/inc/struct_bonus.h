@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 09:16:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:51:55 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,13 @@ typedef struct s_img
 	int				height;
 }					t_img;
 
+typedef struct s_RGB
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_RGB;
+
 typedef struct s_bresenham_line
 {
 	t_plane			crd;
@@ -298,6 +305,7 @@ typedef struct s_mmap
 	t_point			bounds;
 	int				tilesize;
 	t_tile			*cur;
+	t_tile			*door;
 	t_tile			*corners[4];
 	t_tile			**tiles;
 }					t_mmap;
@@ -313,6 +321,8 @@ typedef struct s_cub
 	t_mmap			minimap;
 	t_hook			hooks;
 	double			ppd;
+	t_img			rotated_key;
+	long			cur_time;
 }					t_cub;
 
 #endif

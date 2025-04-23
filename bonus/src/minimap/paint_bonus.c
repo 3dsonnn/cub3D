@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paint_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:57:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/21 23:11:57 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 14:12:19 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	paint_obx(t_cub *cub, t_tile *topleft, t_point *minip)
 		tmp = topleft;
 		while (++(pos.x) < cub->minimap.bounds.x + 1)
 		{
-			if (tmp->id == 'C')
+			if (tmp == cub->minimap.cur)
 			{
 				minip->x = pos.x * cub->minimap.tilesize + 10;
 				minip->y = pos.y * cub->minimap.tilesize + 10;
