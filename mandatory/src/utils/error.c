@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:22:09 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 07:35:53 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 11:45:12 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	exit_error(char *message, t_scene *scene)
 	ft_strfree(&scene->line);
 	ft_strfree(&scene->line_cpy);
 	free_rows(&scene->map.head);
+	free_map_crds(&scene->map.crds);
 	ft_strfree(&scene->elements);
 	ft_mtxfree(&scene->map.content);
 	ft_strfree(&scene->line_nbr.str);

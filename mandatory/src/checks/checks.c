@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 18:03:55 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 18:01:02 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,39 +69,9 @@ void	print_rows(t_row *head)
 	}
 	while (head)
 	{
-		ft_printf("id=%d-->%s\n", head->line_nbr.value, head->str);
+		ft_printf("id=%s-->%s\n", head->line_nbr, head->str);
 		head = head->next;
 	}
-}
-
-void trim_rows(t_row **head)
-{
-    t_row *aux;
-    t_row *tmp;
-
-    if (!head || !*head)
-        return ;
-    tmp = *head;
-    while (tmp && ft_strspace(tmp->str))
-    {
-        aux = tmp;
-        tmp = tmp->next;
-        free_row(&aux, aux);
-    }
-    *head = tmp;
-    if (!*head)
-        return ;
-    aux = tmp;
-    while (aux->next && !ft_strspace(aux->next->str))
-        aux = aux->next;
-    while (aux->next && ft_strspace(aux->next->str))
-    {
-        tmp = aux->next;
-        aux->next = tmp->next;
-        if (tmp->next)
-            tmp->next->prev = aux;
-        free_row(&tmp, tmp);
-    }
 }
 
 static void	check_map(t_scene *scene, t_map *map)
@@ -109,21 +79,22 @@ static void	check_map(t_scene *scene, t_map *map)
 	add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
 	ft_strfree(&scene->line);
 	fill_map(scene, map);
-	map->content = row_to_mtx(map->head);
-	print_rows(map->head);
 	trim_rows(&map->head);
-	ft_printf("-----------------------------------------\n");
-	print_rows(map->head);
-	// free_rows(&map->head);
-	map->size.x = ft_longestr_mtx(map->content);
-	map->size.y = ft_mtxlen(map->content);
+	if (!map->head)
+		exit_error(get_explicit_error_message(scene,
+			(t_strs){"Invalid map: it cannot be full of spaces", NULL,
+				NULL, NULL, NULL, NULL}), scene);
+	map->size = rows_size(map->head);
 	if (map->size.x < 3 || map->size.y < 3)
 		exit_error(get_explicit_error_message(scene,
-				(t_strs){"Invalid map: too small", NULL, NULL, NULL, NULL,
-				NULL}), scene);
+				(t_strs){"Invalid map: too small", NULL, NULL, NULL,
+					NULL, NULL}), scene);
 	fulfill_map(scene, map);
-	check_starting_position(scene, map, -1, -1);
-	is_surrounded(scene, map, (t_point){0, 0});
+	check_starting_position(scene, map, map->head, (t_iter){-1, -1, 0, -1, -1, -1});
+	is_surrounded(scene, map, map->head->next, get_last_row(map->head));
+	map->content = row_to_mtx(map->head);
+	map->content[map->spos.y][map->spos.x] = '0';
+	free_rows(&map->head);
 }
 
 void	checks(t_cub *cub, int ac, char **av)
