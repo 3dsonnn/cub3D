@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:26:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:25:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 09:45:16 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	check_boundary_columns(t_scene *scene, t_map *map, t_row *head)
 	}
 }
 
-static void	check_boundary_lines(t_scene *scene, t_map *map, t_row *tail)
+static void	check_tail_line(t_scene *scene, t_map *map, t_row *tail)
 {
 	if (ft_strchr(tail->str, '0'))
 	{

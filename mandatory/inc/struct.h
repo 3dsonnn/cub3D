@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 09:42:07 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 09:44:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ typedef enum ID
 	WE,
 	EA
 }					t_ID;
+
+typedef struct s_iter
+{
+	int					i;
+	int					j;
+	int					k;
+	int					l;
+	int					m;
+	int					n;
+}						t_iter;
 
 typedef struct s_strs
 {
