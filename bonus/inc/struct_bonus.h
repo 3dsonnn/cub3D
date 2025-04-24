@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:48:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define STRUCT_BONUS_H
 
 # include <stdbool.h>
-# include <pthread.h>
-# include <stdatomic.h>
+
+typedef struct s_img	t_img;
 
 # define CROSSHAIR_PATH "bonus/config/animated_sprites/crosshair.xpm"
 # define CARTRIDGE_PATH "bonus/config/animated_sprites/cartridge.xpm"
@@ -82,12 +82,6 @@ typedef enum e_ID
 	EA
 }						t_ID;
 
-typedef struct s_img_path
-{
-	int					key;
-	char				*path;
-}						t_img_path;
-
 typedef enum e_CORNERS
 {
 	TOPLEFT,
@@ -95,26 +89,6 @@ typedef enum e_CORNERS
 	BOTTLEFT,
 	BOTTRIGHT
 }						t_CORNERS;
-
-typedef struct s_iter
-{
-	int					i;
-	int					j;
-	int					k;
-	int					l;
-	int					m;
-	int					n;
-}						t_iter;
-
-typedef struct s_strs
-{
-	char				*s1;
-	char				*s2;
-	char				*s3;
-	char				*s4;
-	char				*s5;
-	char				*s6;
-}						t_strs;
 
 typedef struct s_dpoint
 {
@@ -138,28 +112,25 @@ typedef struct s_plane
 	int					y;
 }						t_plane;
 
-typedef struct s_rows
+typedef struct s_iter
 {
-	char				*str;
-	struct s_rows		*next;
-}						t_row;
+	int					i;
+	int					j;
+	int					k;
+	int					l;
+	int					m;
+	int					n;
+}						t_iter;
 
-typedef struct s_nbr
+typedef struct s_strs
 {
-	int					value;
-	char				*str;
-}						t_nbr;
-
-typedef struct s_img
-{
-	void				*img;
-	int					*addr;
-	int					line_len;
-	int					bpp;
-	int					endian;
-	int					width;
-	int					height;
-}						t_img;
+	char				*s1;
+	char				*s2;
+	char				*s3;
+	char				*s4;
+	char				*s5;
+	char				*s6;
+}						t_strs;
 
 typedef struct s_bresenham_line
 {
@@ -183,11 +154,52 @@ typedef struct s_bresenham_circle
 	t_img				*img;
 }						t_bresenham_circle;
 
-typedef struct s_hook
+typedef struct s_img_path
 {
-	bool				alt;
-	bool				space;
-}						t_hook;
+	int					key;
+	char				*path;
+}						t_img_path;
+
+struct					s_img
+{
+	void				*img;
+	int					*addr;
+	int					line_len;
+	int					bpp;
+	int					endian;
+	int					width;
+	int					height;
+};
+
+typedef struct s_map_crd
+{
+	char				*str;
+	struct s_map_crd	*next;
+}						t_map_crd;
+
+typedef struct s_row
+{
+	char				*str;
+	char				*line_nbr;
+	struct s_row		*prev;
+	struct s_row		*next;
+}						t_row;
+
+typedef struct s_map
+{
+	t_row				*head;
+	t_map_crd			*crds;
+	char				**content;
+	char				start;
+	t_point				spos;
+	t_point				size;
+}						t_map;
+
+typedef struct s_nbr
+{
+	int					value;
+	char				*str;
+}						t_nbr;
 
 typedef struct s_texture
 {
@@ -196,40 +208,20 @@ typedef struct s_texture
 	t_img				img;
 }						t_texture;
 
-typedef struct s_map
-{
-	t_row				*head;
-	char				**content;
-	char				start;
-	t_point				spos;
-	t_point				size;
-}						t_map;
-
 typedef struct s_scene
 {
 	int					fd;
 	int					floor;
 	int					ceiling;
-	int					line_nbr;
 	char				**mtx;
 	char				*tmp;
 	char				*line;
+	char				*line_cpy;
 	char				*elements;
-	char				*line_nbr_str;
+	t_nbr				line_nbr;
 	t_map				map;
 	t_texture			textures[4];
 }						t_scene;
-
-typedef struct s_tile
-{
-	char				id;
-	int					color;
-	t_point				crd;
-	struct s_tile		*up;
-	struct s_tile		*down;
-	struct s_tile		*left;
-	struct s_tile		*right;
-}						t_tile;
 
 typedef struct s_intersection
 {
@@ -255,6 +247,12 @@ typedef struct s_ray
 	t_img				img;
 }						t_ray;
 
+typedef struct s_hook
+{
+	bool				alt;
+	bool				space;
+}						t_hook;
+
 typedef struct s_sprite
 {
 	int					ammo;
@@ -267,14 +265,16 @@ typedef struct s_sprite
 	t_img				imgs[27];
 }						t_sprite;
 
-typedef struct s_player
+typedef struct s_tile
 {
-	t_dpoint			pos;
-	t_dpoint			dir;
-	t_dpoint			plane;
-	double				angle;
-	int					updown;
-}						t_player;
+	char				id;
+	int					color;
+	t_point				crd;
+	struct s_tile		*up;
+	struct s_tile		*down;
+	struct s_tile		*left;
+	struct s_tile		*right;
+}						t_tile;
 
 typedef struct s_mmap
 {
@@ -286,6 +286,15 @@ typedef struct s_mmap
 	t_tile				*corners[4];
 	t_tile				**tiles;
 }						t_mmap;
+
+typedef struct s_player
+{
+	t_dpoint			pos;
+	t_dpoint			dir;
+	t_dpoint			plane;
+	double				angle;
+	int					updown;
+}						t_player;
 
 typedef struct s_cub
 {

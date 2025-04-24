@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/23 14:37:48 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/24 14:57:28 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,20 +64,21 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/hooks/hooks_aux_bonus.c 						\
 			bonus/src/hooks/image_manipulation_bonus.c 				\
 			bonus/src/cub3D/cub3D_bonus.c 							\
-			bonus/src/cub3D/painting_bonus.c 						\
 			bonus/src/player/init_bonus.c 							\
 			bonus/src/player/move_bonus.c 							\
 			bonus/src/player/rotate_bonus.c							\
 			bonus/src/raycast/aux_bonus.c							\
-			bonus/src/raycast/get_rays_bonus.c						\
+			bonus/src/raycast/raycast_bonus.c						\
 			bonus/src/raycast/vertical_bonus.c						\
 			bonus/src/raycast/horizontal_bonus.c					\
-			bonus/src/t_row/t_row_bonus.c 							\
-			bonus/src/t_row/t_row_aux_bonus.c 						\
+			bonus/src/linked_list_lib/t_row_bonus.c 				\
+			bonus/src/linked_list_lib/t_row_aux_bonus.c 			\
+			bonus/src/linked_list_lib/t_map_crd_bonus.c				\
 			bonus/src/utils/bresenham_bonus.c						\
 			bonus/src/utils/free_bonus.c 							\
 			bonus/src/utils/error_bonus.c 							\
 			bonus/src/utils/ft_math_bonus.c							\
+			bonus/src/utils/general_bonus.c							\
 			bonus/src/minimap/init_bonus.c							\
 			bonus/src/minimap/linkage_bonus.c						\
 			bonus/src/minimap/settings_bonus.c						\

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 09:41:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 10:44:11 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		move_player(t_cub *cub, double forward, double strafe,
 
 //  RAYCAST
 void		raycast(t_cub *cub, int j);
-extern void	init_rays(t_cub *cub);
+void		init_rays(t_cub *cub);
 void		check_horizontal_intersection(t_cub *cub, t_ray *ray);
 void		check_vertical_intersection(t_cub *cub, t_ray *ray);
 int			is_wall(t_cub *cub, double x, double y);
