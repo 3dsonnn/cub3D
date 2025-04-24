@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:06:11 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 10:29:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	choose_intersection(t_cub *cub, t_ray *ray)
 
 static void	get_column(t_cub *cub, t_ray *ray)
 {
-	ray->dist = ray->dist * cos(ft_normalizer(ray->angle - cub->player.angle));
+	ray->dist *= cos(ft_normalizer(ray->angle - cub->player.angle));
 	ray->height = (int)(TILE / ray->dist * cub->ppd);
 	ray->top = (int)(cub->img.height - ray->height) / 2;
 	ray->bot = (int)(cub->img.height + ray->height) / 2;
