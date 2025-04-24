@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:57:28 by efinda            #+#    #+#             */
-/*   Updated: 2024/05/30 20:57:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:46:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	char	*one_line(char *str)
 
 	i = 0;
 	j = 0;
-	if (!str || *str == '\0')
+	if (!str || !*str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
@@ -57,8 +57,8 @@ static	char	*ft_substr_gnl(char *str, int start, int end)
 	while (str[start])
 	{
 		res[i] = str[start];
-		i++;
 		start++;
+		i++;
 	}
 	res[i] = '\0';
 	ft_strfree(&str);
@@ -87,15 +87,14 @@ char	*get_next_line(int fd)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-		{
-			gnl_free(str[fd], buffer);
-			return (NULL);
-		}
+			return (gnl_free(str[fd], buffer), NULL);
 		buffer[bytes_read] = '\0';
-		str[fd] = ft_strjoin_free(str[fd], buffer);
+		str[fd] = ft_strjoin(str[fd], buffer, 1);
 	}
 	ft_strfree(&buffer);
 	buffer = one_line(str[fd]);
 	str[fd] = ft_substr_gnl(str[fd], ft_strlen(buffer), ft_strlen(str[fd]));
+	if (buffer && *buffer && buffer[ft_strlen(buffer) - 1] == '\n')
+		buffer[ft_strlen(buffer) - 1] = '\0';
 	return (buffer);
 }

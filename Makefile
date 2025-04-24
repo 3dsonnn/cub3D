@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/17 10:14:44 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/23 14:37:48 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,12 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/raycast/aux.c								\
 		mandatory/src/raycast/vertical.c						\
 		mandatory/src/raycast/horizontal.c						\
-		mandatory/src/t_row/t_row.c 							\
-		mandatory/src/t_row/t_row_aux.c 						\
+		mandatory/src/linked_list_lib/t_row.c 					\
+		mandatory/src/linked_list_lib/t_row_aux.c 				\
+		mandatory/src/linked_list_lib/t_map_crd.c				\
 		mandatory/src/utils/error.c 							\
 		mandatory/src/utils/ft_math.c							\
+		mandatory/src/utils/general.c							\
 		mandatory/src/my_mlx/my_mlx_init_img.c					\
 		mandatory/src/my_mlx/my_mlx_pixel_put.c					\
 		mandatory/src/my_mlx/my_mlx_get_pixel.c					\

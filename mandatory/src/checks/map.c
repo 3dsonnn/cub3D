@@ -6,42 +6,17 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 02:24:22 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:08:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
-
-void	check_map_start(t_scene *scene, t_map *map)
-{
-	if (!scene->line)
-		exit_error("The map is missing in the scene file", scene);
-	if (scene->line[ft_strlen(scene->line) - 1] == '\n')
-		scene->line[ft_strlen(scene->line) - 1] = '\0';
-	if (!*scene->line)
-	{
-		ft_strfree(&scene->line);
-		skip_empty_lines(scene);
-		if (!scene->line)
-			exit_error("The map is missing in the scene file", scene);
-	}
-	if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
-	{
-		scene->line_nbr.str = ft_itoa(scene->line_nbr.value);
-		exit_error(get_explicit_error_message(scene,
-				(t_strs){"Invalid element on line ", scene->line_nbr.str,
-				" of the scene file", NULL, NULL, NULL}), scene);
-	}
-	add_row(&map->head, new_row(scene->line));
-	ft_strfree(&scene->line);
-}
 
 static void	check_map_end(t_scene *scene, t_map *map)
 {
 	ft_strfree(&scene->line_nbr.str);
 	if (!scene->line)
 		return ;
-	ft_strfree(&scene->line);
 	while (-42)
 	{
 		skip_empty_lines(scene);
@@ -49,29 +24,32 @@ static void	check_map_end(t_scene *scene, t_map *map)
 			return ;
 		scene->line_nbr.str = ft_itoa(scene->line_nbr.value);
 		exit_error(get_explicit_error_message(scene,
-				(t_strs){"The map content always has to be the last information on the file. \
-				So the element on line ",
-				scene->line_nbr.str, " is invalid", NULL, NULL, NULL}), scene);
+				(t_strs){"The map content always has to be the last ",
+				"information on the file. So the element on line ",
+				scene->line_nbr.str, " is invalid", NULL, NULL}), scene);
 	}
 }
 
 void	fulfill_map(t_scene *scene, t_map *map)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
+	t_row	*tmp;
 
 	i = -1;
+	tmp = map->head;
 	while (++i < map->size.y)
 	{
-		len = ft_strlen(map->content[i]);
+		len = ft_strlen(tmp->str);
 		if (len < map->size.x)
 		{
 			scene->tmp = ft_calloc(map->size.x + 1, sizeof(char));
-			ft_strnfill(scene->tmp, map->content[i], len);
+			ft_strnfill(scene->tmp, tmp->str, len);
 			ft_memset(scene->tmp + len, ' ', map->size.x - len);
-			ft_strfree(&map->content[i]);
-			ft_swaptr((void **)&map->content[i], (void **)&scene->tmp);
+			ft_strfree(&tmp->str);
+			ft_swaptr((void **)&tmp->str, (void **)&scene->tmp);
 		}
+		tmp = tmp->next;
 	}
 }
 
@@ -80,49 +58,50 @@ void	fill_map(t_scene *scene, t_map *map)
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);
-		scene->line_nbr = (t_nbr){.value = scene->line_nbr.value++,
+		scene->line_nbr = (t_nbr){.value = ++scene->line_nbr.value,
 			.str = ft_itoa(scene->line_nbr.value)};
-		if (!scene->line)
-			break ;
-		if (scene->line[ft_strlen(scene->line) - 1] == '\n')
-			scene->line[ft_strlen(scene->line) - 1] = '\0';
-		if (!*scene->line)
+		if (!scene->line || !*scene->line)
 			break ;
 		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
 		{
 			exit_error(get_explicit_error_message(scene,
-					(t_strs){"Invalid character inside \
-					the map content on line ",
-					scene->line_nbr.str, " of the scene file", NULL, NULL,
-					NULL}), scene);
+					(t_strs){"Invalid map: strange character inside it,",
+					" on line ", scene->line_nbr.str, " of the scene file",
+					NULL, NULL}), scene);
 		}
-		add_row(&map->head, new_row(scene->line));
-		ft_strfree(&scene->line);
+		add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
 		ft_strfree(&scene->line_nbr.str);
+		ft_strfree(&scene->line);
 	}
 	check_map_end(scene, map);
 }
 
-void	check_starting_position(t_scene *scene, t_map *map, int i, int j)
+void	check_starting_position(t_scene *scene, t_map *map, t_row *head,
+		t_iter iter)
 {
-	int	flag;
-
-	flag = 0;
-	while (++i < map->size.y)
+	while (++iter.i < map->size.y)
 	{
-		j = -1;
-		while (++j < map->size.x)
+		iter.j = -1;
+		while (++iter.j < map->size.x)
 		{
-			if (ft_strchr("NSEW", map->content[i][j]))
+			if (ft_strchr("NSEW", head->str[iter.j]))
 			{
-				map->start = map->content[i][j];
-				map->spos = (t_point){.x = j, .y = i};
-				flag++;
+				map->start = head->str[iter.j];
+				map->spos = (t_point){.x = iter.j, .y = iter.i};
+				add_map_crd(&map->crds, new_map_crd(map->start, ft_itoa(iter.j),
+						head->line_nbr));
+				iter.k++;
 			}
 		}
+		head = head->next;
 	}
-	if (!flag)
+	if (!iter.k)
 		exit_error("Invalid map: there isn't a start position", scene);
-	if (flag > 1)
-		exit_error("Invalid map: there's more than one start position", scene);
+	if (iter.k > 1)
+	{
+		scene->tmp = map_crds_to_str(map->crds,
+				"Invalid map: there're more than one start position:");
+		exit_error(scene->tmp, scene);
+	}
+	free_map_crds(&scene->map.crds);
 }

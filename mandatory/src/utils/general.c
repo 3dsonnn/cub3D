@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ctoa.c                                          :+:      :+:    :+:   */
+/*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 09:59:30 by efinda            #+#    #+#             */
-/*   Updated: 2025/02/21 01:36:45 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/23 12:10:08 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/23 19:03:17 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../../inc/cub3D.h"
 
-char	*ft_ctoa(char c)
+char	*join_strs(t_strs strs)
 {
-	char *res;
+	char	*res;
 
-	res = (char *)malloc(sizeof(char) * 2);
-	if (!res)
-		return (NULL);
-	*res = c;
-	*(res + 1) = '\0';
+	res = NULL;
+	if (strs.s1)
+		res = ft_strjoin(res, strs.s1, 3);
+	if (strs.s3)
+		res = ft_strjoin(res, strs.s2, 3);
+	if (strs.s3)
+		res = ft_strjoin(res, strs.s3, 3);
+	if (strs.s4)
+		res = ft_strjoin(res, strs.s4, 3);
+	if (strs.s5)
+		res = ft_strjoin(res, strs.s5, 3);
+	if (strs.s6)
+		res = ft_strjoin(res, strs.s6, 3);
 	return (res);
 }

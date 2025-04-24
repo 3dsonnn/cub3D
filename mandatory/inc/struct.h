@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 11:36:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 09:42:07 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ typedef struct s_nbr
 	char				*str;
 }						t_nbr;
 
+typedef struct s_row
+{
+	char			*str;
+	char			*line_nbr;
+	struct s_row	*prev;
+	struct s_row	*next;
+}					t_row;
+
+typedef struct s_map_crd
+{
+	char				*str;
+	struct s_map_crd	*next;
+}					t_map_crd;
+
 typedef struct s_img
 {
 	void			*img;
@@ -76,7 +90,8 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	t_rows			*head;
+	t_row			*head;
+	t_map_crd		*crds;
 	char			**content;
 	char			start;
 	t_point			spos;
@@ -91,6 +106,7 @@ typedef struct s_scene
 	char			**mtx;
 	char			*tmp;
 	char			*line;
+	char			*line_cpy;
 	char			*elements;
 	t_nbr			line_nbr;
 	t_map			map;

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 08:19:40 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:06:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ static void	get_starting_angle(t_cub *cub, char spawning_orientation)
 
 void	init_player(t_cub *cub)
 {
-	cub->player.pos = (t_dpoint){.x = (cub->scene.map.spos.x * TILE) + (TILE / 2), .y = (cub->scene.map.spos.y * TILE) + (TILE / 2)};
+	cub->player.pos = (t_dpoint){.x = (cub->scene.map.spos.x * TILE) + (TILE
+			/ 2), .y = (cub->scene.map.spos.y * TILE) + (TILE / 2)};
 	get_starting_angle(cub, cub->scene.map.start);
-	cub->player.dir = (t_dpoint){.x = cos(cub->player.angle), .y = sin(cub->player.angle)};
-	cub->player.plane = (t_dpoint){.x = -cub->player.dir.y, .y = cub->player.dir.x};
+	cub->player.dir = (t_dpoint){.x = cos(cub->player.angle),
+		.y = sin(cub->player.angle)};
+	cub->player.plane = (t_dpoint){.x = -cub->player.dir.y,
+		.y = cub->player.dir.x};
 }

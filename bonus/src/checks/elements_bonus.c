@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/04 17:28:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:48:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ void	check_duplicate_id(t_scene *scene, char ID)
 					(t_strs){"Duplicate path to the ", get_element_str(ID),
 					" texture on line ", scene->line_nbr_str, NULL, NULL}), scene);
 	}
-	scene->tmp = ft_strjoin(scene->elements, (char []){ID, '\0'});
-	ft_strfree(&scene->elements);
+	scene->tmp = ft_strjoin(scene->elements, (char []){ID, '\0'}, 1);
 	ft_swaptr((void **)&scene->elements, (void **)&scene->tmp);
 }
 

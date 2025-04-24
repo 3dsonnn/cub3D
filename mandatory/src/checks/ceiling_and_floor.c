@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:23:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 01:51:58 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:47:06 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,9 @@ static void	keep_checking(t_scene *scene, char *id, int rgb[3], int i)
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
 				" element on line ", scene->line_nbr.str, ": ",
 				"the color range cannot end with a ','"}), scene);
+	ft_strfree(&scene->tmp);
 	while (scene->mtx[++i])
-		scene->tmp = ft_strjoin_free(scene->tmp, scene->mtx[i]);
+		scene->tmp = ft_strjoin(scene->tmp, scene->mtx[i], 1);
 	aux = scene->tmp;
 	rgb[0] = ft_atoi(scene->tmp);
 	scene->tmp = ft_strchr(scene->tmp, ',');
@@ -110,7 +111,7 @@ void	check_fc(t_scene *scene)
 	int		rgb[3];
 	char	*id;
 
-	id = get_element_str(*scene->line);
+	id = get_element_name(*scene->line);
 	if (ft_strchr_count(scene->line, ',') != 2)
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Incorrect number of commas on the ", id,
@@ -118,6 +119,7 @@ void	check_fc(t_scene *scene)
 	first_checks(scene, id, 1);
 	keep_checking(scene, id, rgb, -1);
 	ft_strfree(&scene->line_nbr.str);
+	ft_strfree(&scene->line_cpy);
 	ft_strfree(&scene->line);
 	ft_mtxfree(&scene->mtx);
 }

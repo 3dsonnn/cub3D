@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/17 01:56:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:48:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_id(char *line, int flag)
 	return (0);
 }
 
-char	*get_element_str(char c)
+inline	char	*get_element_name(char c)
 {
 	if (c == 'N')
 		return ("North");
@@ -58,33 +58,35 @@ void	check_duplicate_id(t_scene *scene, char ID)
 	{
 		if (ID == 'C' || ID == 'F')
 			exit_error(get_explicit_error_message(scene, (t_strs){"Duplicated ",
-					get_element_str(ID), " element on line ",
+					get_element_name(ID), " element on line ",
 					scene->line_nbr.str, NULL, NULL}), scene);
 		else
 			exit_error(get_explicit_error_message(scene,
-					(t_strs){"Duplicate path to the ", get_element_str(ID),
+					(t_strs){"Duplicate path to the ", get_element_name(ID),
 					" texture on line ", scene->line_nbr.str, NULL, NULL}),
 				scene);
 	}
-	scene->tmp = ft_strjoin(scene->elements, (char []){ID, '\0'});
-	ft_strfree(&scene->elements);
+	ft_strfree(&scene->tmp);
+	scene->tmp = ft_strjoin(scene->elements, (char []){ID, '\0'}, 1);
 	ft_swaptr((void **)&scene->elements, (void **)&scene->tmp);
 }
 
-void	check_element(t_scene *scene, int *flag)
+void	check_element(t_scene *scene)
 {
 	scene->tmp = ft_strtrim(scene->line, " ");
 	ft_strfree(&scene->line);
 	ft_swaptr((void **)&scene->line, (void **)&scene->tmp);
+	scene->line_nbr.str = ft_itoa(scene->line_nbr.value);
 	if (check_id(scene->line, 0))
 		check_texture(scene);
 	else if (check_id(scene->line, 1))
 		check_fc(scene);
 	else if (ft_strlen(scene->elements) == 6
-		&& ft_strspn(scene->line, "01 NSEW") == ft_strlen(scene->line))
+		&& ft_strspn(scene->line_cpy, "01 NSEW") == ft_strlen(scene->line_cpy))
 	{
-		*flag = 1;
-		return ;
+		ft_strfree(&scene->line);
+		ft_swaptr((void **)&scene->line, (void **)&scene->line_cpy);
+		ft_strfree(&scene->line_nbr.str);
 	}
 	else
 	{
