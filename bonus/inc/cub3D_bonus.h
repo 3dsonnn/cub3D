@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 09:56:53 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:36:04 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,6 @@ void				free_rows(t_rows **head);
 char				**row_to_mtx(t_rows *head);
 void				add_row(t_rows **head, t_rows *_new);
 
+void				rotate_image(t_img src, t_img *dst, float angle_degrees, t_cub *cub);
 long				get_current_time(void);
 #endif
