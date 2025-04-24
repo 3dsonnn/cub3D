@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 09:16:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:08:59 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ typedef struct s_scene
 	t_map			map;
 	t_texture		textures[4];
 	t_texture		door;
+	t_texture		rotated_key;
 	t_texture		e_key;
 }					t_scene;
 
@@ -313,6 +314,7 @@ typedef struct s_cub
 	t_mmap			minimap;
 	t_hook			hooks;
 	double			ppd;
+	long			cur_time;
 }					t_cub;
 
 #endif
