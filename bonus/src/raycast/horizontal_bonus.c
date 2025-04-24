@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 20:27:25 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 10:39:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,19 @@ static void	get_steps(t_cub *cub, t_ray *ray, t_intersection *tmp)
 		tmp->step.x *= -1;
 }
 
+static void	get_distance(t_cub *cub, t_ray *ray)
+{
+	if (ray->hor.intersected)
+		ray->hor.dist = sqrt(pow((ray->hor.wall.x - cub->player.pos.x), 2)
+				+ pow((ray->hor.wall.y - cub->player.pos.y), 2));
+	else
+		ray->hor.dist = DBL_MAX;
+}
+
 void	check_horizontal_intersection(t_cub *cub, t_ray *ray)
 {
 	t_intersection	tmp;
 
-	ray->hor.dist = DBL_MAX;
 	ray->hor.intersected = 0;
 	get_first_intersection(cub, ray, &tmp);
 	get_steps(cub, ray, &tmp);
@@ -48,15 +56,12 @@ void	check_horizontal_intersection(t_cub *cub, t_ray *ray)
 		{
 			if (!face_down(ray->angle))
 				tmp.crd.y += 1;
-			ray->hor.wall.x = tmp.crd.x;
-			ray->hor.wall.y = tmp.crd.y;
+			ray->hor.wall = (t_dpoint){.x = tmp.crd.x, .y = tmp.crd.y};
 			ray->hor.intersected = 1;
 			break ;
 		}
-		tmp.crd.x += tmp.step.x;
-		tmp.crd.y += tmp.step.y;
+		tmp.crd = (t_dpoint){.x = tmp.crd.x + tmp.step.x, .y = tmp.crd.y
+			+ tmp.step.y};
 	}
-	if (ray->hor.intersected)
-		ray->hor.dist = sqrt(pow((ray->hor.wall.x - cub->player.pos.x), 2)
-				+ pow((ray->hor.wall.y - cub->player.pos.y), 2));
+	get_distance(cub, ray);
 }
