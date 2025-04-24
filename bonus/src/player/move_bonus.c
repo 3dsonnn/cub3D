@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/16 21:14:07 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:35:37 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ static void	update_cur_tile(t_cub *cub, double x, double y)
 
 	i = (int)floor(y / TILE);
 	j = (int)floor(x / TILE);
-	cub->minimap.cur->id = '0';
+	if (cub->minimap.cur->id != 'D' && cub->minimap.cur->id != 'd')
+		cub->minimap.cur->id = '0';
 	cub->minimap.cur = &cub->minimap.tiles[i][j];
-	cub->minimap.cur->id = 'C';
+	// cub->minimap.cur->id = 'C';
 	update_obx(cub);
 }
+
 
 static int	obx_overlaps_wall(t_dpoint pos, t_point check)
 {
@@ -102,4 +104,5 @@ void	rotate_player(t_cub *cub, double angle_delta)
 	cub->player.dir.y = sin(cub->player.angle);
 	cub->player.plane.x = -cub->player.dir.y;
 	cub->player.plane.y = cub->player.dir.x;
+	rotate_image(cub->scene.e_key.img, &cub->scene.rotated_key.img, cub->player.angle, cub);
 }

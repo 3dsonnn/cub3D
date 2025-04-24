@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 09:16:59 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:46:21 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ static	void	my_mlx_new_image(t_cub *cub)
 	cub->img.line_len /= 4;
 }
 
+float	get_corner_length(int side)
+{
+	return ((side * sqrt(2.0f)) / 2.0f);
+}
+
+
 void	init_mlx(t_cub *cub)
 {
 	cub->mlx = mlx_init();
@@ -95,5 +101,12 @@ void	init_mlx(t_cub *cub)
 	cub->scene.e_key.img.addr = (int *)mlx_get_data_addr(cub->scene.e_key.img.img, &cub->scene.e_key.img.bpp, &cub->scene.e_key.img.line_len, &cub->scene.e_key.img.endian);
 	cub->scene.e_key.img.line_len /= 4;
 	cub->scene.e_key.img = my_mlx_resize_img(cub->mlx, cub->scene.e_key.img, (t_point){32, 32});
+
+	float rotated_key_size = ceil(get_corner_length(32));
+	cub->scene.rotated_key.img.img = mlx_xpm_file_to_image(cub->mlx, E_TEXTURE, &cub->scene.rotated_key.img.width, &cub->scene.rotated_key.img.height);
+	cub->scene.rotated_key.img.addr = (int *)mlx_get_data_addr(cub->scene.rotated_key.img.img, &cub->scene.rotated_key.img.bpp, &cub->scene.rotated_key.img.line_len, &cub->scene.rotated_key.img.endian);
+	cub->scene.rotated_key.img.line_len /= 4;
+	cub->scene.rotated_key.img = my_mlx_resize_img(cub->mlx, cub->scene.rotated_key.img, (t_point){32 + rotated_key_size, 32 + rotated_key_size});
+	
 	mlx_mouse_move(cub->mlx, cub->win, (int)(cub->img.width / 2), (int)(cub->img.height / 2));
 }
