@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 19:18:41 by efinda            #+#    #+#              #
-#    Updated: 2025/04/22 10:50:25 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/24 20:29:08 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRC = 	ctype/ft_isalnum.c				\
 	extras/ft_replace_char.c			\
 	extras/ft_strpbrk.c				\
 	extras/ft_strqbrk.c				\
+	extras/ft_strint.c				\
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror
