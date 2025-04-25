@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 21:17:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 16:37:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static int	my_mlx_key_press(int keycode, t_cub *cub)
 	}
 	else if (keycode == ALT || keycode == SPACE)
 		alt_space(cub, keycode);
+	else if (keycode == EKEY && (cub->minimap.cur->left->id == 'D'
+		|| cub->minimap.cur->right->id == 'D'
+		|| cub->minimap.cur->down->id == 'D'
+		|| cub->minimap.cur->up->id == 'D'))
+		open_door(cub, cub->minimap.cur);
 	else
 		return (0);
 	cub3D(cub);

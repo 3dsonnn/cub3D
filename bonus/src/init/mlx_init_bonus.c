@@ -6,13 +6,37 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 10:51:27 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 20:25:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	get_textures_images(t_cub *cub, t_texture textures[4], int i)
+static void	get_door_img(t_cub *cub, t_img *img, char *id, char *path)
+{
+	img->img = mlx_xpm_file_to_image(cub->mlx, path, &img->width, &img->height);
+	if (!img->img)
+	{
+		get_explicit_error_message(&cub->scene, (t_strs){"Failed to load the",
+			id, "image from ", path, "\n",
+			"Make sure the configuration files were not modified"});
+		my_mlx_error_free(cub, cub->scene.tmp);
+	}
+	my_mlx_get_data_addr(img);
+	if (!img->addr)
+	{
+		get_explicit_error_message(&cub->scene,
+			(t_strs){"Failed to get the address of the", id, "image from ",
+			path, "\n", "Make sure the configuration files were not modified"});
+		my_mlx_error_free(cub, cub->scene.tmp);
+	}
+	if (ft_strlen(id) == 6)
+		my_mlx_resize_img(cub->mlx, img, (t_point){64, 64});
+	else
+		my_mlx_resize_img(cub->mlx, img, (t_point){32, 32});
+}
+
+static void	get_textures_images(t_cub *cub, t_texture textures[5], int i)
 {
 	while (++i < 4)
 	{
@@ -33,6 +57,8 @@ static void	get_textures_images(t_cub *cub, t_texture textures[4], int i)
 		}
 		ft_strfree(&textures[i].path);
 	}
+	get_door_img(cub, &cub->scene.map.door.door, " door ", DOOR_PATH);
+	get_door_img(cub, &cub->scene.map.door.key, " door key ", E_KEY_PATH);
 }
 
 void	init_mlx(t_cub *cub)
