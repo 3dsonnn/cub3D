@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 12:20:01 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 09:44:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ typedef struct s_dpoint
 	double			x;
 	double			y;
 }					t_dpoint;
+
+typedef struct s_rows
+{
+	char			*str;
+	struct s_rows	*next;
+}					t_rows;
 
 typedef struct s_nbr
 {

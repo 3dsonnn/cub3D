@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:02:24 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 10:50:22 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 20:28:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ long long int		ft_atoll(char *str);
 int					ft_getpid(void);
 int					ft_nbrlen(int n);
 int					ft_strnbr(char *str);
+int					ft_strint(char *str);
 int					ft_strspace(char *str);
 int					ft_mtxlen(char **matrix);
 int					ft_longestr_mtx(char **mtx);

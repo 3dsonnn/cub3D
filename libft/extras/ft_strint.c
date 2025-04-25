@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 07:21:59 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 20:14:04 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/24 20:03:17 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/25 10:25:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_strnbr(char *str)
+int	ft_strint(char *str)
 {
-	size_t	i;
+	int	sig;
+	int	len;
 
-	i = 0;
-	if (!str || !(*str))
+	sig = 0;
+	if (!ft_strnbr(str))
 		return (0);
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (!str[i])
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sig = 1;
+		str++;
+	}
+	while (*str == '0')
+		str++;
+	len = ft_strlen(str);
+	if (len > 10)
 		return (0);
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!ft_isdigit(str[i]))
-		return (0);
-	while (ft_isdigit(str[i]))
-		i++;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] != '\0')
-		return (0);
+	if (len == 10)
+		if ((sig == 0 && ft_strcmp(str, "2147483647") > 0) || (sig == 1
+				&& ft_strcmp(str, "2147483648") > 0))
+			return (0);
 	return (1);
 }

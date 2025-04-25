@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:59:10 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/02 04:14:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 10:15:02 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	minimap(t_cub *cub)
 
 	if (cub->minimap.box)
 	{
+		// ft_printf("%d\n", cub->minimap.bounds.x);
 		my_mlx_resize_img(cub->mlx, &cub->minimap.img,
 			(t_point){cub->minimap.tilesize * (cub->minimap.bounds.x + 1),
 			cub->minimap.tilesize * (cub->minimap.bounds.y + 1)});
@@ -94,7 +95,7 @@ void	minimap(t_cub *cub)
 	}
 	else
 	{
-		paint_nobx(cub, -1, -1);
+		// paint_nobx(cub, -1, -1);
 		miniplayer(cub, (t_point){cub->minimap.cur->crd.x
 			* cub->minimap.tilesize, cub->minimap.cur->crd.y
 			* cub->minimap.tilesize}, (t_point){((int)cub->player.pos.x

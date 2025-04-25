@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:29:56 by efinda           ###   ########.fr       */
+/*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/24 10:42:21 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../../inc/cub3D_bonus.h"
 
 static void	paint_column(t_cub *cub, t_ray *ray, t_point iter, t_point pixel)
 {
@@ -35,9 +35,9 @@ static void	paint_column(t_cub *cub, t_ray *ray, t_point iter, t_point pixel)
 	}
 }
 
-static void	choose_intersection(t_cub *cub, t_ray *ray)
+static  void    choose_intersection(t_cub *cub, t_ray *ray)
 {
-	if (ray->hor.dist < ray->ver.dist)
+    if (ray->hor.dist < ray->ver.dist)
 	{
 		ray->dist = ray->hor.dist;
 		ray->wall = (t_dpoint){.x = ray->hor.wall.x, .y = ray->hor.wall.y};
@@ -53,9 +53,9 @@ static void	choose_intersection(t_cub *cub, t_ray *ray)
 		(ray->dist)++;
 }
 
-static void	get_column(t_cub *cub, t_ray *ray)
+static  void    get_column(t_cub *cub, t_ray *ray)
 {
-	ray->dist *= cos(ft_normalizer(ray->angle - cub->player.angle));
+    ray->dist *= cos(ft_normalizer(ray->angle - cub->player.angle));
 	ray->height = (int)(TILE / ray->dist * cub->ppd);
 	ray->top = (int)(cub->img.height - ray->height) / 2;
 	ray->bot = (int)(cub->img.height + ray->height) / 2;
@@ -63,19 +63,18 @@ static void	get_column(t_cub *cub, t_ray *ray)
 		ray->bot = cub->img.height;
 }
 
-void	raycast(t_cub *cub, int j)
+void    get_rays(t_cub *cub, int j)
 {
-	while (++j < cub->img.width)
-	{
-		cub->rays[j].angle = ft_normalizer(cub->player.angle + atan((j
-						- cub->img.width / 2) / cub->ppd));
-		cub->rays[j].tan = tan(cub->rays[j].angle);
-		check_horizontal_intersection(cub, cub->rays + j);
-		check_vertical_intersection(cub, cub->rays + j);
-		choose_intersection(cub, cub->rays + j);
-		get_column(cub, cub->rays + j);
+    while (++j < cub->img.width)
+    {
+        cub->rays[j].angle = ft_normalizer(cub->player.angle + atan((j
+            - cub->img.width / 2) / cub->ppd));
+        cub->rays[j].tan = tan(cub->rays[j].angle);
+        check_horizontal_intersection(cub, cub->rays + j);
+        check_vertical_intersection(cub, cub->rays + j);
+        choose_intersection(cub, cub->rays + j);
+        get_column(cub, cub->rays + j);
 		get_texture(cub, cub->rays + j, cub->rays[j].angle, cub->rays[j].dir);
-		paint_column(cub, cub->rays + j, (t_point){j, -1}, (t_point){0, 0});
-	}
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
+	    paint_column(cub, cub->rays + j, (t_point){j, -1}, (t_point){0, 0});
+    }
 }

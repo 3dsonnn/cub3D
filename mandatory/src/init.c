@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:15:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 10:43:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	init_dfl(t_cub *cub, int i)
 	cub->ppd = 0.0;
 }
 
-inline void	init_rays(t_cub *cub)
+void	init_rays(t_cub *cub)
 {
 	cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
 	if (!cub->rays)

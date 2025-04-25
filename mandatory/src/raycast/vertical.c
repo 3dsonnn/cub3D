@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:04:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/24 10:39:41 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	get_steps(t_cub *cub, t_intersection *tmp, t_ray *ray)
 		tmp->step.y *= -1;
 }
 
-static inline void	get_distance(t_cub *cub, t_ray *ray)
+static void	get_distance(t_cub *cub, t_ray *ray)
 {
 	if (ray->ver.intersected)
 		ray->ver.dist = sqrt(pow((ray->ver.wall.x - cub->player.pos.x), 2)

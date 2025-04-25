@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:09:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 10:17:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define SPEED 5.0
 # define FOV 2.094395102393195
 # define PLAYER_RADIUS 10
+# define DIGITS "0123456789"
 
 # define ESC 65307
 # define AKEY 97
@@ -41,14 +42,14 @@
 # define LEFT 65361
 # define RIGHT 65363
 
-# define BLACK 0x000000
-# define WHITE 0xFFFFFF
 # define TRANSPARENT 0xFF000000
 
 //  CHECKS
 void		init_dfl(t_cub *cub, int i);
 extern char	*get_element_name(char c);
 void		check_fc(t_scene *scene);
+void		check_fc_syntax(t_scene *scene, char *info, char *id);
+void		divide_to_conquer(t_scene *scene, char *id, int rgb[3], int i);
 void		check_texture(t_scene *scene);
 void		check_element(t_scene *scene);
 void		skip_empty_lines(t_scene *scene);
@@ -74,7 +75,7 @@ void		move_player(t_cub *cub, double forward, double strafe,
 
 //  RAYCAST
 void		raycast(t_cub *cub, int j);
-extern void	init_rays(t_cub *cub);
+void		init_rays(t_cub *cub);
 void		check_horizontal_intersection(t_cub *cub, t_ray *ray);
 void		check_vertical_intersection(t_cub *cub, t_ray *ray);
 int			is_wall(t_cub *cub, double x, double y);

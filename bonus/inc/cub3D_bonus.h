@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 15:34:24 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 10:17:23 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define FOV 2.094395102393195
 # define PLAYER_RADIUS 10
 
+# define DIGITS "0123456789"
+
 # define SPACE 32
 # define ALT 65513
 # define CTRL 65507
@@ -66,20 +68,24 @@
 # define TRANSPARENT 0xFF000000
 
 //  CHECKS
-char				*get_element_str(char c);
+extern char			*get_element_name(char c);
 void				check_fc(t_scene *scene);
+void				check_fc_syntax(t_scene *scene, char *info, char *id);
+void				divide_to_conquer(t_scene *scene, char *id, int rgb[3],
+						int i);
 void				check_texture(t_scene *scene);
 void				check_element(t_scene *scene);
-char				*skip_empty_lines(t_scene *scene);
+void				skip_empty_lines(t_scene *scene);
+void				fulfill_map(t_scene *scene, t_map *map);
 void				fill_map(t_scene *scene, t_map *map);
 void				checks(t_cub *cub, int ac, char **av);
 void				fulfill_map(t_scene *scene, t_map *map);
-void				is_surrounded(t_scene *scene, t_map *map, t_point iter);
+void				is_surrounded(t_scene *scene, t_map *map, t_row *head,
+						t_row *tile);
 void				check_duplicate_id(t_scene *scene, char ID);
-void				check_map_start(t_scene *scene, t_map *map);
 char				*get_explicit_error_message(t_scene *scene, t_strs strs);
-void				check_starting_position(t_scene *scene, t_map *map, int i,
-						int j);
+void				check_starting_position(t_scene *scene, t_map *map,
+						t_row *head, t_iter iter);
 
 // MINIMAP
 void				minimap(t_cub *cub);
@@ -109,7 +115,7 @@ void				get_sprites_images(t_cub *cub, int i);
 void				put_gun_frame(t_cub *cub, t_img frame);
 
 //  RAYS
-extern void			init_rays(t_cub *cub);
+void				init_rays(t_cub *cub);
 void				get_rays(t_cub *cub, int i);
 void				check_horizontal_intersection(t_cub *cub, t_ray *ray);
 void				check_vertical_intersection(t_cub *cub, t_ray *ray);
@@ -117,16 +123,12 @@ int					is_wall(t_cub *cub, double x, double y);
 int					inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
 extern int			face_right(double angle);
-void				get_texture_img(t_cub *cub, t_ray *ray, double angle,
+void				get_texture(t_cub *cub, t_ray *ray, double angle,
 						t_point dir);
 
 //  CUB3D
 void				init_dfl(t_cub *cub);
 void				cub3D(t_cub *cub);
-
-// PAINTING
-void				paint_column(t_cub *cub, t_ray *ray, t_point iter,
-						t_point pixel);
 
 //  UTILS
 double				ft_normalizer(double angle);
@@ -138,12 +140,22 @@ void				bresenham_line(t_bresenham_line line);
 void				free_tiles(t_tile ***tiles, int i, int size);
 void				destroy_all_imgs(t_cub *cub);
 unsigned long long	get_current_time(void);
+char				*join_strs(t_strs strs);
 
 //  T_ROW
-t_row				*new_row(char *str);
-int					rowlen(t_row *head);
-void				free_rows(t_row **head);
+void				free_row(t_row **head, t_row *ref);
+void				add_row(t_row **head, t_row *new);
+t_row				*new_row(char *str, int nbr);
+t_row				*get_last_row(t_row *head);
 char				**row_to_mtx(t_row *head);
-void				add_row(t_row **head, t_row *_new);
+void				free_rows(t_row **head);
+void				trim_rows(t_row **head);
+t_point				rows_size(t_row *head);
+
+//  T_MAP_CRD
+char				*map_crds_to_str(t_map_crd *head, char *base);
+void				add_map_crd(t_map_crd **head, t_map_crd *new);
+t_map_crd			*new_map_crd(char c, char *col, char *line);
+void				free_map_crds(t_map_crd **head);
 
 #endif
