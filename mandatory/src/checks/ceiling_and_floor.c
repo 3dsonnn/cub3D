@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:23:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 19:19:05 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 10:34:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ static void	check_color_range(t_scene *scene, int rgb[3], char *id)
 {
 	if (!(rgb[0] >= 0 && rgb[0] <= 255))
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-			" element on line ", scene->line_nbr.str, ": ",
-			"Red color is out of the range [0, 255]"}), scene);
+				" element on line ", scene->line_nbr.str, ": ",
+				"Red color is out of the range [0, 255]"}), scene);
 	if (!(rgb[1] >= 0 && rgb[1] <= 255))
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-			" element on line ", scene->line_nbr.str, ": ",
-			"Green color is out of the range [0, 255]"}), scene);
+				" element on line ", scene->line_nbr.str, ": ",
+				"Green color is out of the range [0, 255]"}), scene);
 	if (!(rgb[2] >= 0 && rgb[2] <= 255))
 		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-			" element on line ", scene->line_nbr.str, ": ",
-			"Blue color is out of the range [0, 255]"}), scene);
+				" element on line ", scene->line_nbr.str, ": ",
+				"Blue color is out of the range [0, 255]"}), scene);
 	ft_strfree(&scene->tmp);
 	fill_fc(scene, *id, rgb, -1);
 }
