@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:32:31 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:10:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,11 @@ static void	check_elements(t_scene *scene)
 	ft_strfree(&scene->elements);
 }
 
-void	print_rows(t_row *head)
-{
-	if (!head)
-	{
-		ft_printf("EMPTY\n");
-		return ;
-	}
-	while (head)
-	{
-		ft_printf("id=%s-->%s\n", head->line_nbr, head->str);
-		head = head->next;
-	}
-}
-
 static void	check_map(t_scene *scene, t_map *map)
 {
 	add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
 	ft_strfree(&scene->line);
-	fill_map(scene, map);
+	fill_map(scene, map, 0);
 	trim_rows(&map->head);
 	if (!map->head)
 		exit_error(get_explicit_error_message(scene,
@@ -92,6 +78,7 @@ static void	check_map(t_scene *scene, t_map *map)
 	fulfill_map(scene, map);
 	check_starting_position(scene, map, map->head, (t_iter){-1, -1, 0, -1, -1,
 		-1});
+	check_doors(scene, map->door, map->head->next, get_last_row(map->head));
 	is_surrounded(scene, map, map->head->next, get_last_row(map->head));
 	map->content = row_to_mtx(map->head);
 	map->content[map->spos.y][map->spos.x] = '0';
