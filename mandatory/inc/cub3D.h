@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:44:11 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 10:17:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define SPEED 5.0
 # define FOV 2.094395102393195
 # define PLAYER_RADIUS 10
+# define DIGITS "0123456789"
 
 # define ESC 65307
 # define AKEY 97
@@ -47,6 +48,8 @@
 void		init_dfl(t_cub *cub, int i);
 extern char	*get_element_name(char c);
 void		check_fc(t_scene *scene);
+void		check_fc_syntax(t_scene *scene, char *info, char *id);
+void		divide_to_conquer(t_scene *scene, char *id, int rgb[3], int i);
 void		check_texture(t_scene *scene);
 void		check_element(t_scene *scene);
 void		skip_empty_lines(t_scene *scene);
