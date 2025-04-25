@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:38:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 13:32:45 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	fulfill_map(t_scene *scene, t_map *map)
 	}
 }
 
-void	fill_map(t_scene *scene, t_map *map)
+void	fill_map(t_scene *scene, t_map *map, int diff)
 {
 	while (-42)
 	{
@@ -62,12 +62,14 @@ void	fill_map(t_scene *scene, t_map *map)
 			.str = ft_itoa(scene->line_nbr.value)};
 		if (!scene->line || !*scene->line)
 			break ;
-		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
+		diff = ft_strspn(scene->line, "01 NSEWD");
+		if (diff != ft_strlen(scene->line))
 		{
-			exit_error(get_explicit_error_message(scene,
-					(t_strs){"Invalid map: strange character inside it,",
-					" on line ", scene->line_nbr.str, " of the scene file",
-					NULL, NULL}), scene);
+			map_crd_error_message(scene,
+				"Invalid map: strange character inside it:", *(scene->line
+					+ diff), (t_nbr){.str = ft_strdup(scene->line_nbr.str),
+				.value = diff});
+			exit_error(scene->tmp, scene);
 		}
 		add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
 		ft_strfree(&scene->line_nbr.str);
