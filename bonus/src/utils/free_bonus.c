@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:47:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 16:54:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 20:07:22 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	destroy_all_imgs(t_cub *cub)
 
 	i = -1;
 	my_mlx_destroy_img(cub->mlx, &cub->img);
+	my_mlx_destroy_img(cub->mlx, &cub->scene.map.door.door);
+	my_mlx_destroy_img(cub->mlx, &cub->scene.map.door.key);
 	while (++i < 4)
 		my_mlx_destroy_img(cub->mlx, &cub->scene.textures[i].img);
 	my_mlx_destroy_img(cub->mlx, &cub->minimap.img);

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:42:21 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:26:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ static  void    choose_intersection(t_cub *cub, t_ray *ray)
 		ray->dist = ray->hor.dist;
 		ray->wall = (t_dpoint){.x = ray->hor.wall.x, .y = ray->hor.wall.y};
 		ray->dir = (t_point){.x = 1, .y = 0};
+		ray->ver.is_door = 0;
 	}
 	else
 	{
 		ray->dist = ray->ver.dist;
 		ray->wall = (t_dpoint){.x = ray->ver.wall.x, .y = ray->ver.wall.y};
 		ray->dir = (t_point){.x = 0, .y = 1};
+		ray->hor.is_door = 0;
 	}
 	if (!ray->dist)
 		(ray->dist)++;
@@ -67,11 +69,13 @@ void    get_rays(t_cub *cub, int j)
 {
     while (++j < cub->img.width)
     {
+		cub->rays[j].hor.is_door = 0;
+		cub->rays[j].ver.is_door = 0;
         cub->rays[j].angle = ft_normalizer(cub->player.angle + atan((j
             - cub->img.width / 2) / cub->ppd));
         cub->rays[j].tan = tan(cub->rays[j].angle);
-        check_horizontal_intersection(cub, cub->rays + j);
-        check_vertical_intersection(cub, cub->rays + j);
+        check_horizontal_intersection(cub, cub->rays + j, 0);
+        check_vertical_intersection(cub, cub->rays + j, 0);
         choose_intersection(cub, cub->rays + j);
         get_column(cub, cub->rays + j);
 		get_texture(cub, cub->rays + j, cub->rays[j].angle, cub->rays[j].dir);

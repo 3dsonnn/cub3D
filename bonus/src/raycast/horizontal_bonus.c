@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:39:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 14:41:19 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	get_distance(t_cub *cub, t_ray *ray)
 		ray->hor.dist = DBL_MAX;
 }
 
-void	check_horizontal_intersection(t_cub *cub, t_ray *ray)
+void	check_horizontal_intersection(t_cub *cub, t_ray *ray, int check_wall)
 {
 	t_intersection	tmp;
 
@@ -52,12 +52,15 @@ void	check_horizontal_intersection(t_cub *cub, t_ray *ray)
 		tmp.crd.y -= 1;
 	while (inside_map(cub, tmp.crd.x, tmp.crd.y))
 	{
-		if (is_wall(cub, tmp.crd.x, tmp.crd.y))
+		check_wall = is_wall(cub, tmp.crd.x, tmp.crd.y);
+		if (check_wall)
 		{
 			if (!face_down(ray->angle))
 				tmp.crd.y += 1;
 			ray->hor.wall = (t_dpoint){.x = tmp.crd.x, .y = tmp.crd.y};
 			ray->hor.intersected = 1;
+			if (check_wall == 2)
+				ray->hor.is_door = 1;
 			break ;
 		}
 		tmp.crd = (t_dpoint){.x = tmp.crd.x + tmp.step.x, .y = tmp.crd.y
