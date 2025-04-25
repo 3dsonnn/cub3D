@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:04:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:54:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:21:17 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static void	init_scene_dfl(t_scene *scene, int i)
 	scene->line_nbr = (t_nbr){.value = 0, .str = NULL};
 	scene->map = (t_map){.head = NULL, .crds = NULL, .content = NULL,
 		.start = '\0', .spos = (t_point){.x = 0, .y = 0},
+		.door.i = 0, .door.dir = (t_point){.x = 0, .y = 0},
+		.door.points = {0, 0, 0, 0}, .door.cur_time = 0,
 		.size = (t_point){.x = 0, .y = 0}};
+	my_mlx_init_img(&scene->map.door.key);
+	my_mlx_init_img(&scene->map.door.door);
 	while (++i < 4)
 	{
 		scene->textures[i].id = 0;
