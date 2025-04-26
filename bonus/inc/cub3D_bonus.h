@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:58:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 14:25:44 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define DARK_GRAY 0x333333
+# define YELLOW 0xFFFF00
 # define TRANSPARENT 0xFF000000
+
+#define FOG_MAX_DISTANCE 650.0f
+#define FOG_COLOR WHITE
 
 //  CHECKS
 extern char			*get_element_name(char c);
