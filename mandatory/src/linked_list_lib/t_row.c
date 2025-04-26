@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:18:27 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:03:09 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 18:13:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	add_row(t_row **head, t_row *new)
 		*head = new;
 	else
 	{
-		while (tmp->next)
-			tmp = tmp->next;
+		tmp = get_last_row(tmp);
 		tmp->next = new;
 		new->prev = tmp;
 	}
