@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/02 00:46:19 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 20:43:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ static void	update_cur_tile(t_cub *cub, double x, double y)
 
 	i = (int)floor(y / TILE);
 	j = (int)floor(x / TILE);
-	cub->minimap.cur->id = '0';
 	cub->minimap.cur = &cub->minimap.tiles[i][j];
-	cub->minimap.cur->id = 'C';
 	update_obx(cub, cub->minimap.corners, cub->minimap.tiles);
 }
 
@@ -57,7 +55,8 @@ static int	player_is_wall(t_cub *cub, t_dpoint pos, t_point offsets[4], int i)
 		if (check.x < 0 || check.x >= cub->scene.map.size.x || check.y < 0
 			|| check.y >= cub->scene.map.size.y)
 			return (1);
-		if (cub->minimap.tiles[check.y][check.x].id == '1'
+		if ((cub->minimap.tiles[check.y][check.x].id == '1'
+				|| cub->minimap.tiles[check.y][check.x].id == 'D')
 			&& obx_overlaps_wall(pos, check))
 			return (1);
 	}
