@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 13:32:45 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 18:56:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,49 @@ static void	check_map_end(t_scene *scene, t_map *map)
 	}
 }
 
-void	fulfill_map(t_scene *scene, t_map *map)
+void	extend_map(t_map *map, t_row **head, t_row *tmp)
 {
-	int		i;
-	int		len;
-	t_row	*tmp;
+	char	*aux;
 
-	i = -1;
-	tmp = map->head;
-	while (++i < map->size.y)
+	while (tmp)
 	{
-		len = ft_strlen(tmp->str);
+		tmp->str = ft_strjoin("!!!!!", tmp->str, 2);
+		tmp->str = ft_strjoin(tmp->str, "!!!!!", 1);
+		tmp = tmp->next;
+	}
+	aux = ft_strdup((*head)->str);
+	ft_memset(aux, '!', ft_strlen(aux));
+	add_row_front(head, new_row(aux, 0));
+	add_row_front(head, new_row(aux, 0));
+	add_row_front(head, new_row(aux, 0));
+	add_row_front(head, new_row(aux, 0));
+	add_row_front(head, new_row(aux, 0));
+	add_row_back(head, new_row(aux, 0));
+	add_row_back(head, new_row(aux, 0));
+	add_row_back(head, new_row(aux, 0));
+	add_row_back(head, new_row(aux, 0));
+	add_row_back(head, new_row(aux, 0));
+	map->size = (t_point){.x = map->size.x + 10, .y = map->size.y + 10};
+	map->spos = (t_point){.x = map->spos.x + 5, .y = map->spos.y + 5};
+	ft_strfree(&aux);
+}
+
+void	fulfill_map(t_scene *scene, t_map *map, t_row *head)
+{
+	int	len;
+
+	while (head)
+	{
+		len = ft_strlen(head->str);
 		if (len < map->size.x)
 		{
 			scene->tmp = ft_calloc(map->size.x + 1, sizeof(char));
-			ft_strnfill(scene->tmp, tmp->str, len);
+			ft_strnfill(scene->tmp, head->str, len);
 			ft_memset(scene->tmp + len, ' ', map->size.x - len);
-			ft_strfree(&tmp->str);
-			ft_swaptr((void **)&tmp->str, (void **)&scene->tmp);
+			ft_strfree(&head->str);
+			ft_swaptr((void **)&head->str, (void **)&scene->tmp);
 		}
-		tmp = tmp->next;
+		head = head->next;
 	}
 }
 
@@ -71,7 +94,7 @@ void	fill_map(t_scene *scene, t_map *map, int diff)
 				.value = diff});
 			exit_error(scene->tmp, scene);
 		}
-		add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
+		add_row_back(&map->head, new_row(scene->line, scene->line_nbr.value));
 		ft_strfree(&scene->line_nbr.str);
 		ft_strfree(&scene->line);
 	}

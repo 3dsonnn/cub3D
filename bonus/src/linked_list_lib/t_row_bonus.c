@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:18:27 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:44:14 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 18:14:06 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_row	*new_row(char *str, int nbr)
 	return (row);
 }
 
-void	add_row(t_row **head, t_row *new)
+void	add_row_back(t_row **head, t_row *new)
 {
 	t_row	*tmp;
 
@@ -35,10 +35,23 @@ void	add_row(t_row **head, t_row *new)
 		*head = new;
 	else
 	{
-		while (tmp->next)
-			tmp = tmp->next;
+		tmp = get_last_row(tmp);
 		tmp->next = new;
 		new->prev = tmp;
+	}
+}
+
+void	add_row_front(t_row **head, t_row *new)
+{
+	if (!head || !new)
+		return ;
+	if (!*head)
+		*head = new;
+	else
+	{
+		new->next = *head;
+		(*head)->prev = new;
+		*head = new;
 	}
 }
 
