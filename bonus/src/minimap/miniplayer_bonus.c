@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 07:48:53 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/02 03:47:37 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 21:14:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static inline void	init_circle(t_bresenham_circle *circle, int cx, int cy,
 	circle->decision = 3 - 2 * radius;
 }
 
-void	miniplayer(t_cub *cub, t_point base, t_point tile_min)
+void	miniplayer(t_cub *cub, t_point tile_min)
 {
 	t_bresenham_line	line;
 	t_bresenham_circle	circle;
@@ -33,9 +33,9 @@ void	miniplayer(t_cub *cub, t_point base, t_point tile_min)
 	circle.img = &cub->minimap.img;
 	line.color = GREEN;
 	line.crd.x0 = ft_map((int)cub->player.pos.x, (int[]){tile_min.x, tile_min.x
-			+ TILE}, (int[]){base.x, base.x + cub->minimap.tilesize});
+			+ TILE}, (int[]){100, 100 + MINI_TILE});
 	line.crd.y0 = ft_map((int)cub->player.pos.y, (int[]){tile_min.y, tile_min.y
-			+ TILE}, (int[]){base.y, base.y + cub->minimap.tilesize});
+			+ TILE}, (int[]){100, 100 + MINI_TILE});
 	line.crd.x = line.crd.x0 + cub->player.dir.x * 10;
 	line.crd.y = line.crd.y0 + cub->player.dir.y * 10;
 	bresenham_line(line);

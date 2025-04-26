@@ -6,31 +6,11 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:30:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:11:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 19:34:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
-
-static void	is_obx(t_cub *cub, t_point map_size)
-{
-	int	max;
-
-	if (map_size.x < 11 && map_size.y < 11)
-	{
-		if (map_size.x > map_size.y)
-			max = map_size.x;
-		else
-			max = map_size.y;
-		cub->minimap.tilesize = (int)floor(220 / max);
-		cub->minimap.box = 0;
-	}
-	else
-	{
-		cub->minimap.tilesize = 20;
-		cub->minimap.box = 1;
-	}
-}
 
 static void	init_tiles(t_cub *cub, t_tile ***tiles, int i, int j)
 {
@@ -62,14 +42,8 @@ static void	init_tiles(t_cub *cub, t_tile ***tiles, int i, int j)
 
 void	init_minimap(t_cub *cub)
 {
-	is_obx(cub, cub->scene.map.size);
-	if (cub->minimap.box)
-		my_mlx_new_img(cub->mlx, &cub->minimap.img,
-			(t_point){cub->minimap.tilesize * 11, cub->minimap.tilesize * 11});
-	else
-		my_mlx_new_img(cub->mlx, &cub->minimap.img,
-			(t_point){cub->minimap.tilesize * cub->scene.map.size.x,
-			cub->minimap.tilesize * cub->scene.map.size.y});
+	my_mlx_new_img(cub->mlx, &cub->minimap.img,
+		(t_point){MINI_TILE * 11, MINI_TILE * 11});
 	if (!cub->minimap.img.img)
 		my_mlx_error_free(cub, "Failed to create the minimap image");
 	my_mlx_get_data_addr(&cub->minimap.img);

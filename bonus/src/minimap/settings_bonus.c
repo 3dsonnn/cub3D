@@ -6,34 +6,26 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 19:09:47 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 16:23:13 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 20:33:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	set_tiles_aux(t_cub *cub, char c, int i, int j)
+static void	set_tile_color(t_cub *cub, t_tile *tile, char c)
 {
 	if (c == '1')
-	{
-		cub->minimap.tiles[i][j].id = '1';
-		cub->minimap.tiles[i][j].color = BLUE;
-	}
+		tile->color = BLUE;
 	else if (c == '0')
-	{
-		cub->minimap.tiles[i][j].id = '0';
-		cub->minimap.tiles[i][j].color = WHITE;
-	}
+		tile->color = WHITE;
 	else if (c == ' ')
-	{
-		cub->minimap.tiles[i][j].id = ' ';
-		cub->minimap.tiles[i][j].color = TRANSPARENT;
-	}
+		tile->color = TRANSPARENT;
 	else if (c == 'D')
-	{
-		cub->minimap.tiles[i][j].id = 'D';
-		cub->minimap.tiles[i][j].color = DARK_GRAY;
-	}
+		tile->color = DARK_GRAY;
+	else if (c == '!')
+		tile->color = GREEN;
+	else
+		tile->color = WHITE;
 }
 
 void	set_tiles(t_cub *cub, int i, int j)
@@ -45,12 +37,10 @@ void	set_tiles(t_cub *cub, int i, int j)
 		{
 			cub->minimap.tiles[i][j].crd.x = j;
 			cub->minimap.tiles[i][j].crd.y = i;
-			set_tiles_aux(cub, cub->scene.map.content[i][j], i, j);
+			cub->minimap.tiles[i][j].id = cub->scene.map.content[i][j];
+			set_tile_color(cub, &cub->minimap.tiles[i][j], cub->scene.map.content[i][j]);
 			if (i == cub->scene.map.spos.y && j == cub->scene.map.spos.x)
-			{
-				cub->minimap.tiles[i][j].id = 'C';
 				cub->minimap.cur = &cub->minimap.tiles[i][j];
-			}
 		}
 	}
 	update_obx(cub, cub->minimap.corners, cub->minimap.tiles);
