@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 18:55:36 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/26 19:02:19 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ void	rotate_image(t_img src, t_img *dst, float angle_degrees, t_cub *cub)
 
 void	funcao(t_cub *cub, t_tile *tile)
 {
-	if (is_door(tile));
+	if (is_door(tile))
 		my_mlx_put_img_to_img(&cub->img, cub->scene.e_key.img, (t_point){(cub->img.width / 2) - (cub->scene.e_key.img.width / 2), (cub->img.height / 2)+(cub->img.height / 3)}, 1);
 }
 
