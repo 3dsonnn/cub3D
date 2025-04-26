@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:04:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:54:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 20:57:25 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static void	init_scene_dfl(t_scene *scene, int i)
 	scene->line_nbr = (t_nbr){.value = 0, .str = NULL};
 	scene->map = (t_map){.head = NULL, .crds = NULL, .content = NULL,
 		.start = '\0', .spos = (t_point){.x = 0, .y = 0},
+		.door.i = 0, .door.dir = (t_point){.x = 0, .y = 0},
+		.door.points = {0, 0, 0, 0},
 		.size = (t_point){.x = 0, .y = 0}};
+	my_mlx_init_img(&scene->map.door.key);
+	my_mlx_init_img(&scene->map.door.door);
 	while (++i < 4)
 	{
 		scene->textures[i].id = 0;
@@ -39,9 +43,8 @@ static void	init_player_minimap_sprites_dfl(t_player *player, t_mmap *minimap,
 {
 	*player = (t_player){.pos = (t_dpoint){0.0, 0.0}, .dir = (t_dpoint){0.0,
 		0.0}, .angle = 0.0, .plane = (t_dpoint){0.0, 0.0}, .updown = 0};
-	*minimap = (t_mmap){.box = 0, .tilesize = 0, .cur = NULL, .tiles = NULL,
-		.bounds = (t_point){.x = 0, .y = 0}, .corners = {NULL, NULL,
-		NULL, NULL}};
+	*minimap = (t_mmap){.cur = NULL, .tiles = NULL,
+		.corners = {NULL, NULL,	NULL, NULL}};
 	my_mlx_init_img(&minimap->img);
 	*sprites = (t_sprite){.ammo = 8, .health = (t_nbr){.value = 100,
 		.str = NULL}, .idle = true, .shooting = true, .recharging = false,

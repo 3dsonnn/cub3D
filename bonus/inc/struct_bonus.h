@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:48:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 20:57:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_img	t_img;
 # define SHOOTING_01_PATH "bonus/config/animated_sprites/shotgun/shooting01.xpm"
 # define SHOOTING_02_PATH "bonus/config/animated_sprites/shotgun/shooting02.xpm"
 # define SHOOTING_IDLE_PATH "bonus/config/animated_sprites/shotgun/shooting_idle.xpm"
+# define DOOR_PATH "bonus/config/animated_sprites/door.xpm"
+# define E_KEY_PATH "bonus/config/animated_sprites/e_key.xpm"
 
 typedef enum e_frames
 {
@@ -185,6 +187,15 @@ typedef struct s_row
 	struct s_row		*next;
 }						t_row;
 
+typedef struct s_door
+{
+	int					i;
+	t_point				dir;
+	int					points[4];
+	t_img				door;
+	t_img				key;
+}						t_door;
+
 typedef struct s_map
 {
 	t_row				*head;
@@ -193,6 +204,7 @@ typedef struct s_map
 	char				start;
 	t_point				spos;
 	t_point				size;
+	t_door				door;
 }						t_map;
 
 typedef struct s_nbr
@@ -229,6 +241,7 @@ typedef struct s_intersection
 	t_dpoint			step;
 	t_dpoint			crd;
 	t_dpoint			wall;
+	int					is_door;
 	int					intersected;
 }						t_intersection;
 
@@ -278,10 +291,7 @@ typedef struct s_tile
 
 typedef struct s_mmap
 {
-	int					box;
 	t_img				img;
-	t_point				bounds;
-	int					tilesize;
 	t_tile				*cur;
 	t_tile				*corners[4];
 	t_tile				**tiles;
@@ -300,8 +310,8 @@ typedef struct s_cub
 {
 	void				*mlx;
 	void				*win;
-	t_img				img;
 	t_ray				*rays;
+	t_img				img;
 	t_scene				scene;
 	t_player			player;
 	t_mmap				minimap;

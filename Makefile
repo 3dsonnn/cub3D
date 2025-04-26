@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/25 10:18:06 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/26 17:40:32 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/init/init_bonus.c								\
 			bonus/src/init/mlx_init_bonus.c							\
 			bonus/src/checks/map_bonus.c 							\
+			bonus/src/checks/check_doors_bonus.c					\
 			bonus/src/checks/checks_bonus.c 						\
 			bonus/src/checks/elements_bonus.c 						\
 			bonus/src/checks/textures_bonus.c						\
@@ -69,6 +70,7 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/player/init_bonus.c 							\
 			bonus/src/player/move_bonus.c 							\
 			bonus/src/player/rotate_bonus.c							\
+			bonus/src/player/door_bonus.c							\
 			bonus/src/raycast/aux_bonus.c							\
 			bonus/src/raycast/raycast_bonus.c						\
 			bonus/src/raycast/vertical_bonus.c						\

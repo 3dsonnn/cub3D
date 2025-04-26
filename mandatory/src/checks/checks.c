@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:09:16 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 17:18:52 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ static void	check_map(t_scene *scene, t_map *map)
 		exit_error(get_explicit_error_message(scene,
 				(t_strs){"Invalid map: too small", NULL, NULL, NULL, NULL,
 				NULL}), scene);
-	fulfill_map(scene, map);
+	fulfill_map(scene, map, map->head);
+	map->size.x = ft_strlen(map->head->str);
 	check_starting_position(scene, map, map->head, (t_iter){-1, -1, 0, -1, -1,
 		-1});
 	is_surrounded(scene, map, map->head->next, get_last_row(map->head));

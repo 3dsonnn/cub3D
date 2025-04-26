@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:36:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 10:34:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 17:17:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ static inline char	*get_color_name(int i)
 static void	conquer(t_scene *scene, char *id, int rgb[3], int i)
 {
 	if (ft_strint(scene->mtx[i]))
-	{
 		rgb[i] = ft_atoi(scene->mtx[i]);
-		ft_printf("%d-->%d\n", i, rgb[i]);
-	}
 	else
 	{
 		get_explicit_error_message(scene, (t_strs){"Invalid ", id,

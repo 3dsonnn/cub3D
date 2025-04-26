@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 19:08:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 16:43:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,22 @@ static void	check_map_end(t_scene *scene, t_map *map)
 	}
 }
 
-void	fulfill_map(t_scene *scene, t_map *map)
+void	fulfill_map(t_scene *scene, t_map *map, t_row *head)
 {
-	int		i;
 	int		len;
-	t_row	*tmp;
 
-	i = -1;
-	tmp = map->head;
-	while (++i < map->size.y)
+	while (head)
 	{
-		len = ft_strlen(tmp->str);
+		len = ft_strlen(head->str);
 		if (len < map->size.x)
 		{
 			scene->tmp = ft_calloc(map->size.x + 1, sizeof(char));
-			ft_strnfill(scene->tmp, tmp->str, len);
+			ft_strnfill(scene->tmp, head->str, len);
 			ft_memset(scene->tmp + len, ' ', map->size.x - len);
-			ft_strfree(&tmp->str);
-			ft_swaptr((void **)&tmp->str, (void **)&scene->tmp);
+			ft_strfree(&head->str);
+			ft_swaptr((void **)&head->str, (void **)&scene->tmp);
 		}
-		tmp = tmp->next;
+		head = head->next;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 10:17:23 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 21:15:23 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define HEALTH_BAR_HEIGHT 30
 
 # define TILE 64
+# define MINI_TILE 20
 # define ROT 0.05
 # define SPEED 5.0
 # define FOV 2.094395102393195
@@ -54,6 +55,7 @@
 # define DKEY 100
 # define SKEY 115
 # define WKEY 119
+# define EKEY 101
 # define LEFT 65361
 # define RIGHT 65363
 # define UP 65362
@@ -76,10 +78,12 @@ void				divide_to_conquer(t_scene *scene, char *id, int rgb[3],
 void				check_texture(t_scene *scene);
 void				check_element(t_scene *scene);
 void				skip_empty_lines(t_scene *scene);
-void				fulfill_map(t_scene *scene, t_map *map);
-void				fill_map(t_scene *scene, t_map *map);
+void				extend_map(t_map *map, t_row **head, t_row *tmp);
+void				fulfill_map(t_scene *scene, t_map *map, t_row *head);
+void				fill_map(t_scene *scene, t_map *map, int diff);
+void				check_doors(t_scene *scene, t_door door, t_row *head,
+						t_row *tail);
 void				checks(t_cub *cub, int ac, char **av);
-void				fulfill_map(t_scene *scene, t_map *map);
 void				is_surrounded(t_scene *scene, t_map *map, t_row *head,
 						t_row *tile);
 void				check_duplicate_id(t_scene *scene, char ID);
@@ -93,7 +97,7 @@ void				set_tiles(t_cub *cub, int i, int j);
 void				link_tiles(t_cub *cub, int i, int j);
 void				init_minimap(t_cub *cub);
 void				update_obx(t_cub *cub, t_tile *corners[4], t_tile **tiles);
-void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
+void				miniplayer(t_cub *cub, t_point tile_min);
 
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
@@ -109,6 +113,8 @@ void				init_player(t_cub *cub);
 int					move_player(t_cub *cub, int keycode);
 int					rotate_player(t_cub *cub, int keycode);
 void				player(t_cub *cub);
+extern bool			is_door(t_tile *tile);
+void				open_or_close_door(t_tile *cur);
 
 // SPRITES
 void				get_sprites_images(t_cub *cub, int i);
@@ -117,8 +123,10 @@ void				put_gun_frame(t_cub *cub, t_img frame);
 //  RAYS
 void				init_rays(t_cub *cub);
 void				get_rays(t_cub *cub, int i);
-void				check_horizontal_intersection(t_cub *cub, t_ray *ray);
-void				check_vertical_intersection(t_cub *cub, t_ray *ray);
+void				check_horizontal_intersection(t_cub *cub, t_ray *ray,
+						int check_wall);
+void				check_vertical_intersection(t_cub *cub, t_ray *ray,
+						int check_wall);
 int					is_wall(t_cub *cub, double x, double y);
 int					inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
@@ -141,10 +149,13 @@ void				free_tiles(t_tile ***tiles, int i, int size);
 void				destroy_all_imgs(t_cub *cub);
 unsigned long long	get_current_time(void);
 char				*join_strs(t_strs strs);
+void				map_crd_error_message(t_scene *scene, char *message, char c,
+						t_nbr aux);
 
 //  T_ROW
 void				free_row(t_row **head, t_row *ref);
-void				add_row(t_row **head, t_row *new);
+void				add_row_back(t_row **head, t_row *new);
+void				add_row_front(t_row **head, t_row *new);
 t_row				*new_row(char *str, int nbr);
 t_row				*get_last_row(t_row *head);
 char				**row_to_mtx(t_row *head);
