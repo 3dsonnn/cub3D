@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 17:18:01 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 14:41:23 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void				miniplayer(t_cub *cub, t_point base, t_point tile_min);
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
 extern void			alt_space(t_cub *cub, int keycode);
-void				open_door(t_cub *cub, t_tile *cur);
 void				init_mlx(t_cub *cub);
 void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
 						int flag);
@@ -113,6 +112,9 @@ void				init_player(t_cub *cub);
 int					move_player(t_cub *cub, int keycode);
 int					rotate_player(t_cub *cub, int keycode);
 void				player(t_cub *cub);
+void				open_door(t_cub *cub, t_tile *cur);
+void				open_or_close_door(t_tile *cur);
+void				funcao(t_cub *cub, t_tile *cur);
 
 // SPRITES
 void				get_sprites_images(t_cub *cub, int i);
@@ -121,8 +123,10 @@ void				put_gun_frame(t_cub *cub, t_img frame);
 //  RAYS
 void				init_rays(t_cub *cub);
 void				get_rays(t_cub *cub, int i);
-void				check_horizontal_intersection(t_cub *cub, t_ray *ray, int check_wall);
-void				check_vertical_intersection(t_cub *cub, t_ray *ray, int check_wall);
+void				check_horizontal_intersection(t_cub *cub, t_ray *ray,
+						int check_wall);
+void				check_vertical_intersection(t_cub *cub, t_ray *ray,
+						int check_wall);
 int					is_wall(t_cub *cub, double x, double y);
 int					inside_map(t_cub *cub, double x, double y);
 extern int			face_down(double angle);
@@ -145,8 +149,8 @@ void				free_tiles(t_tile ***tiles, int i, int size);
 void				destroy_all_imgs(t_cub *cub);
 unsigned long long	get_current_time(void);
 char				*join_strs(t_strs strs);
-void				map_crd_error_message(t_scene *scene, char *message,
-						char c, t_nbr aux);
+void				map_crd_error_message(t_scene *scene, char *message, char c,
+						t_nbr aux);
 
 //  T_ROW
 void				free_row(t_row **head, t_row *ref);

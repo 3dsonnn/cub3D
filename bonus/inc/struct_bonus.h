@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 20:02:38 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 14:11:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,8 +314,8 @@ typedef struct s_cub
 {
 	void				*mlx;
 	void				*win;
-	t_img				img;
 	t_ray				*rays;
+	t_img				img;
 	t_scene				scene;
 	t_player			player;
 	t_mmap				minimap;

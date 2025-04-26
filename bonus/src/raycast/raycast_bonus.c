@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 17:26:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 15:08:38 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static  void    get_column(t_cub *cub, t_ray *ray)
 {
     ray->dist *= cos(ft_normalizer(ray->angle - cub->player.angle));
 	ray->height = (int)(TILE / ray->dist * cub->ppd);
-	ray->top = (int)(cub->img.height - ray->height) / 2;
-	ray->bot = (int)(cub->img.height + ray->height) / 2;
+	ray->top = ((int)(cub->img.height - ray->height) / 2) + cub->player.updown;
+	ray->bot = ((int)(cub->img.height + ray->height) / 2) + cub->player.updown;
 	if (ray->bot > cub->img.height)
 		ray->bot = cub->img.height;
 }

@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/25 12:52:58 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/26 14:25:33 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/player/init_bonus.c 							\
 			bonus/src/player/move_bonus.c 							\
 			bonus/src/player/rotate_bonus.c							\
+			bonus/src/player/door_bonus.c							\
 			bonus/src/raycast/aux_bonus.c							\
 			bonus/src/raycast/raycast_bonus.c						\
 			bonus/src/raycast/vertical_bonus.c						\
