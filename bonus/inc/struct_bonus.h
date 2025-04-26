@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 14:11:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 20:57:10 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,6 @@ typedef struct s_door
 	int					points[4];
 	t_img				door;
 	t_img				key;
-	unsigned long long	cur_time;
 }						t_door;
 
 typedef struct s_map
@@ -292,10 +291,7 @@ typedef struct s_tile
 
 typedef struct s_mmap
 {
-	int					box;
 	t_img				img;
-	t_point				bounds;
-	int					tilesize;
 	t_tile				*cur;
 	t_tile				*corners[4];
 	t_tile				**tiles;
