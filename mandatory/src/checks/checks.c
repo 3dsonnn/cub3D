@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 17:18:52 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/27 09:26:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,6 @@ static void	check_elements(t_scene *scene)
 			break ;
 	}
 	ft_strfree(&scene->elements);
-}
-
-void	print_rows(t_row *head)
-{
-	if (!head)
-	{
-		ft_printf("EMPTY\n");
-		return ;
-	}
-	while (head)
-	{
-		ft_printf("id=%s-->%s\n", head->line_nbr, head->str);
-		head = head->next;
-	}
 }
 
 static void	check_map(t_scene *scene, t_map *map)

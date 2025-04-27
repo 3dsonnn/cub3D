@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 18:48:58 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/27 09:22:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	check_map(t_scene *scene, t_map *map)
 {
 	add_row_back(&map->head, new_row(scene->line, scene->line_nbr.value));
 	ft_strfree(&scene->line);
-	fill_map(scene, map, 0);
+	fill_map(scene, map);
 	trim_rows(&map->head);
 	if (!map->head)
 		exit_error(get_explicit_error_message(scene,

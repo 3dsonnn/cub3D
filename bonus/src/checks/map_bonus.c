@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 18:56:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/27 09:22:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ void	fulfill_map(t_scene *scene, t_map *map, t_row *head)
 	}
 }
 
-void	fill_map(t_scene *scene, t_map *map, int diff)
+void	fill_map(t_scene *scene, t_map *map)
 {
+	int	diff;
+
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);

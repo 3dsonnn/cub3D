@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 16:42:21 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/27 09:24:03 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ double		ft_normalizer(double angle);
 int			ft_map(int old_value, int old_limits[2], int new_limits[2]);
 void		exit_error(char *message, t_scene *scene);
 char		*join_strs(t_strs strs);
+void		map_crd_error_message(t_scene *scene, char *message, char c,
+				t_nbr aux);
 
 //  T_ROW
 void		free_row(t_row **head, t_row *ref);
