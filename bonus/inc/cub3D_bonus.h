@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 14:25:44 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:46:24 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 # define TRANSPARENT 0xFF000000
 
 #define FOG_MAX_DISTANCE 650.0f
-#define FOG_COLOR WHITE
+#define FOG_COLOR BLACK
 
 //  CHECKS
 extern char			*get_element_name(char c);
