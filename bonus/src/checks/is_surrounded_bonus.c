@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:26:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/27 09:29:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 19:44:08 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	is_surrounded(t_scene *scene, t_map *map, t_row *head, t_row *tail)
 	check_head_line(scene, map, head->prev);
 	check_tail_line(scene, map, tail);
 	check_boundary_columns(scene, map, head, '\0');
-	while (head != tail->prev)
+	while (head != tail)
 	{
 		i = 0;
 		while (++i < map->size.x - 1)

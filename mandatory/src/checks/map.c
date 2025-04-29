@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/27 09:25:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 19:53:31 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,20 @@ void	check_starting_position(t_scene *scene, t_map *map, t_row *head,
 		exit_error(scene->tmp, scene);
 	}
 	free_map_crds(&scene->map.crds);
+}
+
+void	update_player(t_map *map, t_row *head)
+{
+	t_point	iter;
+
+	iter.y = 0;
+	while (head)
+	{
+		iter.x = -1;
+		while (head->str[++iter.x])
+			if (head->str[iter.x] == map->start)
+				map->spos = (t_point){.x = iter.x, .y = iter.y};
+		iter.y++;
+		head = head->next;
+	}
 }
