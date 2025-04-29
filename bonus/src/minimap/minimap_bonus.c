@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:59:10 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 21:19:13 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/29 12:46:27 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ static void	paint_minimap(t_cub *cub, t_tile *topleft)
 void	minimap(t_cub *cub)
 {
 	paint_minimap(cub, cub->minimap.corners[TOPLEFT]);
-	miniplayer(cub, (t_point){((int)cub->player.pos.x / TILE) * TILE,
-		((int)cub->player.pos.y / TILE) * TILE});
+	// miniplayer(cub, (t_point){((int)cub->player.pos.x / TILE) * TILE,
+	// 	((int)cub->player.pos.y / TILE) * TILE});
 }

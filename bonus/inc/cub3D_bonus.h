@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 11:15:39 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/29 12:47:51 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,16 @@
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
+# define YELLOW 0xFFFF00
 # define DARK_GRAY 0x333333
 # define TRANSPARENT 0xFF000000
 
 # define FOG_COLOR BLACK
 # define FOG_MAX_DIST 650.0f
+
+# define CIRCLE_RADIUS 98
+# define TRIANGLE_SIZE 8
+
 
 //  CHECKS
 extern char			*get_element_name(char c);
