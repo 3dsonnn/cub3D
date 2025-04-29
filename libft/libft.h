@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:02:24 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 20:28:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 18:06:20 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ int					ft_strspace(char *str);
 int					ft_mtxlen(char **matrix);
 int					ft_longestr_mtx(char **mtx);
 int					ft_strcmp(char *s1, char *s2);
-int					ft_samestr(char *s1, char *s2);
 int					ft_strspn(char *s, char *accept);
+int					ft_strspn_rev(char *s, char *accept);
 int					ft_strchr_count(char *str, int c);
 int					ft_strcspn(char *s, char *reject);
 int					ft_word_count(char const *s, char c);

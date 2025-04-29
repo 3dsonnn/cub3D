@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 19:18:41 by efinda            #+#    #+#              #
-#    Updated: 2025/04/24 20:29:08 by efinda           ###   ########.fr        #
+#    Updated: 2025/04/28 18:06:55 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,6 @@ SRC = 	ctype/ft_isalnum.c				\
 	extras/ft_strspace.c				\
 	extras/ft_strcmp.c				\
 	extras/ft_strfree.c				\
-	extras/ft_samestr.c				\
 	extras/ft_strnfill.c				\
 	extras/ft_strcpy.c				\
 	extras/ft_mtxdup.c				\
@@ -83,6 +82,7 @@ SRC = 	ctype/ft_isalnum.c				\
 	extras/ft_realloc.c				\
 	extras/ft_strnbr.c				\
 	extras/ft_strspn.c				\
+	extras/ft_strspn_rev.c			\
 	extras/ft_strcspn.c				\
 	extras/ft_atoll.c				\
 	extras/ft_getpid.c				\

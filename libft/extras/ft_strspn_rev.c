@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_samestr.c                                       :+:      :+:    :+:   */
+/*   ft_strspn_rev.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 21:39:57 by efinda            #+#    #+#             */
-/*   Updated: 2024/11/09 21:41:28 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/28 18:05:35 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/28 18:12:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_samestr(char *s1, char *s2)
+int	ft_strspn_rev(char *s, char *accept)
 {
-	if (!s1 || !s2)
+	int	i;
+	int	res;
+
+	if (!s || !accept || !*s || !*accept)
 		return (0);
-	if (ft_strcmp(s1, s2) == 0)
-		return (1);
-	return (0);
+    res = 0;
+    i = ft_strlen(s);
+	while (--i >= 0)
+    {
+		if (!ft_strchr(accept, s[i]))
+			break ;
+        res++;
+    }
+	return (res);
 }

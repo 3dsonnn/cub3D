@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/27 09:22:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:15:39 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <time.h>
 # include <unistd.h>
 
 # define FONT "-sony-fixed-medium-r-normal--24-240-75-75-c-120-iso8859-1"
@@ -69,6 +70,9 @@
 # define DARK_GRAY 0x333333
 # define TRANSPARENT 0xFF000000
 
+# define FOG_COLOR BLACK
+# define FOG_MAX_DIST 650.0f
+
 //  CHECKS
 extern char			*get_element_name(char c);
 void				check_fc(t_scene *scene);
@@ -81,6 +85,8 @@ void				skip_empty_lines(t_scene *scene);
 void				extend_map(t_map *map, t_row **head, t_row *tmp);
 void				fulfill_map(t_scene *scene, t_map *map, t_row *head);
 void				fill_map(t_scene *scene, t_map *map);
+void				update_player(t_map *map, t_row *head);
+
 void				check_doors(t_scene *scene, t_door door, t_row *head,
 						t_row *tail);
 void				checks(t_cub *cub, int ac, char **av);
@@ -103,8 +109,8 @@ void				miniplayer(t_cub *cub, t_point tile_min);
 void				my_mlx_hook(t_cub *cub);
 extern void			alt_space(t_cub *cub, int keycode);
 void				init_mlx(t_cub *cub);
-void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
-						int flag);
+// void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
+// 						int flag);
 void				my_mlx_draw_horizontal_lines_to_img(t_img *img, t_point crd,
 						t_point size, int color);
 
@@ -118,7 +124,8 @@ void				open_or_close_door(t_tile *cur);
 
 // SPRITES
 void				get_sprites_images(t_cub *cub, int i);
-void				put_gun_frame(t_cub *cub, t_img frame);
+void				update_frame(t_img *back, t_sprite *sprites,
+						unsigned long long current_time);
 
 //  RAYS
 void				init_rays(t_cub *cub);
@@ -134,12 +141,18 @@ extern int			face_right(double angle);
 void				get_texture(t_cub *cub, t_ray *ray, double angle,
 						t_point dir);
 
+// PAINTING
+void				paint_wall(t_cub *cub, t_ray *ray, t_point iter,
+						t_point pixel);
+void				paint_ceiling_and_floor(t_cub *cub, t_point iter);
+
 //  CUB3D
 void				init_dfl(t_cub *cub);
 void				cub3D(t_cub *cub);
 
 //  UTILS
 double				ft_normalizer(double angle);
+float				ft_clamp(float value, float min, float max);
 int					ft_map(int old_value, int old_limits[2], int new_limits[2]);
 void				exit_error(char *message, t_scene *scene);
 void				my_mlx_error_free(t_cub *cub, char *message);
@@ -162,6 +175,9 @@ char				**row_to_mtx(t_row *head);
 void				free_rows(t_row **head);
 void				trim_rows(t_row **head);
 t_point				rows_size(t_row *head);
+void				trim_rows_horizontally(t_row **head, t_point limits);
+t_point				get_horizontal_limits(t_row *head, t_point limits,
+						t_point tmp);
 
 //  T_MAP_CRD
 char				*map_crds_to_str(t_map_crd *head, char *base);
