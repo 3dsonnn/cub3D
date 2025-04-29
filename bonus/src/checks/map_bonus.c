@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 18:56:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 20:02:48 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,6 @@ static void	check_map_end(t_scene *scene, t_map *map)
 	}
 }
 
-void	extend_map(t_map *map, t_row **head, t_row *tmp)
-{
-	char	*aux;
-
-	while (tmp)
-	{
-		tmp->str = ft_strjoin("!!!!!", tmp->str, 2);
-		tmp->str = ft_strjoin(tmp->str, "!!!!!", 1);
-		tmp = tmp->next;
-	}
-	aux = ft_strdup((*head)->str);
-	ft_memset(aux, '!', ft_strlen(aux));
-	add_row_front(head, new_row(aux, 0));
-	add_row_front(head, new_row(aux, 0));
-	add_row_front(head, new_row(aux, 0));
-	add_row_front(head, new_row(aux, 0));
-	add_row_front(head, new_row(aux, 0));
-	add_row_back(head, new_row(aux, 0));
-	add_row_back(head, new_row(aux, 0));
-	add_row_back(head, new_row(aux, 0));
-	add_row_back(head, new_row(aux, 0));
-	add_row_back(head, new_row(aux, 0));
-	map->size = (t_point){.x = map->size.x + 10, .y = map->size.y + 10};
-	map->spos = (t_point){.x = map->spos.x + 5, .y = map->spos.y + 5};
-	ft_strfree(&aux);
-}
-
 void	fulfill_map(t_scene *scene, t_map *map, t_row *head)
 {
 	int	len;
@@ -76,8 +49,10 @@ void	fulfill_map(t_scene *scene, t_map *map, t_row *head)
 	}
 }
 
-void	fill_map(t_scene *scene, t_map *map, int diff)
+void	fill_map(t_scene *scene, t_map *map)
 {
+	int	diff;
+
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 20:57:10 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/26 22:55:12 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,12 +262,13 @@ typedef struct s_ray
 
 typedef struct s_hook
 {
-	bool				alt;
-	bool				space;
+	bool				alt : 1;
+	bool				space : 1;
 }						t_hook;
 
 typedef struct s_sprite
 {
+	int					i;
 	int					ammo;
 	t_nbr				health;
 	bool				idle;

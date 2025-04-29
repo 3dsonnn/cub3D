@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:22:09 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/23 11:45:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/27 09:23:45 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,12 @@ void	exit_error(char *message, t_scene *scene)
 	while (++i < 4)
 		ft_strfree(&scene->textures[i].path);
 	exit(1);
+}
+
+void    map_crd_error_message(t_scene *scene, char *message, char c, t_nbr aux)
+{
+    add_map_crd(&scene->map.crds, new_map_crd(c, ft_itoa(aux.value),
+        aux.str));
+    scene->tmp = map_crds_to_str(scene->map.crds, message);
+	ft_strfree(&aux.str);
 }

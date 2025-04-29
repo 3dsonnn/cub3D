@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:26:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 14:22:24 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 19:44:08 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	is_surrounded(t_scene *scene, t_map *map, t_row *head, t_row *tail)
 	check_head_line(scene, map, head->prev);
 	check_tail_line(scene, map, tail);
 	check_boundary_columns(scene, map, head, '\0');
-	while (head != tail->prev)
+	while (head != tail)
 	{
 		i = 0;
 		while (++i < map->size.x - 1)
@@ -90,10 +90,9 @@ void	is_surrounded(t_scene *scene, t_map *map, t_row *head, t_row *tail)
 				&& (head->str[i + 1] == ' ' || head->str[i - 1] == ' '
 					|| head->prev->str[i] == ' ' || head->next->str[i] == ' '))
 			{
-				add_map_crd(&map->crds, new_map_crd(head->str[i], ft_itoa(i),
-						head->line_nbr));
-				scene->tmp = map_crds_to_str(map->crds,
-						"Invalid map: not surrounded by walls due to:");
+				map_crd_error_message(scene, "Invalid map: not surrounded by walls due to:",
+					head->str[i], (t_nbr){.str = ft_strdup(head->line_nbr),
+					.value = i});
 				exit_error(scene->tmp, scene);
 			}
 		}

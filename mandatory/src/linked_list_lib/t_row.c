@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:18:27 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 18:13:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 11:46:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,13 @@ void	free_rows(t_row **head)
 		free(tmp);
 	}
 	*head = NULL;
+}
+
+t_row	*get_last_row(t_row *head)
+{
+	if (!head)
+		return (NULL);
+	while (head->next)
+		head = head->next;
+	return (head);
 }

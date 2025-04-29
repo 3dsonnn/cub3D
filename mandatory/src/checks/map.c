@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 16:43:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 19:53:31 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	fulfill_map(t_scene *scene, t_map *map, t_row *head)
 
 void	fill_map(t_scene *scene, t_map *map)
 {
+	int	diff;
+
 	while (-42)
 	{
 		scene->line = get_next_line(scene->fd);
@@ -58,12 +60,14 @@ void	fill_map(t_scene *scene, t_map *map)
 			.str = ft_itoa(scene->line_nbr.value)};
 		if (!scene->line || !*scene->line)
 			break ;
-		if (ft_strspn(scene->line, "01 NSEW") != ft_strlen(scene->line))
+		diff = ft_strspn(scene->line, "01 NSEW");
+		if (diff != ft_strlen(scene->line))
 		{
-			exit_error(get_explicit_error_message(scene,
-					(t_strs){"Invalid map: strange character inside it,",
-					" on line ", scene->line_nbr.str, " of the scene file",
-					NULL, NULL}), scene);
+			map_crd_error_message(scene,
+				"Invalid map: strange character inside it:", *(scene->line
+					+ diff), (t_nbr){.str = ft_strdup(scene->line_nbr.str),
+				.value = diff});
+			exit_error(scene->tmp, scene);
 		}
 		add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
 		ft_strfree(&scene->line_nbr.str);
@@ -100,4 +104,20 @@ void	check_starting_position(t_scene *scene, t_map *map, t_row *head,
 		exit_error(scene->tmp, scene);
 	}
 	free_map_crds(&scene->map.crds);
+}
+
+void	update_player(t_map *map, t_row *head)
+{
+	t_point	iter;
+
+	iter.y = 0;
+	while (head)
+	{
+		iter.x = -1;
+		while (head->str[++iter.x])
+			if (head->str[iter.x] == map->start)
+				map->spos = (t_point){.x = iter.x, .y = iter.y};
+		iter.y++;
+		head = head->next;
+	}
 }

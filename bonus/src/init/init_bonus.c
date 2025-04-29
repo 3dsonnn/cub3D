@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:04:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 20:57:25 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/27 11:44:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	init_player_minimap_sprites_dfl(t_player *player, t_mmap *minimap,
 	*minimap = (t_mmap){.cur = NULL, .tiles = NULL,
 		.corners = {NULL, NULL,	NULL, NULL}};
 	my_mlx_init_img(&minimap->img);
-	*sprites = (t_sprite){.ammo = 8, .health = (t_nbr){.value = 100,
+	*sprites = (t_sprite){.i = 0, .ammo = 8, .health = (t_nbr){.value = 100,
 		.str = NULL}, .idle = true, .shooting = true, .recharging = false,
 		.cur_frame_index = IDLE, .last_frame_time = 0};
 	while (++i < 27)
@@ -57,6 +57,7 @@ void	init_dfl(t_cub *cub)
 {
 	cub->mlx = NULL;
 	cub->win = NULL;
+	srand(time(NULL));
 	my_mlx_init_img(&cub->img);
 	cub->rays = NULL;
 	init_scene_dfl(&cub->scene, -1);

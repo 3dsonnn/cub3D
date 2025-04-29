@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 16:42:21 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/28 19:53:53 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		check_element(t_scene *scene);
 void		skip_empty_lines(t_scene *scene);
 void		fulfill_map(t_scene *scene, t_map *map, t_row *head);
 void		fill_map(t_scene *scene, t_map *map);
+void		update_player(t_map *map, t_row *head);
 void		checks(t_cub *cub, int ac, char **av);
 void		is_surrounded(t_scene *scene, t_map *map, t_row *head, t_row *tile);
 void		check_duplicate_id(t_scene *scene, char ID);
@@ -89,6 +90,8 @@ double		ft_normalizer(double angle);
 int			ft_map(int old_value, int old_limits[2], int new_limits[2]);
 void		exit_error(char *message, t_scene *scene);
 char		*join_strs(t_strs strs);
+void		map_crd_error_message(t_scene *scene, char *message, char c,
+				t_nbr aux);
 
 //  T_ROW
 void		free_row(t_row **head, t_row *ref);
@@ -97,7 +100,10 @@ t_row		*new_row(char *str, int nbr);
 t_row		*get_last_row(t_row *head);
 char		**row_to_mtx(t_row *head);
 void		free_rows(t_row **head);
-void		trim_rows(t_row **head);
+void		trim_rows_vertically(t_row **head);
+void		trim_rows_horizontally(t_row **head, t_point limits);
+t_point		get_horizontal_limits(t_row *head, t_point limits, t_point tmp);
+
 t_point		rows_size(t_row *head);
 
 //  T_MAP_CRD

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:16:17 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 20:26:09 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/29 10:26:55 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ double	ft_normalizer(double angle)
 	if (result < 0)
 		result += (2 * M_PI);
 	return (result);
+}
+
+float	ft_clamp(float value, float min, float max)
+{
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
 }
 
 int	ft_map(int old_value, int old_limits[2], int new_limits[2])
