@@ -1,60 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_row_aux.c                                        :+:      :+:    :+:   */
+/*   t_row_trim_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 12:20:30 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 18:57:11 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/28 19:58:29 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/28 19:58:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../../inc/cub3D_bonus.h"
 
-t_point	rows_size(t_row *head)
-{
-	t_row	*tmp;
-	t_point	size;
-
-	if (!head)
-		return ((t_point){0, 0});
-	size = (t_point){0, 0};
-	tmp = head;
-	while (tmp)
-	{
-		if (ft_strlen(tmp->str) > size.x)
-			size.x = ft_strlen(tmp->str);
-		tmp = tmp->next;
-		size.y++;
-	}
-	return (size);
-}
-
-char	**row_to_mtx(t_row *head)
-{
-	char	**mtx;
-	t_row	*tmp;
-	int		i;
-
-	if (!head)
-		return (NULL);
-	mtx = (char **)malloc(sizeof(char *) * (rows_size(head).y + 1));
-	if (!mtx)
-		return (NULL);
-	i = 0;
-	tmp = head;
-	while (tmp)
-	{
-		mtx[i] = ft_strdup(tmp->str);
-		tmp = tmp->next;
-		i++;
-	}
-	mtx[i] = NULL;
-	return (mtx);
-}
-
-void	trim_rows_vertically(t_row **head)
+void	trim_rows(t_row **head)
 {
 	t_row	*tmp;
 	t_row	*aux;
