@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:22:21 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 12:46:08 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:50:53 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static void	draw_health_bar(t_cub *cub, t_point bar_size, t_point iter)
 			if (!iter.x || iter.x == 1 || iter.x + 1 == active.x || iter.x
 				+ 2 == active.x || !iter.y || iter.y == 1 || iter.y + 1 == 30
 				|| iter.y + 2 == 30)
-				my_mlx_pixel_put(&cub->img, 20 + iter.x, active.y + iter.y,
+				my_mlx_pixel_put(&cub->img, (t_point){20 + iter.x, active.y + iter.y},
 					WHITE);
 			else
-				my_mlx_pixel_put(&cub->img, 20 + iter.x, active.y + iter.y,
+				my_mlx_pixel_put(&cub->img, (t_point){20 + iter.x, active.y + iter.y},
 					RED);
 		}
 	}
@@ -64,10 +64,10 @@ t_img	cutout_circle_from_image(void *mlx, t_img src, int radius)
 				int src_x = center_x + dx;
 				int src_y = center_y + dy;
 				int color = my_mlx_get_pixel(src, src_x, src_y);
-				my_mlx_pixel_put(&result, x, y, color);
+				my_mlx_pixel_put(&result, (t_point){x, y}, color);
 			}
 			else
-				my_mlx_pixel_put(&result, x, y, BLACK); // transparent
+				my_mlx_pixel_put(&result, (t_point){x, y}, BLACK);
 		}
 	}
 
@@ -86,7 +86,7 @@ void blit_image_alpha(t_img src, t_img *dst, int offset_x, int offset_y)
 			if (color == BLACK || color == TRANSPARENT)
 				continue;
 
-			my_mlx_pixel_put(dst, x + offset_x, y + offset_y, color);
+			my_mlx_pixel_put(dst, (t_point){x + offset_x, y + offset_y}, color);
 		}
 	}
 }
@@ -100,55 +100,54 @@ void	center_image(t_img src, t_img *dst)
 		for (int x = 0; x < src.width; x++)
 		{
 			int color = my_mlx_get_pixel(src, x, y);
-			my_mlx_pixel_put(dst, x + offset_x, y + offset_y, color);
+			my_mlx_pixel_put(dst, (t_point){x + offset_x, y + offset_y}, color);
+		}
+	}
+}
+
+void	init_point(t_point *point, int x, int y)
+{
+	point->x = x;
+	point->y = y;
+}
+
+void	paint_rotated_color(t_point center, t_dpoint sincos, t_img pad, t_img *dst)
+{
+	t_point		near;
+	for (int y = 0; y < dst->height; ++y)
+	{
+		for (int x = 0; x < dst->width; ++x)
+		{
+			float xt = x - center.x;
+			float yt = y - center.y;
+			float src_x =  xt * sincos.x + yt * sincos.y;
+			float src_y = -xt * sincos.y + yt * sincos.x;
+			src_x += center.x;
+			src_y += center.y;
+			init_point(&near, (int)(src_x + 0.5f), (int)(src_y + 0.5f));
+			my_mlx_pixel_put(dst, (t_point){x, y}, my_mlx_get_pixel(pad, near.x, near.y));
 		}
 	}
 }
 
 void	rotate_image(t_img src, t_img *dst, float angle_degrees, t_cub *cub)
 {
-	t_img padded_src;
-	padded_src.width = dst->width;
-	padded_src.height = dst->height;
-	padded_src.img = mlx_new_image(cub->mlx, padded_src.width, padded_src.height);
-	padded_src.addr = (int *)mlx_get_data_addr(padded_src.img, &padded_src.bpp, &padded_src.line_len, &padded_src.endian);
-	padded_src.line_len /= 4;
+	t_img		pad;
+	t_point		center;
+	t_point		t;
+	t_dpoint	sincos;
 
-	for (int y = 0; y < padded_src.height; y++)
-		for (int x = 0; x < padded_src.width; x++)
-			my_mlx_pixel_put(&padded_src, x, y, BLACK);
-
-	center_image(src, &padded_src);
-
-	int cx = dst->width / 2;
-	int cy = dst->height / 2;
-
-	float angle_rad = angle_degrees;
-	float cos_a = cos(angle_rad);
-	float sin_a = sin(angle_rad);
-
-	for (int y = 0; y < dst->height; ++y)
-	{
-		for (int x = 0; x < dst->width; ++x)
-		{
-			float xt = x - cx;
-			float yt = y - cy;
-
-			float src_x =  xt * cos_a + yt * sin_a;
-			float src_y = -xt * sin_a + yt * cos_a;
-
-			src_x += cx;
-			src_y += cy;
-
-			int nearest_x = (int)(src_x + 0.5f);
-			int nearest_y = (int)(src_y + 0.5f);
-
-			int color = my_mlx_get_pixel(padded_src, nearest_x, nearest_y);
-			my_mlx_pixel_put(dst, x, y, color);
-		}
-	}
-
-	mlx_destroy_image(cub->mlx, padded_src.img); // Cleanup
+	pad.width = dst->width;
+	pad.height = dst->height;
+	pad.img = mlx_new_image(cub->mlx, pad.width, pad.height);
+	pad.addr = (int *)mlx_get_data_addr(pad.img, &pad.bpp, &pad.line_len, &pad.endian);
+	pad.line_len /= 4;
+	center_image(src, &pad);
+	init_point(&center, dst->width / 2, dst->height / 2);
+	sincos.x = cos(angle_degrees);
+	sincos.y = sin(angle_degrees);
+	paint_rotated_color(center, sincos, pad, dst);
+	mlx_destroy_image(cub->mlx, pad.img);
 }
 
 void draw_filled_triangle(void *mlx, void *win, int x, int y, int size, int color)
