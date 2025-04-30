@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 12:47:51 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:17:49 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 # define DARK_GRAY 0x333333
 # define TRANSPARENT 0xFF000000
 
-# define FOG_COLOR BLACK
+# define FOG_COLOR WHITE
 # define FOG_MAX_DIST 650.0f
 
 # define CIRCLE_RADIUS 98
