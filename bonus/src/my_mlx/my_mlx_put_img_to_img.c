@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_mlx_put_img_to_img.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 09:45:56 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/27 11:51:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:22:20 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	my_mlx_put_img_to_img(t_img_to_img base)
 				else if (base.aux)
 					base.color = my_mlx_get_pixel(*base.aux, limits.x0, limits.y0);
 			}
-			my_mlx_pixel_put(base.dst, base.dst_point.x + limits.x0,
-				base.dst_point.y + limits.y0, base.color);
+			my_mlx_pixel_put(base.dst,(t_point){base.dst_point.x + limits.x0,
+				base.dst_point.y + limits.y0}, base.color);
 			limits.x0++;
 		}
 		limits.y0++;

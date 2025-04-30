@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paint_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:32:10 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 11:19:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:24:07 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	paint_ceiling_and_floor(t_cub *cub, t_point iter)
 		while (++iter.x < cub->img.width)
 		{
 			if (iter.y < HALF_HEIGHT)
-				my_mlx_pixel_put(&cub->img, iter.x, iter.y,
+				my_mlx_pixel_put(&cub->img,(t_point){iter.x, iter.y},
 					smoother_lerp_color((int[]){cub->scene.ceiling, FOG_COLOR},
 						(float[]){0, HALF_HEIGHT}, iter.y));
 			else
-				my_mlx_pixel_put(&cub->img, iter.x, iter.y,
+				my_mlx_pixel_put(&cub->img,(t_point){iter.x, iter.y},
 					smoother_lerp_color((int[]){cub->scene.floor, FOG_COLOR},
 						(float[]){cub->img.height, HALF_HEIGHT}, iter.y));
 		}
@@ -60,6 +60,6 @@ void	paint_wall(t_cub *cub, t_ray *ray, t_point iter, t_point pixel)
 					pixel.y), FOG_COLOR, fog_strength);
 		pixel.y = ft_map(iter.y - ray->top, (int[]){0, ray->height}, (int[]){0,
 				ray->img.height});
-		my_mlx_pixel_put(&cub->img, iter.x, iter.y, color);
+		my_mlx_pixel_put(&cub->img,(t_point){iter.x, iter.y}, color);
 	}
 }

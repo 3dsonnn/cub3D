@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 22:59:10 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 12:46:27 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:19:41 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	paint_minimap_tile(t_cub *cub, t_plane edges, t_point iter,
 		while (edges.x0 < edges.x)
 		{
 			if (color == TRANSPARENT)
-				my_mlx_pixel_put(&cub->minimap.img, edges.x0, edges.y0,
+				my_mlx_pixel_put(&cub->minimap.img,(t_point){edges.x0, edges.y0},
 					my_mlx_get_pixel(cub->img, edges.x0 + 10, edges.y0 + 10));
 			else if (edges.x0 == iter.x * MINI_TILE || edges.x0 == edges.x - 1
 				|| edges.y0 == iter.y * MINI_TILE || edges.y0 == edges.y - 1)
-				my_mlx_pixel_put(&cub->minimap.img, edges.x0, edges.y0, WHITE);
+				my_mlx_pixel_put(&cub->minimap.img,(t_point){edges.x0, edges.y0}, WHITE);
 			else
-				my_mlx_pixel_put(&cub->minimap.img, edges.x0, edges.y0,
+				my_mlx_pixel_put(&cub->minimap.img,(t_point){edges.x0, edges.y0},
 					my_mlx_get_transparent_color(my_mlx_get_pixel(cub->img,
 							edges.x0 + 10, edges.y0 + 10), color, .5));
 			edges.x0++;
@@ -60,6 +60,6 @@ static void	paint_minimap(t_cub *cub, t_tile *topleft)
 void	minimap(t_cub *cub)
 {
 	paint_minimap(cub, cub->minimap.corners[TOPLEFT]);
-	// miniplayer(cub, (t_point){((int)cub->player.pos.x / TILE) * TILE,
-	// 	((int)cub->player.pos.y / TILE) * TILE});
+	miniplayer(cub, (t_point){((int)cub->player.pos.x / TILE) * TILE,
+		((int)cub->player.pos.y / TILE) * TILE});
 }

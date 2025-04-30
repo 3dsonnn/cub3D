@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_mlx_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:52:08 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/27 11:50:50 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:21:04 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_img_to_img
 	int		color;
 }			t_img_to_img;
 
-extern void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+extern void	my_mlx_pixel_put(t_img *img, t_point crd, int color);
 extern int	my_mlx_get_pixel(t_img img, int x, int y);
 extern int	my_mlx_get_rgb_color(int r, int g, int b);
 extern void	my_mlx_get_rgb_values(int color, int rgb[3]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_mlx_resize_img_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:10:15 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 18:17:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:22:36 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	fill_img(t_img *src, t_img *dst, int x, int y)
 			offset.y = ft_map(y, (int[]){0, dst->height}, (int[]){0,
 					src->height});
 			pixel = my_mlx_get_pixel(*src, offset.x, offset.y);
-			my_mlx_pixel_put(dst, x, y, pixel);
+			my_mlx_pixel_put(dst,(t_point){x, y}, pixel);
 		}
 	}
 }
