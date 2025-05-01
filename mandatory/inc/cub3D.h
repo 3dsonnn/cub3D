@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 19:53:53 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:45:39 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		check_starting_position(t_scene *scene, t_map *map, t_row *head,
 
 //  MY_MLX
 void		my_mlx_hook(t_cub *cub);
-void		init_mlx(t_cub *cub, int i);
+void		init_mlx(t_cub *cub);
 void		my_mlx_free(t_cub *cub, char *message, t_plane flag);
 
 //  PLAYER
@@ -94,17 +94,16 @@ void		map_crd_error_message(t_scene *scene, char *message, char c,
 				t_nbr aux);
 
 //  T_ROW
-void		free_row(t_row **head, t_row *ref);
 void		add_row(t_row **head, t_row *new);
 t_row		*new_row(char *str, int nbr);
 t_row		*get_last_row(t_row *head);
 char		**row_to_mtx(t_row *head);
 void		free_rows(t_row **head);
-void		trim_rows_vertically(t_row **head);
-void		trim_rows_horizontally(t_row **head, t_point limits);
-t_point		get_horizontal_limits(t_row *head, t_point limits, t_point tmp);
-
+void		free_row(t_row **row);
 t_point		rows_size(t_row *head);
+void		trim_rows_vertically(t_row **head);
+t_point		get_horizontal_limits(t_row *head);
+void		trim_rows_horizontally(t_row **head, t_point limits);
 
 //  T_MAP_CRD
 char		*map_crds_to_str(t_map_crd *head, char *base);
