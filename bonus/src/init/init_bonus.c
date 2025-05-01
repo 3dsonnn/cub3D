@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:04:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/27 11:44:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 12:50:26 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	init_player_minimap_sprites_dfl(t_player *player, t_mmap *minimap,
 		.corners = {NULL, NULL,	NULL, NULL}};
 	my_mlx_init_img(&minimap->img);
 	*sprites = (t_sprite){.i = 0, .ammo = 8, .health = (t_nbr){.value = 100,
-		.str = NULL}, .idle = true, .shooting = true, .recharging = false,
-		.cur_frame_index = IDLE, .last_frame_time = 0};
+		.str = NULL}, .idle = true, .shooting = false, .recharging = false,
+		.cur_frame_index = IDLE, .current_frame = IDLE, .last_frame_time = 0};
 	while (++i < 27)
 		my_mlx_init_img(&sprites->imgs[i]);
 }
