@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:18:27 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 11:46:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:23:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,15 @@ void	add_row(t_row **head, t_row *new)
 	}
 }
 
-void	free_row(t_row **head, t_row *ref)
+void	free_row(t_row **row)
 {
-	t_row	*cur;
-
-	if (!head || !*head || !ref)
-		return ;
-	cur = *head;
-	while (cur && cur != ref)
-		cur = cur->next;
-	if (!cur)
-		return ;
-	if (cur == *head)
+	if (row && *row)
 	{
-		*head = cur->next;
-		if (*head)
-			(*head)->prev = NULL;
+		ft_strfree(&(*row)->str);
+		ft_strfree(&(*row)->line_nbr);
+		free(*row);
+		*row = NULL;
 	}
-	else
-	{
-		cur->prev->next = cur->next;
-		if (cur->next)
-			cur->next->prev = cur->prev;
-	}
-	ft_strfree(&ref->str);
-	ft_strfree(&ref->line_nbr);
-	free(ref);
 }
 
 void	free_rows(t_row **head)
@@ -79,9 +62,7 @@ void	free_rows(t_row **head)
 	{
 		tmp = *head;
 		*head = (*head)->next;
-		ft_strfree(&tmp->str);
-		ft_strfree(&tmp->line_nbr);
-		free(tmp);
+		free_row(&tmp);
 	}
 	*head = NULL;
 }

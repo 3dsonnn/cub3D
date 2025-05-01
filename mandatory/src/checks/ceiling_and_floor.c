@@ -6,13 +6,13 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:23:22 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 10:34:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:41:24 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static void	fill_fc(t_scene *scene, char id, int rgb[3], int i)
+static void	fill_fc(t_scene *scene, char id, int rgb[3])
 {
 	if (!scene->elements)
 		scene->elements = ft_strdup((char []){id, '\0'});
@@ -39,7 +39,7 @@ static void	check_color_range(t_scene *scene, int rgb[3], char *id)
 				" element on line ", scene->line_nbr.str, ": ",
 				"Blue color is out of the range [0, 255]"}), scene);
 	ft_strfree(&scene->tmp);
-	fill_fc(scene, *id, rgb, -1);
+	fill_fc(scene, *id, rgb);
 }
 
 void	check_fc(t_scene *scene)

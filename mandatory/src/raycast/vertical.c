@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:39:41 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:43:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	get_first_intersection(t_cub *cub, t_intersection *tmp, t_ray *ray)
 			* ray->tan);
 }
 
-static void	get_steps(t_cub *cub, t_intersection *tmp, t_ray *ray)
+static void	get_steps(t_intersection *tmp, t_ray *ray)
 {
 	tmp->step.x = TILE;
 	if (!face_right(ray->angle))
@@ -47,7 +47,7 @@ void	check_vertical_intersection(t_cub *cub, t_ray *ray)
 
 	ray->ver.intersected = 0;
 	get_first_intersection(cub, &tmp, ray);
-	get_steps(cub, &tmp, ray);
+	get_steps(&tmp, ray);
 	if (!face_right(ray->angle))
 		tmp.crd.x -= 1;
 	while (inside_map(cub, tmp.crd.x, tmp.crd.y))

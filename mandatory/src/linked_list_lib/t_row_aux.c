@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:20:30 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 18:57:11 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:19:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,56 +65,67 @@ void	trim_rows_vertically(t_row **head)
 	{
 		tmp = *head;
 		*head = (*head)->next;
-		free_row(&tmp, tmp);
+		if (*head)
+			(*head)->prev = NULL;
+		free_row(&tmp);
 	}
 	if (!*head)
 		return ;
-	tmp = *head;
-	while (tmp->next && !ft_strspace(tmp->next->str))
-		tmp = tmp->next;
-	while (tmp->next && ft_strspace(tmp->next->str))
+	tmp = get_last_row(*head);
+	while (tmp && ft_strspace(tmp->str))
 	{
-		aux = tmp->next;
-		tmp->next = aux->next;
-		if (aux->next)
-			aux->next->prev = tmp;
-		free_row(&aux, aux);
+		aux = tmp;
+		tmp = tmp->prev;
+		if (tmp)
+			tmp->next = NULL;
+		free_row(&aux);
 	}
 }
 
-t_point	get_horizontal_limits(t_row *head, t_point limits, t_point tmp)
+t_point	get_horizontal_limits(t_row *head)
 {
+	t_point	tmp;
+	t_point	res;
+
 	if (!head)
 		return ((t_point){0, 0});
+	tmp = (t_point){0, 0};
+	res = (t_point){INT_MAX, INT_MAX};
 	while (head)
 	{
 		tmp.x = ft_strspn(head->str, " ");
 		tmp.y = ft_strspn_rev(head->str, " ");
-		if (tmp.x < limits.x)
-			limits.x = tmp.x;
-		if (tmp.y < limits.y)
-			limits.y = tmp.y;
+		if (tmp.x < res.x)
+			res.x = tmp.x;
+		if (tmp.y < res.y)
+			res.y = tmp.y;
 		head = head->next;
 	}
-	return (limits);
+	return (res);
 }
 
 void	trim_rows_horizontally(t_row **head, t_point limits)
 {
 	t_row	*tmp;
 	char	*aux;
+	int		len;
 
-	if (!head || !*head || (!limits.x && !limits.y))
+	if (!head || !*head || limits.x < 0 || limits.y < 0 || (!limits.x
+			&& !limits.y))
 		return ;
 	tmp = *head;
 	while (tmp)
 	{
-		aux = ft_strdup(tmp->str + limits.x);
-		if (aux)
+		len = ft_strlen(tmp->str);
+		if (len >= (limits.x + limits.y))
 		{
-			aux[ft_strlen(aux) - limits.y] = '\0';
-			ft_swaptr((void **)&tmp->str, (void **)&aux);
-			ft_strfree(&aux);
+			tmp->str[len - limits.y] = '\0';
+			aux = ft_strdup(tmp->str + limits.x);
+			if (aux)
+			{
+				ft_swaptr((void **)&tmp->str, (void **)&aux);
+				ft_strfree(&aux);
+			}
 		}
 		tmp = tmp->next;
 	}
