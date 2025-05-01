@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 13:17:49 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:30:50 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@
 # define CIRCLE_RADIUS 98
 # define TRIANGLE_SIZE 8
 
+void	update_shooting_animation(t_cub *cub);
 
 //  CHECKS
 extern char			*get_element_name(char c);
