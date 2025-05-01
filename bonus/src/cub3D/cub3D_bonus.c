@@ -6,7 +6,7 @@
 /*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 13:08:38 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:01:22 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	cub3D(t_cub *cub)
 			.color_aux = my_mlx_get_rgb_color(rand() % 256, rand() % 256, rand() % 256),
 			.color = 0
 		});
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
+	// mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
 	// mlx_put_image_to_window(cub->mlx, cub->win, cub->minimap.img.img, 10, 10);
 	// draw_filled_triangle(cub->mlx, cub->win, 10 + 10 + CIRCLE_RADIUS, 10 + 10 + CIRCLE_RADIUS, TRIANGLE_SIZE, YELLOW);
 
