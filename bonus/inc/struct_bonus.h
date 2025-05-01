@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 22:55:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 12:19:21 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,7 @@ typedef struct s_sprite
 	bool				recharging;
 	int					cur_frame_index;
 	unsigned long long	last_frame_time;
+	long				current_frame;
 	t_img				imgs[27];
 }						t_sprite;
 
