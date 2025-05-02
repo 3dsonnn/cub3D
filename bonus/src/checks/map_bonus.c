@@ -6,13 +6,13 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 20:02:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:50:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	check_map_end(t_scene *scene, t_map *map)
+static void	check_map_end(t_scene *scene)
 {
 	ft_strfree(&scene->line_nbr.str);
 	if (!scene->line)
@@ -73,7 +73,7 @@ void	fill_map(t_scene *scene, t_map *map)
 		ft_strfree(&scene->line_nbr.str);
 		ft_strfree(&scene->line);
 	}
-	check_map_end(scene, map);
+	check_map_end(scene);
 }
 
 void	check_starting_position(t_scene *scene, t_map *map, t_row *head,

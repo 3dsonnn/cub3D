@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:49:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/01 16:50:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 18:17:41 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	my_mlx_destroy_img(void *mlx, t_img *img)
 	if (mlx && img && img->img)
 	{
 		mlx_destroy_image(mlx, img->img);
-        my_mlx_init_img(img);
+		my_mlx_init_img(img);
 	}
 }

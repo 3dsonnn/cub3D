@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:25:03 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 20:43:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 18:13:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	player_is_wall(t_cub *cub, t_dpoint pos, t_point offsets[4], int i)
 			|| check.y >= cub->scene.map.size.y)
 			return (1);
 		if ((cub->minimap.tiles[check.y][check.x].id == '1'
-				|| cub->minimap.tiles[check.y][check.x].id == 'D')
+			|| cub->minimap.tiles[check.y][check.x].id == 'D')
 			&& obx_overlaps_wall(pos, check))
 			return (1);
 	}
@@ -68,12 +68,12 @@ static int	move(t_cub *cub, t_dpoint vector, int direction, t_dpoint new_pos)
 	new_pos.x += vector.x * (SPEED + PLAYER_RADIUS) * direction;
 	new_pos.y += vector.y * (SPEED + PLAYER_RADIUS) * direction;
 	if (player_is_wall(cub, new_pos, (t_point[]){{0, 0}, {1, 0}, {0, 1}, {1,
-			1}}, -1))
+				1}}, -1))
 		return (1);
 	cub->player.pos.x += vector.x * SPEED * direction;
 	cub->player.pos.y += vector.y * SPEED * direction;
 	if (cub->minimap.cur != &cub->minimap.tiles[(int)floor(cub->player.pos.y
-			/ TILE)][(int)floor(cub->player.pos.x / TILE)])
+				/ TILE)][(int)floor(cub->player.pos.x / TILE)])
 		update_cur_tile(cub, cub->player.pos.x, cub->player.pos.y);
 	return (0);
 }

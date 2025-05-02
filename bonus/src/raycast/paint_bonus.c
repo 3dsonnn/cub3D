@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:32:10 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 11:19:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 18:12:41 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,22 @@ static int	smoother_lerp_color(int colors[2], float range[2], float pos)
 
 void	paint_ceiling_and_floor(t_cub *cub, t_point iter)
 {
+	int	up;
+
+	up = HALF_HEIGHT + cub->player.updown;
 	while (++iter.y < cub->img.height)
 	{
 		iter.x = -1;
 		while (++iter.x < cub->img.width)
 		{
-			if (iter.y < HALF_HEIGHT)
+			if (iter.y < up)
 				my_mlx_pixel_put(&cub->img, iter.x, iter.y,
-					smoother_lerp_color((int[]){cub->scene.ceiling, FOG_COLOR},
-						(float[]){0, HALF_HEIGHT}, iter.y));
+					smoother_lerp_color((int []){cub->scene.ceiling, FOG_COLOR},
+						(float []){0, up}, iter.y));
 			else
 				my_mlx_pixel_put(&cub->img, iter.x, iter.y,
-					smoother_lerp_color((int[]){cub->scene.floor, FOG_COLOR},
-						(float[]){cub->img.height, HALF_HEIGHT}, iter.y));
+					smoother_lerp_color((int []){cub->scene.floor, FOG_COLOR},
+						(float []){cub->img.height, up}, iter.y));
 		}
 	}
 }
@@ -58,8 +61,8 @@ void	paint_wall(t_cub *cub, t_ray *ray, t_point iter, t_point pixel)
 		fog_strength = pow(ft_clamp((ray->dist / FOG_MAX_DIST), 0, 1), 2);
 		color = my_mlx_get_transparent_color(my_mlx_get_pixel(ray->img, pixel.x,
 					pixel.y), FOG_COLOR, fog_strength);
-		pixel.y = ft_map(iter.y - ray->top, (int[]){0, ray->height}, (int[]){0,
-				ray->img.height});
+		pixel.y = ft_map(iter.y - ray->top, (int []){0, ray->height},
+				(int []){0, ray->img.height});
 		my_mlx_pixel_put(&cub->img, iter.x, iter.y, color);
 	}
 }

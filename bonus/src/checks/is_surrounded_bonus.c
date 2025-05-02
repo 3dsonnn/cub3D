@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:26:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 19:44:08 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 18:22:33 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	check_boundary_columns(t_scene *scene, t_map *map, t_row *head,
 		else if (*head->str == 'D' || head->str[map->size.x - 1] == 'D')
 			c = 'D';
 		else if (*head->str == map->start || head->str[map->size.x
-			- 1] == map->start)
+				- 1] == map->start)
 			c = map->start;
 		else
 		{
@@ -90,7 +90,8 @@ void	is_surrounded(t_scene *scene, t_map *map, t_row *head, t_row *tail)
 				&& (head->str[i + 1] == ' ' || head->str[i - 1] == ' '
 					|| head->prev->str[i] == ' ' || head->next->str[i] == ' '))
 			{
-				map_crd_error_message(scene, "Invalid map: not surrounded by walls due to:",
+				map_crd_error_message(scene,
+					"Invalid map: not surrounded by walls due to:",
 					head->str[i], (t_nbr){.str = ft_strdup(head->line_nbr),
 					.value = i});
 				exit_error(scene->tmp, scene);

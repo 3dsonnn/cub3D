@@ -6,13 +6,13 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 11:19:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:54:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	choose_intersection(t_cub *cub, t_ray *ray)
+static void	choose_intersection(t_ray *ray)
 {
 	if (ray->hor.dist < ray->ver.dist)
 	{
@@ -54,7 +54,7 @@ void	get_rays(t_cub *cub, int j)
 		cub->rays[j].tan = tan(cub->rays[j].angle);
 		check_horizontal_intersection(cub, cub->rays + j, 0);
 		check_vertical_intersection(cub, cub->rays + j, 0);
-		choose_intersection(cub, cub->rays + j);
+		choose_intersection(cub->rays + j);
 		get_column(cub, cub->rays + j);
 		get_texture(cub, cub->rays + j, cub->rays[j].angle, cub->rays[j].dir);
 		paint_wall(cub, cub->rays + j, (t_point){j, cub->rays[j].top - 1},

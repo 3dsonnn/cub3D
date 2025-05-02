@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 20:01:10 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 18:12:51 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	inside_map(t_cub *cub, double x, double y)
 
 int	is_wall(t_cub *cub, double x, double y)
 {
-	int tile_x;
-	int tile_y;
+	int	tile_x;
+	int	tile_y;
 
 	if (x < 0 || x >= cub->scene.map.size.x * TILE || y < 0
 		|| y >= cub->scene.map.size.y * TILE)
@@ -31,7 +31,8 @@ int	is_wall(t_cub *cub, double x, double y)
 	tile_x = (int)floor(x / TILE);
 	tile_y = (int)floor(y / TILE);
 	if (tile_x < 0 || tile_x > cub->scene.map.size.x - 1 || tile_y < 0
-		|| tile_y > cub->scene.map.size.y - 1 || cub->minimap.tiles[tile_y][tile_x].id == '1')
+		|| tile_y > cub->scene.map.size.y - 1
+		|| cub->minimap.tiles[tile_y][tile_x].id == '1')
 		return (1);
 	if (cub->minimap.tiles[tile_y][tile_x].id == 'D')
 		return (2);
