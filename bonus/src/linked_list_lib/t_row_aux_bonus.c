@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:31:23 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 19:58:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 14:43:33 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_point	rows_size(t_row *head)
 char	**row_to_mtx(t_row *head)
 {
 	char	**mtx;
-	t_row	*tmp;
 	int		i;
 
 	if (!head)
@@ -43,11 +42,10 @@ char	**row_to_mtx(t_row *head)
 	if (!mtx)
 		return (NULL);
 	i = 0;
-	tmp = head;
-	while (tmp)
+	while (head)
 	{
-		mtx[i] = ft_strdup(tmp->str);
-		tmp = tmp->next;
+		mtx[i] = ft_strdup(head->str);
+		head = head->next;
 		i++;
 	}
 	mtx[i] = NULL;

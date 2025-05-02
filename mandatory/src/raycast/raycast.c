@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:20:38 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:29:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:42:59 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	paint_column(t_cub *cub, t_ray *ray, t_point iter, t_point pixel)
 	}
 }
 
-static void	choose_intersection(t_cub *cub, t_ray *ray)
+static void	choose_intersection(t_ray *ray)
 {
 	if (ray->hor.dist < ray->ver.dist)
 	{
@@ -72,7 +72,7 @@ void	raycast(t_cub *cub, int j)
 		cub->rays[j].tan = tan(cub->rays[j].angle);
 		check_horizontal_intersection(cub, cub->rays + j);
 		check_vertical_intersection(cub, cub->rays + j);
-		choose_intersection(cub, cub->rays + j);
+		choose_intersection(cub->rays + j);
 		get_column(cub, cub->rays + j);
 		get_texture(cub, cub->rays + j, cub->rays[j].angle, cub->rays[j].dir);
 		paint_column(cub, cub->rays + j, (t_point){j, -1}, (t_point){0, 0});

@@ -6,13 +6,13 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 19:53:31 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:45:25 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static void	check_map_end(t_scene *scene, t_map *map)
+static void	check_map_end(t_scene *scene)
 {
 	ft_strfree(&scene->line_nbr.str);
 	if (!scene->line)
@@ -73,7 +73,7 @@ void	fill_map(t_scene *scene, t_map *map)
 		ft_strfree(&scene->line_nbr.str);
 		ft_strfree(&scene->line);
 	}
-	check_map_end(scene, map);
+	check_map_end(scene);
 }
 
 void	check_starting_position(t_scene *scene, t_map *map, t_row *head,
@@ -115,8 +115,13 @@ void	update_player(t_map *map, t_row *head)
 	{
 		iter.x = -1;
 		while (head->str[++iter.x])
+		{
 			if (head->str[iter.x] == map->start)
+			{
 				map->spos = (t_point){.x = iter.x, .y = iter.y};
+				break ;
+			}
+		}
 		iter.y++;
 		head = head->next;
 	}

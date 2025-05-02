@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 11:15:39 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 04:35:18 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_BONUS_H
 
 # include "../../libft/libft.h"
+# include "macros_bonus.h"
 # include "mlx.h"
 # include "my_mlx_bonus.h"
 # include "struct_bonus.h"
@@ -28,51 +29,6 @@
 # include <time.h>
 # include <unistd.h>
 
-# define FONT "-sony-fixed-medium-r-normal--24-240-75-75-c-120-iso8859-1"
-
-# define WIDTH 1920
-# define HEIGHT 1010
-# define HALF_WIDTH 960
-# define HALF_HEIGHT 505
-# define GUN_WIDTH 640
-# define GUN_HEIGHT 640
-# define HEALTH_BAR_WIDTH 300
-# define HEALTH_BAR_HEIGHT 30
-
-# define TILE 64
-# define MINI_TILE 20
-# define ROT 0.05
-# define SPEED 5.0
-# define FOV 2.094395102393195
-# define PLAYER_RADIUS 10
-
-# define DIGITS "0123456789"
-
-# define SPACE 32
-# define ALT 65513
-# define CTRL 65507
-# define ESC 65307
-# define AKEY 97
-# define DKEY 100
-# define SKEY 115
-# define WKEY 119
-# define EKEY 101
-# define LEFT 65361
-# define RIGHT 65363
-# define UP 65362
-# define DOWN 65364
-
-# define BLACK 0x000000
-# define WHITE 0xFFFFFF
-# define RED 0xFF0000
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define DARK_GRAY 0x333333
-# define TRANSPARENT 0xFF000000
-
-# define FOG_COLOR BLACK
-# define FOG_MAX_DIST 650.0f
-
 //  CHECKS
 extern char			*get_element_name(char c);
 void				check_fc(t_scene *scene);
@@ -86,7 +42,6 @@ void				extend_map(t_map *map, t_row **head, t_row *tmp);
 void				fulfill_map(t_scene *scene, t_map *map, t_row *head);
 void				fill_map(t_scene *scene, t_map *map);
 void				update_player(t_map *map, t_row *head);
-
 void				check_doors(t_scene *scene, t_door door, t_row *head,
 						t_row *tail);
 void				checks(t_cub *cub, int ac, char **av);
@@ -103,29 +58,31 @@ void				set_tiles(t_cub *cub, int i, int j);
 void				link_tiles(t_cub *cub, int i, int j);
 void				init_minimap(t_cub *cub);
 void				update_obx(t_cub *cub, t_tile *corners[4], t_tile **tiles);
-void				miniplayer(t_cub *cub, t_point tile_min);
+void				paint_minimap(t_cub *cub, t_tile *topleft);
+void				get_circle_img(t_img *dst, t_img src, t_point iter);
+void				rotate_img(t_img *dst, t_img src, t_img *aux, double angle);
+void				blit_rotated_img(t_img *dst, t_img src, t_point offset);
 
 //  MY_MLX
 void				my_mlx_hook(t_cub *cub);
 extern void			alt_space(t_cub *cub, int keycode);
 void				init_mlx(t_cub *cub);
-// void				my_mlx_put_img_to_img(t_img *dst, t_img src, t_point crd,
-// 						int flag);
-void				my_mlx_draw_horizontal_lines_to_img(t_img *img, t_point crd,
-						t_point size, int color);
+int					my_mlx_mouse_click(int keycode, int x, int y, t_cub *cub);
 
 //  PLAYER
 void				init_player(t_cub *cub);
 int					move_player(t_cub *cub, int keycode);
 int					rotate_player(t_cub *cub, int keycode);
-void				player(t_cub *cub);
 extern bool			is_door(t_tile *tile);
 void				open_or_close_door(t_tile *cur);
 
 // SPRITES
 void				get_sprites_images(t_cub *cub, int i);
-void				update_frame(t_img *back, t_sprite *sprites,
-						unsigned long long current_time);
+void				update_shooting_animation(t_img *back, t_sprite *sprites,
+						unsigned long long cur_time);
+void				put_shooting_animation(t_img *back, t_img frame,
+						t_img clear);
+void				get_clear_and_crosshair_imgs(t_cub *cub, t_img imgs[25]);
 
 //  RAYS
 void				init_rays(t_cub *cub);
@@ -148,7 +105,7 @@ void				paint_ceiling_and_floor(t_cub *cub, t_point iter);
 
 //  CUB3D
 void				init_dfl(t_cub *cub);
-void				cub3D(t_cub *cub);
+void				cub3d(t_cub *cub);
 
 //  UTILS
 double				ft_normalizer(double angle);
@@ -156,8 +113,6 @@ float				ft_clamp(float value, float min, float max);
 int					ft_map(int old_value, int old_limits[2], int new_limits[2]);
 void				exit_error(char *message, t_scene *scene);
 void				my_mlx_error_free(t_cub *cub, char *message);
-void				bresenham_circle(t_bresenham_circle circle);
-void				bresenham_line(t_bresenham_line line);
 void				free_tiles(t_tile ***tiles, int i, int size);
 void				destroy_all_imgs(t_cub *cub);
 unsigned long long	get_current_time(void);
@@ -166,18 +121,17 @@ void				map_crd_error_message(t_scene *scene, char *message, char c,
 						t_nbr aux);
 
 //  T_ROW
-void				free_row(t_row **head, t_row *ref);
 void				add_row_back(t_row **head, t_row *new);
 void				add_row_front(t_row **head, t_row *new);
 t_row				*new_row(char *str, int nbr);
 t_row				*get_last_row(t_row *head);
 char				**row_to_mtx(t_row *head);
 void				free_rows(t_row **head);
-void				trim_rows(t_row **head);
 t_point				rows_size(t_row *head);
+void				free_row(t_row **row);
+void				trim_rows_vertically(t_row **head);
+t_point				get_horizontal_limits(t_row *head);
 void				trim_rows_horizontally(t_row **head, t_point limits);
-t_point				get_horizontal_limits(t_row *head, t_point limits,
-						t_point tmp);
 
 //  T_MAP_CRD
 char				*map_crds_to_str(t_map_crd *head, char *base);

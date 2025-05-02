@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:41:26 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/25 17:17:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 00:07:54 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ static void	check_points(t_scene *scene, t_door door, t_nbr aux)
 			"Invalid map: a door cannot have a space near it:", 'D', aux);
 		exit_error(scene->tmp, scene);
 	}
-    ft_strfree(&aux.str);
+	ft_strfree(&aux.str);
 }
 
 static void	check_dir(t_scene *scene, t_door door, t_nbr aux)
 {
+	char	*tmp;
+
 	if (door.dir.x && door.dir.y)
 	{
 		map_crd_error_message(scene,
@@ -41,9 +43,10 @@ static void	check_dir(t_scene *scene, t_door door, t_nbr aux)
 	}
 	if (!door.dir.x && !door.dir.y)
 	{
-		map_crd_error_message(scene,
-			"Invalid map: doors must be vertically/horizontally surrounded by walls:",
-			'D', aux);
+		tmp = ft_strjoin("Invalid map: doors must be vertically or",
+				"horizontally surrounded by walls:", 0);
+		map_crd_error_message(scene, tmp, 'D', aux);
+		ft_strfree(&tmp);
 		exit_error(scene->tmp, scene);
 	}
 	if ((door.dir.x && (door.points[WE] == '1' || door.points[EA] == '1'))
@@ -52,7 +55,7 @@ static void	check_dir(t_scene *scene, t_door door, t_nbr aux)
 		map_crd_error_message(scene, "Invalid map: Dead end door:", 'D', aux);
 		exit_error(scene->tmp, scene);
 	}
-    ft_strfree(&aux.str);
+	ft_strfree(&aux.str);
 }
 
 void	check_doors(t_scene *scene, t_door door, t_row *head, t_row *tail)
@@ -68,8 +71,8 @@ void	check_doors(t_scene *scene, t_door door, t_row *head, t_row *tail)
 				door.points[SO] = head->next->str[door.i];
 				door.points[WE] = head->str[door.i - 1];
 				door.points[EA] = head->str[door.i + 1];
-				check_points(scene, door, (t_nbr){.str = ft_strdup(head->line_nbr),
-					.value = door.i});
+				check_points(scene, door,
+					(t_nbr){.str = ft_strdup(head->line_nbr), .value = door.i});
 				door.dir.x = (door.points[NO] == '1' && door.points[SO] == '1');
 				door.dir.y = (door.points[WE] == '1' && door.points[EA] == '1');
 				check_dir(scene, door, (t_nbr){.str = ft_strdup(head->line_nbr),

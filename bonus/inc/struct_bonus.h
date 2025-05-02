@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 22:55:12 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 02:49:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,13 @@
 
 typedef struct s_img	t_img;
 
-# define CROSSHAIR_PATH "bonus/config/animated_sprites/crosshair.xpm"
-# define CARTRIDGE_PATH "bonus/config/animated_sprites/cartridge.xpm"
-# define IDLE_PATH "bonus/config/animated_sprites/shotgun/idle.xpm"
-# define PUTTING_01_PATH "bonus/config/animated_sprites/shotgun/putting01.xpm"
-# define PUTTING_02_PATH "bonus/config/animated_sprites/shotgun/putting02.xpm"
-# define PUTTING_03_PATH "bonus/config/animated_sprites/shotgun/putting03.xpm"
-# define RECHARGING_01_PATH "bonus/config/animated_sprites/shotgun/recharging01.xpm"
-# define RECHARGING_02_PATH "bonus/config/animated_sprites/shotgun/recharging02.xpm"
-# define RECHARGING_03_PATH "bonus/config/animated_sprites/shotgun/recharging03.xpm"
-# define RECHARGING_04_PATH "bonus/config/animated_sprites/shotgun/recharging04.xpm"
-# define RECHARGING_05_PATH "bonus/config/animated_sprites/shotgun/recharging05.xpm"
-# define RECHARGING_06_PATH "bonus/config/animated_sprites/shotgun/recharging06.xpm"
-# define RECHARGING_IDLE_PATH "bonus/config/animated_sprites/shotgun/recharging_idle.xpm"
-# define SHELL_01_PATH "bonus/config/animated_sprites/shotgun/shell01.xpm"
-# define SHELL_02_PATH "bonus/config/animated_sprites/shotgun/shell02.xpm"
-# define SHELL_03_PATH "bonus/config/animated_sprites/shotgun/shell03.xpm"
-# define SHELL_04_PATH "bonus/config/animated_sprites/shotgun/shell04.xpm"
-# define SHELL_05_PATH "bonus/config/animated_sprites/shotgun/shell05.xpm"
-# define SHELL_06_PATH "bonus/config/animated_sprites/shotgun/shell06.xpm"
-# define SHELL_07_PATH "bonus/config/animated_sprites/shotgun/shell07.xpm"
-# define SHELL_08_PATH "bonus/config/animated_sprites/shotgun/shell08.xpm"
-# define SHELL_09_PATH "bonus/config/animated_sprites/shotgun/shell09.xpm"
-# define SHOOTING_01_PATH "bonus/config/animated_sprites/shotgun/shooting01.xpm"
-# define SHOOTING_02_PATH "bonus/config/animated_sprites/shotgun/shooting02.xpm"
-# define SHOOTING_IDLE_PATH "bonus/config/animated_sprites/shotgun/shooting_idle.xpm"
-# define DOOR_PATH "bonus/config/animated_sprites/door.xpm"
-# define E_KEY_PATH "bonus/config/animated_sprites/e_key.xpm"
-
 typedef enum e_frames
 {
 	CROSSHAIR,
-	CARTRIDGE,
 	IDLE,
+	SHOOTING_01,
+	SHOOTING_02,
+	SHOOTING_IDLE,
 	PUTTING_01,
 	PUTTING_02,
 	PUTTING_03,
@@ -69,11 +43,7 @@ typedef enum e_frames
 	SHELL_07,
 	SHELL_08,
 	SHELL_09,
-	SHOOTING_01,
-	SHOOTING_02,
-	SHOOTING_IDLE,
 	CLEAR,
-	HEALTH_BAR
 }						t_frames;
 
 typedef enum e_ID
@@ -262,21 +232,20 @@ typedef struct s_ray
 
 typedef struct s_hook
 {
-	bool				alt : 1;
-	bool				space : 1;
+	int	alt : 1;
+	int	space : 1;
 }						t_hook;
 
 typedef struct s_sprite
 {
 	int					i;
-	int					ammo;
-	t_nbr				health;
 	bool				idle;
 	bool				shooting;
 	bool				recharging;
 	int					cur_frame_index;
+	int					cur_frame;
 	unsigned long long	last_frame_time;
-	t_img				imgs[27];
+	t_img				imgs[25];
 }						t_sprite;
 
 typedef struct s_tile
@@ -293,6 +262,10 @@ typedef struct s_tile
 typedef struct s_mmap
 {
 	t_img				img;
+	t_img				circle;
+	t_img				rotated;
+	t_img				padded;
+	int					angle;
 	t_tile				*cur;
 	t_tile				*corners[4];
 	t_tile				**tiles;

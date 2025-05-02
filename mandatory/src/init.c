@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 10:43:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:42:04 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	convert_textures_to_imgs(t_cub *cub, t_texture textures[4], int i)
 	}
 }
 
-void	init_mlx(t_cub *cub, int i)
+void	init_mlx(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	if (!cub->mlx)

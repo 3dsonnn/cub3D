@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 19:48:42 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:21:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,6 @@ static void	check_elements(t_scene *scene)
 	ft_strfree(&scene->elements);
 }
 
-void	print(t_row *head)
-{
-	while (head)
-	{
-		ft_printf("|%s|\n", head->str);
-		head = head->next;
-	}
-}
-
 static void	check_map(t_scene *scene, t_map *map)
 {
 	add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
@@ -89,11 +80,8 @@ static void	check_map(t_scene *scene, t_map *map)
 	check_starting_position(scene, map, map->head, (t_iter){-1, -1, 0, -1, -1,
 		-1});
 	is_surrounded(scene, map, map->head->next, get_last_row(map->head));
-	trim_rows_horizontally(&map->head, get_horizontal_limits(map->head,
-			(t_point){.x = map->size.x, .y = map->size.x}, (t_point){.x = 0,
-			.y = 0}));
+	trim_rows_horizontally(&map->head, get_horizontal_limits(map->head));
 	update_player(map, map->head);
-	print(map->head);
 	map->content = row_to_mtx(map->head);
 	map->content[map->spos.y][map->spos.x] = '0';
 	free_rows(&map->head);

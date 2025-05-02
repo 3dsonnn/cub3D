@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 10:48:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:26:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_id(char *line, int flag)
 	return (0);
 }
 
-inline	char	*get_element_name(char c)
+inline char	*get_element_name(char c)
 {
 	if (c == 'N')
 		return ("North");
@@ -81,13 +81,15 @@ void	check_element(t_scene *scene)
 		check_texture(scene);
 	else if (check_id(scene->line, 1))
 		check_fc(scene);
-	else if (ft_strlen(scene->elements) == 6
-		&& ft_strspn(scene->line_cpy, "01 NSEW") == ft_strlen(scene->line_cpy))
+	else if (ft_strlen(scene->elements) == 6 && ft_strspn(scene->line_cpy,
+			"01 NSEW") == ft_strlen(scene->line_cpy))
 	{
 		ft_strfree(&scene->line);
 		ft_swaptr((void **)&scene->line, (void **)&scene->line_cpy);
 		ft_strfree(&scene->line_nbr.str);
 	}
+	else if (ft_strlen(scene->elements) != 6)
+		exit_error("Missing elements in the scene file", scene);
 	else
 	{
 		exit_error(get_explicit_error_message(scene,

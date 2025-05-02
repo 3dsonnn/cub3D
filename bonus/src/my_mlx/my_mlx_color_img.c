@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   my_mlx_color_img.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 00:00:15 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/29 18:40:17 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/30 18:08:08 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D_bonus.h"
+#include "../../inc/my_mlx_bonus.h"
 
-int	main(int ac, char **av)
+void	my_mlx_color_img(t_img *img, int color)
 {
-	t_cub	cub;
+	t_point	iter;
 
-	init_dfl(&cub);
-	checks(&cub, ac, av);
-	init_mlx(&cub);
-	init_minimap(&cub);
-	init_rays(&cub);
-	init_player(&cub);
-	cub3d(&cub);
-	my_mlx_hook(&cub);
-	mlx_loop(cub.mlx);
-	return (0);
+	if (!img || !img->addr || img->height <= 0 || img->width <= 0)
+		return ;
+	iter = (t_point){-1, -1};
+	while (++iter.y < img->height)
+	{
+		iter.x = -1;
+		while (++iter.x < img->width)
+			my_mlx_pixel_put(img, iter.x, iter.y, color);
+	}
 }

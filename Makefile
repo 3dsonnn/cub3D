@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/04/29 10:31:24 by efinda           ###   ########.fr        #
+#    Updated: 2025/05/01 17:18:48 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = cub3D
 NAME_BONUS = cub3D_bonus
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror
 RM = rm -rf
 
 SRC =	mandatory/src/main.c 									\
@@ -66,7 +66,6 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/checks/ceiling_and_floor_aux_bonus.c			\
 			bonus/src/hooks/hooks_bonus.c 							\
 			bonus/src/hooks/hooks_aux_bonus.c 						\
-			bonus/src/hooks/image_manipulation_bonus.c 				\
 			bonus/src/cub3D/cub3D_bonus.c 							\
 			bonus/src/player/init_bonus.c 							\
 			bonus/src/player/move_bonus.c 							\
@@ -79,9 +78,8 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/raycast/horizontal_bonus.c					\
 			bonus/src/linked_list_lib/t_row_bonus.c 				\
 			bonus/src/linked_list_lib/t_row_aux_bonus.c 			\
-			bonus/src/linked_list_lib/t_row_trim_bonus.c			\
 			bonus/src/linked_list_lib/t_map_crd_bonus.c				\
-			bonus/src/utils/bresenham_bonus.c						\
+			bonus/src/linked_list_lib/t_row_trim_bonus.c			\
 			bonus/src/utils/free_bonus.c 							\
 			bonus/src/utils/error_bonus.c 							\
 			bonus/src/utils/ft_math_bonus.c							\
@@ -91,7 +89,8 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/minimap/settings_bonus.c						\
 			bonus/src/minimap/obx_bonus.c							\
 			bonus/src/minimap/minimap_bonus.c						\
-			bonus/src/minimap/miniplayer_bonus.c					\
+			bonus/src/minimap/minimg_manipulation_bonus.c			\
+			bonus/src/minimap/painting_bonus.c						\
 			bonus/src/sprites/init_bonus.c							\
 			bonus/src/sprites/sprites_bonus.c						\
 			bonus/src/my_mlx/my_mlx_init_img_bonus.c				\
@@ -105,6 +104,9 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/my_mlx/my_mlx_get_data_addr_bonus.c			\
 			bonus/src/my_mlx/my_mlx_get_transparent_color_bonus.c	\
 			bonus/src/my_mlx/my_mlx_put_img_to_img.c				\
+			bonus/src/my_mlx/my_mlx_duplicate_img.c					\
+			bonus/src/my_mlx/my_mlx_color_img.c						\
+			bonus/src/my_mlx/my_mlx_drawn_triangle.c				\
 
 LIBFTPATH = libft
 LIBFT =	$(LIBFTPATH)/libft.a
@@ -127,10 +129,10 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAG) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $@
+	$(CC) $(FLAG) $(FLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $@
 
 bonus: $(LIBFT) $(MLX) $(OBJ_DIR_BONUS) $(NAME_BONUS)
 
@@ -139,10 +141,10 @@ $(OBJ_DIR_BONUS):
 
 $(OBJ_DIR_BONUS)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAG) $(FLAGS) -c $< -o $@
 
 $(NAME_BONUS): $(OBJ_BONUS)
-	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) $(LIBS) -o $@
+	$(CC) $(FLAG) $(FLAGS) $(OBJ_BONUS) $(LIBFT) $(LIBS) -o $@
 
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFTPATH)

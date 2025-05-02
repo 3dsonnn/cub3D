@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   my_mlx_duplicate_img.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 00:00:15 by efinda           ###   ########.fr       */
+/*   Created: 2025/04/29 17:32:07 by efinda            #+#    #+#             */
+/*   Updated: 2025/04/30 18:13:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D_bonus.h"
+#include "../../inc/my_mlx_bonus.h"
 
-int	main(int ac, char **av)
+void	my_mlx_duplicate_img(void *mlx, t_img *dst, t_img src)
 {
-	t_cub	cub;
-
-	init_dfl(&cub);
-	checks(&cub, ac, av);
-	init_mlx(&cub);
-	init_minimap(&cub);
-	init_rays(&cub);
-	init_player(&cub);
-	cub3d(&cub);
-	my_mlx_hook(&cub);
-	mlx_loop(cub.mlx);
-	return (0);
+	if (!mlx || src.height <= 0 || src.width <= 0)
+		return ;
+	my_mlx_init_img(dst);
+	my_mlx_new_img(mlx, dst, (t_point){src.width, src.height});
+	if (!dst->img)
+		return ;
+	my_mlx_get_data_addr(dst);
+	if (!dst->addr)
+		my_mlx_destroy_img(mlx, dst);
 }
