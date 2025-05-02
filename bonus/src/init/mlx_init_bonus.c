@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 17:04:36 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 07:53:39 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static void	get_textures_images(t_cub *cub, t_texture textures[5], int i)
 
 void	init_mlx(t_cub *cub)
 {
-	if (!XInitThreads())
-		exit_error("Failed to initialize X11 threads", &cub->scene);
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 		exit_error("Failed to initialize mlx", &cub->scene);
