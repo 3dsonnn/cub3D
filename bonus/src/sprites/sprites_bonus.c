@@ -3,188 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:22:21 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/29 12:46:08 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/05/02 04:35:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	draw_health_bar(t_cub *cub, t_point bar_size, t_point iter)
+void	get_clear_and_crosshair_imgs(t_cub *cub, t_img imgs[25])
 {
-	t_point	active;
+	my_mlx_put_img_to_img((t_img_to_img){.dst = &imgs[CLEAR], .src = cub->img,
+		.aux = NULL, .dst_point = (t_point){.x = 0, .y = 0},
+		.src_point = (t_point){.x = cub->img.width / 2 + CROSSHAIR_SIZE,
+		.y = cub->img.height - imgs[CLEAR].height},
+		.size = (t_point){.x = imgs[CLEAR].width, .y = imgs[CLEAR].height},
+		.filter = 0, .color_aux = TRANSPARENT, .skip = 0});
+	my_mlx_put_img_to_img((t_img_to_img){.dst = &cub->img,
+		.src = imgs[CROSSHAIR], .aux = NULL,
+		.dst_point = (t_point){.x = cub->img.width / 2, .y = cub->img.height
+		/ 2}, .src_point = (t_point){.x = 0, .y = 0},
+		.size = (t_point){.x = imgs[CROSSHAIR].width,
+		.y = imgs[CROSSHAIR].height}, .filter = 1, .color_aux = TRANSPARENT,
+		.skip = 1});
+}
 
-	my_mlx_draw_horizontal_lines_to_img(&cub->img, (t_point){20,
-		(cub->img.height - (bar_size.y + 20))}, (t_point){bar_size.x,
-		bar_size.y}, DARK_GRAY);
-	if (cub->sprites.health.value <= 0)
-		return ;
-	active.x = (bar_size.x * cub->sprites.health.value) / 100;
-	active.y = cub->img.height - (bar_size.y + 20);
-	while (++iter.y < 30)
+void	put_shooting_animation(t_img *back, t_img frame, t_img clear)
+{
+	t_point	iter;
+	t_point	start;
+	int		color;
+
+	iter = (t_point){-1, -1};
+	start = (t_point){back->width / 2 + CROSSHAIR_SIZE,
+		back->height - frame.height};
+	while (++iter.y < frame.height)
 	{
 		iter.x = -1;
-		while (++iter.x < active.x)
+		while (++iter.x < frame.width)
 		{
-			if (!iter.x || iter.x == 1 || iter.x + 1 == active.x || iter.x
-				+ 2 == active.x || !iter.y || iter.y == 1 || iter.y + 1 == 30
-				|| iter.y + 2 == 30)
-				my_mlx_pixel_put(&cub->img, 20 + iter.x, active.y + iter.y,
-					WHITE);
-			else
-				my_mlx_pixel_put(&cub->img, 20 + iter.x, active.y + iter.y,
-					RED);
+			color = my_mlx_get_pixel(frame, iter.x, iter.y);
+			if (color == (int)TRANSPARENT || color == (int)BLACK)
+				color = my_mlx_get_pixel(clear, iter.x, iter.y);
+			my_mlx_pixel_put(back, start.x + iter.x, start.y + iter.y, color);
 		}
 	}
 }
 
-t_img	cutout_circle_from_image(void *mlx, t_img src, int radius)
+void	update_shooting_animation(t_img *back, t_sprite *sprites,
+		unsigned long long cur_time)
 {
-	t_img result;
-	int diameter = radius * 2;
-	result.width = diameter;
-	result.height = diameter;
-	result.img = mlx_new_image(mlx, diameter, diameter);
-	result.addr = (int *)mlx_get_data_addr(result.img, &result.bpp, &result.line_len, &result.endian);
-	result.line_len /= 4;
-
-	int center_x = src.width / 2;
-	int center_y = src.height / 2;
-
-	for (int y = 0; y < diameter; ++y)
+	cur_time = get_current_time();
+	if (cur_time - sprites->last_frame_time >= 35)
 	{
-		for (int x = 0; x < diameter; ++x)
+		sprites->last_frame_time = cur_time;
+		if (sprites->cur_frame <= SHELL_09)
 		{
-			int dx = x - radius;
-			int dy = y - radius;
-			if (dx * dx + dy * dy <= radius * radius)
-			{
-				int src_x = center_x + dx;
-				int src_y = center_y + dy;
-				int color = my_mlx_get_pixel(src, src_x, src_y);
-				my_mlx_pixel_put(&result, x, y, color);
-			}
-			else
-				my_mlx_pixel_put(&result, x, y, BLACK); // transparent
+			put_shooting_animation(back, sprites->imgs[sprites->cur_frame],
+				sprites->imgs[CLEAR]);
+			sprites->i++;
+			if (sprites->i % 2 == 0)
+				sprites->cur_frame++;
+		}
+		else
+		{
+			sprites->shooting = false;
+			sprites->idle = true;
+			sprites->cur_frame = IDLE;
+			put_shooting_animation(back, sprites->imgs[IDLE],
+				sprites->imgs[CLEAR]);
 		}
 	}
-
-	return result;
-}
-
-void blit_image_alpha(t_img src, t_img *dst, int offset_x, int offset_y)
-{
-	for (int y = 0; y < src.height; y++)
-	{
-		for (int x = 0; x < src.width; x++)
-		{
-			int color = my_mlx_get_pixel(src, x, y);
-
-			int alpha = (color >> 24) & 0xFF;
-			if (color == BLACK || color == TRANSPARENT)
-				continue;
-
-			my_mlx_pixel_put(dst, x + offset_x, y + offset_y, color);
-		}
-	}
-}
-void	center_image(t_img src, t_img *dst)
-{
-	int offset_x = (dst->width - src.width) / 2;
-	int offset_y = (dst->height - src.height) / 2;
-
-	for (int y = 0; y < src.height; y++)
-	{
-		for (int x = 0; x < src.width; x++)
-		{
-			int color = my_mlx_get_pixel(src, x, y);
-			my_mlx_pixel_put(dst, x + offset_x, y + offset_y, color);
-		}
-	}
-}
-
-void	rotate_image(t_img src, t_img *dst, float angle_degrees, t_cub *cub)
-{
-	t_img padded_src;
-	padded_src.width = dst->width;
-	padded_src.height = dst->height;
-	padded_src.img = mlx_new_image(cub->mlx, padded_src.width, padded_src.height);
-	padded_src.addr = (int *)mlx_get_data_addr(padded_src.img, &padded_src.bpp, &padded_src.line_len, &padded_src.endian);
-	padded_src.line_len /= 4;
-
-	for (int y = 0; y < padded_src.height; y++)
-		for (int x = 0; x < padded_src.width; x++)
-			my_mlx_pixel_put(&padded_src, x, y, BLACK);
-
-	center_image(src, &padded_src);
-
-	int cx = dst->width / 2;
-	int cy = dst->height / 2;
-
-	float angle_rad = angle_degrees;
-	float cos_a = cos(angle_rad);
-	float sin_a = sin(angle_rad);
-
-	for (int y = 0; y < dst->height; ++y)
-	{
-		for (int x = 0; x < dst->width; ++x)
-		{
-			float xt = x - cx;
-			float yt = y - cy;
-
-			float src_x =  xt * cos_a + yt * sin_a;
-			float src_y = -xt * sin_a + yt * cos_a;
-
-			src_x += cx;
-			src_y += cy;
-
-			int nearest_x = (int)(src_x + 0.5f);
-			int nearest_y = (int)(src_y + 0.5f);
-
-			int color = my_mlx_get_pixel(padded_src, nearest_x, nearest_y);
-			my_mlx_pixel_put(dst, x, y, color);
-		}
-	}
-
-	mlx_destroy_image(cub->mlx, padded_src.img); // Cleanup
-}
-
-void draw_filled_triangle(void *mlx, void *win, int x, int y, int size, int color)
-{
-	int half_base = size / 2;
-	int height = size;
-
-	for (int i = 0; i < height; i++)
-	{
-		// Horizontal span at current row i
-		int row_width = (int)((float)i / height * half_base);
-
-		for (int j = -row_width; j <= row_width; j++)
-		{
-			int draw_x = x + j;
-			int draw_y = y + i;
-			mlx_pixel_put(mlx, win, draw_x, draw_y, color);
-		}
-	}
-}
-
-void	player(t_cub *cub)
-{
-	int	plus;
-
-	if (cub->scene.map.start == 'N' || cub->scene.map.start == 'S')
-		plus = 90;
-	if (cub->scene.map.start == 'W' || cub->scene.map.start == 'E')
-		plus = 270;
-	t_img	cut = cutout_circle_from_image(cub->mlx, cub->minimap.img, 98);
-	t_img rotated;
-	// blit_image_alpha(circle, &cub->img, 10, 10);
-	rotate_image(cut, &rotated, -(cub->player.angle + plus * (M_PI / 180)), cub);
-	blit_image_alpha(rotated, &cub->img, 10, 10);
-	// draw_health_bar(cub, (t_point){300, 30}, (t_point){-1, -1});
-	// my_mlx_put_img_to_img(&cub->img, cub->sprites.imgs[CROSSHAIR],
-	// 	(t_point){(cub->img.width - cub->sprites.imgs[CROSSHAIR].width) / 2,
-	// 	(cub->img.height - cub->sprites.imgs[CROSSHAIR].height) / 2}, 1);
 }
