@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:05:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/28 18:12:51 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 16:37:23 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	ft_strspn_rev(char *s, char *accept)
 
 	if (!s || !accept || !*s || !*accept)
 		return (0);
-    res = 0;
-    i = ft_strlen(s);
+	res = 0;
+	i = ft_strlen(s);
 	while (--i >= 0)
-    {
+	{
 		if (!ft_strchr(accept, s[i]))
 			break ;
-        res++;
-    }
+		res++;
+	}
 	return (res);
 }

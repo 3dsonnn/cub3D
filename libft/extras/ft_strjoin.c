@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 08:03:21 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 10:46:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 16:39:14 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static	void	ft_strjoin_free(char *str, char *buffer, int flag)
 char	*ft_strjoin(char *str, char *buffer, int flag)
 {
 	char	*new_str;
+	int		lens;
 
 	if (!str && !buffer)
 		return (NULL);
@@ -37,8 +38,8 @@ char	*ft_strjoin(char *str, char *buffer, int flag)
 		new_str = ft_strdup(str);
 	else
 	{
-		new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + ft_strlen(buffer)
-			+ 1));
+		lens = ft_strlen(str) + ft_strlen(buffer);
+		new_str = (char *)malloc(sizeof(char) * (lens + 1));
 		if (!new_str)
 			return (NULL);
 		ft_join(&new_str, str, buffer);
