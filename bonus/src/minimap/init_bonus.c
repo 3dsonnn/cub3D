@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:30:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 19:34:15 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:41:44 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,49 @@ static void	init_tiles(t_cub *cub, t_tile ***tiles, int i, int j)
 	}
 }
 
+void	init_minimap_aux_imgs(t_cub *cub, t_mmap *mmap)
+{
+	int	aux;
+
+	my_mlx_new_img(cub->mlx, &mmap->circle, (t_point){MINIMAP_RADIUS * 2,
+		MINIMAP_RADIUS * 2});
+	if (!mmap->circle.img)
+		my_mlx_error_free(cub, "Failed to create the minimap circle image");
+	my_mlx_get_data_addr(&mmap->circle);
+	if (!mmap->circle.addr)
+		my_mlx_error_free(cub,
+			"Failed to get the address of the minimap circle image");
+	aux = (int)ceil(sqrt(2 * (mmap->circle.width * mmap->circle.width)));
+	my_mlx_new_img(cub->mlx, &mmap->rotated, (t_point){aux, aux});
+	if (!mmap->rotated.img)
+		my_mlx_error_free(cub, "Failed to create the minimap rotated image");
+	my_mlx_get_data_addr(&mmap->rotated);
+	if (!mmap->rotated.addr)
+		my_mlx_error_free(cub,
+			"Failed to get the address of the minimap rotated image");
+	my_mlx_duplicate_img(cub->mlx, &mmap->padded, mmap->rotated);
+	if (!mmap->padded.img)
+		my_mlx_error_free(cub, "Failed to create the minimap padded image");
+	if (!mmap->padded.addr)
+		my_mlx_error_free(cub,
+			"Failed to get the address of the minimap padded image");
+}
+
 void	init_minimap(t_cub *cub)
 {
-	my_mlx_new_img(cub->mlx, &cub->minimap.img,
-		(t_point){MINI_TILE * 11, MINI_TILE * 11});
+	if (cub->scene.map.start == 'N' || cub->scene.map.start == 'S')
+		cub->minimap.angle = 90;
+	if (cub->scene.map.start == 'W' || cub->scene.map.start == 'E')
+		cub->minimap.angle = 270;
+	my_mlx_new_img(cub->mlx, &cub->minimap.img, (t_point){MINI_TILE * 11,
+		MINI_TILE * 11});
 	if (!cub->minimap.img.img)
 		my_mlx_error_free(cub, "Failed to create the minimap image");
 	my_mlx_get_data_addr(&cub->minimap.img);
 	if (!cub->minimap.img.addr)
 		my_mlx_error_free(cub,
 			"Failed to get the address of the minimap image");
+	init_minimap_aux_imgs(cub, &cub->minimap);
 	init_tiles(cub, &cub->minimap.tiles, -1, -1);
 	link_tiles(cub, 0, 0);
 	set_tiles(cub, -1, -1);
