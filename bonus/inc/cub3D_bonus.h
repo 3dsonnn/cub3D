@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 02:55:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 04:35:18 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void				update_shooting_animation(t_img *back, t_sprite *sprites,
 						unsigned long long cur_time);
 void				put_shooting_animation(t_img *back, t_img frame,
 						t_img clear);
+void				get_clear_and_crosshair_imgs(t_cub *cub, t_img imgs[25]);
 
 //  RAYS
 void				init_rays(t_cub *cub);
