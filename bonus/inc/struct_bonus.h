@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 14:54:10 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 02:49:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef enum e_frames
 {
 	CROSSHAIR,
 	IDLE,
+	SHOOTING_01,
+	SHOOTING_02,
+	SHOOTING_IDLE,
 	PUTTING_01,
 	PUTTING_02,
 	PUTTING_03,
@@ -40,9 +43,6 @@ typedef enum e_frames
 	SHELL_07,
 	SHELL_08,
 	SHELL_09,
-	SHOOTING_01,
-	SHOOTING_02,
-	SHOOTING_IDLE,
 	CLEAR,
 }						t_frames;
 
@@ -232,8 +232,8 @@ typedef struct s_ray
 
 typedef struct s_hook
 {
-	bool				alt : 1;
-	bool				space : 1;
+	int	alt : 1;
+	int	space : 1;
 }						t_hook;
 
 typedef struct s_sprite

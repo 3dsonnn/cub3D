@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 15:03:06 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 02:55:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void				blit_rotated_img(t_img *dst, t_img src, t_point offset);
 void				my_mlx_hook(t_cub *cub);
 extern void			alt_space(t_cub *cub, int keycode);
 void				init_mlx(t_cub *cub);
+int					my_mlx_mouse_click(int keycode, int x, int y, t_cub *cub);
 
 //  PLAYER
 void				init_player(t_cub *cub);
@@ -79,6 +80,8 @@ void				open_or_close_door(t_tile *cur);
 void				get_sprites_images(t_cub *cub, int i);
 void				update_shooting_animation(t_img *back, t_sprite *sprites,
 						unsigned long long cur_time);
+void				put_shooting_animation(t_img *back, t_img frame,
+						t_img clear);
 
 //  RAYS
 void				init_rays(t_cub *cub);
@@ -101,7 +104,7 @@ void				paint_ceiling_and_floor(t_cub *cub, t_point iter);
 
 //  CUB3D
 void				init_dfl(t_cub *cub);
-void				cub3D(t_cub *cub);
+void				cub3d(t_cub *cub);
 
 //  UTILS
 double				ft_normalizer(double angle);

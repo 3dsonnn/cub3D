@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:58:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/03/31 17:09:45 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 00:00:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	init_minimap(&cub);
 	init_rays(&cub);
 	init_player(&cub);
-	cub3D(&cub);
+	cub3d(&cub);
 	my_mlx_hook(&cub);
 	mlx_loop(cub.mlx);
 	return (0);
