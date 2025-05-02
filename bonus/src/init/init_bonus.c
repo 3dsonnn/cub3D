@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:04:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/27 11:44:30 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:54:49 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ static void	init_scene_dfl(t_scene *scene, int i)
 	scene->elements = NULL;
 	scene->line_nbr = (t_nbr){.value = 0, .str = NULL};
 	scene->map = (t_map){.head = NULL, .crds = NULL, .content = NULL,
-		.start = '\0', .spos = (t_point){.x = 0, .y = 0},
-		.door.i = 0, .door.dir = (t_point){.x = 0, .y = 0},
-		.door.points = {0, 0, 0, 0},
+		.start = '\0', .spos = (t_point){.x = 0, .y = 0}, .door.i = 0,
+		.door.dir = (t_point){.x = 0, .y = 0}, .door.points = {0, 0, 0, 0},
 		.size = (t_point){.x = 0, .y = 0}};
 	my_mlx_init_img(&scene->map.door.key);
 	my_mlx_init_img(&scene->map.door.door);
@@ -43,13 +42,16 @@ static void	init_player_minimap_sprites_dfl(t_player *player, t_mmap *minimap,
 {
 	*player = (t_player){.pos = (t_dpoint){0.0, 0.0}, .dir = (t_dpoint){0.0,
 		0.0}, .angle = 0.0, .plane = (t_dpoint){0.0, 0.0}, .updown = 0};
-	*minimap = (t_mmap){.cur = NULL, .tiles = NULL,
-		.corners = {NULL, NULL,	NULL, NULL}};
+	*minimap = (t_mmap){.cur = NULL, .angle = 0, .tiles = NULL,
+		.corners = {NULL, NULL, NULL, NULL}};
 	my_mlx_init_img(&minimap->img);
-	*sprites = (t_sprite){.i = 0, .ammo = 8, .health = (t_nbr){.value = 100,
-		.str = NULL}, .idle = true, .shooting = true, .recharging = false,
-		.cur_frame_index = IDLE, .last_frame_time = 0};
-	while (++i < 27)
+	my_mlx_init_img(&minimap->circle);
+	my_mlx_init_img(&minimap->rotated);
+	my_mlx_init_img(&minimap->padded);
+	*sprites = (t_sprite){.i = 0, .idle = true, .shooting = false,
+		.recharging = false, .cur_frame_index = IDLE, .cur_frame = IDLE,
+		.last_frame_time = 0};
+	while (++i < 25)
 		my_mlx_init_img(&sprites->imgs[i]);
 }
 
@@ -71,9 +73,9 @@ void	init_rays(t_cub *cub)
 {
 	cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
 	if (!cub->rays)
-    {
-        free_tiles(&cub->minimap.tiles, -1, cub->scene.map.size.y);
-        my_mlx_error_free(cub, "Failed to allocate memory for rays");
-    }
+	{
+		free_tiles(&cub->minimap.tiles, -1, cub->scene.map.size.y);
+		my_mlx_error_free(cub, "Failed to allocate memory for rays");
+	}
 	cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
 }
