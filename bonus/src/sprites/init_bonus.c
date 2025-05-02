@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:50:57 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 07:53:59 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 15:17:43 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ static int	sprite_xpm_file_to_img(t_cub *cub, t_img *img, char *path)
 
 void	get_sprites_images(t_cub *cub, int i)
 {
-	const char	*paths[24] = {CROSSHAIR_PATH, IDLE_PATH, PUTTING_01_PATH,
-		PUTTING_02_PATH, PUTTING_03_PATH, RECHARGING_01_PATH,
-		RECHARGING_02_PATH, RECHARGING_03_PATH, RECHARGING_04_PATH,
-		RECHARGING_05_PATH, RECHARGING_06_PATH, RECHARGING_IDLE_PATH,
+	const char	*paths[24] = {CROSSHAIR_PATH, IDLE_PATH,
+		SHOOTING_01_PATH, SHOOTING_02_PATH, SHOOTING_IDLE_PATH,
 		SHELL_01_PATH, SHELL_02_PATH, SHELL_03_PATH, SHELL_04_PATH,
 		SHELL_05_PATH, SHELL_06_PATH, SHELL_07_PATH, SHELL_08_PATH,
-		SHELL_09_PATH, SHOOTING_01_PATH, SHOOTING_02_PATH,
-		SHOOTING_IDLE_PATH};
+		SHELL_09_PATH, RECHARGING_IDLE_PATH, RECHARGING_01_PATH,
+		RECHARGING_02_PATH, RECHARGING_03_PATH, RECHARGING_04_PATH,
+		RECHARGING_05_PATH, RECHARGING_06_PATH, PUTTING_01_PATH,
+		PUTTING_02_PATH, PUTTING_03_PATH,
+	};
 
 	while (++i < 24)
 	{

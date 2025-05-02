@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 02:49:28 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 15:18:06 by marcsilv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ typedef enum e_frames
 	SHOOTING_01,
 	SHOOTING_02,
 	SHOOTING_IDLE,
+	SHELL_01,
+	SHELL_02,
+	SHELL_03,
+	SHELL_04,
+	SHELL_05,
+	SHELL_06,
+	SHELL_07,
+	SHELL_08,
+	SHELL_09,
 	PUTTING_01,
 	PUTTING_02,
 	PUTTING_03,
@@ -34,15 +43,6 @@ typedef enum e_frames
 	RECHARGING_05,
 	RECHARGING_06,
 	RECHARGING_IDLE,
-	SHELL_01,
-	SHELL_02,
-	SHELL_03,
-	SHELL_04,
-	SHELL_05,
-	SHELL_06,
-	SHELL_07,
-	SHELL_08,
-	SHELL_09,
 	CLEAR,
 }						t_frames;
 
