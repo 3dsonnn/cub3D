@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:40:16 by efinda           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:20:11 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	check_element(t_scene *scene)
 		ft_swaptr((void **)&scene->line, (void **)&scene->line_cpy);
 		ft_strfree(&scene->line_nbr.str);
 	}
+	else if (ft_strlen(scene->elements) != 6)
+		exit_error("Missing elements in the scene file", scene);
 	else
 	{
 		exit_error(get_explicit_error_message(scene,
