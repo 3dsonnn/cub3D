@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:30:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/30 13:41:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/04 12:30:20 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ void	init_minimap_aux_imgs(t_cub *cub, t_mmap *mmap)
 {
 	int	aux;
 
-	my_mlx_new_img(cub->mlx, &mmap->circle, (t_point){MINIMAP_RADIUS * 2,
-		MINIMAP_RADIUS * 2});
+	my_mlx_duplicate_img(cub->mlx, &mmap->circle, mmap->img);
 	if (!mmap->circle.img)
 		my_mlx_error_free(cub, "Failed to create the minimap circle image");
-	my_mlx_get_data_addr(&mmap->circle);
 	if (!mmap->circle.addr)
 		my_mlx_error_free(cub,
 			"Failed to get the address of the minimap circle image");

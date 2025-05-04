@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:21:47 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 23:56:35 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 17:35:40 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	get_circle_img(t_img *dst, t_img src, t_point iter)
 		iter.x = -1;
 		while (++iter.x < dst->width)
 		{
-			delta.x = iter.x - MINIMAP_RADIUS;
-			delta.y = iter.y - MINIMAP_RADIUS;
-			if (delta.x * delta.x + delta.y * delta.y <= MINIMAP_RADIUS
-				* MINIMAP_RADIUS)
+			delta.x = iter.x - (MINI_TILE * 5);
+			delta.y = iter.y - (MINI_TILE * 5);
+			if (delta.x * delta.x + delta.y * delta.y <= (MINI_TILE * 5)
+				* (MINI_TILE * 5))
 			{
 				pixel.x = center.x + delta.x;
 				pixel.y = center.y + delta.y;
