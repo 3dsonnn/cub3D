@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/05/01 17:18:48 by efinda           ###   ########.fr        #
+#    Updated: 2025/05/04 12:22:03 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,8 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/utils/error_bonus.c 							\
 			bonus/src/utils/ft_math_bonus.c							\
 			bonus/src/utils/general_bonus.c							\
+			bonus/src/utils/bresenham_line.c						\
+			bonus/src/utils/bresenham_circle.c						\
 			bonus/src/minimap/init_bonus.c							\
 			bonus/src/minimap/linkage_bonus.c						\
 			bonus/src/minimap/settings_bonus.c						\

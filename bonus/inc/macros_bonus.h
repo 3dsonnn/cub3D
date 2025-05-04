@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:51:41 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 02:33:11 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/02 17:40:03 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define HEALTH_BAR_WIDTH 300
 # define HEALTH_BAR_HEIGHT 30
 # define CROSSHAIR_SIZE 16
-# define MINIMAP_RADIUS 100
 
 # define TILE 64
 # define MINI_TILE 20
@@ -52,11 +51,12 @@
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
+# define LIGHT_BLUE 0xADD8E6
 # define YELLOW 0xFFFF00
 # define DARK_GRAY 0x333333
 # define TRANSPARENT 0xFF000000
 
-# define FOG_COLOR WHITE
+# define FOG_COLOR LIGHT_BLUE
 # define FOG_MAX_DIST 650.0f
 
 # define CIRCLE_RADIUS 100
