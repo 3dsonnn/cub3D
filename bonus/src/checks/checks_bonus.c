@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 14:39:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/04 14:13:56 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	check_map(t_scene *scene, t_map *map)
 	check_doors(scene, map->door, map->head->next, get_last_row(map->head));
 	is_surrounded(scene, map, map->head->next, get_last_row(map->head));
 	trim_rows_horizontally(&map->head, get_horizontal_limits(map->head));
-	update_player(map, map->head);
+	update_map(map, map->head);
 	extend_map(map, &map->head, map->head);
 	map->content = row_to_mtx(map->head);
 	map->content[map->spos.y][map->spos.x] = '0';

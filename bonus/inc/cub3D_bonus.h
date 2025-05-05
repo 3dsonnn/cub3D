@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/04 12:20:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/04 14:12:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void				skip_empty_lines(t_scene *scene);
 void				extend_map(t_map *map, t_row **head, t_row *tmp);
 void				fulfill_map(t_scene *scene, t_map *map, t_row *head);
 void				fill_map(t_scene *scene, t_map *map);
-void				update_player(t_map *map, t_row *head);
+void				update_map(t_map *map, t_row *head);
 void				check_doors(t_scene *scene, t_door door, t_row *head,
 						t_row *tail);
 void				checks(t_cub *cub, int ac, char **av);
