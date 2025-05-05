@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 15:18:06 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/05/04 13:32:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_bresenham_line
 typedef struct s_bresenham_circle
 {
 	t_point				center;
-	t_point				crd;
+	t_point				limits;
 	t_plane				axis;
 	int					radius;
 	int					decision;
@@ -265,7 +265,7 @@ typedef struct s_mmap
 	t_img				circle;
 	t_img				rotated;
 	t_img				padded;
-	int					angle;
+	double				angle;
 	t_tile				*cur;
 	t_tile				*corners[4];
 	t_tile				**tiles;

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 04:35:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/04 14:12:32 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void				skip_empty_lines(t_scene *scene);
 void				extend_map(t_map *map, t_row **head, t_row *tmp);
 void				fulfill_map(t_scene *scene, t_map *map, t_row *head);
 void				fill_map(t_scene *scene, t_map *map);
-void				update_player(t_map *map, t_row *head);
+void				update_map(t_map *map, t_row *head);
 void				check_doors(t_scene *scene, t_door door, t_row *head,
 						t_row *tail);
 void				checks(t_cub *cub, int ac, char **av);
@@ -119,6 +119,8 @@ unsigned long long	get_current_time(void);
 char				*join_strs(t_strs strs);
 void				map_crd_error_message(t_scene *scene, char *message, char c,
 						t_nbr aux);
+void				bresenham_line(t_bresenham_line line);
+void				bresenham_circle(t_bresenham_circle circle);
 
 //  T_ROW
 void				add_row_back(t_row **head, t_row *new);

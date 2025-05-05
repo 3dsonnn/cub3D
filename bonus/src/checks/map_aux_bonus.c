@@ -6,17 +6,18 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:01:29 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 14:39:08 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/05 09:19:44 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-void	update_player(t_map *map, t_row *head)
+void	update_map(t_map *map, t_row *head)
 {
 	t_point	iter;
 
 	iter.y = 0;
+	map->size.x = ft_strlen(head->str);
 	while (head)
 	{
 		iter.x = -1;

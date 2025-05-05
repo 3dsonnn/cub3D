@@ -6,13 +6,13 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 19:09:47 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/30 18:18:05 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/05 09:19:50 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	set_tile_color(t_tile *tile, char c)
+static inline void	set_tile_color(t_tile *tile, char c)
 {
 	if (c == '1')
 		tile->color = BLUE;
@@ -21,9 +21,9 @@ static void	set_tile_color(t_tile *tile, char c)
 	else if (c == ' ')
 		tile->color = TRANSPARENT;
 	else if (c == 'D')
-		tile->color = DARK_GRAY;
+		tile->color = RED;
 	else if (c == '!')
-		tile->color = GREEN;
+		tile->color = AQUA;
 	else
 		tile->color = WHITE;
 }

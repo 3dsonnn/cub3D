@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 14:24:28 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 21:17:57 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/05 09:18:46 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,15 @@ static void	toggle_door(t_tile *tile)
 	if (!tile)
 		return ;
 	if (tile->id == 'D')
+	{
 		tile->id = 'd';
+		tile->color = MAGENTA;
+	}
 	else if (tile->id == 'd')
+	{
 		tile->id = 'D';
+		tile->color = RED;
+	}
 }
 
 void	open_or_close_door(t_tile *cur)
