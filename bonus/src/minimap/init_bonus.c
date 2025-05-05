@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:30:45 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/04 12:30:20 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/05 09:42:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,6 @@ void	init_minimap_aux_imgs(t_cub *cub, t_mmap *mmap)
 
 void	init_minimap(t_cub *cub)
 {
-	if (cub->scene.map.start == 'N' || cub->scene.map.start == 'S')
-		cub->minimap.angle = 90;
-	if (cub->scene.map.start == 'W' || cub->scene.map.start == 'E')
-		cub->minimap.angle = 270;
 	my_mlx_new_img(cub->mlx, &cub->minimap.img, (t_point){MINI_TILE * 11,
 		MINI_TILE * 11});
 	if (!cub->minimap.img.img)

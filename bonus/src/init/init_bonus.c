@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:04:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 14:54:49 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/05 09:42:48 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	init_player_minimap_sprites_dfl(t_player *player, t_mmap *minimap,
 {
 	*player = (t_player){.pos = (t_dpoint){0.0, 0.0}, .dir = (t_dpoint){0.0,
 		0.0}, .angle = 0.0, .plane = (t_dpoint){0.0, 0.0}, .updown = 0};
-	*minimap = (t_mmap){.cur = NULL, .angle = 0, .tiles = NULL,
-		.corners = {NULL, NULL, NULL, NULL}};
+	*minimap = (t_mmap){.cur = NULL, .angle = (90 * (M_PI / 180)),
+		.tiles = NULL, .corners = {NULL, NULL, NULL, NULL}};
 	my_mlx_init_img(&minimap->img);
 	my_mlx_init_img(&minimap->circle);
 	my_mlx_init_img(&minimap->rotated);
