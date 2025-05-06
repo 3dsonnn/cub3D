@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 13:45:39 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:32:36 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void		check_duplicate_id(t_scene *scene, char ID);
 char		*get_explicit_error_message(t_scene *scene, t_strs strs);
 void		check_starting_position(t_scene *scene, t_map *map, t_row *head,
 				t_iter iter);
+void		exit_cub(t_cub *cub, char *message);
 
 //  MY_MLX
 void		my_mlx_hook(t_cub *cub);
 void		init_mlx(t_cub *cub);
-void		my_mlx_free(t_cub *cub, char *message, t_plane flag);
 
 //  PLAYER
 void		init_player(t_cub *cub);
@@ -88,10 +88,7 @@ void		get_texture(t_cub *cub, t_ray *ray, double angle, t_point dir);
 //  UTILS
 double		ft_normalizer(double angle);
 int			ft_map(int old_value, int old_limits[2], int new_limits[2]);
-void		exit_error(char *message, t_scene *scene);
 char		*join_strs(t_strs strs);
-void		map_crd_error_message(t_scene *scene, char *message, char c,
-				t_nbr aux);
 
 //  T_ROW
 void		add_row(t_row **head, t_row *new);
@@ -110,5 +107,7 @@ char		*map_crds_to_str(t_map_crd *head, char *base);
 void		add_map_crd(t_map_crd **head, t_map_crd *new);
 t_map_crd	*new_map_crd(char c, char *col, char *line);
 void		free_map_crds(t_map_crd **head);
+void		map_crd_error_message(t_scene *scene, char *message, char c,
+				t_nbr aux);
 
 #endif

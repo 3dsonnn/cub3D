@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 22:22:11 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/22 10:53:58 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:08:53 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	fill_texture(t_scene *scene, char id, char *path)
 {
 	if (!scene->elements)
-		scene->elements = ft_strdup((char []){id, '\0'});
+		scene->elements = ft_strdup((char[]){id, '\0'});
 	else
 		check_duplicate_id(scene, id);
 	if (id == 'N')
@@ -32,16 +32,16 @@ static void	check_texture_aux(t_scene *scene, char *id)
 {
 	if (ft_mtxlen(scene->mtx) != 2)
 	{
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"Invalid path to the ", id, " texture on line ",
-				scene->line_nbr.str, NULL, NULL}), scene);
+				scene->line_nbr.str, NULL, NULL}));
 	}
 	if (ft_strlen(scene->mtx[1]) < 4 || ft_strncmp(scene->mtx[1]
 			+ ft_strlen(scene->mtx[1]) - 4, ".xpm", 4))
 	{
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"Invalid extension on the path to the ", id,
-				" texture on line ", scene->line_nbr.str, NULL, NULL}), scene);
+				" texture on line ", scene->line_nbr.str, NULL, NULL}));
 	}
 }
 
@@ -54,9 +54,9 @@ void	check_texture(t_scene *scene)
 	check_texture_aux(scene, id);
 	if (open(scene->mtx[1], O_RDONLY) < 0)
 	{
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"Invalid path to the ", id, " texture on line ",
-				scene->line_nbr.str, ": ", strerror(errno)}), scene);
+				scene->line_nbr.str, ": ", strerror(errno)}));
 	}
 	fill_texture(scene, *id, scene->mtx[1]);
 	ft_strfree(&scene->line_nbr.str);

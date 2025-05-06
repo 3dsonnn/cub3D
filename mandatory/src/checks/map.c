@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 02:23:44 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/01 13:45:25 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:19:33 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	check_map_end(t_scene *scene)
 		if (!scene->line)
 			return ;
 		scene->line_nbr.str = ft_itoa(scene->line_nbr.value);
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"The map content always has to be the last ",
 				"information on the file. So the element on line ",
-				scene->line_nbr.str, " is invalid", NULL, NULL}), scene);
+				scene->line_nbr.str, " is invalid", NULL, NULL}));
 	}
 }
 
@@ -67,7 +67,7 @@ void	fill_map(t_scene *scene, t_map *map)
 				"Invalid map: strange character inside it:", *(scene->line
 					+ diff), (t_nbr){.str = ft_strdup(scene->line_nbr.str),
 				.value = diff});
-			exit_error(scene->tmp, scene);
+			exit_cub(scene->cub, scene->tmp);
 		}
 		add_row(&map->head, new_row(scene->line, scene->line_nbr.value));
 		ft_strfree(&scene->line_nbr.str);
@@ -96,12 +96,12 @@ void	check_starting_position(t_scene *scene, t_map *map, t_row *head,
 		head = head->next;
 	}
 	if (!iter.k)
-		exit_error("Invalid map: there isn't a start position", scene);
+		exit_cub(scene->cub, "Invalid map: there isn't a start position");
 	if (iter.k > 1)
 	{
 		scene->tmp = map_crds_to_str(map->crds,
 				"Invalid map: there're more than one start position:");
-		exit_error(scene->tmp, scene);
+		exit_cub(scene->cub, scene->tmp);
 	}
 	free_map_crds(&scene->map.crds);
 }

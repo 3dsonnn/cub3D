@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:35 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 02:55:18 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:42:30 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,8 @@
 
 static int	my_mlx_close(t_cub *cub)
 {
-	int	i;
-
-	i = -1;
-	free_tiles(&cub->minimap.tiles, -1, cub->scene.map.size.y);
-	while (++i < 4)
-		my_mlx_destroy_img(cub->mlx, &cub->scene.textures[i].img);
-	my_mlx_destroy_img(cub->mlx, &cub->img);
-	mlx_destroy_window(cub->mlx, cub->win);
-	mlx_do_key_autorepeaton(cub->mlx);
-	mlx_destroy_display(cub->mlx);
-	free(cub->rays);
-	free(cub->mlx);
-	exit(0);
+	exit_cub(cub, NULL);
+	return(0);
 }
 
 static int	my_mlx_key_press(int keycode, t_cub *cub)

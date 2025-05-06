@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:41:26 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 00:07:54 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:44:18 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	check_points(t_scene *scene, t_door door, t_nbr aux)
 	{
 		map_crd_error_message(scene,
 			"Invalid map: a door cannot have another door near it:", 'D', aux);
-		exit_error(scene->tmp, scene);
+		exit_cub(scene->cub, scene->tmp);
 	}
 	if (door.points[NO] == ' ' || door.points[SO] == ' '
 		|| door.points[WE] == ' ' || door.points[EA] == ' ')
 	{
 		map_crd_error_message(scene,
 			"Invalid map: a door cannot have a space near it:", 'D', aux);
-		exit_error(scene->tmp, scene);
+		exit_cub(scene->cub, scene->tmp);
 	}
 	ft_strfree(&aux.str);
 }
@@ -39,7 +39,7 @@ static void	check_dir(t_scene *scene, t_door door, t_nbr aux)
 	{
 		map_crd_error_message(scene,
 			"Invalid map: a door cannot be surrounded by walls:", 'D', aux);
-		exit_error(scene->tmp, scene);
+		exit_cub(scene->cub, scene->tmp);
 	}
 	if (!door.dir.x && !door.dir.y)
 	{
@@ -47,13 +47,13 @@ static void	check_dir(t_scene *scene, t_door door, t_nbr aux)
 				"horizontally surrounded by walls:", 0);
 		map_crd_error_message(scene, tmp, 'D', aux);
 		ft_strfree(&tmp);
-		exit_error(scene->tmp, scene);
+		exit_cub(scene->cub, scene->tmp);
 	}
 	if ((door.dir.x && (door.points[WE] == '1' || door.points[EA] == '1'))
 		|| (door.dir.y && (door.points[NO] == '1' || door.points[SO] == '1')))
 	{
 		map_crd_error_message(scene, "Invalid map: Dead end door:", 'D', aux);
-		exit_error(scene->tmp, scene);
+		exit_cub(scene->cub, scene->tmp);
 	}
 	ft_strfree(&aux.str);
 }

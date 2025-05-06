@@ -6,17 +6,18 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:04:00 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/05 09:42:48 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:58:29 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D_bonus.h"
 
-static void	init_scene_dfl(t_scene *scene, int i)
+static void	init_scene_dfl(t_scene *scene, t_cub *cub, int i)
 {
 	scene->fd = 0;
 	scene->floor = 0;
 	scene->ceiling = 0;
+	scene->cub = cub;
 	scene->mtx = NULL;
 	scene->tmp = NULL;
 	scene->line = NULL;
@@ -62,7 +63,7 @@ void	init_dfl(t_cub *cub)
 	srand(time(NULL));
 	my_mlx_init_img(&cub->img);
 	cub->rays = NULL;
-	init_scene_dfl(&cub->scene, -1);
+	init_scene_dfl(&cub->scene, cub, -1);
 	init_player_minimap_sprites_dfl(&cub->player, &cub->minimap, &cub->sprites,
 		-1);
 	cub->hooks = (t_hook){.alt = 0, .space = 0};
@@ -73,9 +74,6 @@ void	init_rays(t_cub *cub)
 {
 	cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
 	if (!cub->rays)
-	{
-		free_tiles(&cub->minimap.tiles, -1, cub->scene.map.size.y);
-		my_mlx_error_free(cub, "Failed to allocate memory for rays");
-	}
+		exit_cub(cub, "Failed to allocate memory for rays");
 	cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
 }

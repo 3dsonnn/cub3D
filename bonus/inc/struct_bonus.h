@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:50:36 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/04 13:32:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 15:39:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdbool.h>
 
 typedef struct s_img	t_img;
+typedef struct s_cub	t_cub;
 
 typedef enum e_frames
 {
@@ -203,6 +204,7 @@ typedef struct s_scene
 	t_nbr				line_nbr;
 	t_map				map;
 	t_texture			textures[4];
+	t_cub				*cub;
 }						t_scene;
 
 typedef struct s_intersection
@@ -232,8 +234,8 @@ typedef struct s_ray
 
 typedef struct s_hook
 {
-	int	alt : 1;
-	int	space : 1;
+	int alt : 1;
+	int space : 1;
 }						t_hook;
 
 typedef struct s_sprite
@@ -280,7 +282,7 @@ typedef struct s_player
 	int					updown;
 }						t_player;
 
-typedef struct s_cub
+struct					s_cub
 {
 	void				*mlx;
 	void				*win;
@@ -292,6 +294,6 @@ typedef struct s_cub
 	t_hook				hooks;
 	t_sprite			sprites;
 	double				ppd;
-}						t_cub;
+};
 
 #endif

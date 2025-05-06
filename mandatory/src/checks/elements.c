@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:36:43 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/30 17:26:46 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:07:35 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,16 @@ void	check_duplicate_id(t_scene *scene, char ID)
 	if (ft_strchr(scene->elements, ID))
 	{
 		if (ID == 'C' || ID == 'F')
-			exit_error(get_explicit_error_message(scene, (t_strs){"Duplicated ",
-					get_element_name(ID), " element on line ",
-					scene->line_nbr.str, NULL, NULL}), scene);
+			exit_cub(scene->cub, get_explicit_error_message(scene,
+					(t_strs){"Duplicated ", get_element_name(ID),
+					" element on line ", scene->line_nbr.str, NULL, NULL}));
 		else
-			exit_error(get_explicit_error_message(scene,
+			exit_cub(scene->cub, get_explicit_error_message(scene,
 					(t_strs){"Duplicate path to the ", get_element_name(ID),
-					" texture on line ", scene->line_nbr.str, NULL, NULL}),
-				scene);
+					" texture on line ", scene->line_nbr.str, NULL, NULL}));
 	}
 	ft_strfree(&scene->tmp);
-	scene->tmp = ft_strjoin(scene->elements, (char []){ID, '\0'}, 1);
+	scene->tmp = ft_strjoin(scene->elements, (char[]){ID, '\0'}, 1);
 	ft_swaptr((void **)&scene->elements, (void **)&scene->tmp);
 }
 
@@ -89,11 +88,11 @@ void	check_element(t_scene *scene)
 		ft_strfree(&scene->line_nbr.str);
 	}
 	else if (ft_strlen(scene->elements) != 6)
-		exit_error("Missing elements in the scene file", scene);
+		exit_cub(scene->cub, "Missing elements in the scene file");
 	else
 	{
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"Invalid element on line ", scene->line_nbr.str,
-				" of the scene file", NULL, NULL, NULL}), scene);
+				" of the scene file", NULL, NULL, NULL}));
 	}
 }
