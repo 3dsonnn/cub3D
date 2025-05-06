@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:27:58 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/04 14:12:32 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 15:52:15 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void				check_duplicate_id(t_scene *scene, char ID);
 char				*get_explicit_error_message(t_scene *scene, t_strs strs);
 void				check_starting_position(t_scene *scene, t_map *map,
 						t_row *head, t_iter iter);
+void				exit_cub(t_cub *cub, char *message);
 
 // MINIMAP
 void				minimap(t_cub *cub);
@@ -111,7 +112,6 @@ void				cub3d(t_cub *cub);
 double				ft_normalizer(double angle);
 float				ft_clamp(float value, float min, float max);
 int					ft_map(int old_value, int old_limits[2], int new_limits[2]);
-void				exit_error(char *message, t_scene *scene);
 void				my_mlx_error_free(t_cub *cub, char *message);
 void				free_tiles(t_tile ***tiles, int i, int size);
 void				destroy_all_imgs(t_cub *cub);

@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/04 14:13:56 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 15:42:34 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static void	check_args(t_scene *scene, int ac, char **av)
 {
 	if (ac != 2)
-		exit_error("Invalid number of arguments", scene);
+		exit_cub(scene->cub, "Invalid number of arguments");
 	if (ft_strlen(av[1]) < 4 || ft_strcmp(av[1] + ft_strlen(av[1]) - 4, ".cub"))
-		exit_error("Invalid scene file extension", scene);
+		exit_cub(scene->cub, "Invalid scene file extension");
 	scene->fd = open(av[1], O_RDONLY);
 	if (scene->fd < 0)
-		exit_error(strerror(errno), scene);
+		exit_cub(scene->cub, strerror(errno));
 	scene->line = get_next_line(scene->fd);
 	if (!scene->line)
-		exit_error("Empty scene file", scene);
+		exit_cub(scene->cub, "Empty scene file");
 	scene->line_nbr.value++;
 	if (!*scene->line)
 	{
 		skip_empty_lines(scene);
 		if (!scene->line)
-			exit_error("There aren't elements in the scene file", scene);
+			exit_cub(scene->cub, "There aren't elements in the scene file");
 	}
 	check_element(scene);
 }
@@ -42,8 +42,8 @@ static void	check_elements(t_scene *scene)
 		if (!scene->line)
 		{
 			if (ft_strlen(scene->elements) == 6)
-				exit_error("The map is missing in the scene file", scene);
-			exit_error("Missing elements in the scene file", scene);
+				exit_cub(scene->cub, "The map is missing in the scene file");
+			exit_cub(scene->cub, "Missing elements in the scene file");
 		}
 		scene->line_nbr.value++;
 		if (!*scene->line)
@@ -67,14 +67,14 @@ static void	check_map(t_scene *scene, t_map *map)
 	fill_map(scene, map);
 	trim_rows_vertically(&map->head);
 	if (!map->head)
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"Invalid map: it cannot be full of spaces", NULL, NULL,
-				NULL, NULL, NULL}), scene);
+				NULL, NULL, NULL}));
 	map->size = rows_size(map->head);
 	if (map->size.x < 3 || map->size.y < 3)
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"Invalid map: too small", NULL, NULL, NULL, NULL,
-				NULL}), scene);
+				NULL}));
 	fulfill_map(scene, map, map->head);
 	map->size.x = ft_strlen(map->head->str);
 	check_starting_position(scene, map, map->head, (t_iter){-1, -1, 0, -1, -1,

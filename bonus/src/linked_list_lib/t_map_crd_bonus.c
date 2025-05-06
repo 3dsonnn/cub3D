@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:40:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/24 14:43:53 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:38:28 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,11 @@ char	*map_crds_to_str(t_map_crd *head, char *base)
 	}
 	res[ft_strlen(res) - 1] = '\0';
 	return (res);
+}
+
+void	map_crd_error_message(t_scene *scene, char *message, char c, t_nbr aux)
+{
+	add_map_crd(&scene->map.crds, new_map_crd(c, ft_itoa(aux.value), aux.str));
+	scene->tmp = map_crds_to_str(scene->map.crds, message);
+	ft_strfree(&aux.str);
 }

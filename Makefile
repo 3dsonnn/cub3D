@@ -6,7 +6,7 @@
 #    By: efinda <efinda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 09:28:49 by efinda            #+#    #+#              #
-#    Updated: 2025/05/04 12:22:03 by efinda           ###   ########.fr        #
+#    Updated: 2025/05/06 16:38:45 by efinda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,9 @@ FLAG = -Wall -Wextra -Werror
 RM = rm -rf
 
 SRC =	mandatory/src/main.c 									\
+		mandatory/src/init.c 									\
+		mandatory/src/hooks.c 									\
+		mandatory/src/exit.c									\
 		mandatory/src/checks/map.c 								\
 		mandatory/src/checks/checks.c 							\
 		mandatory/src/checks/elements.c 						\
@@ -28,8 +31,6 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/checks/utils.c 							\
 		mandatory/src/checks/ceiling_and_floor.c				\
 		mandatory/src/checks/ceiling_and_floor_aux.c			\
-		mandatory/src/init.c 									\
-		mandatory/src/hooks.c 									\
 		mandatory/src/player/init.c 							\
 		mandatory/src/player/move.c 							\
 		mandatory/src/raycast/raycast.c 						\
@@ -39,7 +40,6 @@ SRC =	mandatory/src/main.c 									\
 		mandatory/src/linked_list_lib/t_row.c 					\
 		mandatory/src/linked_list_lib/t_row_aux.c 				\
 		mandatory/src/linked_list_lib/t_map_crd.c				\
-		mandatory/src/utils/error.c 							\
 		mandatory/src/utils/ft_math.c							\
 		mandatory/src/utils/general.c							\
 		mandatory/src/my_mlx/my_mlx_init_img.c					\
@@ -53,6 +53,7 @@ SRC =	mandatory/src/main.c 									\
 
 SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/init/init_bonus.c								\
+			bonus/src/init/exit_bonus.c								\
 			bonus/src/init/mlx_init_bonus.c							\
 			bonus/src/checks/map_bonus.c 							\
 			bonus/src/checks/map_aux_bonus.c						\
@@ -81,7 +82,6 @@ SRC_BONUS =	bonus/src/main_bonus.c 									\
 			bonus/src/linked_list_lib/t_map_crd_bonus.c				\
 			bonus/src/linked_list_lib/t_row_trim_bonus.c			\
 			bonus/src/utils/free_bonus.c 							\
-			bonus/src/utils/error_bonus.c 							\
 			bonus/src/utils/ft_math_bonus.c							\
 			bonus/src/utils/general_bonus.c							\
 			bonus/src/utils/bresenham_line.c						\

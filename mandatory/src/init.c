@@ -6,29 +6,11 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:40:46 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/30 17:42:04 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:24:31 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
-
-void	my_mlx_free(t_cub *cub, char *message, t_plane flag)
-{
-	while (++(flag.x0) < (flag.x))
-		my_mlx_destroy_img(cub->mlx, &cub->scene.textures[flag.x0].img);
-	if (flag.y0)
-	{
-		mlx_destroy_window(cub->mlx, cub->win);
-		cub->win = NULL;
-	}
-	if (flag.y)
-	{
-		mlx_destroy_display(cub->mlx);
-		free(cub->mlx);
-		cub->mlx = NULL;
-	}
-	exit_error(message, &cub->scene);
-}
 
 static void	convert_textures_to_imgs(t_cub *cub, t_texture textures[4], int i)
 {
@@ -40,7 +22,7 @@ static void	convert_textures_to_imgs(t_cub *cub, t_texture textures[4], int i)
 		{
 			cub->scene.tmp = ft_strjoin("Failed to load image from ",
 					textures[i].path, 0);
-			my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, (i - 1), 0, 1});
+			exit_cub(cub, cub->scene.tmp);
 		}
 		my_mlx_get_data_addr(&textures[i].img);
 		if (!textures[i].img.addr)
@@ -48,7 +30,7 @@ static void	convert_textures_to_imgs(t_cub *cub, t_texture textures[4], int i)
 			cub->scene.tmp = ft_strjoin("Failed to get the address",
 					"of image from ", 0);
 			cub->scene.tmp = ft_strjoin(cub->scene.tmp, textures[i].path, 1);
-			my_mlx_free(cub, cub->scene.tmp, (t_plane){-1, (i + 1), 0, 1});
+			exit_cub(cub, cub->scene.tmp);
 		}
 		ft_strfree(&textures[i].path);
 	}
@@ -58,21 +40,19 @@ void	init_mlx(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
-		exit_error("Failed to initialize mlx", &cub->scene);
+		exit_cub(cub, "Failed to initialize mlx");
 	convert_textures_to_imgs(cub, cub->scene.textures, -1);
 	cub->win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!cub->win)
-		my_mlx_free(cub, "Failed to create the window", (t_plane){-1, 4, 1, 1});
+		exit_cub(cub, "Failed to create the window");
 	my_mlx_new_img(cub->mlx, &cub->img, (t_point){WIDTH, HEIGHT});
 	if (!cub->img.img)
-		my_mlx_free(cub, "Failed to create the main image", (t_plane){-1, 4, 1,
-			1});
+		exit_cub(cub, "Failed to create the main image");
 	my_mlx_get_data_addr(&cub->img);
 	if (!cub->img.addr)
 	{
 		my_mlx_destroy_img(cub->mlx, &cub->img);
-		my_mlx_free(cub, "Failed to get the address of the main image",
-			(t_plane){-1, 4, 1, 1});
+		exit_cub(cub, "Failed to get the address of the main image");
 	}
 }
 
@@ -83,7 +63,7 @@ void	init_dfl(t_cub *cub, int i)
 	my_mlx_init_img(&cub->img);
 	cub->scene = (t_scene){.fd = 0, .floor = 0, .ceiling = 0, .mtx = NULL,
 		.tmp = NULL, .line = NULL, .line_cpy = NULL, .elements = NULL,
-		.line_nbr = (t_nbr){.value = 0, .str = NULL}};
+		.line_nbr = (t_nbr){.value = 0, .str = NULL}, .cub = cub};
 	cub->scene.map = (t_map){.head = NULL, .crds = NULL, .content = NULL,
 		.start = '\0', .spos = (t_point){0, 0}, .size = (t_point){0, 0}};
 	while (++i < 4)
@@ -101,7 +81,6 @@ void	init_rays(t_cub *cub)
 {
 	cub->rays = (t_ray *)ft_calloc(cub->img.width, sizeof(t_ray));
 	if (!cub->rays)
-		my_mlx_free(cub, "Failed to allocate memory for rays", (t_plane){-1, 4,
-			1, 1});
+		exit_cub(cub, "Failed to allocate memory for rays");
 	cub->ppd = (cub->img.width / 2) / tan(FOV / 2);
 }

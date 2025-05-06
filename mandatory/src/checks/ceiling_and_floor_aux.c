@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:36:25 by efinda            #+#    #+#             */
-/*   Updated: 2025/04/26 17:17:26 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:15:48 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	conquer(t_scene *scene, char *id, int rgb[3], int i)
 		get_explicit_error_message(scene, (t_strs){"Invalid ", id,
 			" element on line ", scene->line_nbr.str, ": ", get_color_name(i)});
 		scene->tmp = ft_strjoin(scene->tmp, " not an integer", 1);
-		exit_error(scene->tmp, scene);
+		exit_cub(scene->cub, scene->tmp);
 	}
 }
 
@@ -50,7 +50,7 @@ void	divide_to_conquer(t_scene *scene, char *id, int rgb[3], int i)
 				get_color_name(i)});
 			scene->tmp = ft_strjoin(scene->tmp,
 					" color information is misconfigured", 1);
-			exit_error(scene->tmp, scene);
+			exit_cub(scene->cub, scene->tmp);
 		}
 		ft_swaptr((void **)&scene->mtx[i], (void **)&scene->tmp);
 		ft_strfree(&scene->tmp);
@@ -63,22 +63,25 @@ static void	check_fc_syntax_aux(t_scene *scene, char *info, char *id)
 	scene->tmp = ft_strtrim(info, " ");
 	if (*scene->tmp == ',')
 	{
-		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr.str, ": ",
-				"the color range cannot start with a ','"}), scene);
+		exit_cub(scene->cub, get_explicit_error_message(scene,
+				(t_strs){"Invalid ", id, " element on line ",
+				scene->line_nbr.str, ": ",
+				"the color range cannot start with a ','"}));
 	}
 	if (scene->tmp[ft_strlen(scene->tmp) - 1] == ',')
 	{
-		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr.str, ": ",
-				"the color range cannot end with a ','"}), scene);
+		exit_cub(scene->cub, get_explicit_error_message(scene,
+				(t_strs){"Invalid ", id, " element on line ",
+				scene->line_nbr.str, ": ",
+				"the color range cannot end with a ','"}));
 	}
 	info = ft_strchr(scene->tmp, ',');
 	if (*(info + 1) == ',')
 	{
-		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr.str, ": ",
-				"the color range cannot contain consecutive commas"}), scene);
+		exit_cub(scene->cub, get_explicit_error_message(scene,
+				(t_strs){"Invalid ", id, " element on line ",
+				scene->line_nbr.str, ": ",
+				"the color range cannot contain consecutive commas"}));
 	}
 	ft_swaptr((void **)&scene->line, (void **)&scene->tmp);
 	ft_strfree(&scene->tmp);
@@ -89,19 +92,18 @@ void	check_fc_syntax(t_scene *scene, char *info, char *id)
 	int	i;
 
 	if (ft_strlen(info) < 5)
-		exit_error(get_explicit_error_message(scene, (t_strs){"Invalid ", id,
-				" element on line ", scene->line_nbr.str, ": ", "too short"}),
-			scene);
+		exit_cub(scene->cub, get_explicit_error_message(scene,
+				(t_strs){"Invalid ", id, " element on line ",
+				scene->line_nbr.str, ": ", "too short"}));
 	i = -1;
 	while (info[++i])
 		if (!ft_strchr("0123456789 ,", info[i]))
-			exit_error(get_explicit_error_message(scene,
+			exit_cub(scene->cub, get_explicit_error_message(scene,
 					(t_strs){"Invalid character on the ", id,
-					" element on line ", scene->line_nbr.str, NULL, NULL}),
-				scene);
+					" element on line ", scene->line_nbr.str, NULL, NULL}));
 	if (ft_strchr_count(info, ',') != 2)
-		exit_error(get_explicit_error_message(scene,
+		exit_cub(scene->cub, get_explicit_error_message(scene,
 				(t_strs){"Incorrect number of commas on the ", id,
-				" element on line ", scene->line_nbr.str, NULL, NULL}), scene);
+				" element on line ", scene->line_nbr.str, NULL, NULL}));
 	check_fc_syntax_aux(scene, info, id);
 }

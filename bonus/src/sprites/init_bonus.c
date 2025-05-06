@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcsilv <marcsilv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:50:57 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/02 15:17:43 by marcsilv         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:39:53 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	get_sprites_images(t_cub *cub, int i)
 	{
 		if (sprite_xpm_file_to_img(cub, &cub->sprites.imgs[i],
 				(char *)paths[i]))
-			my_mlx_error_free(cub, cub->scene.tmp);
+			exit_cub(cub, cub->scene.tmp);
 		if (i)
 			my_mlx_resize_img(cub->mlx, &cub->sprites.imgs[i],
 				(t_point){GUN_WIDTH, GUN_HEIGHT});
@@ -80,5 +80,5 @@ void	get_sprites_images(t_cub *cub, int i)
 	my_mlx_resize_img(cub->mlx, &cub->sprites.imgs[CROSSHAIR],
 		(t_point){CROSSHAIR_SIZE, CROSSHAIR_SIZE});
 	if (get_clear_img(cub, &cub->sprites.imgs[CLEAR]))
-		my_mlx_error_free(cub, cub->scene.tmp);
+		exit_cub(cub, cub->scene.tmp);
 }
