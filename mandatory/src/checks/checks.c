@@ -6,7 +6,7 @@
 /*   By: efinda <efinda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:00:49 by efinda            #+#    #+#             */
-/*   Updated: 2025/05/06 14:05:44 by efinda           ###   ########.fr       */
+/*   Updated: 2025/05/07 18:13:26 by efinda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	check_args(t_scene *scene, int ac, char **av)
 {
 	if (ac != 2)
 		exit_cub(scene->cub, "Invalid number of arguments");
-	if (ft_strlen(av[1]) < 4 || ft_strcmp(av[1] + ft_strlen(av[1]) - 4, ".cub"))
+	if (ft_strlen(av[1]) <= 4 || ft_strcmp(av[1] + ft_strlen(av[1]) - 4, ".cub"))
 		exit_cub(scene->cub, "Invalid scene file extension");
 	scene->fd = open(av[1], O_RDONLY);
 	if (scene->fd < 0)
